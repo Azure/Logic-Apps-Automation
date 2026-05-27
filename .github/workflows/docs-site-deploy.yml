@@ -1,0 +1,103 @@
+# Docs Site — Azure Static Web Apps Deploy
+#
+# Builds the Astro/Starlight docs site and deploys to Azure Static Web Apps.
+#
+# Triggers:
+#   - push to main (changes under docs-site/**) → production deploy
+#   - pull_request                              → preview environment
+#   - workflow_dispatch                         → manual deploy
+#
+# Required GitHub secret:
+#   AZURE_STATIC_WEB_APPS_API_TOKEN — set automatically when you link the
+#   SWA resource to this repo, or add manually from the Azure portal.
+
+name: 'Docs Site: Deploy'
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs-site/**'
+      - '.github/workflows/docs-site-deploy.yml'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'docs-site/**'
+      - '.github/workflows/docs-site-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: docs-site-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22'
+  DOCS_APP_LOCATION: 'docs-site'
+  DOCS_OUTPUT_LOCATION: 'dist'
+
+jobs:
+  build_and_deploy:
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    name: 'Build and deploy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+          lfs: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        working-directory: ${{ env.DOCS_APP_LOCATION }}
+        run: npm install --no-audit --no-fund
+
+      - name: Type-check and lint content
+        working-directory: ${{ env.DOCS_APP_LOCATION }}
+        run: npm run check
+
+      - name: Build (Astro)
+        working-directory: ${{ env.DOCS_APP_LOCATION }}
+        env:
+          DOCS_SITE_URL: ${{ vars.DOCS_SITE_URL || '' }}
+        run: npm run build
+
+      # The SWA deploy action with skip_app_build: true treats app_location
+      # as the folder containing index.html. Stage the built output at a
+      # workspace-root path so the action finds it reliably.
+      - name: Stage build output for SWA
+        run: |
+          rm -rf swa-staging
+          cp -r "${DOCS_APP_LOCATION}/${DOCS_OUTPUT_LOCATION}" swa-staging
+
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          app_location: 'swa-staging'
+          skip_app_build: true
+          skip_api_build: true
+
+  close_pr_preview:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    name: 'Close PR preview'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Close preview environment
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: 'close'

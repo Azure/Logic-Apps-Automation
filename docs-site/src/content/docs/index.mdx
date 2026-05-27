@@ -1,0 +1,67 @@
+---
+title: Welcome
+description: Documentation for building, automating, and shipping workflows.
+template: splash
+hero:
+  tagline: "Automate anything. Just describe it."
+  image:
+    file: ../../assets/logo.svg
+  actions:
+    - text: Watch the overview (3 min)
+      link: https://aka.ms/otto-summary-doc-video
+      icon: external
+      variant: primary
+      attrs:
+        target: _blank
+        rel: noopener noreferrer
+    - text: Get started
+      link: /getting-started/introduction/
+      icon: right-arrow
+      variant: secondary
+    - text: Quickstart
+      link: /getting-started/quickstart/
+      icon: rocket
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+**Start here:** the [3-minute platform overview](https://aka.ms/otto-summary-doc-video) walks the whole experience end-to-end — designer, assistant, connectors, run history. Watch it once, then come back when you need specifics. The rest of this site is the long form for whatever you want to look up after.
+
+{/*
+  When the overview video moves to an embeddable host (YouTube, Vimeo, a
+  Stream-on-SharePoint embed URL), enable the inline player by:
+    1. Adding back the import next to the Card / CardGrid one above:
+       import Video from '../../components/Video.astro';
+    2. Uncommenting the block below and updating the src.
+
+  Today the overview is hosted on personal SharePoint (aka.ms redirect),
+  which sets X-Frame-Options and can't be inlined. The hero CTA above
+  links out instead — same content, full-screen player, back-button comes
+  home.
+
+  <Video
+    src="https://aka.ms/otto-summary-doc-video"
+    title="Platform overview — a 3-minute walk-through"
+  />
+*/}
+
+## Where to start
+
+<CardGrid>
+	<Card title="Watch first" icon="seti:video">
+		The [3-minute platform overview](/demos/platform-overview/) walks the whole experience end-to-end. Start here if you have 3 minutes.
+	</Card>
+	<Card title="New to the platform" icon="rocket">
+		Start with the [introduction](/getting-started/introduction/), then build your first workflow with the [Quickstart](/getting-started/quickstart/).
+	</Card>
+	<Card title="Learn the concepts" icon="open-book">
+		Read about [workflows](/features/workflows/), [agents](/features/agents/), [connectors](/features/connectors/), and the rest of the [feature surface](/features/overview/).
+	</Card>
+	<Card title="Stay current" icon="document">
+		Track every release on the [changelog](/release-notes/changelog/).
+	</Card>
+	<Card title="Get help" icon="warning">
+		[Report a bug](/support/report-a-bug/) or [request a feature](/support/feature-request/).
+	</Card>
+</CardGrid>
