@@ -1,0 +1,52 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="otto-g0" x1="47.9903" y1="28.9601" x2="96.5558" y2="28.9601" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0094F0" />
+      <stop offset="1" stop-color="#0067BF" />
+    </linearGradient>
+    <linearGradient id="otto-g1" x1="79.882" y1="21.9697" x2="67.8622" y2="7.35587" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#003580" />
+      <stop offset="0.55" stop-color="#0081DB" stop-opacity="0.31188" />
+      <stop offset="1" stop-color="#0081DB" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="otto-g2" x1="45.9924" y1="27.7961" x2="5.10079" y2="64.7668" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0094F0" />
+      <stop offset="0.511991" stop-color="#4894FE" />
+      <stop offset="1" stop-color="#8F8FFF" />
+    </linearGradient>
+    <linearGradient id="otto-g3" x1="23.1803" y1="72.4876" x2="7.11923" y2="54.5039" gradientUnits="userSpaceOnUse">
+      <stop offset="0.102325" stop-color="#E4A7FE" />
+      <stop offset="1" stop-color="#4894FE" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="otto-g4" x1="-0.575185" y1="81.0207" x2="45.2865" y2="101.93" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B2AB5" />
+      <stop offset="0.64356" stop-color="#8B52F4" />
+    </linearGradient>
+    <linearGradient id="otto-g5" x1="15.2086" y1="75.029" x2="23.0474" y2="84.5595" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4B20A0" />
+      <stop offset="0.998551" stop-color="#8B52F4" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="otto-g6" x1="95.9895" y1="20.0365" x2="45.7625" y2="60.5936" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#66C0FF" />
+      <stop offset="0.552928" stop-color="#7B7BFF" />
+      <stop offset="1" stop-color="#8B52F4" />
+    </linearGradient>
+    <linearGradient id="otto-g7" x1="75.9905" y1="20.5331" x2="90.4854" y2="35.9058" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B3E0FF" />
+      <stop offset="0.639201" stop-color="#9C6CFE" stop-opacity="0" />
+    </linearGradient>
+    <clipPath id="otto-clip">
+      <rect width="96" height="96" fill="white" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#otto-clip)">
+    <path d="M71.3 29L85.2 17.68L89.6 14.08L93.56 10.84L93.78 10.66C95.14 9.56 96 7.88 96 6C96 2.68 93.32 0 90 0H48V29H71.3Z" fill="url(#otto-g0)" />
+    <path d="M71.3 29L85.2 17.68L89.6 14.08L93.56 10.84L93.78 10.66C95.14 9.56 96 7.88 96 6C96 2.68 93.32 0 90 0H48V29H71.3Z" fill="url(#otto-g1)" fill-opacity="0.5" />
+    <path d="M10.8 78.32L24.7 67L25.86 66.06C29.6 63 31.14 58 29.78 53.38C29.28 51.66 29 49.86 29 48C29 37.5 37.5 29 48 29V0C21.5 0 0 21.5 0 48C0 55.394 1.75 63.1 5.16 69.66C5.26 69.88 5.36 70.08 5.48 70.28C8.12 75.32 6.86 81.54 2.44 85.16L6.4 81.92L10.8 78.32Z" fill="url(#otto-g2)" />
+    <path d="M10.8 78.32L24.7 67L25.86 66.06C29.6 63 31.14 58 29.78 53.38C29.28 51.66 29 49.86 29 48C29 37.5 37.5 29 48 29V0C21.5 0 0 21.5 0 48C0 55.394 1.75 63.1 5.16 69.66C5.26 69.88 5.36 70.08 5.48 70.28C8.12 75.32 6.86 81.54 2.44 85.16L6.4 81.92L10.8 78.32Z" fill="url(#otto-g3)" fill-opacity="0.8" />
+    <path d="M24.7 67L10.8 78.32L6.4 81.92L2.44 85.16L2.22 85.34C0.86 86.44 0 88.12 0 90C0 93.32 2.68 96 6 96H48V67H24.7Z" fill="url(#otto-g4)" />
+    <path d="M24.7 67L10.8 78.32L6.4 81.92L2.44 85.16L2.22 85.34C0.86 86.44 0 88.12 0 90C0 93.32 2.68 96 6 96H48V67H24.7Z" fill="url(#otto-g5)" fill-opacity="0.5" />
+    <path d="M90.52 25.72C87.88 20.66 89.14 14.46 93.56 10.84L89.6 14.08L85.2 17.68L71.3 29L70.14 29.94C66.4 33 64.86 38 66.22 42.62C66.72 44.34 67 46.14 67 48C67 58.5 58.5 67 48 67V96C74.5 96 96 74.5 96 48C96 40.392 94.056 32.524 90.84 26.34C90.74 26.12 90.64 25.92 90.52 25.72Z" fill="url(#otto-g6)" />
+    <path d="M90.52 25.72C87.88 20.66 89.14 14.46 93.56 10.84L89.6 14.08L85.2 17.68L71.3 29L70.14 29.94C66.4 33 64.86 38 66.22 42.62C66.72 44.34 67 46.14 67 48C67 58.5 58.5 67 48 67V96C74.5 96 96 74.5 96 48C96 40.392 94.056 32.524 90.84 26.34C90.74 26.12 90.64 25.92 90.52 25.72Z" fill="url(#otto-g7)" fill-opacity="0.8" />
+  </g>
+</svg>

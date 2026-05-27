@@ -1,0 +1,211 @@
+---
+/**
+ * <Video /> — embeds a video in docs pages, wrapped in a Plyr player.
+ *
+ * Supports three source kinds (auto-detected from `src`):
+ *   1. Self-hosted MP4 / WebM    — HTML5 <video>, HTTP range buffering.
+ *   2. YouTube watch URL         — Plyr's YouTube provider (iframe).
+ *   3. Vimeo URL                 — Plyr's Vimeo provider (iframe).
+ *
+ * Plyr gives a consistent, accessible player UI across all three: play,
+ * pause, seek, volume, captions, playback speed, picture-in-picture,
+ * fullscreen. Lazy-initialised — the heavy JS only runs on pages that
+ * actually contain a video.
+ *
+ * Usage in a .mdx file:
+ *   import Video from '../../../components/Video.astro';
+ *
+ *   <Video src="/videos/quickstart.mp4" title="Building your first workflow" />
+ *   <Video src="https://www.youtube.com/watch?v=ABC123" title="Platform overview" />
+ *   <Video src="https://vimeo.com/123456" title="Demo" />
+ */
+interface Props {
+  /** Source: local path (/videos/foo.mp4) or full URL (YouTube / Vimeo / MP4 / WebM / MOV / M4V) */
+  src: string;
+  /** Accessible label for the player region (rendered as the container's
+   *  aria-label). Required for a11y. Note: this is not the YouTube/Vimeo
+   *  iframe's `title` attribute — Plyr manages the iframe and uses metadata
+   *  from the embedded service for its own labels. */
+  title: string;
+  /** Optional poster image for self-hosted videos (path or URL). */
+  poster?: string;
+  /** Optional aspect ratio: '16/9' (default), '4/3', '1/1', '9/16'. */
+  aspect?: '16/9' | '4/3' | '1/1' | '9/16';
+}
+
+const { src, title, poster, aspect = '16/9' } = Astro.props;
+
+type Detected =
+  | { kind: 'html5'; url: string; mime: string }
+  | { kind: 'youtube'; id: string }
+  | { kind: 'vimeo'; id: string };
+
+// Map of supported video extensions to the MIME type we declare on <source>.
+// The browser ultimately trusts the server's Content-Type, but a correct hint
+// helps preload heuristics. The values here match the SWA config in
+// public/staticwebapp.config.json so dev/preview and prod agree.
+const VIDEO_MIME: Record<string, string> = {
+  mp4: 'video/mp4',
+  webm: 'video/webm',
+  mov: 'video/quicktime',
+  m4v: 'video/x-m4v',
+};
+const VIDEO_EXT_RE = /\.(mp4|webm|mov|m4v)(?:[?#]|$)/i;
+const YT_ID_RE = /^[\w-]{11}$/;
+
+function detect(s: string): Detected {
+  // Try URL-parsing first so YouTube / Vimeo detection is robust to query-param
+  // ordering (e.g. https://youtube.com/watch?si=...&v=ID) and to optional
+  // trailing slashes / hash fragments.
+  if (/^https?:\/\//i.test(s)) {
+    let parsed: URL | null = null;
+    try { parsed = new URL(s); } catch { /* fall through */ }
+    if (parsed) {
+      const host = parsed.hostname.toLowerCase();
+      if (host === 'youtu.be') {
+        const id = parsed.pathname.replace(/^\//, '').split('/')[0];
+        if (YT_ID_RE.test(id)) return { kind: 'youtube', id };
+      }
+      if (host === 'youtube.com' || host.endsWith('.youtube.com') ||
+          host === 'youtube-nocookie.com' || host.endsWith('.youtube-nocookie.com')) {
+        const v = parsed.searchParams.get('v');
+        if (v && YT_ID_RE.test(v)) return { kind: 'youtube', id: v };
+        const m = parsed.pathname.match(/^\/(?:embed|shorts|v|live)\/([\w-]{11})/);
+        if (m) return { kind: 'youtube', id: m[1] };
+      }
+      if (host === 'vimeo.com' || host.endsWith('.vimeo.com') || host === 'player.vimeo.com') {
+        const m = parsed.pathname.match(/^\/(?:video\/)?(\d+)/);
+        if (m) return { kind: 'vimeo', id: m[1] };
+      }
+    }
+  }
+
+  // File-extension path. Works for local paths (/videos/foo.mp4) and arbitrary
+  // https://… MP4 / WebM URLs (e.g. Azure Blob). The regex strips a trailing
+  // querystring or hash before reading the extension.
+  const ext = s.match(VIDEO_EXT_RE)?.[1].toLowerCase();
+  if (ext && VIDEO_MIME[ext]) {
+    return { kind: 'html5', url: s, mime: VIDEO_MIME[ext] };
+  }
+
+  // Nothing matched — fail the build with a clear error rather than render a
+  // broken HTML5 <video> tag pointing at something that won't play. Typos
+  // ("https://youtub.com/...", "/videso/foo.mp4") and unsupported hosts
+  // surface immediately.
+  throw new Error(
+    `<Video src="${s}"> is not a recognised video source. Supported:\n` +
+      `  • Local / absolute URL ending in .mp4 / .webm / .mov / .m4v\n` +
+      `  • youtube.com / youtu.be / youtube-nocookie.com (watch, shorts, embed, v, live)\n` +
+      `  • vimeo.com / player.vimeo.com\n` +
+      `If the source genuinely is a video at this URL but uses a different ` +
+      `extension or host, extend src/components/Video.astro detect().`,
+  );
+}
+
+const meta = detect(src);
+const aspectClass = `aspect-${aspect.replace('/', 'x')}`;
+---
+
+<div
+  class:list={['docs-video', aspectClass]}
+  data-docs-video
+  data-poster={poster}
+>
+  {meta.kind === 'html5' && (
+    <video controls playsinline preload="metadata" poster={poster} aria-label={title}>
+      <source src={meta.url} type={meta.mime} />
+      <p>
+        Your browser can't play this video. <a href={meta.url}>Download it</a> instead.
+      </p>
+    </video>
+  )}
+  {meta.kind === 'youtube' && (
+    <div
+      class="plyr__video-embed"
+      data-plyr-provider="youtube"
+      data-plyr-embed-id={meta.id}
+      aria-label={title}
+    ></div>
+  )}
+  {meta.kind === 'vimeo' && (
+    <div
+      class="plyr__video-embed"
+      data-plyr-provider="vimeo"
+      data-plyr-embed-id={meta.id}
+      aria-label={title}
+    ></div>
+  )}
+</div>
+
+<script>
+  // Lazy-import Plyr so its ~20 KB only loads on pages that have a video.
+  // No `lang` attribute here — Astro's `<script>` blocks are bundled by Vite
+  // and processed as TypeScript by default. Adding `lang="ts"` would flip
+  // this block to `is:inline` and disable the `import('plyr')` bundling
+  // below (Astro check astro(4000) warning), so we stay attribute-less.
+  const hosts = document.querySelectorAll('[data-docs-video]:not([data-plyr-initialised])');
+  if (hosts.length > 0) {
+    void Promise.all([import('plyr'), import('plyr/dist/plyr.css')]).then(([{ default: Plyr }]) => {
+      hosts.forEach((host) => {
+        const target = host.querySelector('video, .plyr__video-embed');
+        if (!target) return;
+        new Plyr(target as HTMLElement, {
+          ratio: undefined, // let the container's aspect-ratio drive layout
+          loadSprite: true,
+          controls: [
+            'play-large',
+            'play',
+            'progress',
+            'current-time',
+            'mute',
+            'volume',
+            'captions',
+            'settings',
+            'pip',
+            'airplay',
+            'fullscreen',
+          ],
+          settings: ['captions', 'quality', 'speed'],
+          tooltips: { controls: true, seek: true },
+          // Privacy-friendly YouTube embeds — uses youtube-nocookie.com so
+          // tracking cookies aren't set until the viewer hits play.
+          youtube: { noCookie: true, rel: 0, modestbranding: 1 },
+        });
+        host.setAttribute('data-plyr-initialised', '');
+      });
+    });
+  }
+</script>
+
+<style>
+  .docs-video {
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: var(--sl-color-bg-nav, #0c0d0e);
+    max-width: 100%;
+  }
+  .docs-video.aspect-16x9 { aspect-ratio: 16 / 9; }
+  .docs-video.aspect-4x3  { aspect-ratio: 4 / 3; }
+  .docs-video.aspect-1x1  { aspect-ratio: 1 / 1; }
+  .docs-video.aspect-9x16 {
+    aspect-ratio: 9 / 16;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+  .docs-video > video,
+  .docs-video > .plyr,
+  .docs-video > .plyr__video-embed {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  /* Theme Plyr to fit the Starlight dark palette. */
+  :global(.docs-video .plyr) {
+    --plyr-color-main: var(--sl-color-accent, #5b8def);
+    --plyr-video-background: var(--sl-color-bg-nav, #0c0d0e);
+  }
+</style>
+
