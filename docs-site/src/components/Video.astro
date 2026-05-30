@@ -15,12 +15,12 @@
  * Usage in a .mdx file:
  *   import Video from '../../../components/Video.astro';
  *
- *   <Video src="/videos/quickstart.mp4" title="Building your first workflow" />
+ *   <Video src="/docs/videos/quickstart.mp4" title="Building your first workflow" />
  *   <Video src="https://www.youtube.com/watch?v=ABC123" title="Platform overview" />
  *   <Video src="https://vimeo.com/123456" title="Demo" />
  */
 interface Props {
-  /** Source: local path (/videos/foo.mp4) or full URL (YouTube / Vimeo / MP4 / WebM / MOV / M4V) */
+  /** Source: local path (/docs/videos/foo.mp4) or full URL (YouTube / Vimeo / MP4 / WebM / MOV / M4V) */
   src: string;
   /** Accessible label for the player region (rendered as the container's
    *  aria-label). Required for a11y. Note: this is not the YouTube/Vimeo
@@ -80,7 +80,7 @@ function detect(s: string): Detected {
     }
   }
 
-  // File-extension path. Works for local paths (/videos/foo.mp4) and arbitrary
+  // File-extension path. Works for local paths (/docs/videos/foo.mp4) and arbitrary
   // https://… MP4 / WebM URLs (e.g. Azure Blob). The regex strips a trailing
   // querystring or hash before reading the extension.
   const ext = s.match(VIDEO_EXT_RE)?.[1].toLowerCase();

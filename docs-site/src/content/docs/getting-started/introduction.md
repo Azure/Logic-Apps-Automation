@@ -11,7 +11,7 @@ This is a **designer for developers** to build workflows, automate processes, an
 - An **AI assistant** that turns natural-language descriptions into runnable workflows.
 - A **catalog of connectors** for Azure, SaaS apps, databases, and HTTP APIs.
 
-You use the platform in your browser at **[otto.azure.com](https://otto.azure.com)**. There's nothing to install or run locally.
+You use the platform in your browser at **[auto.azure.com](https://auto.azure.com)**. There's nothing to install or run locally.
 
 ## How a workflow gets built
 

@@ -10,7 +10,7 @@ The platform runs in your browser. There's nothing to install.
 
 ## 1. Open the portal
 
-Go to **[otto.azure.com](https://otto.azure.com)** and sign in with your work or school account.
+Go to **[auto.azure.com](https://auto.azure.com)** and sign in with your work or school account.
 
 ![Sign-in page](../../../assets/portal/01-login.png)
 
@@ -35,7 +35,7 @@ The left rail surfaces the rest of the project surface — **Sandboxes** for exp
 | Problem | Try |
 | --- | --- |
 | **"You don't have access to any project"** | Ask a project admin to invite you, or create your own project from the empty state. |
-| **Login loop / SSO error** | Clear cookies for `otto.azure.com` and `login.microsoftonline.com`, then sign in again. |
+| **Login loop / SSO error** | Clear cookies for `auto.azure.com` and `login.microsoftonline.com`, then sign in again. |
 | **Portal looks blank** | Hard-refresh (`Cmd/Ctrl + Shift + R`). If it persists, [report a bug](/support/report-a-bug/). |
 
 ## Next

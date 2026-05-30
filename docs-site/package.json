@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/postbuild.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro"
@@ -16,7 +16,8 @@
     "@astrojs/starlight": "^0.39.2",
     "astro": "^6.3.1",
     "plyr": "^3.8.4",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
