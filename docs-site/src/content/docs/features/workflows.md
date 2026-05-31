@@ -106,4 +106,4 @@ For a full end-to-end test of a non-HTTP trigger, the workflow has to be publish
 
 ## Local authoring
 
-The fastest way to experiment is right in the [portal](https://otto.azure.com). Workflows you save publish to a draft you can run on-demand before you publish over the live version. See the [Quickstart](/getting-started/quickstart/) to walk through building your first one.
+The fastest way to experiment is right in the [portal](https://auto.azure.com). Workflows you save publish to a draft you can run on-demand before you publish over the live version. See the [Quickstart](/getting-started/quickstart/) to walk through building your first one.

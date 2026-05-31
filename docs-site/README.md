@@ -37,13 +37,16 @@ npm run dev         # http://localhost:4321 — hot reload
 ```
 docs-site/
 ├── README.md                      ← this file (entry point + conventions)
-├── INFRA.md                       ← canary resources + deploy recovery
-├── astro.config.mjs               ← site config + sidebar groups
+├── INFRA.md                       ← canary + prod resources + deploy recovery
+├── staticwebapp.config.json       ← SWA security headers + caching + video MIME / range + `/` → `/docs/` redirect (postbuild copies this into `dist/`)
+├── astro.config.mjs               ← site config + sidebar groups (built with `base: '/docs'`, `outDir: './dist/docs'`)
 ├── package.json
 ├── tsconfig.json
-├── public/
+├── scripts/
+│   ├── postbuild.mjs              ← copies staticwebapp.config.json into dist/ root after `astro build`
+│   └── remarkBasePrefix.mjs       ← remark plugin: prepends `/docs` to plain markdown links so content stays portable
+├── public/                        ← copied as-is into `dist/docs/` (so URLs match the `/docs/*` AFD route)
 │   ├── favicon.svg                ← product icon (reused from portal)
-│   ├── staticwebapp.config.json   ← SWA security headers + caching + video MIME / range
 │   └── videos/                    ← self-hosted MP4 clips (see ./public/videos/README.md)
 └── src/
     ├── assets/
@@ -198,7 +201,7 @@ JS + CSS lazy-load only on pages that actually contain a video.
 | Capability | Notes |
 | --- | --- |
 | Unified controls | Play / pause / seek / time / mute / volume / captions / settings / PiP / AirPlay / fullscreen — same UI for MP4, YouTube, and Vimeo. |
-| HTTP-range buffering | `Accept-Ranges: bytes` is set on `/videos/*` by `public/staticwebapp.config.json`, so the player only fetches the bytes it needs for the user's current playback position. |
+| HTTP-range buffering | `Accept-Ranges: bytes` is set on `/docs/videos/*` by `staticwebapp.config.json`, so the player only fetches the bytes it needs for the user's current playback position. |
 | Lazy load | `import('plyr')` runs only when the page actually has a `[data-docs-video]` host. Pages without a video stay zero-cost. |
 | Idempotent init | The init script marks each host with `data-plyr-initialised`, so client-side route changes (Starlight prefetching) don't double-mount the player. |
 | Themed | Plyr's CSS variables are bound to the Starlight palette in the component's `<style>` block. |
@@ -208,7 +211,7 @@ JS + CSS lazy-load only on pages that actually contain a video.
 
 | `src` | Renders as | Notes |
 | --- | --- | --- |
-| `/videos/foo.mp4` (or `.webm` / `.mov` / `.m4v`) | HTML5 `<video>` + Plyr | Uses `preload="metadata"` — only the poster + duration are fetched until play. |
+| `/docs/videos/foo.mp4` (or `.webm` / `.mov` / `.m4v`) | HTML5 `<video>` + Plyr | Uses `preload="metadata"` — only the poster + duration are fetched until play. |
 | `https://www.youtube.com/watch?v=…`, `https://youtu.be/…`, `https://www.youtube.com/shorts/…` | Plyr's YouTube provider (iframe) | Privacy-friendly host, no cookies until play. |
 | `https://vimeo.com/123456` | Plyr's Vimeo provider (iframe) | — |
 | Any absolute `.mp4` URL (e.g. Azure Blob) | HTML5 `<video>` + Plyr | Works as long as the host serves `Accept-Ranges: bytes`. |
@@ -223,8 +226,8 @@ import Video from '../../../components/Video.astro';
 
 {/* Self-hosted MP4 with optional poster */}
 <Video
-  src="/videos/quickstart.mp4"
-  poster="/videos/quickstart-poster.png"
+  src="/docs/videos/quickstart.mp4"
+  poster="/docs/videos/quickstart-poster.png"
   title="Building your first workflow"
 />
 
@@ -283,7 +286,7 @@ import Video from '../../../components/Video.astro';
 
 The **AI workflow assistant** is the fastest path from idea to running workflow…
 
-<Video src="/videos/ai-assistant.mp4" title="Authoring with the AI assistant" />
+<Video src="/docs/videos/ai-assistant.mp4" title="Authoring with the AI assistant" />
 
 ## Starting from a prompt
 …
@@ -346,7 +349,7 @@ docs keeps working.
 | --- | --- |
 | Player doesn't render | Confirm the page is `.mdx` (not `.md`) and you imported `Video` from the right relative path. Check the browser console for the dynamic `import('plyr')` error. |
 | Poster shows but video won't play | Browser blocked autoplay (expected — Plyr respects this). User has to click play. |
-| Self-hosted MP4 won't seek | The source server must serve `Accept-Ranges: bytes`. SWA does this automatically for `/videos/*` via `staticwebapp.config.json`. External hosts may not. |
+| Self-hosted MP4 won't seek | The source server must serve `Accept-Ranges: bytes`. SWA does this automatically for `/docs/videos/*` via `staticwebapp.config.json`. External hosts may not. |
 | Captions don't appear | Plyr expects `<track kind="captions">` inside the `<video>`. Add a `.vtt` file to `public/videos/` and pass a `<track>` slot (component currently doesn't expose this — extend `Video.astro` if you need it). |
 | Page loads slower after adding a video | Expected only on pages with a video — Plyr lazy-loads (~33 KB gz). Pages without a video are untouched. |
 
@@ -458,7 +461,7 @@ This section is a structured map for AI agents working on the docs.
 | Add a video (self-hosted) | `public/videos/<name>.mp4` (+ optional `<name>-poster.png`); see `public/videos/README.md` for encoding |
 | Embed a video on a page | Rename target page to `.mdx`; `import Video from '../../../components/Video.astro';` then `<Video src="..." title="..." />`. Auto-detects MP4 vs YouTube vs Vimeo and wraps Plyr lazily. |
 | Update logo / favicon | `src/assets/logo.svg`, `public/favicon.svg` |
-| Update SWA security headers / caching | `public/staticwebapp.config.json` |
+| Update SWA security headers / caching | `staticwebapp.config.json` |
 | Update deploy workflow | `../.github/workflows/docs-site-deploy.yml` |
 | Inspect canary infra / RBAC / fed creds | `INFRA.md` |
 
@@ -519,7 +522,7 @@ This section is a structured map for AI agents working on the docs.
    ```mdx
    import Video from '../../../components/Video.astro';
 
-   <Video src="/videos/<name>.mp4" title="<accessible label>" />
+   <Video src="/docs/videos/<name>.mp4" title="<accessible label>" />
    ```
 
    For YouTube / Vimeo, replace `src` with the watch URL — auto-detected.

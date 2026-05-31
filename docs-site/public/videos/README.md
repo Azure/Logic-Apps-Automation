@@ -5,7 +5,7 @@ Drop MP4 / WebM files here. Reference them in `.mdx` content with:
 ```mdx
 import Video from '../../../components/Video.astro';
 
-<Video src="/videos/your-clip.mp4" title="Caption" poster="/videos/your-clip-poster.png" />
+<Video src="/docs/videos/your-clip.mp4" title="Caption" poster="/docs/videos/your-clip-poster.png" />
 ```
 
 ## Conventions

@@ -1,15 +1,30 @@
-# Docs Site — Azure Static Web Apps Deploy
+# Docs Site — Azure Static Web Apps Deploy (canary + prod)
 #
-# Builds the Astro/Starlight docs site and deploys to Azure Static Web Apps.
+# Builds the Astro/Starlight docs site once and deploys to the appropriate
+# Azure Static Web App. All Azure auth flows through workload-identity
+# federation (OIDC) against the shared `Otto E2E GitHub Actions` SP — no
+# long-lived deployment tokens are stored anywhere in this repo.
 #
 # Triggers:
-#   - push to main (changes under docs-site/**) → production deploy
-#   - pull_request                              → preview environment
-#   - workflow_dispatch                         → manual deploy
+#   push (main, docs-site/**)              → canary auto-deploy
+#   pull_request (opened/sync/reopened)    → canary preview environment
+#   pull_request (closed)                  → tear down preview environment
+#   workflow_dispatch (target=canary|prod) → manual deploy (prod requires
+#                                            approval via the `docs-prod`
+#                                            GitHub environment)
 #
-# Required GitHub secret:
-#   AZURE_STATIC_WEB_APPS_API_TOKEN — set automatically when you link the
-#   SWA resource to this repo, or add manually from the Azure portal.
+# Required repo configuration (Settings → Secrets and variables → Actions):
+#   Secrets: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+#   Optional vars: DOCS_SITE_URL (canonical site URL used in <link rel="canonical">)
+#
+# Required GitHub environment: `docs-prod` (with required reviewers).
+#
+# Resources:
+#   Canary SWA: otto-docs-canary-swa (RG: otto-docs-canary-rg)
+#                hostname: lemon-mud-0e10bdd1e.7.azurestaticapps.net
+#   Prod SWA:   otto-docs-swa        (RG: otto-docs-rg)
+#                hostname: kind-river-0d9e9ac1e.7.azurestaticapps.net
+#                fronted by AFD `otto-portal-afd` at https://auto.azure.com/docs/
 
 name: 'Docs Site: Deploy'
 
@@ -25,14 +40,24 @@ on:
       - 'docs-site/**'
       - '.github/workflows/docs-site-deploy.yml'
   workflow_dispatch:
+    inputs:
+      target:
+        description: 'Deploy target'
+        type: choice
+        options: [canary, prod]
+        default: canary
 
+# Default permissions = read only; jobs opt-in to what they need.
 permissions:
   contents: read
-  pull-requests: write
 
+# Concurrency by resolved target so that:
+#   - PRs: each PR has its own group (preview deploy can be cancelled by a new push)
+#   - push to main and manual canary: share the `canary` group (cancel one another)
+#   - manual prod: lives in its own `prod` group and is never auto-cancelled
 concurrency:
-  group: docs-site-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  group: docs-site-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || (github.event_name == 'workflow_dispatch' && inputs.target) || 'canary' }}
+  cancel-in-progress: ${{ !(github.event_name == 'workflow_dispatch' && inputs.target == 'prod') }}
 
 env:
   NODE_VERSION: '22'
@@ -40,12 +65,16 @@ env:
   DOCS_OUTPUT_LOCATION: 'dist'
 
 jobs:
-  build_and_deploy:
+  # --------------------------------------------------------------------------
+  # Build once. The same artifact is deployed to whichever target the job
+  # graph selects. `base: '/docs'` is baked into astro.config.mjs so there's
+  # no per-target build divergence.
+  # --------------------------------------------------------------------------
+  build:
+    name: 'Build'
     if: github.event_name != 'pull_request' || github.event.action != 'closed'
-    name: 'Build and deploy'
     runs-on: ubuntu-latest
     timeout-minutes: 15
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,10 +86,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ${{ env.DOCS_APP_LOCATION }}/package-lock.json
 
       - name: Install dependencies
         working-directory: ${{ env.DOCS_APP_LOCATION }}
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Type-check and lint content
         working-directory: ${{ env.DOCS_APP_LOCATION }}
@@ -72,32 +103,207 @@ jobs:
           DOCS_SITE_URL: ${{ vars.DOCS_SITE_URL || '' }}
         run: npm run build
 
-      # The SWA deploy action with skip_app_build: true treats app_location
-      # as the folder containing index.html. Stage the built output at a
-      # workspace-root path so the action finds it reliably.
-      - name: Stage build output for SWA
-        run: |
-          rm -rf swa-staging
-          cp -r "${DOCS_APP_LOCATION}/${DOCS_OUTPUT_LOCATION}" swa-staging
+      - name: Upload built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-dist
+          path: ${{ env.DOCS_APP_LOCATION }}/${{ env.DOCS_OUTPUT_LOCATION }}
+          retention-days: 7
+          if-no-files-found: error
 
-      - name: Deploy to Azure Static Web Apps
+  # --------------------------------------------------------------------------
+  # Deploy → canary. Triggered by push to main, by PR previews from in-repo
+  # branches, or by manual dispatch with target=canary (also restricted to
+  # main because that's the only ref the SP's federated credential covers
+  # for non-PR runs). Fork PRs lack access to secrets and so this job will
+  # skip cleanly (azure/login won't be invoked).
+  # --------------------------------------------------------------------------
+  deploy_canary:
+    name: 'Deploy → canary'
+    needs: build
+    if: |
+      (github.event_name == 'push') ||
+      (github.event_name == 'pull_request' &&
+        github.event.action != 'closed' &&
+        github.event.pull_request.head.repo.full_name == github.repository) ||
+      (github.event_name == 'workflow_dispatch' &&
+        inputs.target == 'canary' &&
+        github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    env:
+      SWA_NAME: otto-docs-canary-swa
+      SWA_RG: otto-docs-canary-rg
+    steps:
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-dist
+          path: dist
+
+      - name: Verify Azure auth secrets are configured
+        shell: bash
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          set -euo pipefail
+          missing=()
+          [[ -z "$AZURE_CLIENT_ID" ]] && missing+=("AZURE_CLIENT_ID")
+          [[ -z "$AZURE_TENANT_ID" ]] && missing+=("AZURE_TENANT_ID")
+          [[ -z "$AZURE_SUBSCRIPTION_ID" ]] && missing+=("AZURE_SUBSCRIPTION_ID")
+          if (( ${#missing[@]} > 0 )); then
+            echo "::error::Missing required repo secrets: ${missing[*]}"
+            echo "::error::See docs-site/INFRA.md → 'Repo-side one-time setup' for how to configure these."
+            exit 1
+          fi
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch SWA deployment token (JIT)
+        id: token
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOKEN=$(az staticwebapp secrets list \
+            --name "$SWA_NAME" --resource-group "$SWA_RG" \
+            --query properties.apiKey -o tsv)
+          echo "::add-mask::$TOKEN"
+          echo "swa_token=$TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to Azure Static Web Apps (canary)
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ steps.token.outputs.swa_token }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
-          app_location: 'swa-staging'
+          app_location: 'dist'
           skip_app_build: true
           skip_api_build: true
 
+  # --------------------------------------------------------------------------
+  # Deploy → prod. Only triggered manually. The `docs-prod` GitHub environment
+  # gates this job with required reviewers, so production never deploys without
+  # an explicit approval click.
+  # --------------------------------------------------------------------------
+  deploy_prod:
+    name: 'Deploy → prod'
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && inputs.target == 'prod'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: docs-prod
+      url: https://auto.azure.com/docs/
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      SWA_NAME: otto-docs-swa
+      SWA_RG: otto-docs-rg
+    steps:
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-dist
+          path: dist
+
+      - name: Verify Azure auth secrets are configured
+        shell: bash
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          set -euo pipefail
+          missing=()
+          [[ -z "$AZURE_CLIENT_ID" ]] && missing+=("AZURE_CLIENT_ID")
+          [[ -z "$AZURE_TENANT_ID" ]] && missing+=("AZURE_TENANT_ID")
+          [[ -z "$AZURE_SUBSCRIPTION_ID" ]] && missing+=("AZURE_SUBSCRIPTION_ID")
+          if (( ${#missing[@]} > 0 )); then
+            echo "::error::Missing required repo secrets: ${missing[*]}"
+            echo "::error::See docs-site/INFRA.md → 'Repo-side one-time setup' for how to configure these."
+            exit 1
+          fi
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch SWA deployment token (JIT)
+        id: token
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOKEN=$(az staticwebapp secrets list \
+            --name "$SWA_NAME" --resource-group "$SWA_RG" \
+            --query properties.apiKey -o tsv)
+          echo "::add-mask::$TOKEN"
+          echo "swa_token=$TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to Azure Static Web Apps (prod)
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ steps.token.outputs.swa_token }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          app_location: 'dist'
+          skip_app_build: true
+          skip_api_build: true
+
+  # --------------------------------------------------------------------------
+  # Close PR preview. Only same-repo PRs created a preview; only same-repo
+  # PR closures can tear one down (forks can't access the token).
+  # --------------------------------------------------------------------------
   close_pr_preview:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
     name: 'Close PR preview'
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    env:
+      SWA_NAME: otto-docs-canary-swa
+      SWA_RG: otto-docs-canary-rg
     steps:
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch SWA deployment token (JIT)
+        id: token
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOKEN=$(az staticwebapp secrets list \
+            --name "$SWA_NAME" --resource-group "$SWA_RG" \
+            --query properties.apiKey -o tsv)
+          echo "::add-mask::$TOKEN"
+          echo "swa_token=$TOKEN" >> "$GITHUB_OUTPUT"
+
       - name: Close preview environment
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ steps.token.outputs.swa_token }}
           action: 'close'

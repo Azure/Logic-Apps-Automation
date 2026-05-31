@@ -84,7 +84,7 @@ To share an app, the owner (or an app Contributor) explicitly invites users by g
 
 ### Create a project
 
-1. Open the portal at **[otto.azure.com](https://otto.azure.com)**.
+1. Open the portal at **[auto.azure.com](https://auto.azure.com)**.
 2. Click **Create project**, give it a name, pick a region.
 3. Click **Create**.
 
