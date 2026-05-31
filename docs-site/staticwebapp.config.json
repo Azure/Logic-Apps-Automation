@@ -8,6 +8,7 @@
       "/docs/pagefind/*",
       "/docs/videos/*",
       "/docs/*.{png,svg,ico,jpg,jpeg,webp,gif,js,css,xml,txt,woff,woff2,mp4,webm,mov,m4v}",
+      "/index.html",
       "/staticwebapp.config.json"
     ]
   },
