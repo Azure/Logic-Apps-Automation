@@ -139,11 +139,27 @@ jobs:
       SWA_NAME: otto-docs-canary-swa
       SWA_RG: otto-docs-canary-rg
     steps:
+      - name: Checkout (lockdown script only)
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            docs-site/scripts/apply-lockdown.mjs
+          sparse-checkout-cone-mode: false
+
       - name: Download built site
         uses: actions/download-artifact@v4
         with:
           name: docs-dist
           path: dist
+
+      # PR previews are served on per-PR `*-<pr>.eastus2.7.azurestaticapps.net`
+      # hosts that AFD does not front — locking them down would 403 the
+      # reviewer. So we only inject the AFD `forwardingGateway` block for the
+      # canary `production` environment (push / workflow_dispatch runs).
+      - name: Apply canary AFD lockdown (skip for PR previews)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: node docs-site/scripts/apply-lockdown.mjs canary
 
       - name: Verify Azure auth secrets are configured
         shell: bash
@@ -212,11 +228,22 @@ jobs:
       SWA_NAME: otto-docs-swa
       SWA_RG: otto-docs-rg
     steps:
+      - name: Checkout (lockdown script only)
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            docs-site/scripts/apply-lockdown.mjs
+          sparse-checkout-cone-mode: false
+
       - name: Download built site
         uses: actions/download-artifact@v4
         with:
           name: docs-dist
           path: dist
+
+      - name: Apply prod AFD lockdown
+        shell: bash
+        run: node docs-site/scripts/apply-lockdown.mjs prod
 
       - name: Verify Azure auth secrets are configured
         shell: bash
