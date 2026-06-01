@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-This page tracks releases. For day-to-day changes, see the [pull request history](https://github.com/serverless-paas-balam/project-otto/pulls?q=is%3Apr+is%3Aclosed).
+This page tracks releases. For day-to-day changes, see the [pull request history](https://github.com/Azure/Logic-Apps-Automation/pulls?q=is%3Apr+is%3Aclosed).
 
 ## Unreleased
 
@@ -13,4 +13,4 @@ This page tracks releases. For day-to-day changes, see the [pull request history
 
 ---
 
-*Looking for a specific change? Search the [closed PR list](https://github.com/serverless-paas-balam/project-otto/pulls?q=is%3Apr+is%3Aclosed) or the [commit history](https://github.com/serverless-paas-balam/project-otto/commits/main).*
+*Looking for a specific change? Search the [closed PR list](https://github.com/Azure/Logic-Apps-Automation/pulls?q=is%3Apr+is%3Aclosed) or the [commit history](https://github.com/Azure/Logic-Apps-Automation/commits/main).*
