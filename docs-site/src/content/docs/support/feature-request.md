@@ -9,13 +9,9 @@ Feature requests are welcome — especially ones with a clear user story.
 
 ## File the request
 
-→ [**Open a new feature request on GitHub**](https://github.com/serverless-paas-balam/project-otto/issues/new?template=feature_request.yml)
+→ [**Open a new feature request on GitHub**](https://github.com/Azure/Logic-Apps-Automation/issues/new?template=feature_request.yml)
 
 The link opens the feature-request form with labels and the priority dropdown pre-filled — you just describe the problem and the proposed experience.
-
-:::note[Private preview]
-The tracker is in a private repo today. If the link 404s, you don't yet have access — ping the team to be added.
-:::
 
 ## What to include
 
