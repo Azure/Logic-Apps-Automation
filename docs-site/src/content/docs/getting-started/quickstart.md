@@ -1,11 +1,28 @@
 ---
-title: Quickstart
-description: Open an app, build a workflow, run it, and read the execution log — in a few minutes.
+title: Quickstart - Azure Logic Apps Automation
+description: Open your project and app, build and run your workflow, and then review the execution history.
 sidebar:
-  order: 3
+  order: 4
+  label: Quickstart
 ---
 
 This page walks the whole loop: open an app, create a workflow, save it as a draft, run it, and inspect what happened. Use it as a template and swap in whatever you actually want to automate.
+
+## 1. Open your project
+
+Sign-in takes you to the dashboard, where you see every **project** you have access to. A project is the top-level container for your work — each project holds applications, sandboxes, connections, and settings.
+
+![Projects dashboard](../../../assets/portal/02-projects.png)
+
+Click a project to open it.
+
+## 3. Browse applications
+
+Inside a project, the default tab is **Applications**. An *application* is a deployable unit that holds **workflows, connections, parameters,** and **analytics** together. Most teams have a handful of apps per project — one per logical service or domain.
+
+![Applications inside a project](../../../assets/portal/03-apps.png)
+
+The left rail surfaces the rest of the project surface — **Sandboxes** for experimentation and **Settings** for project-level configuration.
 
 ## 1. Open an application
 
@@ -158,6 +175,14 @@ For failed actions, the same panel shows the error message and stack trace so yo
 ## 10. Iterate
 
 Edit the workflow in the designer or send follow-ups to the assistant (*"add error handling to the HTTP action"*, *"use a Slack post instead"*). Changes go into a draft until you publish.
+
+## Troubleshooting
+
+| Problem | Try |
+|---------|-----|
+
+| **Sign in loop or single sign-on (SSO) error** | Clear your cookies for the following URLs, and sign in again: <br><br>- `https://auto.azure.com` <br>- `https://login.microsoftonline.com` |
+| **Portal appears empty** | Perform a hard refresh (Keyboard: `Cmd/Ctrl + Shift + R`). If the problem persists, [report a bug](/support/report-a-bug/). |
 
 ## Where to go from here
 

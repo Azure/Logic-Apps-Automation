@@ -1,37 +1,42 @@
 ---
-title: Introduction
-description: A designer for developers to build, automate, and ship workflows with a visual canvas, an AI assistant, and a library of connectors.
+title: Introduction - Azure Logic Apps Automation
+description: This service gives developers the power to automate unpredictable processes and create runtime-adaptable workflows by using the designer, AI assistant, and connectors library.
 sidebar:
   order: 1
+  label: Introduction
 ---
 
-This is a **designer for developers** to build workflows, automate processes, and connect the services they already use. Three things make it work:
+# Introduction
 
-- A **visual canvas** for designing workflows — triggers, actions, branches, loops.
-- An **AI assistant** that turns natural-language descriptions into runnable workflows.
-- A **catalog of connectors** for Azure, SaaS apps, databases, and HTTP APIs.
+Automate unpredictable processes and create AI-driven workflows that adapt at runtime with Azure Logic Apps Automation. 
 
-You use the platform in your browser at **[auto.azure.com](https://auto.azure.com)**. There's nothing to install or run locally.
+Just describe what you want in your own words by using the AI assistant, or design your workflows on the visual canvas. Connect the services and systems you already use by choosing from 1,400+ prebuilt and read-to-use connectors.
 
-## How a workflow gets built
+All these capabilities exist through your browser at the [Azure Logic Apps Automation portal](https://auto.azure.com). No need to locally install or run any other tools.
 
-| Step | What you do |
-| --- | --- |
-| **1. Describe** | Tell the AI assistant what you want to automate in plain language. |
-| **2. Review** | See every step on the visual canvas. Edit nodes, add logic, adjust parameters. |
-| **3. Connect** | Wire up services with pre-built connectors. |
-| **4. Deploy and monitor** | Save the workflow; it runs in the cloud with built-in run history and alerts. |
+## Build workflows with AI or the designer
 
-## What's in the box
+Here's what the high-level process looks like to build a workflow:
 
-- **Visual designer** — drag-and-drop canvas with conditions, loops, parallel branches, and nested logic.
-- **AI workflow assistant** — design, build, and iterate on workflows from plain-language prompts.
-- **1,400+ connectors** — Service Bus, Cosmos DB, SQL, HTTP, Teams, Outlook, SharePoint, and many more.
-- **Code & sandbox** — inline JavaScript actions, a code editor with IntelliSense, and an isolated sandbox for agent loops.
-- **Runs & analytics** — real-time run history, execution trends, failure analysis, and per-action performance.
+| Step | Description |
+|------|-------------|
+| **1. Describe or design** | - **AI assistant**: Use your own words to describe what to automate. <br><br>- **Designer**: Drag-and-drop the steps that you want to automate on the visual canvas. Add conditions, loops, branches, and nested logic. |
+| **2. Inspect** | Review each step on the visual canvas. Edit nodes, add logic, and adjust parameters. |
+| **3. Connect** | Create connections to services and systems through 1,400+ prebuilt connectors. Including Service Bus, Cosmos DB, SQL, HTTP, Teams, Outlook, SharePoint, and more. |
+| **4. Deploy and monitor** | Save the workflow and run in the cloud, which generates run history and produces alerts. |
+
+## Other capabilities
+
+| Capability | Description |
+|------------|-------------|
+| **Code support** | Run inline code actions like JavaScript, Edit workflows in a code editor with IntelliSense. |
+| **Agents** | Add and run agents, which are actions backed by large language models (LLMs). Drag and drop on the designer like any other action. Provide a system prompt, a toolset, and inputs. Downstream actions can use the output. |
+| **Knowledge bases** | External information sources for context that agents can search while reasoning. |
+| **Sandboxes** | Run agentic workflows with code inside isolated compute environments. |
+| **Run analytics** | Diagnose problems using real-time run history, execution trends, failure analysis, and per-action performance. |
 
 ## Next
 
-- **[Sign in](/getting-started/setup/)** — open the portal and get into your workspace.
-- **[Quickstart](/getting-started/quickstart/)** — build and run your first workflow in a few minutes.
-- **[Features → overview](/features/overview/)** — a tour of what you can do.
+- [**Set up**](/getting-started/setup/): Sign in to the portal. Create your first project and app.
+- [**Quickstart**](/getting-started/quickstart/): Build and run your first workflow.
+- [**Core concepts**](/getting-started/core-concepts/): Learn the key concepts and terminology.

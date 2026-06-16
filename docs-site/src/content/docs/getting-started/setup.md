@@ -1,43 +1,59 @@
 ---
-title: Sign in
-description: Open the portal, pick a workspace, and see your projects.
+title: Set up - Azure Logic Apps Automation
+description: Create a project and an app, which you need before you create a workflow.
 sidebar:
-  order: 2
-  label: Sign in
+  order: 3
+  label: Set up
 ---
 
-The platform runs in your browser. There's nothing to install.
+# Set up your project and app
 
-## 1. Open the portal
+Before you create your first workflow, you need a *project* and an *app* to store your workflow.
 
-Go to **[auto.azure.com](https://auto.azure.com)** and sign in with your work or school account.
+## Requirements
 
-![Sign-in page](../../../assets/portal/01-login.png)
+An Azure account and subscription that uses a Microsoft work or school account. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
 
-## 2. Pick a project
+> [!NOTE]
+>
+> You only need an Azure subscription to create projects. Make sure that your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com). As a workflow builder, you only need access to the portal - no Azure subscription necessary.
 
-Sign-in takes you to the dashboard, where you see every **project** you have access to. A project is the top-level container for your work — each project holds applications, sandboxes, connections, and settings.
+## 1. Sign in to the portal
 
-![Projects dashboard](../../../assets/portal/02-projects.png)
+1. Go to the [Azure Logic Apps Automation portal](https://auto.azure.com), and select **Sign in**.
 
-Click a project to open it.
+   :::image type="content" source="media/setup/sign-in.png" alt-text="Screenshot shows the Azure Logic Apps Automation portal home page for sign in." lightbox="media/setup/sign-in.png":::
 
-## 3. Browse applications
+1. Sign in with your Azure account.
 
-Inside a project, the default tab is **Applications**. An *application* is a deployable unit that holds **workflows, connections, parameters,** and **analytics** together. Most teams have a handful of apps per project — one per logical service or domain.
+## 2. Create a project
 
-![Applications inside a project](../../../assets/portal/03-apps.png)
+1. On the **Projects** tab, select **Create project**.
 
-The left rail surfaces the rest of the project surface — **Sandboxes** for experimentation and **Settings** for project-level configuration.
+1. In the **Create automation project** box, provide the following information:
 
-## Troubleshooting
+   | Property | Description |
+   |----------|-------------|
+   | **Subscription** | Your Azure subscription. |
+   | **Resource group** | The [Azure resource group](/azure/azure-resource-manager/management/overview#terminology) for organizing your project resources. |
+   | **Location** | The Azure region closest to your end users or the components that your workflows need to use. |
+   | **Automation project name** | A unique project name across Azure regions. |
 
-| Problem | Try |
-| --- | --- |
-| **"You don't have access to any project"** | Ask a project admin to invite you, or create your own project from the empty state. |
-| **Login loop / SSO error** | Clear cookies for `auto.azure.com` and `login.microsoftonline.com`, then sign in again. |
-| **Portal looks blank** | Hard-refresh (`Cmd/Ctrl + Shift + R`). If it persists, [report a bug](/support/report-a-bug/). |
+1. When you finish, select **Create**.
+
+   > [!NOTE]
+   >
+   > The project creation process might take several minutes to finish.
+
+1. After the project creation completes, from the **Projects** list, open your project.
+
+## Add project members
+
+Before others can work in your project, you need to add them as project members.
+
 
 ## Next
 
-You've found your projects and apps — continue to the **[Quickstart](/getting-started/quickstart/)** to build your first workflow.
+- [**Quickstart**](/getting-started/quickstart/): Build and run your first workflow.
+- [**Core concepts**](/getting-started/core-concepts/): Learn the key concepts and terminology.
+- [**Troubleshoot problems**](/getting-started/troubleshoot/): Resolve common problems.
