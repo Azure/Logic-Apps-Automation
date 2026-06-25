@@ -404,7 +404,8 @@ hero:                       # only with template: splash
 
 ## Conventions
 
-- **Sentence-case** headings — "Getting started", not "Getting Started".
+- **Sentence-case** headings — "Get started", not "Get Started".
+- **No gerunds** headings - "Get started", not "Getting started".
 - **Imperative voice** for instructions — "Run the build", not "You should run the build".
 - **Site-absolute paths** with trailing slash for cross-links:
   `[Quickstart](/getting-started/quickstart/)`.

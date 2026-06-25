@@ -1,156 +1,244 @@
 ---
 title: Quickstart - Azure Logic Apps Automation
-description: Open your project and app, build and run your workflow, and then review the execution history.
+description: Create apps so you can build and run workflows. Review their execution history.
 sidebar:
   order: 4
   label: Quickstart
 ---
 
-This page walks the whole loop: open an app, create a workflow, save it as a draft, run it, and inspect what happened. Use it as a template and swap in whatever you actually want to automate.
+These steps show how to create or open an app in an automation project, build and run a sample workflow, and review what happened. You can use the workflow as a template and swap in what you actually want to automate.
+
+## Requirements
+
+To view and create apps and workflows in a project, you need access to that project. If you don't have access, contact the project owner to add you as a project member. 
 
 ## 1. Open your project
 
-Sign-in takes you to the dashboard, where you see every **project** you have access to. A project is the top-level container for your work — each project holds applications, sandboxes, connections, and settings.
+1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
-![Projects dashboard](../../../assets/portal/02-projects.png)
+   The portal opens and shows every project where you have access. If you don't see the projects you expect, contact the project owner to check whether you have access.
 
-Click a project to open it.
+   :::image type="content" source="media/quickstart/projects-list.png" alt-text="Screenshot shows the portal and projects list." lightbox="media/quickstart/projects-list.png":::
 
-## 3. Browse applications
+1. On the **Projects** tab, select your project.
 
-Inside a project, the default tab is **Applications**. An *application* is a deployable unit that holds **workflows, connections, parameters,** and **analytics** together. Most teams have a handful of apps per project — one per logical service or domain.
+   The portal opens the project and shows the **Apps** list. The following example shows an empty project.
 
-![Applications inside a project](../../../assets/portal/03-apps.png)
+   :::image type="content" source="media/quickstart/apps-list.png" alt-text="Screenshot shows an empty project without apps." lightbox="media/quickstart/apps-list.png":::
 
-The left rail surfaces the rest of the project surface — **Sandboxes** for experimentation and **Settings** for project-level configuration.
+1. If the project is empty, go to the next section to create an app. 
 
-## 1. Open an application
+   Otherwise, select the app where you want to create your workflow, and skip to [Create your workflow](#3-create-your-workflow).
 
-From your project's **Applications** tab, click an app. The app shell opens with five sections in the left rail — **Workflows**, **Connections**, **Parameters**, **Analytics**, and **Settings**.
+## 2. Create an app
 
-![Workflows tab inside an application](../../../assets/portal/04-workflows-list.png)
+1. In the project, on the **Apps** page, select **Create app**.
 
-The **Workflows** tab is your default view: a workflow builder at the top and the list of existing workflows below.
+1. In the **Create application** box, enter a name for your app, and select **Create**.
 
-:::tip[No applications yet?]
-A fresh project starts empty. Click **Create application** on the project's **Applications** tab, give it a name, and submit.
+   :::image type="content" source="media/quickstart/create-application-box.png" alt-text="Screenshot shows the Create application box with example app name." lightbox="media/quickstart/create-application-box.png":::
 
-![Applications list with Create application + Status column](../../../assets/portal/80-apps-list.png)
-![Create Application dialog](../../../assets/portal/81-create-app-dialog.png)
+   App creation might take a couple minutes to finish.
+   
+1. To check when the app is ready for you to open, review the **Status** column.
 
-App provisioning takes a minute or two — watch the **Status** column flip from *Building* to **Ready** before opening it.
+1. After app creation completes, select your app.
 
-Want collaborators? Open the application's **Settings → User permissions** tab and invite them, or invite them at the project level if they need access to every app. See [Permissions](/features/permissions/).
-:::
+   The portal opens the app and shows the **Workflows** list. The following example shows an empty app.
 
-## 2. Pick a path: assistant or scratch
+   :::image type="content" source="media/quickstart/workflows-list.png" alt-text="Screenshot shows an empty app without workflows." lightbox="media/quickstart/workflows-list.png":::
 
-You have two ways to start a workflow.
+1. To add people to work on your app, follow these steps:
 
-**Use the assistant.** Type what you want into the *"Describe what your workflow should do…"* box. The assistant generates the workflow and drops you onto the canvas.
+   1. On the app sidebar, select **Settings**. 
 
-![Describe-your-workflow prompt](../../../assets/portal/50-assistant-prompt-typed.png)
+   1. On the **User permissions** tab, select **Add user**.
+   
+      If people need access to every app in the project, they need access at the project level.
 
-**Build from scratch.** Click **Build from scratch** to start with a blank canvas. The dialog asks for a workflow name:
+## 3. Create your workflow
 
-![Name dialog](../../../assets/portal/11-name-workflow.png)
+1. In your app, on the **Workflows** page, select **Create workflow**.
 
-Either path lands you in the designer. The rest of this page uses *build from scratch* so every step is visible.
+1. In the **Create workflow** box, enter the workflow name, and select **Build**.
 
-## 3. Add a trigger
+1. After the portal opens the designer, choose an option to start creating your workflow.
 
-Every workflow starts with a trigger. The empty canvas shows an **Add a trigger** placeholder:
+   | Opation | Path |
+   |---------|------|
+   | **AI assistant** | Generate your workflow on the designer, based on your description about what the workflow does. <br><br>For more information, see [Generate workflow with assistant](#3a-generate-workflow-with-assistant). |
+   | **Designer** | Add the trigger and each action from the connectors library. |
 
-![Empty designer](../../../assets/portal/12-empty-designer.png)
+## 3a. Generate a workflow with the assistant
 
-Click it to open the picker:
+1. On the bottom toolbar, select **Copilot**.
 
-![Trigger picker](../../../assets/portal/13-trigger-picker.png)
+1. In the chat box, enter your workflow description.
 
-Search for the integration you want — `Request` for an HTTP webhook trigger, `Schedule` for recurrence, or any connector that exposes triggers.
+1. Select **Generate**.
 
-![Search "Request"](../../../assets/portal/14-trigger-search-request.png)
+   The following example shows the AI assistant and a workflow description:
 
-Select an operation (for example, *When an HTTP request is received*) to add it to the canvas:
+   :::image type="content" source="media/quickstart/prompt-assistant.png" alt-text="Screenshot shows the workflow designer with AI assistant pane and workflow description." lightbox="media/quickstart/prompt-assistant.png":::
 
-![Trigger added](../../../assets/portal/15-trigger-added.png)
+   The following example shows the assistant-generated workflow:
 
-## 4. Add actions
+   :::image type="content" source="media/quickstart/generated-workflow.png" alt-text="Screenshot shows the workflow designer and assistant-generated workflow." lightbox="media/quickstart/generated-workflow.png":::
 
-Click the **+** between (or after) nodes to add the next step. Pick a connector or built-in action, fill in its parameters, and continue. Compose-style branching shows up automatically when actions can run in parallel.
+   > [!NOTE]
+   >
+   > Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But it doesn't know your credentials or environment-specific values. Before your first workflow run succeeds, you need to complete any required follow-up tasks.
 
-A complete workflow with parallel branches and a final response looks like this:
+1. Complete any remaining follow-up tasks that your workflow needs to run successfully, for example:
 
-![A complete workflow on the canvas](../../../assets/portal/20-designer-canvas.png)
+   - Add any required parameter values that the assistant left empty.
+   
+     1. Open the information box for the trigger and each action.
 
-The bottom toolbar gives you canvas-wide controls:
+     1. Find the parameters marked with an asterisk or red outline.
 
-- **Add** — quick-add a node anywhere on the canvas.
-- **Code** — open the raw JSON view side-by-side with the canvas (next section).
-- **Test your draft** — run the workflow with a test payload without publishing.
-- **Copilot** — open the assistant in the designer to iterate on the workflow.
-- **Draft** — the indicator showing you're editing the unpublished version.
+   - Configure the connections for each connector trigger and action.
+   
+     - On your app sidebar, select **Connections**. Review each connection and complete the necessary setup.
 
-## 5. Edit in code or with copilot
+     - In the designer, open the information box for the connector trigger and each action. Review the **Connection** tab and complete the necessary setup.
 
-Switch to the code view for hand-edits. Canvas and JSON stay in sync — change either, the other updates:
+   - Resolve any prompts on the trigger or actions that show a label named **Finish configuring with Copilot**.
 
-![Code view side-by-side with the canvas](../../../assets/portal/21-code-view.png)
+## 3b. Build a workflow with the designer
 
-Or open the assistant inside the designer to iterate on the workflow with natural language:
+When you start with an empty designer, manually add the trigger and actions that provide your workflow's behavior.
 
-![Copilot pane inside the designer](../../../assets/portal/22-copilot-pane.png)
+### Add the trigger
 
-:::caution[Workflows from Copilot still need configuration]
-Copilot scaffolds the workflow shape — triggers, actions, branching — but it can't guess your credentials or environment-specific values. Before the first run succeeds you'll need to:
+Every workflow starts with a trigger, which identifies the event or condition that runs the workflow.
 
-- **Configure connections** for each connector action (the app's **Connections** tab, or per-node *Connection* tab in the designer).
-- **Fill required parameters** the assistant left blank — look for fields marked with an asterisk or red outline.
-- **Resolve any "Finish configuring with Copilot" prompts** that appear on individual nodes.
+1. On the empty designer, select **Add a trigger**.
 
-![Agent node with a "Finish configuring with Copilot" prompt](../../../assets/portal/82-agent-tools-tab.png)
+   :::image type="content" source="media/quickstart/empty-designer.png" alt-text="Screenshot shows the empty workflow designer and placeholder named Add a trigger." lightbox="media/quickstart/empty-designer.png":::
 
-Click **Test your draft** (see step 7) to surface any missing config quickly.
-:::
+1. When the **Add a trigger** pane opens, search or browse the triggers. Select the trigger you want. 
 
-## 6. Save the draft, then publish
+   :::image type="content" source="media/quickstart/add-trigger.png" alt-text="Screenshot shows the empty workflow designer and the pane for Add a trigger." lightbox="media/quickstart/add-trigger.png":::
 
-Changes you make are saved to a **draft** of the workflow. The pill on the bottom toolbar shows the current state — **Draft** (unpublished changes) or **Published** (in sync with production). Click **Publish** to promote the draft.
+   For example:
 
-![Designer toolbar showing the Published pill after a successful publish](../../../assets/portal/85-publish-dialog.png)
+   | Trigger type | Trigger name | Description |
+   |--------------|--------------|-------------|
+   | **Request** | **When an HTTP request is received** | A webhook trigger that handles incoming requests sent from external callers. |
+   | **Schedule** | **Recurrence** | A trigger that runs on a specified schedule. |
 
-:::caution[Some triggers only fire on the published workflow]
-Not every trigger respects the draft. As a rule of thumb:
+1. In the trigger information box, enter any required details, and then close the box.
 
-| Trigger kind | Fires from a draft? | How to test |
-| --- | --- | --- |
-| HTTP / Request, manual | ✅ | Use **Test your draft** (step 7) to fire with a custom payload. |
-| Schedule / Recurrence | ❌ — published only | Publish, then wait for the scheduled time (or shorten the schedule). |
-| Event-driven (Service Bus, Event Hubs, Storage queue) | ❌ — published only | Publish, then push an event to the source. |
-| Connector triggers that poll a SaaS endpoint | ❌ — published only | Publish, then trigger the event in the source SaaS app. |
+   Your selected trigger appears on the designer, like the following example:
+   
+   :::image type="content" source="media/quickstart/added-trigger.png" alt-text="Screenshot shows the workflow designer and selected example trigger." lightbox="media/quickstart/added-trigger.png":::
 
-For a full end-to-end test of any non-HTTP trigger, publish the draft first.
-:::
+### Add an action
 
-See [**Draft vs published**](/features/workflows/#draft-vs-published) for the full mental model.
+After the trigger, an action performs a specific task in the workflow.
 
-## 7. Run the workflow
+1. On the designer, following the trigger, select the plus sign (+) to add an action.
 
-Switch to the **Monitoring** tab. If the workflow has never run, you'll see the empty state and a **Run workflow** button:
+1. When the **Add an action** pane opens, search or browse the actions. Select the action you want. 
 
-![Monitoring — no runs yet](../../../assets/portal/30-monitoring-empty.png)
+   :::image type="content" source="media/quickstart/add-action.png" alt-text="Screenshot shows the workflow designer, an example trigger, and the pane for Add an action." lightbox="media/quickstart/add-action.png":::
 
-Click **Run workflow** to fire it manually. A test-payload dialog opens — pick the trigger and provide any JSON body the trigger needs:
+1. In the action information box, enter any required details for the action to work, and then close the box.
 
-![Run payload dialog](../../../assets/portal/31-run-payload-dialog.png)
+   Your selected action appears on the designer.
 
-![Run payload filled in](../../../assets/portal/32-run-payload-filled.png)
+   For actions that run in parallel, branches automatically appear on the designer. For example, the following workflow shows these branches and includes a final response back to the caller who sent the request:
 
-Click **Test your draft** to execute. The monitoring view streams the run as it happens.
+   :::image type="content" source="media/quickstart/branched-workflow.png" alt-text="Screenshot shows the workflow designer and completed branched workflow." lightbox="media/quickstart/branched-workflow.png":::
 
-## 8. Read the run history
+## 4. Edit your workflow with AI or in code
 
-After a run completes, the **Monitoring** tab shows it in the left rail with status, timestamp, and duration:
+To continue editing your workflow, you have the following options:
+
+- Keep using the designer.
+
+- Describe your changes in natural language by opening the AI assistant.
+
+- Directly edit the workflow's underlying JSON definition by switching to the code editor. Changes stay synchronized between the code editor and the designer.
+
+  The following example shows the AI assistant with instructions to edit a workflow:
+
+  :::image type="content" source="media/quickstart/edit-copilot.png" alt-text="Screenshot shows the workflow designer and Copilot pane with instructions in the chat box." lightbox="media/quickstart/edit-copilot.png":::
+
+  The following example shows the open code editor where you can directly edit a workflow's JSON definition:
+
+  :::image type="content" source="media/quickstart/code-view.png" alt-text="Screenshot shows the workflow designer and code editor side by side." lightbox="media/quickstart/code-view.png":::
+
+## 5. Test for missing setup details
+
+You can test HTTP-based triggers in draft before you publish your workflow. Other triggers fire only after you publish the workflow.
+
+1. To quickly find any missing configuration information, on the bottom toolbar, select **Test**.
+
+1. In the **Test draft workflow** box, enter a sample payload, if you have one, and select **Test Draft**.
+
+1. Next to the **Designer** tab, select **Monitoring**.
+
+   If you haven't run your workflow before, the **Monitoring** tab appears empty.
+
+   :::image type="content" source="media/quickstart/monitoring-empty.png" alt-text="Screenshot shows the Monitoring tab, which appears empty when workflow hasn't run before." lightbox="media/quickstart/monitoring-empty.png":::
+
+   After the run completes, the **Monitoring** tab shows the details in a side window along with the status, timestamp, and duration.
+
+   The following example shows the history for one successful workflow run:
+
+
+1. To fully test a non-HTTP trigger, you need to publish your workflow first.
+
+The following table describes common example trigger firing behaviors while in draft versus published:
+
+| Trigger type | Trigger name | Fires in draft? | How to test | 
+|--------------|--------------|-----------------|-------------|
+| **Request** | **When an HTTP request is received** | Yes | On the bottom designer toolbar, select **Test**, and provide a sample payload. |
+| **Schedule** | **Recurrence** | No, must publish | Publish, and then wait for the scheduled time, or shorten the schedule. |
+| Event-driven, such as **Service Bus**, **Event Hubs**, **Queue Storage** | | No, must publish | Publish, and then push an event to the target resource. |
+| Polls a service or system endpoint | | No, must publish | Publish, and then trigger the event in the target service or system. |
+
+## 6. Publish draft to production
+
+When you create and edit your workflow, you always work on a *draft* version.
+
+The following example shows the **Draft** label on the designer's title bar:
+
+:::image type="content" source="media/quickstart/draft-label.png" alt-text="Screenshow shows the workflow designer and highlighted Draft label." lightbox=""media/quickstart/draft-label.png"":::
+
+1. To promote your draft to production, select **Publish**.
+
+1. To switch to the published version, next to **Publish**, from the vertical ellipses (**...**) menu, select **View published version**. 
+
+## 7. Run and monitor your workflow
+
+1. Next to the **Designer** tab, select **Monitoring**.
+
+   If you haven't run your workflow before, the **Monitoring** tab appears empty.
+
+   :::image type="content" source="media/quickstart/monitoring-empty.png" alt-text="Screenshot shows the Monitoring tab, which appears empty when workflow hasn't run before." lightbox="media/quickstart/monitoring-empty.png":::
+
+1. Select **Run workflow** to manually fire the trigger.
+
+1. In the test workflow window that opens, confirm the selected trigger, and enter the JSON body input that the trigger needs.
+
+   :::image type="content" source="media/quickstart/test-draft-workflow.png" alt-text="Screenshot shows the test workflow window." lightbox="media/quickstart/test-draft-workflow.png":::
+
+   The following example shows example JSON body input:
+
+   :::image type="content" source="media/quickstart/test-draft-workflow-payload.png" alt-text="Screenshot shows the test workflow window and example JSON body input." lightbox="media/quickstart/test-draft-workflow-payload.png":::
+
+1. When you're ready, select **Test Draft**.
+
+   The **Monitoring** tab streams the workflow run in real time.
+
+## 8. Review the run history
+
+After a run completes, the **Monitoring** tab shows the details in a side window along with the status, timestamp, and duration.
+
+The following example shows the history for one successful workflow run:
 
 ![Run history list with one succeeded run](../../../assets/portal/33-run-history.png)
 

@@ -1,22 +1,22 @@
 ---
 title: Set up - Azure Logic Apps Automation
-description: Create a project and an app, which you need before you create a workflow.
+description: Create projects to store your apps and workflows.
 sidebar:
   order: 3
   label: Set up
 ---
 
-# Set up your project and app
-
-Before you create your first workflow, you need a *project* and an *app* to store your workflow.
+Before you create your first workflow, you need a project to store your apps and workflows. If you don't have a project yet, follow these steps.
 
 ## Requirements
 
-An Azure account and subscription that uses a Microsoft work or school account. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
+- An Azure account and subscription that uses a Microsoft work or school account. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
 
-> [!NOTE]
->
-> You only need an Azure subscription to create projects. Make sure that your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com). As a workflow builder, you only need access to the portal - no Azure subscription necessary.
+  > [!NOTE]
+  >
+  > You need an Azure subscription only to create projects. Make sure that your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
+
+- For you to add a project member, they need an Azure account that uses a Microsoft work or school account in your Microsoft Entra tenant. They don't need an Azure subscription to create apps and workflows.
 
 ## 1. Sign in to the portal
 
@@ -27,6 +27,8 @@ An Azure account and subscription that uses a Microsoft work or school account. 
 1. Sign in with your Azure account.
 
 ## 2. Create a project
+
+Create a project to store your apps and workflows.
 
 1. On the **Projects** tab, select **Create project**.
 
@@ -45,15 +47,14 @@ An Azure account and subscription that uses a Microsoft work or school account. 
    >
    > The project creation process might take several minutes to finish.
 
-1. After the project creation completes, from the **Projects** list, open your project.
+1. After the portal creates your project, select your project.
 
-## Add project members
+Before you can start building workflows, you need to create an app as a deployable package for your workflows. To continue with this task, see [Quickstart](/getting-started/quickstart/).
 
-Before others can work in your project, you need to add them as project members.
-
+Before others can work in your project to create apps and build workflows, [add them as project members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-projects#add-project-members).
 
 ## Next
 
-- [**Quickstart**](/getting-started/quickstart/): Build and run your first workflow.
-- [**Core concepts**](/getting-started/core-concepts/): Learn the key concepts and terminology.
-- [**Troubleshoot problems**](/getting-started/troubleshoot/): Resolve common problems.
+- [**Quickstart**](/getting-started/quickstart/)
+- [**Core concepts**](/getting-started/core-concepts/)
+- [**Troubleshoot problems**](/getting-started/troubleshoot/)

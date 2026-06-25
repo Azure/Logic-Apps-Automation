@@ -44,7 +44,7 @@ export default defineConfig({
 			lastUpdated: true,
 			sidebar: [
 				{
-					label: 'Getting started',
+					label: 'Get started',
 					items: [{ autogenerate: { directory: 'getting-started' } }],
 				},
 				{
