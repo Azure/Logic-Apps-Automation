@@ -255,17 +255,17 @@ To run a published workflow and monitor the progress, follow these steps:
 
 ## 8. Examine the run history
 
-To explore the run history at a deeper and more detailed level, follow these steps:
+To explore the run history with more details, follow these steps:
 
-1. On the **Runs** tab, from the runs list, select a run to inspect the details.
+1. On the **Runs** tab, select the run you want.
 
-1. On the canvas or in the execution log, select the trigger or an action to inspect the values on the **Output**, **Input**, and **Properties** tabs.
+1. On the canvas or in the execution log, select the trigger or an action to review the values on the pane with the **Output**, **Input**, and **Properties** tabs.
 
-   If any actions failed, these same For failed actions, the same panel shows the error message and stack trace so you can diagnose without leaving the run view.
+   If any actions failed, the same pane shows the error messages and stack trace so you can diagnose without changing context.
 
 ## 9. Iterate on your workflow
 
-To edit your workflow, return to draft mode in the designer, or send follow-up instructions to the assistant.
+To edit your workflow, return to the **Designer** tab and select **Edit draft**. Or, send follow-up instructions to the assistant.
 
 For example, you might ask the assistant to `add error handling to the HTTP action` or `use Slack to post alerts instead`.
 
