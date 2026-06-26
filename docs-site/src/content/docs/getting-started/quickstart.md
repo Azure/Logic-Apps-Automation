@@ -22,7 +22,7 @@ To view and create apps and workflows in a project, you need access to that proj
 
 1. On the **Projects** tab, select your project.
 
-   The portal opens the project and shows the **Apps** list. The following example shows an empty project.
+   The portal opens the project and shows the **Apps** list. The following example shows an empty project:
 
    :::image type="content" source="media/quickstart/apps-list.png" alt-text="Screenshot shows an empty project without apps." lightbox="media/quickstart/apps-list.png":::
 
@@ -31,6 +31,8 @@ To view and create apps and workflows in a project, you need access to that proj
    Otherwise, select the app where you want to create your workflow, and skip to [Create your workflow](#3-create-your-workflow).
 
 ## 2. Create an app
+
+If your project doesn't include an app to store and organize workflows, follow these steps to create an app:
 
 1. In the project, on the **Apps** page, select **Create app**.
 
@@ -50,7 +52,7 @@ To view and create apps and workflows in a project, you need access to that proj
 
 1. To add people to work on your app, follow these steps:
 
-   1. On the app sidebar, select **Settings**. 
+   1. On the app sidebar, select **Settings**.
 
    1. On the **User permissions** tab, select **Add user**.
    
@@ -60,7 +62,7 @@ To view and create apps and workflows in a project, you need access to that proj
 
 1. In your app, on the **Workflows** page, select **Create workflow**.
 
-1. In the **Create workflow** box, enter the workflow name, and select **Build**.
+1. In the **Create workflow** box, enter the name, and select **Build**.
 
 1. After the portal opens the designer, choose an option to start creating your workflow.
 
@@ -73,9 +75,7 @@ To view and create apps and workflows in a project, you need access to that proj
 
 1. On the bottom toolbar, select **Copilot**.
 
-1. In the chat box, enter your workflow description.
-
-1. Select **Generate**.
+1. In the chat box, enter your workflow description. Select **Generate**.
 
    The following example shows the AI assistant and a workflow description:
 
@@ -172,110 +172,116 @@ To continue editing your workflow, you have the following options:
 
 ## 5. Test for missing setup details
 
-You can test HTTP-based triggers in draft before you publish your workflow. Other triggers fire only after you publish the workflow.
-
-1. To quickly find any missing configuration information, on the bottom toolbar, select **Test**.
-
-1. In the **Test draft workflow** box, enter a sample payload, if you have one, and select **Test Draft**.
-
-1. Next to the **Designer** tab, select **Monitoring**.
-
-   If you haven't run your workflow before, the **Monitoring** tab appears empty.
-
-   :::image type="content" source="media/quickstart/monitoring-empty.png" alt-text="Screenshot shows the Monitoring tab, which appears empty when workflow hasn't run before." lightbox="media/quickstart/monitoring-empty.png":::
-
-   After the run completes, the **Monitoring** tab shows the details in a side window along with the status, timestamp, and duration.
-
-   The following example shows the history for one successful workflow run:
-
-
-1. To fully test a non-HTTP trigger, you need to publish your workflow first.
-
-The following table describes common example trigger firing behaviors while in draft versus published:
-
-| Trigger type | Trigger name | Fires in draft? | How to test | 
-|--------------|--------------|-----------------|-------------|
-| **Request** | **When an HTTP request is received** | Yes | On the bottom designer toolbar, select **Test**, and provide a sample payload. |
-| **Schedule** | **Recurrence** | No, must publish | Publish, and then wait for the scheduled time, or shorten the schedule. |
-| Event-driven, such as **Service Bus**, **Event Hubs**, **Queue Storage** | | No, must publish | Publish, and then push an event to the target resource. |
-| Polls a service or system endpoint | | No, must publish | Publish, and then trigger the event in the target service or system. |
-
-## 6. Publish draft to production
-
-When you create and edit your workflow, you always work on a *draft* version.
-
-The following example shows the **Draft** label on the designer's title bar:
+When you create or edit a workflow in the designer, you always work on a *draft* version. For example, note the **Draft** label on the designer's title bar:
 
 :::image type="content" source="media/quickstart/draft-label.png" alt-text="Screenshow shows the workflow designer and highlighted Draft label." lightbox=""media/quickstart/draft-label.png"":::
 
-1. To promote your draft to production, select **Publish**.
+To quickly find any missing configuration information while you work in draft mode, you can test workflows that start with HTTP triggers. To test non-HTTP triggers, [first publish your draft](#6-publish-draft-to-production).
 
-1. To switch to the published version, next to **Publish**, from the vertical ellipses (**...**) menu, select **View published version**. 
+1. In the designer, on the bottom toolbar, select **Test** to open the **Test draft workflow** box.
+
+1. In the **Trigger** box, confirm the selected trigger.
+
+1. In the **Test data (JSON)** box, enter any sample JSON body input that the trigger needs to run, for example:
+
+   ```json
+   {
+      "number_1": 5,
+      "number_2": 10
+   }
+   ```
+
+   The following example shows the sample JSON body input:
+
+   :::image type="content" source="media/quickstart/test-draft-workflow-payload.png" alt-text="Screenshot shows the test draft workflow box with example JSON body input." lightbox="media/quickstart/test-draft-workflow-payload.png":::
+
+1. After you finish, select **Test Draft**.
+
+   The **Monitoring** tab opens to show the running workflow. After the run completes, in a side window, the **Runs** tab shows the workflow's run history, including details such as status and duration.
+
+   The following example shows a successful run, run history, execution log, and other information about each operation in the workflow run:
+
+   :::image type="content" source="media/quickstart/draft-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, draft workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/draft-workflow-run-history.png":::
+
+##### Common triggers and when you can test them
+
+The following table describes common example triggers in workflows that you can run in draft versus published mode:
+
+| Trigger type | Trigger name | Test in draft? | How to test | 
+|--------------|--------------|-----------------|-------------|
+| **Request** | **When an HTTP request is received** | Yes | On the bottom designer toolbar, select **Test**, and provide a sample payload. |
+| **Schedule** | **Recurrence** | No, must publish | Publish, and then wait for the scheduled time, or shorten the schedule. |
+| Event-driven, such as **Service Bus**, **Event Hubs**, **Queue Storage** | Varies | No, must publish | Publish, and then push an event to the target resource. |
+| Polls a service or system endpoint | Varies | No, must publish | Publish, and then trigger the event in the target service or system. |
+
+## 6. Publish draft to production
+
+To promote your draft workflow to production, follow these steps:
+
+1. On the **Designer** tab, in the upper right corner, select **Publish**.
+
+1. To switch to the published workflow, next to **Publish**, from the vertical ellipses (**...**) menu, select **View published version**.
+
+   :::image type="content" source="media/quickstart/view-published-version.png" alt-text="Screenshot shows the Designer tab, Publish menu, and selected option for View published version." lightbox="media/quickstart/view-published-version.png":::
 
 ## 7. Run and monitor your workflow
 
+To run a published workflow and monitor the progress, follow these steps:
+
 1. Next to the **Designer** tab, select **Monitoring**.
 
-   If you haven't run your workflow before, the **Monitoring** tab appears empty.
+1. Based on whether previously run workflows exist, choose from the following actions:
 
-   :::image type="content" source="media/quickstart/monitoring-empty.png" alt-text="Screenshot shows the Monitoring tab, which appears empty when workflow hasn't run before." lightbox="media/quickstart/monitoring-empty.png":::
+   | Previously run workflows? | Action |
+   |---|---|
+   | No | Select **Run workflow**. |
+   | Yes | In the side window, on the **Runs** tab, select **Run**. |
 
-1. Select **Run workflow** to manually fire the trigger.
+1. In the **Trigger** box, confirm the selected trigger.
 
-1. In the test workflow window that opens, confirm the selected trigger, and enter the JSON body input that the trigger needs.
+1. In the **Test data (JSON)** box, enter the sample JSON body input that the trigger needs to run.
 
-   :::image type="content" source="media/quickstart/test-draft-workflow.png" alt-text="Screenshot shows the test workflow window." lightbox="media/quickstart/test-draft-workflow.png":::
+   The following example shows sample JSON body input and includes the automatically generated and callable endpoint URL, which you can use to call and trigger the workflow:
 
-   The following example shows example JSON body input:
+   :::image type="content" source="media/quickstart/run-workflow-payload.png" alt-text="Screenshot shows the run workflow box and example JSON body input." lightbox="media/quickstart/run-workflow-payload.png":::
 
-   :::image type="content" source="media/quickstart/test-draft-workflow-payload.png" alt-text="Screenshot shows the test workflow window and example JSON body input." lightbox="media/quickstart/test-draft-workflow-payload.png":::
+1. After you finish, select **Run**.
 
-1. When you're ready, select **Test Draft**.
+   The **Monitoring** tab opens to show the running workflow. After the workflow run completes, in a side window, the **Runs** tab shows the workflow's run history, including details such as status and duration.
 
-   The **Monitoring** tab streams the workflow run in real time.
+   The following example shows a successful run, run history, execution log, and other information about each operation in the workflow run:
 
-## 8. Review the run history
+   :::image type="content" source="media/quickstart/published-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, published workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/published-workflow-run-history.png":::
 
-After a run completes, the **Monitoring** tab shows the details in a side window along with the status, timestamp, and duration.
+## 8. Examine the run history
 
-The following example shows the history for one successful workflow run:
+To explore the run history at a deeper and more detailed level, follow these steps:
 
-![Run history list with one succeeded run](../../../assets/portal/33-run-history.png)
+1. On the **Runs** tab, from the runs list, select a run to inspect the details.
 
-Click the run to open its detail view — the canvas re-renders coloured by execution status, every node shows its duration, and the **Execution log** at the bottom lists every action in order:
+1. On the canvas or in the execution log, select the trigger or an action to inspect the values on the **Output**, **Input**, and **Properties** tabs.
 
-![Run detail with execution log](../../../assets/portal/34-run-detail.png)
+   If any actions failed, these same For failed actions, the same panel shows the error message and stack trace so you can diagnose without leaving the run view.
 
-## 9. Inspect inputs, outputs, and errors
+## 9. Iterate on your workflow
 
-Click any action in the execution log (or any node on the canvas) to see what data it received and produced. The **Output**, **Input**, and **Properties** tabs in the bottom panel let you drill in:
+To edit your workflow, return to draft mode in the designer, or send follow-up instructions to the assistant.
 
-![Action output](../../../assets/portal/35-action-output.png)
+For example, you might ask the assistant to `add error handling to the HTTP action` or `use Slack to post alerts instead`.
 
-![Action input](../../../assets/portal/36-action-input.png)
+The portal saves your changes in draft mode until you publish.
 
-Triggers behave the same way — click `manual` (or whatever the trigger node is called) to see what came in:
-
-![Trigger output — HTTP headers and body](../../../assets/portal/37-trigger-output.png)
-
-For failed actions, the same panel shows the error message and stack trace so you can diagnose without leaving the run view.
-
-## 10. Iterate
-
-Edit the workflow in the designer or send follow-ups to the assistant (*"add error handling to the HTTP action"*, *"use a Slack post instead"*). Changes go into a draft until you publish.
-
-## Troubleshooting
+## Troubleshoot problems
 
 | Problem | Try |
 |---------|-----|
-
 | **Sign in loop or single sign-on (SSO) error** | Clear your cookies for the following URLs, and sign in again: <br><br>- `https://auto.azure.com` <br>- `https://login.microsoftonline.com` |
 | **Portal appears empty** | Perform a hard refresh (Keyboard: `Cmd/Ctrl + Shift + R`). If the problem persists, [report a bug](/support/report-a-bug/). |
 
-## Where to go from here
+## Next steps
 
-- **[Visual designer](/features/visual-designer/)** — what the canvas can do.
-- **[AI workflow assistant](/features/ai-assistant/)** — patterns that work well with the assistant.
-- **[Connectors](/features/connectors/)** — the catalog of integrations.
-- **[Runs and monitoring](/features/runs-and-monitoring/)** — read run history and watch production health.
-- **[Report a bug](/support/report-a-bug/)** if something didn't work.
+- [Visual designer](/features/visual-designer/)
+- [AI workflow assistant](/features/ai-assistant/)
+- [Connectors](/features/connectors/)
+- [Runs and monitoring](/features/runs-and-monitoring/)
+- [Report a bug](/support/report-a-bug/)
