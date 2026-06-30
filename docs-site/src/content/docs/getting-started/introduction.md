@@ -33,6 +33,20 @@ Here's what the high-level process looks like to build a workflow:
 | **Sandboxes** | Run agentic workflows with code inside isolated compute environments. |
 | **Run analytics** | Diagnose problems using real-time run history, execution trends, failure analysis, and per-action performance. |
 
+## Core concepts
+
+The following sections describe the key components and concepts in Azure Logic Apps Automation.
+
+### 
+
+Azure Logic Apps Automation organizes your work at the following levels:
+
+| Level | Contents |
+|-------|----------|
+| *Project* | The top-level container that groups *apps*. As the project creator and default owner, you control access and governance at this level. This quickstart focuses on creating and managing a project. |
+| *App* | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. Most teams have several apps per project, which maps to either a logical service or domain. |
+| *Workflow* | The automation workload itself, which includes the starting event (*trigger*) and the steps (*actions*) to run. |
+
 ## Next
 
 - [**Set up**](/getting-started/setup/)

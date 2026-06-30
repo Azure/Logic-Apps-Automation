@@ -6,7 +6,7 @@ sidebar:
   label: Quickstart
 ---
 
-These steps show how to create or open an app in an automation project, build and run a sample workflow, and review what happened. You can use the workflow as a template and swap in what you actually want to automate.
+This guide shows how to create or open an app in an automation project, build and run a sample workflow, and review what happened. You can use the workflow as a template and swap in what you actually want to automate.
 
 ## Requirements
 
@@ -152,6 +152,17 @@ After the trigger, an action performs a specific task in the workflow.
 
    :::image type="content" source="media/quickstart/branched-workflow.png" alt-text="Screenshot shows the workflow designer and completed branched workflow." lightbox="media/quickstart/branched-workflow.png":::
 
+### Other designer actions
+
+On the designer, the bottom toolbar gives you the following controls, which are covered later in this guide:
+
+| Action | Description |
+|---|---|
+| **Add** | Add an operation anywhere on the designer. |
+| **Code** | View the raw underlying JSON alongside the designer. |
+| **Test** | Run the workflow with a test payload without publishing. |
+| **Copilot** | Open the AI assistant alonside the designer to iterate over you workflow. |
+
 ## 4. Edit your workflow with AI or in code
 
 To continue editing your workflow, you have the following options:
@@ -280,8 +291,8 @@ The portal saves your changes in draft mode until you publish.
 
 ## Next steps
 
-- [Visual designer](/features/visual-designer/)
-- [AI workflow assistant](/features/ai-assistant/)
+- [Designer](/features/visual-designer/)
+- [AI assistant](/features/ai-assistant/)
 - [Connectors](/features/connectors/)
 - [Runs and monitoring](/features/runs-and-monitoring/)
 - [Report a bug](/support/report-a-bug/)
