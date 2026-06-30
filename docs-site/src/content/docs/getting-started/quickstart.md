@@ -2,7 +2,7 @@
 title: Quickstart - Azure Logic Apps Automation
 description: Create apps so you can build and run workflows. Review their execution history.
 sidebar:
-  order: 4
+  order: 3
   label: Quickstart
 ---
 

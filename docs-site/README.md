@@ -1,4 +1,4 @@
-# Otto Docs Site — Maintenance Guide
+# Logic Apps Automation Docs Site — Maintenance Guide
 
 Documentation for the workflow automation platform. This README is the entry
 point for **anyone touching the docs site** — humans and AI agents alike. It
@@ -94,7 +94,7 @@ config edit needed.
 
 ---
 
-## How to do common things
+## Common tasks
 
 ### Add a new page
 

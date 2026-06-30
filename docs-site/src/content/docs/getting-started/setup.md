@@ -2,7 +2,7 @@
 title: Set up - Azure Logic Apps Automation
 description: Create projects to store your apps and workflows.
 sidebar:
-  order: 3
+  order: 2
   label: Set up
 ---
 
@@ -56,5 +56,4 @@ Before others can work in your project to create apps and build workflows, [add 
 ## Next
 
 - [**Quickstart**](/getting-started/quickstart/)
-- [**Core concepts**](/getting-started/core-concepts/)
 - [**Troubleshoot problems**](/getting-started/troubleshoot/)
