@@ -6,11 +6,9 @@ sidebar:
   label: Introduction
 ---
 
-Automate unpredictable processes and create AI-driven workflows that adapt at runtime with Azure Logic Apps Automation. 
+Automate unpredictable processes and create AI-driven workflows that adapt at runtime with Azure Logic Apps Automation. Start by describing the workflow behavior you want in the AI assistant, or build your workflow one component at a time in the designer. Connect the services, systems, apps, and data that you already use by selecting from 1,400+ prebuilt and ready-to-use connectors.
 
-Describe what you want in your own words by using the AI workflow assistant, or design your workflows on the visual canvas. Connect the services and systems you already use by choosing from 1,400+ prebuilt and read-to-use connectors.
-
-All these capabilities exist in your browser at the [Azure Logic Apps Automation portal](https://auto.azure.com). No need to locally install or run any other tools.
+You can find all these capabilities by signing in to the [Azure Logic Apps Automation portal](https://auto.azure.com). You don't need to locally install or run any other tools.
 
 ## Build workflows with AI or the designer
 
@@ -18,10 +16,15 @@ Here's what the high-level process looks like to build a workflow:
 
 | Step | Description |
 |------|-------------|
-| **1. Describe or design** | - **AI workflow assistant**: Use your own words to describe what to automate. <br><br>- **Designer**: Drag-and-drop the steps you want to automate on the visual canvas. Add conditions, loops, branches, and nested logic. |
+| **1. Describe or design** | - **AI workflow assistant**: Use your own words to describe what to automate. <br><br>- **Designer**: Drag-and-drop each step you want to automate on the visual canvas. Add conditions, loops, branches, and nested logic. |
 | **2. Inspect** | Review each step on the visual canvas. Edit nodes, add logic, and adjust parameters. |
 | **3. Connect** | Create connections to services and systems through 1,400+ prebuilt connectors. Including Service Bus, Cosmos DB, SQL, HTTP, Teams, Outlook, SharePoint, and more. |
 | **4. Deploy and monitor** | Save the workflow and run in the cloud, which generates run history and produces alerts. |
+
+Ready to get up and running first? See the following pages:
+
+- [**Setup**](/getting-started/setup/)
+- [**Quickstart**](/getting-started/quickstart/)
 
 ## Other capabilities
 
@@ -33,32 +36,30 @@ Here's what the high-level process looks like to build a workflow:
 | **Sandboxes** | Run agentic workflows with code inside isolated compute environments. |
 | **Run analytics** | Diagnose problems using real-time run history, execution trends, failure analysis, and per-action performance. |
 
-## Core concepts
+## Work organization and structure
 
-The following sections describe the key components and concepts in Azure Logic Apps Automation.
-
-### 
-
-Azure Logic Apps Automation organizes your work at the following levels:
+Azure Logic Apps Automation organizes your work by using the following structures at the following levels:
 
 | Level | Contents |
 |-------|----------|
-| [*Project*](/features/projects-and-applications/) | The top-level container that stores and organizes your *apps* and *sandboxes*. As the project creator and default owner, you control access and governance at this level. |
-| *App* | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. Most teams have several apps per project, which maps to either a logical service or domain. |
-| [*Workflow*](/features/workflows/) | The automation workload itself, which includes operations such as the starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
+| [*Project*](/features/projects-and-applications/) | The top-level container resource that stores and organizes your *apps* and *sandboxes*. As the project creator and default owner, you control access and governance at this level. |
+| *App* | A deployable package resource that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. Most teams have several apps per project, which maps to either a logical service or domain. |
+| [*Workflow*](/features/workflows/) | The automation workload itself, which includes operations such as the starting event (*trigger*) and the tasks to perform or control flow (*actions*). Workflows can be stateful or stateless with triggers, actions, control flow, expressions, IntelliSense, inline code execution such as JavaScript, and more. |
 
-Azure Logic Apps Automation introduces the following concepts and components:
+## Key concepts or components
 
-| Concept | Description |
-|---|---|
-| **[Permissions](/features/permissions/)** | Scoped at the project and app level, role matrix, owners, and how to share. |
-| **[Visual designer](/features/visual-designer/)** | The canvas where you add your workflow's trigger and actions. |
-| **[AI workflow assistant](/features/ai-assistant/)** | Where you can describe and update workflows by using natural language and iterating with the assistant. |
-| **[Connectors](/features/connectors/)** | The catalog of integrations and how connections are managed. |
-| **[Agents](/features/agents/)** | Native vs Foundry agents, the agent loop, agent parameters, adding tools (including Code Interpreter), chat log in monitoring. |
-| **[Knowledge bases](/features/knowledge-bases/)** | Attach Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground its answers in your data. *(preview)* |
-| **[Sandboxes](/features/sandboxes/)** | Isolated microVM environments where agents execute code, with optional cloned repos and skills. |
-| **[Runs and monitoring](/features/runs-and-monitoring/)** | Real-time streaming of draft runs, run history, working with drafts, action inputs / outputs. |
+Azure Logic Apps Automation introduces the following primary concepts and components associated with automating your workflows:
+
+| Concept or component | Description |
+|----------------------|-------------|
+| **[Permissions](/features/permissions/)** | Scoped at the project and app level, organized by role matrix, ownership, and how to share resources for collaboration. |
+| **[Visual designer](/features/visual-designer/)** | The canvas where you manually add your workflow's trigger and actions. |
+| **[AI assistant](/features/ai-assistant/)** | The interface where you can describe and update workflows by using natural language and iterating with the assistant. |
+| **[Connectors](/features/connectors/)** | The catalog that provides integrations with other services, systems, apps, and data. |
+| **[Agents](/features/agents/)** | Add native or Foundry agents, agent loops, set up agent parameters, add agent tools such as code interpreter, and monitor the chat log. |
+| **[Knowledge bases](/features/knowledge-bases/)** | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
+| **[Sandboxes](/features/sandboxes/)** | Set up isolated micro virtual machine environments where agents run code and can optionally use cloned repos and skills. |
+| **[Runs and monitoring](/features/runs-and-monitoring/)** | Get real-time streaming for draft workflow runs, review run history, work with drafts, trigger and action inputs and outputs, and so on. |
 
 ## Next
 

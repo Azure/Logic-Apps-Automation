@@ -1,54 +1,45 @@
 ---
-title: Permissions
-description: Two-scope role-based access model — projects, apps, owners, and how to share.
+title: Permissions - Azure Logic Apps Automation
+description: Learn about resource ownership and permissions for access to projects and apps.
 sidebar:
-  order: 3
+  order: 2
 ---
 
-Access to the platform is controlled by a simple two-scope role model, plus a separate **owner** property on each resource. This page covers the model, the role matrix, and the most common sharing workflows.
+To support access and sharing resources with others, Azure Logic Apps Automation uses a permissions model based on resource scopes and roles. The platform also provides a separate ownership property on each resource. This article describes this model and common sharing scenarios.
 
-## At a glance
+## Summary
 
-- **Two independent scopes** — *Project* (organisational) and *Application* (content).
-- **Three permission levels** — *Contributor* (admin), *Author* (creator), *Reader* (view-only).
-- **Owner** is a resource property, not a permission level. The creator is the owner.
-- **Apps are private by default** — invisible to other project members until you explicitly share them.
-- **App-scope grant auto-adds project Reader** — so collaborators can reach the project resources the app depends on.
+| Aspect | Description |
+|---|---|
+| Resource scopes | The following scopes work independently from each other: <br><br>- Project (organization) <br>- App (content) <br><br>You can have a role on the project, app, or both. |
+| Roles | The following roles control the tasks that you can perform on resources: <br><br>- **Contributor** (administrator) <br>- **Author** (creator) <br>- **Reader** (read only) |
+| Resource owner | Each resource has an owner property that's independent from roles. The resource creator automatically becomes the owner. |
+| Resource visibility | By default, apps are private and invisible to other project members unless you explicitly share access. |
 
----
+## Project roles
 
-## Scopes and roles
+The following table describes project roles in detail:
 
-The two scopes are evaluated independently. A user can have a role at the project scope, at the app scope, or both.
+| Role | Allowed | Not allowed |
+|---|---|---|
+| **Contributor** | - View and edit project settings. <br>- Invite, update, and remove members. <br>- Create apps and view apps (metadata only). <br>- Create and edit sandbox configurations. <br><br>**Example**: Can view app metadata such as the name, owner, and date. <br><br>**Note**: Project owners can delete any resources in the project such as apps or sandboxes, even those they don't own. | <br>- Delete the project as the owner. <br>- Access app content without app-scoped permission. <br><br>**Example**: Can't access app content such as workflows and connections. |
+| **Author** | - View project settings and members. <br>- Create and edit apps. <br>- View, create, and edit sandbox configurations. | - Edit project settings. <br>- Manage other members. <br>- View and access apps without app-scoped permission. |
+| **Reader** | - View project settings and members. <br>- View sandbox configurations. | - Create, edit, or delete anything. <br>- View any apps, which are automatically private. <br><br>**Note**: If you have access to an app, you automatically get the **Reader** role on the parent project. This role lets you view project resources that the app needs.|
 
-### Project-scope roles
+## App roles
 
-| Role | Can do | Cannot do |
-| --- | --- | --- |
-| **Contributor** | Read + modify project settings · invite, update, remove members · create apps · list all apps (metadata only) · create / modify sandbox configurations | Delete the project (owner-only) · access app contents without app-scope permission |
-| **Author** | Read project settings + member list · create new apps · create sandbox configurations · read sandbox configurations | Modify project settings · manage other users · see apps they weren't invited to · access app contents without app-scope permission |
-| **Reader** | Read project settings + member list · read sandbox configurations | Create, modify, or delete anything · see any apps (they're private by default) |
+The following table describes app roles in detail:
 
-### App-scope roles
+| Role | Allowed | Not allowed |
+|---|---|---|
+| **Contributor** | - View and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Run, cancel, or resubmit workflow runs. <br>- Manage app permissions. | - Delete apps, which only owners can do. |
+| **Reader** | - View workflows, connections, and parameters. <br>- View workflow run history. | - Create, modify, or delete anything. <br>- Run or cancel workflow runs. |
 
-:::note
-*Author* is intentionally not available at app scope — only **Contributor** and **Reader**.
-:::
+> [!NOTE]
+> 
+> By design, apps don't have the **Author** role.
 
-| Role | Can do | Cannot do |
-| --- | --- | --- |
-| **Contributor** | Read + modify workflows, connections, parameters · view run history · trigger / cancel / resubmit runs · manage app permissions | Delete the app (owner-only) |
-| **Reader** | Read workflows, connections, parameters · view run history | Create, modify, or delete anything · trigger or cancel runs |
-
-### Cross-scope behaviour
-
-- A **Project Contributor** sees app *metadata* (name, owner, dates) but **cannot** access app *contents* (workflows, connections).
-- A **Project Owner** has an admin override on sub-resources — they can delete *any* app or sandbox in the project, even ones they don't own.
-- When a user is granted app-scope permission, they **automatically receive project Reader** — enough to reach the project resources the app depends on.
-
----
-
-## Owner
+## Resource owner
 
 **Owner** is a property on the resource itself, set when the resource is created.
 

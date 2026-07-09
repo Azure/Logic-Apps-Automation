@@ -1,8 +1,8 @@
 ---
-title: Projects and applications
-description: The resource hierarchy — projects, applications, workflows, and the surfaces that connect them.
+title: Projects and apps - Azure Logic Apps Automation
+description: Learn how Logic Apps Automation organizes your workflows in projects, apps, sandboxes, and their relationships.
 sidebar:
-  order: 2
+  order: 1
 ---
 
 Your work is organised into a three-level hierarchy. Each level shows up in the portal's breadcrumb and left rail.

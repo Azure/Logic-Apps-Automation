@@ -1,11 +1,11 @@
 ---
-title: Workflows
+title: Workflows - Azure Logic Apps Automation
 description: The building blocks — triggers, actions, control flow, expressions. Stateful or stateless.
 sidebar:
   order: 6
 ---
 
-A **workflow** is a trigger plus a sequence of actions. You compose them on the visual canvas or via the assistant; the runtime executes them and keeps run history for inspection.
+In Azure Logic Apps Automation, a **workflow** is a trigger plus a sequence of actions. You compose them on the visual canvas or via the assistant; the runtime executes them and keeps run history for inspection.
 
 ## Triggers
 
@@ -107,3 +107,10 @@ For a full end-to-end test of a non-HTTP trigger, the workflow has to be publish
 ## Local authoring
 
 The fastest way to experiment is right in the [portal](https://auto.azure.com). Workflows you save publish to a draft you can run on-demand before you publish over the live version. See the [Quickstart](/getting-started/quickstart/) to walk through building your first one.
+
+## Related content
+
+- [Quickstart](/getting-started/quickstart/)
+- [Visual designer](designer)
+- [AI assistant](ai-assistant)
+- [Connectors](connectors)

@@ -69,15 +69,14 @@ docs-site/
             │   ├── index.mdx
             │   └── platform-overview.mdx
             ├── features/
-            │   ├── overview.md
             │   ├── projects-and-applications.md
             │   ├── permissions.md
             │   ├── visual-designer.md
             │   ├── ai-assistant.md
+            │   ├── connectors.md
             │   ├── workflows.md
             │   ├── agents.md
             │   ├── sandboxes.md
-            │   ├── connectors.md
             │   └── runs-and-monitoring.md
             ├── guides/            ← stub for how-tos (auto-shown when populated)
             ├── reference/         ← stub for technical reference
