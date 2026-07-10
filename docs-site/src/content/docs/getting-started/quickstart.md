@@ -10,7 +10,7 @@ This guide shows how to create or open an app in an automation project, build an
 
 ## Requirements
 
-To view and create apps and workflows in a project, you need access to that project. If you don't have access, contact the project owner to add you as a project member. 
+To view and create apps and workflows in a project, you need access to that project. If you don't have access, contact the project owner so they can add you as a project member. 
 
 ## 1. Open your project
 
@@ -40,17 +40,19 @@ If your project doesn't include an app to store and organize workflows, follow t
 
    :::image type="content" source="media/quickstart/create-application-box.png" alt-text="Screenshot shows the Create application box with example app name." lightbox="media/quickstart/create-application-box.png":::
 
-   App creation might take a couple minutes to finish.
-   
+   The portal might take a couple minutes to create your app.
+
 1. To check when the app is ready for you to open, review the **Status** column.
 
 1. After app creation completes, select your app.
 
-   The portal opens the app and shows the **Workflows** list. The following example shows an empty app.
+   The portal opens the app and shows the **Workflows** list. The following example shows an empty app:
 
    :::image type="content" source="media/quickstart/workflows-list.png" alt-text="Screenshot shows an empty app without workflows." lightbox="media/quickstart/workflows-list.png":::
 
-1. To add people to work on your app, follow these steps:
+   As the app creator, you automatically become the app owner and have the [**Contributor** role](../features/permissions.md#app-roles) on the app resource. At this point, only you can view the app and its contents. By design, the app is invisible to others except for the project owner and contributors who can view the app metadata.
+
+1. To add people so they can build workflows in on your app, follow these steps:
 
    1. On the app sidebar, select **Settings**.
 

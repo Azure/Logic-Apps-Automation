@@ -11,10 +11,10 @@ To support access and sharing resources with others, Azure Logic Apps Automation
 
 | Aspect | Description |
 |---|---|
-| Resource scopes | The following scopes work independently from each other: <br><br>- Project (organization) <br>- App (content) <br><br>You can have a role on the project, app, or both. |
-| Roles | The following roles control the tasks that you can perform on resources: <br><br>- **Contributor** (administrator) <br>- **Author** (creator) <br>- **Reader** (read only) |
-| Resource owner | Each resource has an owner property that's independent from roles. The resource creator automatically becomes the owner. |
-| Resource visibility | By default, apps are private and invisible to other project members unless you explicitly share access. |
+| Resource scopes | The following scopes work independently from each other: <br><br>- Project (organization) <br>- App (content) <br>- Sandbox (shared resources) <br><br>For example, you can have a role on a project, app, sandbox, or all these. |
+| Roles | The following roles control the tasks that they can perform on resources: <br><br>- **Contributor** (administrator) <br>- **Author** (creator) <br>- **Reader** (read only) |
+| App visibility and privacy | Apps are private and invisible to other project members unless you explicitly grant access. |
+| Resource owner | Each resource has an owner property independent from roles. The resource creator automatically becomes the owner. |
 
 ## Project roles
 
@@ -22,140 +22,9 @@ The following table describes project roles in detail:
 
 | Role | Allowed | Not allowed |
 |---|---|---|
-| **Contributor** | - View and edit project settings. <br>- Invite, update, and remove members. <br>- Create apps and view apps (metadata only). <br>- Create and edit sandbox configurations. <br><br>**Example**: Can view app metadata such as the name, owner, and date. <br><br>**Note**: Project owners can delete any resources in the project such as apps or sandboxes, even those they don't own. | <br>- Delete the project as the owner. <br>- Access app content without app-scoped permission. <br><br>**Example**: Can't access app content such as workflows and connections. |
+| **Contributor** | - View and edit project settings. <br>- Invite, update, and remove members. <br>- Create apps and view apps (metadata only). <br>- Create and edit sandbox configurations. <br><br>**Example**: Can view app metadata such as the name, owner, and date. <br><br>**Note**: Project owners can delete any resources in their project such as apps and sandboxes, including any they don't own. | <br>- Delete the project as the owner. <br>- Access app content without app-scoped permission. <br><br>**Example**: Can't access app content such as workflows and connections. |
 | **Author** | - View project settings and members. <br>- Create and edit apps. <br>- View, create, and edit sandbox configurations. | - Edit project settings. <br>- Manage other members. <br>- View and access apps without app-scoped permission. |
 | **Reader** | - View project settings and members. <br>- View sandbox configurations. | - Create, edit, or delete anything. <br>- View any apps, which are automatically private. <br><br>**Note**: If you have access to an app, you automatically get the **Reader** role on the parent project. This role lets you view project resources that the app needs.|
-
-## App roles
-
-The following table describes app roles in detail:
-
-| Role | Allowed | Not allowed |
-|---|---|---|
-| **Contributor** | - View and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Run, cancel, or resubmit workflow runs. <br>- Manage app permissions. | - Delete apps, which only owners can do. |
-| **Reader** | - View workflows, connections, and parameters. <br>- View workflow run history. | - Create, modify, or delete anything. <br>- Run or cancel workflow runs. |
-
-> [!NOTE]
-> 
-> By design, apps don't have the **Author** role.
-
-## Resource owner
-
-**Owner** is a property on the resource itself, set when the resource is created.
-
-| Rule | Detail |
-| --- | --- |
-| Set on creation | The creator automatically becomes owner. |
-| One owner per resource | Each project / app has exactly one. |
-| Cannot be removed | The owner flag can't be cleared. |
-| Orthogonal to roles | An owner typically has Contributor permission too, but they're separate concepts. |
-
-### Owner-only actions
-
-| Scope | Only the owner can |
-| --- | --- |
-| Project | Delete the project |
-| App | Delete the app |
-
-Even Contributors can't perform these actions.
-
----
-
-## Privacy by default
-
-When you create an app, it's **invisible** to everyone else in the project — only you (the owner) can see and access it. Project Contributors / Owners can see app metadata for governance but **not** the app's contents.
-
-This matters because apps often contain automations connected to personal accounts (email, calendar, OneDrive). Privacy by default keeps that data private until you explicitly share it.
-
-To share an app, the owner (or an app Contributor) explicitly invites users by granting them an app-scope role.
-
----
-
-## Common tasks
-
-### Create a project
-
-1. Open the portal at **[auto.azure.com](https://auto.azure.com)**.
-2. Click **Create project**, give it a name, pick a region.
-3. Click **Create**.
-
-You become the **Project Owner** automatically, receive **Contributor** permission at project scope, and can immediately add members, create apps, and create sandbox configurations.
-
-### Invite someone to a project
-
-1. Open the project → **Settings** → **User permissions** tab.
-2. Click **Add user**.
-3. Enter the email and pick a role.
-
-![Project — User permissions tab](../../../assets/portal/70-project-user-permissions.png)
-
-| The user needs to… | Give them |
-| --- | --- |
-| Manage the project, invite others, see all app metadata | **Contributor** |
-| Create new apps and shared resources | **Author** |
-| Just view project settings and shared resources | **Reader** |
-
-:::caution[They still won't see your apps]
-Apps stay invisible. To grant access to a specific app, switch to that app's **Settings → User permissions** tab.
-:::
-
-### Create an app
-
-1. Open the project.
-2. Click **Create app**, name it, click **Create**.
-
-You become the **App Owner**, receive **Contributor** permission at app scope, and the app is private to you by default.
-
-### Share an app with a collaborator
-
-1. Open the app → **Settings** → **User permissions** tab.
-2. Click **Add user**.
-
-![App — User permissions tab](../../../assets/portal/71-app-user-permissions.png)
-
-3. Enter the user's email and pick a role (Contributor for full edit access, Reader for view-only).
-
-![Add role assignment](../../../assets/portal/72-app-add-user.png)
-
-#### What a Contributor can do
-
-| Action | Allowed |
-| --- | :---: |
-| View workflows, connections, parameters | ✅ |
-| Create / edit / delete workflows | ✅ |
-| Create / edit connections | ✅ |
-| View run history | ✅ |
-| Trigger / cancel runs | ✅ |
-| Manage app permissions | ✅ |
-| **Delete the app** | ❌ (owner-only) |
-
-The collaborator automatically receives project-level **Reader** so they can reach related project resources, and they'll see the app under their **Shared with you** view.
-
-#### What a Reader can do
-
-| Action | Allowed |
-| --- | :---: |
-| View workflows, connections, parameters | ✅ |
-| View run history | ✅ |
-| Create / edit / delete anything | ❌ |
-| Trigger / cancel runs | ❌ |
-| Manage permissions | ❌ |
-
-Use Reader for demos, audits, or onboarding new team members without giving them edit access.
-
-### Create shared resources (sandboxes)
-
-1. Open the project → **Sandboxes**.
-2. Click **New sandbox** (Author or higher at project scope is required).
-
-| Role | Read | Create | Update | Delete |
-| --- | :---: | :---: | :---: | :---: |
-| Contributor | ✅ | ✅ | Only if you created it | Only if you created it |
-| Author | ✅ | ✅ | Only if you created it | Only if you created it |
-| Reader | ✅ | ❌ | ❌ | ❌ |
-| Project Owner | ✅ | ✅ | Only if you created it | ✅ (any resource — admin override) |
-
-**Only the creator can update a shared resource.** The Project Owner can delete any resource but can't edit ones they didn't create.
 
 ### Govern apps as a project admin
 
@@ -171,7 +40,87 @@ Project Owner / Contributor see every app in the project for governance purposes
 
 This is the deliberate privacy boundary: admins can manage resources without seeing personal data.
 
-### Handle an orphaned app
+For more information, see:
+
+- [Create an automation project](../getting-started/setup.md#2-create-a-project)
+- [Add project members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-projects#add-project-members)
+
+### Project members
+
+The following table describes the best role to choose when you add project members:
+
+| Member task | Role |
+|---|---|
+| Manage a project, invite members, view all app metadata | **Contributor** |
+| Create apps and shared resources | **Author** |
+| Only view project settings and shared resources | **Reader** |
+
+> [!NOTE]
+>
+> As a reminder, project members can't automatically view apps or access app content for privacy and security reasons unless they have the appropriate role on those apps.
+>
+> For more information, see:
+>
+> - [Create an app](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications)
+> - [Add app members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications#add-application-members)
+
+## App roles
+
+The following table describes app roles in detail:
+
+| Role | Allowed | Not allowed |
+|---|---|---|
+| **Contributor** | - View, create, and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Run, cancel, or resubmit workflow runs. <br>- Delete workflows. <br>- Manage app permissions. | Delete apps they don't own. |
+| **Reader** | - View workflows, connections, and parameters. <br>- View workflow run history. <br><br>**Tip**: Assign to app members for onboarding, demos, audits, and other tasks that don't need edit access. | - Create, edit, or delete anything. <br>- Run or cancel workflow runs. <br>- Manage app permissions. |
+
+> [!NOTE]
+> 
+> App members automatically get the project-level **Reader** role so they can find project-related resources. They can find the app in their **Shared with you** view.
+>
+> By design, apps don't have the **Author** role. 
+
+For more information, see:
+
+- [Create an app](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications)
+- [Add app members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications#add-application-members)
+
+## App privacy and visibility
+
+Apps often contain workflows that access and handle sensitive data. When you create an app, other project members don't automatically get the permissions to find, view, or access that app. For management and governance, project owners and contributors can find and view your app metadata. They can't view or access your app content.
+
+This behavior makes sure that private data stays private unless you explicitly grant access. Only app owners and contributors can add others to an app by assigning the appropriate app-scoped role.
+
+## Sandbox roles
+
+The following table describes sandbox roles in detail:
+
+| Role | Allowed | Not allowed |
+|---|---|---|
+| Contributor | - View and create sandboxes. <br><br>- Edit and delete sandboxes they create and own. | Edit and delete sandboxes they don't create or own. |
+| Author | - View and create sandboxes. <br><br>- Edit and delete sandboxes they create and own. | Edit and delete sandboxes they don't create or own. |
+| Reader | View sandboxes. | Create, edit, or delete sandboxes. |
+
+Project owners have the following permissions on sandboxes:
+
+| Allowed | Not allowed |
+|---|---|
+| View, create, and delete sandboxes, including any they don't create or own. | Edit any resource they don't create or own. |
+
+## Resource owner
+
+Each resource has an **Owner** property with the following rules and actions:
+
+| Rule | Description |
+|---|---|
+| Set at creation | The resource creator is automatically the owner. |
+| One owner per resource | Each resource, such as a project or app, has only one owner. |
+| Read only | The **Owner** property is read only. |
+| Role-independent | Typically, the resource owner automatically gets the **Contributor** role, but they're separate concepts. |
+| Permitted actions | Only resource owners can perform the following tasks: <br><br>- Delete projects they own, including any content they don't own, such as apps and sandboxes. <br><br>- Delete apps they own. <br><br>**Note**: Contributors can't perform these actions. |
+
+
+
+## Handle an orphaned app
 
 When an app's owner leaves the organisation, the app becomes **orphaned**:
 
@@ -181,9 +130,7 @@ When an app's owner leaves the organisation, the app becomes **orphaned**:
 
 If you're the Project Owner: open the project app list, find the orphaned app (the owner badge will show as departed/unknown), and either leave it for the collaborators or click **Delete**.
 
----
-
-## Troubleshooting
+## Troubleshoot problems
 
 | Problem | Cause | Fix |
 | --- | --- | --- |
@@ -194,13 +141,8 @@ If you're the Project Owner: open the project app list, find the orphaned app (t
 | "I can't manage permissions on an app" | You need Contributor at app scope. | Ask an existing App Contributor or the App Owner to add or remove users. |
 | "I can't trigger a workflow run" | You have app Reader. | Ask for Contributor at app scope, or have a Contributor trigger the run for you. |
 
----
+## Related content
 
-## Summary
-
-- **Two scopes** — project and app — evaluated independently (OR logic).
-- **Three levels** at project scope, two at app scope. Author exists only at project scope.
-- **Owner is a property**, not a level — enables owner-only actions like delete.
-- **Apps are private by default**, even from project admins.
-- **App-level permission auto-grants project Reader** so collaborators can reach related resources.
-- **Project admins can govern apps** without ever seeing their contents.
+- [Quickstart](/getting-started/quickstart/)
+- [Designer](visual-designer)
+- [Connectors](connectors)

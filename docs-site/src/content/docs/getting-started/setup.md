@@ -49,9 +49,11 @@ Create a project to store your apps and workflows.
 
 1. After the portal creates your project, select your project.
 
-Before you can start building workflows, you need to create an app as a deployable package for your workflows. To continue with this task, see [Quickstart](/getting-started/quickstart/).
+   As the project creator, you automatically become the project owner and have the [**Contributor** role](../features/permissions.md#project-roles) on the project resource.
 
-Before others can work in your project to create apps and build workflows, [add them as project members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-projects#add-project-members).
+1. Before others can work in your project to create apps and workflows, [add them as project members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-projects#add-project-members).
+
+1. Before you or others can start building workflows, [create an app](quickstart.md#2-create-an-app) as a deployable package for your workflows.
 
 ## Next
 
