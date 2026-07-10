@@ -7,7 +7,7 @@ sidebar:
 
 To support access and sharing resources with others, Azure Logic Apps Automation uses a permissions model based on resource scopes and roles. The platform also provides a separate ownership property on each resource. This article describes this model and common sharing scenarios.
 
-## Summary
+## High level summary
 
 | Aspect | Description |
 |---|---|
@@ -18,15 +18,15 @@ To support access and sharing resources with others, Azure Logic Apps Automation
 
 ## Resource owner
 
-Each resource has an **Owner** property with the following rules and actions:
+Each resource has an **Owner** property with the following attributes:
 
 | Rule | Description |
 |---|---|
 | Set at creation | The resource creator is automatically the owner. |
-| One owner per resource | Each resource, such as a project or app, has only one owner. |
+| One owner per resource | Each resource, such as a project, app, or sandbox, has only one owner. |
 | Read only | The **Owner** property is read only. |
-| Role-independent | Typically, the resource owner automatically gets the **Contributor** role, but they're separate concepts. |
-| Permitted actions | Only resource owners can perform the following tasks: <br><br>- Delete projects they own, including any content they don't own, such as apps and sandboxes. <br><br>- Delete apps they own. <br><br>**Note**: Contributors can't perform these actions. |
+| Role-independent | Typically, the resource owner automatically gets the **Contributor** role. However, owner and contributor are separate, independent concepts. |
+| Permitted actions | Resource owners can delete their own resources, including any resource contents they don't own. For example, project owners can delete their own projects along with any project contents they don't own. <br><br>**Note**: Contributors alone can't delete resources unless they're also the owners. |
 
 ## Project roles
 
@@ -109,7 +109,7 @@ The following table describes sandbox roles in detail:
 | Author | - View and create sandboxes. <br><br>- Edit and delete sandboxes they create and own. | Edit and delete sandboxes they don't create or own. |
 | Reader | View sandboxes. | Create, edit, or delete sandboxes. |
 
-Project owners have the following permissions on sandboxes:
+Project owners can perform the following tasks on sandboxes:
 
 | Allowed | Not allowed |
 |---|---|
