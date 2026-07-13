@@ -1,75 +1,73 @@
 ---
-title: Projects and apps - Azure Logic Apps Automation
-description: Learn how Logic Apps Automation organizes your workflows in projects, apps, sandboxes, and their relationships.
+title: Project structure - Azure Logic Apps Automation
+description: Learn about projects, apps, knowledge bases, sandboxes, and their relationships for organizing your work.
 sidebar:
   order: 1
 ---
 
-Your work is organised into a three-level hierarchy. Each level shows up in the portal's breadcrumb and left rail.
+Azure Logic Apps Automation organizes your automation using the following hierarchy and structure:
 
 ```
-Project ─┬─ Application ─┬─ Workflow ─┬─ Designer
-         │               │            └─ Monitoring (runs)
-         │               ├─ Connections
-         │               ├─ Parameters
-         │               ├─ Analytics
-         │               └─ Settings (env vars, user permissions)
-         ├─ Sandboxes (project-scoped, see Sandboxes page)
-         └─ Settings (user permissions)
+Project
+   ├─ Apps
+   │   ├─ Workflows
+   |   |     ├─ Designer
+   |   |     └─ Monitoring (workflow runs and history)
+   |   |
+   │   ├─ Connections
+   │   ├─ Parameters
+   │   ├─ Analytics
+   │   └─ Settings (environment variables, app permissions)
+   │
+   ├─ Knowledge
+   ├─ Sandboxes
+   └─ Settings (project permissions)
 ```
 
 ## Project
 
-The top-level container. A **project** holds applications, sandboxes, and project-wide settings. It also defines who has access — RBAC is granted at the project boundary.
+A project is the top-level container resource that stores your apps, knowledge bases, sandboxes, and project settings. As the project creator, you're automatically the project owner. You manage access and governance for project resources at the project level. To control who can access project resources, project settings use role-based access control (RBAC).
 
-![Projects dashboard](../../../assets/portal/02-projects.png)
+When to create a project:
 
-When to create a new project: when you want isolation (separate access control, separate quota, separate billing context) or a new business domain.
+- Isolation: Separate access control, limits, quotas, billing context 
+- Context: New or separate business domain
 
-## Application
+The following table describes project contents in more detail:
 
-An application is a **deployable unit** inside a project. It holds:
+| Item | Description |
+|------|-------------|
+| [Apps](#apps) | The deployable package for your workflows, connections, parameters, analytics data, and app settings. |
+| [Knowledge](knowledge-bases) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
+| [Sandboxes](sandboxes) | The isolated micro, virtual machine, compute environments where workflow agents run code and can optionally use cloned repos and skills. |
+| Settings | Project-level user permissions and environment variables. |
 
-| Tab | What it's for |
-| --- | --- |
-| **Workflows** | The automations themselves — what this app actually does. |
-| **Connections** | Reusable, authenticated bindings to external services (Teams, SharePoint, Service Bus, etc.). |
-| **Parameters** | Named values referenced in workflows — environment-specific URLs, timeouts, feature flags. |
+## Apps
+
+In your project, an app is a deployable resource that stores your workflows, connections, parameters, analytics data, and app settings. Many teams have several apps per project where each app maps to a logical service like `order-processing`, `notifications`, and `daily-reports`.
+
+As the app creator, you're automatically the app owner. You manage access and governance for app resources at the app level. To control who can access app resources, app settings use role-based access control (RBAC).
+
+The following table describes app contents in more detail:
+
+| Item | Description |
+|------|-------------|
+| [Workflows](workflows) | The automation workloads that exist in an app and include the starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
+| Connections | The reusable, authenticated bindings that connect to external services such as Teams, SharePoint, and Service Bus. |
+| Parameters | The niamed values referenced in workflows — environment-specific URLs, timeouts, feature flags. |
 | **Analytics** | Run trends, success/failure rates, per-action latency. |
-| **Settings** | App-level environment variables and user permissions. |
+| Settings| App-level user permissions and environment variables. |
 
-![Applications inside a project](../../../assets/portal/03-apps.png)
+## Choose the work level for your work
 
-Most teams have a handful of apps per project — one per logical service (e.g., `order-processing`, `notifications`, `daily-reports`).
-
-### Creating an app
-
-From the project's **Applications** tab, click **Create Application** and give it a name.
-
-![Applications list with the Create Application button + Status column](../../../assets/portal/80-apps-list.png)
-![Create Application dialog](../../../assets/portal/81-create-app-dialog.png)
-
-Provisioning takes a minute or two — the **Status** column starts as *Building* and flips to **Ready** once the runtime is up. Don't open or wire up the app until it's Ready.
-
-### Sharing an app
-
-Apps are private to the creator by default. To invite collaborators, open the application's **Settings → User permissions** tab and add users by email — or grant project-scope access for someone who should see every app. See **[Permissions](/features/permissions/)** for the full model.
-
-## Workflow
-
-The unit of automation. A workflow lives inside one app, has one trigger and a tree of actions, and is edited on the visual canvas or via the assistant. See [Workflows](/features/workflows/) for the full surface.
-
-![Workflows inside an application](../../../assets/portal/04-workflows-list.png)
-
-## Sandboxes (project-scoped)
-
-Sandboxes are isolated compute environments that workflow **agents** can run code in. They live at the project level so multiple workflows across multiple apps can reuse the same pre-baked image. See **[Sandboxes](/features/sandboxes/)** for the full guide.
-
-## Picking the right level for new work
-
-| You're adding… | Put it at… |
-| --- | --- |
-| A new automation | A workflow inside an existing app |
-| A new logical surface (different team, different SLOs, different connection set) | A new app inside the same project |
+| Item to add | Level |
+|-------------|-------|
+| New automation | A workflow in the related app |
+| New logical service for a different team, connection set, or service level objective (SLO) | An app in the related project |
 | A separate access boundary or business domain | A new project |
-| A new code execution environment for agents (with cloned repos) | A new sandbox inside the project |
+| A new code execution environment for agents with cloned repos | A new sandbox in the related project |
+
+## Related content
+
+- [Setup](../getting-started/setup)
+- [Quickstart](../getting-started/quickstart)

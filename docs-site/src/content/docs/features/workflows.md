@@ -5,7 +5,9 @@ sidebar:
   order: 6
 ---
 
-In Azure Logic Apps Automation, a **workflow** is a trigger plus a sequence of actions. You compose them on the visual canvas or via the assistant; the runtime executes them and keeps run history for inspection.
+In Azure Logic Apps Automation, a **workflow** is a trigger plus a sequence of actions. You compose them on the visual canvas or via the assistant; the runtime executes them and keeps run history for inspection. Workflows can be stateful or stateless with triggers, actions, control flow, expressions, IntelliSense, inline code execution such as JavaScript, and more.
+
+| [Workflow](/features/workflows/) | The automation workload that includes operations such as the starting event (*trigger*) and the tasks to perform or control flow (*actions*). Workflows are stateful or stateless. They support expressions, IntelliSense, inline code execution such as JavaScript, and more. |
 
 ## Triggers
 
@@ -38,7 +40,7 @@ Every action's parameters accept either a literal value or a **dynamic** value c
 
 ![Dynamic content + Expressions panel](../../../assets/portal/95-dynamic-content-popup.png)
 
-The same expression syntax works wherever a value is accepted — node parameters, conditional branches, loops, agent system prompts. The panel includes a live preview so you can validate the result before saving.
+The same expression syntax works wherever a value is accepted — node parameters, conditional branches, loops, agent system prompts. The panel includes a live preview so you can validate the result before saving. 
 
 ### JavaScript actions
 

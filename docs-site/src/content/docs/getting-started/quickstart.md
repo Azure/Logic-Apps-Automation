@@ -52,13 +52,13 @@ If your project doesn't include an app to store and organize workflows, follow t
 
    As the app creator, you automatically become the app owner and have the [**Contributor** role](../features/permissions.md#app-roles) on the app resource. At this point, only you can view the app and its contents. By design, the app is invisible to others except for the project owner and contributors who can view the app metadata.
 
-1. To add people so they can build workflows in on your app, follow these steps:
+1. To add people so they can build workflows in your app, follow these steps:
 
    1. On the app sidebar, select **Settings**.
 
-   1. On the **User permissions** tab, select **Add user**.
+   1. On the **User permissions** tab, select **Add user**. Browse and select the person, or enter their email address.
    
-      If people need access to every app in the project, they need access at the project level.
+      If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](../features/permissions).
 
 ## 3. Create your workflow
 

@@ -17,6 +17,10 @@ A **sandbox** is an isolated compute environment (a microVM, powered by Azure De
 
 Sandboxes live at the **project** level — multiple workflows across multiple apps can target the same sandbox, and the sandbox setup (auth, cloned repos, skills) is configured once.
 
+## Sandboxes (project-scoped)
+
+Sandboxes are isolated compute environments that workflow **agents** can run code in. They live at the project level so multiple workflows across multiple apps can reuse the same pre-baked image. See **[Sandboxes](/features/sandboxes/)** for the full guide.
+
 ![Sandboxes list at the project level](../../../assets/portal/60-sandbox-list.png)
 
 ## Two ways to use a sandbox
