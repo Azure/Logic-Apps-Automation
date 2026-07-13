@@ -216,16 +216,7 @@ To quickly find any missing configuration information while you work in draft mo
 
    :::image type="content" source="media/quickstart/draft-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, draft workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/draft-workflow-run-history.png":::
 
-##### Common triggers and when you can test them
-
-The following table describes common example triggers in workflows that you can run in draft versus published mode:
-
-| Trigger type | Trigger name | Test in draft? | How to test | 
-|--------------|--------------|-----------------|-------------|
-| **Request** | **When an HTTP request is received** | Yes | On the bottom designer toolbar, select **Test**, and provide a sample payload. |
-| **Schedule** | **Recurrence** | No, must publish | Publish, and then wait for the scheduled time, or shorten the schedule. |
-| Event-driven, such as **Service Bus**, **Event Hubs**, **Queue Storage** | Varies | No, must publish | Publish, and then push an event to the target resource. |
-| Polls a service or system endpoint | Varies | No, must publish | Publish, and then trigger the event in the target service or system. |
+For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](../features/workflows#triggers-that-fire-in-draft-versus-published-mode).
 
 ## 6. Publish draft to production
 

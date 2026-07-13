@@ -2,7 +2,7 @@
 title: Agents
 description: AI agents as first-class workflow actions, with a system prompt, a toolset, and structured outputs.
 sidebar:
-  order: 7
+  order: 10
 ---
 
 An **agent** is a workflow action backed by a model. Drop it onto the canvas like any other action; give it a system prompt, a toolset, and an input; downstream actions consume its output.

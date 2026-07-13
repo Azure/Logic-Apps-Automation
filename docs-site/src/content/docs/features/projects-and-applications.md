@@ -54,18 +54,18 @@ The following table describes app contents in more detail:
 |------|-------------|
 | [Workflows](workflows) | The automation workloads that exist in an app and include the starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
 | Connections | The reusable, authenticated bindings that connect to external services such as Teams, SharePoint, and Service Bus. |
-| Parameters | The niamed values referenced in workflows — environment-specific URLs, timeouts, feature flags. |
-| **Analytics** | Run trends, success/failure rates, per-action latency. |
+| Parameters | The named values referenced in workflows like environment-specific URLs, timeouts, and feature flags. |
+| Analytics | Run trends, success and failure rates, and per-action latency. |
 | Settings| App-level user permissions and environment variables. |
 
 ## Choose the work level for your work
 
 | Item to add | Level |
 |-------------|-------|
-| New automation | A workflow in the related app |
-| New logical service for a different team, connection set, or service level objective (SLO) | An app in the related project |
-| A separate access boundary or business domain | A new project |
-| A new code execution environment for agents with cloned repos | A new sandbox in the related project |
+| New automation | New workflow in the related app. |
+| New logical service for a different team, connection set, or service level objective (SLO) | New app in the related project. |
+| Separate business domain or access boundary | New project. |
+| New code execution environment for agents with cloned repos | New sandbox in the related project. |
 
 ## Related content
 
