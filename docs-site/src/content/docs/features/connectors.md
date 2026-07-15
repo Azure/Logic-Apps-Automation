@@ -7,7 +7,7 @@ sidebar:
 
 In Azure Logic Apps Automation, a *connector* is a prebuilt integration for a service, system, SaaS app, data source, or API outside your workflow. The connector catalog includes 1,400+ connectors, so you can build most workflows without writing code.
 
-Connections exist inside apps where each connection saves your authentication setup. You can reuse the same connection across every workflow in the same app.
+Connections exist inside apps where each connection stores your authentication setup. You can reuse the same connection across every workflow in the same app.
 
 ## Built-in operations
 
@@ -19,7 +19,7 @@ Built-in operations run natively in the same process as the platform's runtime a
 | **HTTP** | **HTTP** | Send generic REST API calls like `GET` or `POST`. |
 | **Control** | - **Condition** <br>- **Switch** <br>- **For each** <br>- **Until** | Change the flow based on meeting specific criteria. |
 | **Data Operations** | - **Compose** <br>- **Parse JSON** <br>- **Select** <br>- **Filter array** <br>- **Join** | Perform data shaping. |
-| **Variables** | - **Initliaze variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Store and manage variable values. |
+| **Variables** | - **Initliaze variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Create and manage variable values. |
 | **AI Agents** | **Workflow Agent**, **Coding agent** | Run agents that use models to perform tasks or execute code. |
 
 ## Managed connectors
@@ -46,4 +46,5 @@ If the service you want to connect doesn't have a prebuilt connector, use the bu
 
 ## Related content
 
-- [**Quickstart**](/getting-started/quickstart/)
+- [**Quickstart**](../getting-started/quickstart/)
+- [**Workflows**](workflows)

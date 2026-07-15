@@ -23,8 +23,8 @@ Here's what the high-level process looks like to build a workflow:
 
 Ready to get up and running first? See the following pages:
 
-- [**Setup**](/getting-started/setup/)
-- [**Quickstart**](/getting-started/quickstart/)
+- [**Setup**](setup/)
+- [**Quickstart**](quickstart/)
 
 ## Other capabilities
 
@@ -44,19 +44,19 @@ Azure Logic Apps Automation introduces the following core components and concept
 
 | Component or concept | Description |
 |----------------------|-------------|
-| [Project](/features/projects-and-applications/) | The top-level container resource that stores your *apps*, *knowledge bases*, *sandboxes*, and project settings. |
-| [App](/features/projects-and-applications/) | The second-level deployable package resource that stores your *workflows*, *connections*, *parameters*, analytics data, and app settings. |
-| [Settings](/features/permissions/) | The user permissions at the project and app levels that control resource access and sharing for collaboration through roles and ownership. |
-| [Workflow](/features/workflows/) | The automation workload that includes operations such as the starting event (*trigger*) and the tasks to perform or control flow (*actions*). Workflows are stateful or stateless. They support expressions, IntelliSense, inline code execution such as JavaScript, and more. |
-| [AI assistant](/features/ai-assistant/) | The interface where you can describe and update workflows by using natural language and iterating with the assistant. |
-| [Designer](/features/visual-designer/) | The canvas where you manually add your workflow's trigger and actions. |
-| [Connectors](/features/connectors/) | The catalog that provides integrations with other services, systems, apps, and data. |
-| [Agents](/features/agents/) | Add native or Foundry agents, agent loops, set up agent parameters, add agent tools such as code interpreter, and monitor the chat log. |
-| [Knowledge](/features/knowledge-bases/) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
-| [Sandbox](/features/sandboxes/) | An isolated micro virtual machine environment where agents run code and can optionally use cloned repos and skills. |
-| [Runs and monitoring](/features/runs-and-monitoring/) | Get real-time streaming for draft workflow runs, review run history, work with drafts, trigger and action inputs and outputs, and so on. |
+| [Project](../features/projects-and-applications/) | The top-level container resource that stores your *apps*, *knowledge bases*, *sandboxes*, and project settings. |
+| [App](../features/projects-and-applications/) | The second-level deployable package resource that stores your *workflows*, *connections*, *parameters*, analytics data, and app settings. |
+| [Settings](../features/permissions/) | The user permissions at the project and app levels that control resource access and sharing for collaboration through roles and ownership. |
+| [Workflow](../features/workflows/) | The automation workload that includes operations such as the starting event (*trigger*) and the tasks to perform or control flow (*actions*). Workflows are stateful or stateless. They support expressions, IntelliSense, inline code execution such as JavaScript, and more. |
+| [AI assistant](../features/ai-assistant/) | The interface where you can describe and update workflows by using natural language and iterating with the assistant. |
+| [Designer](../features/visual-designer/) | The canvas where you manually add your workflow's trigger and actions. |
+| [Connectors](../features/connectors/) | The catalog that provides integrations with other services, systems, apps, and data. |
+| [Agents](../features/agents/) | Add native or Foundry agents, agent loops, set up agent parameters, add agent tools such as code interpreter, and monitor the chat log. |
+| [Knowledge](../features/knowledge-bases/) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
+| [Sandbox](../features/sandboxes/) | An isolated micro virtual machine environment where agents run code and can optionally use cloned repos and skills. |
+| [Runs and monitoring](../features/runs-and-monitoring/) | Get real-time streaming for draft workflow runs, review run history, work with drafts, trigger and action inputs and outputs, and so on. |
 
 ## Next
 
-- [**Set up**](/getting-started/setup/)
-- [**Quickstart**](/getting-started/quickstart/)
+- [**Set up**](setup/)
+- [**Quickstart**](quickstart/)

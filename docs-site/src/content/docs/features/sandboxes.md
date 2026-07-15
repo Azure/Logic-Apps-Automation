@@ -1,29 +1,23 @@
 ---
-title: Sandboxes
-description: Isolated microVM environments where agents execute code, with optional cloned repos and skills.
+title: Sandboxes - Azure Logic Apps Automation
+description: Learn about isolated virtual machine environments where agents can run code, optionally work with repositories, and invoke skills.
 sidebar:
-  order: 9
+  order: 10
   badge:
     text: preview
     variant: tip
 ---
 
-A **sandbox** is an isolated compute environment (a microVM, powered by Azure Developer Compute) that an agent workflow can run code in. Use it when an agent needs to:
+In Azure Logic Apps Automation, a *sandbox* is an isolated compute environment where agents in workflows can run code. This environment is a micro virtual machine, powered by Azure Developer Compute, where your agent can perform the following tasks:
 
-- Run shell commands, scripts, or build tools.
-- Browse a real filesystem.
-- Operate on cloned source-control repositories.
-- Invoke skills bundled with those repos.
+- Run shell commands and scripts, or build tools.
+- Browse real file systems.
+- Operate on cloned source control repositories.
+- Invoke skills bundled with repositories.
 
-Sandboxes live at the **project** level — multiple workflows across multiple apps can target the same sandbox, and the sandbox setup (auth, cloned repos, skills) is configured once.
+Sandboxes exist inside projects where workflows across apps can target the same sandbox. You set up each sandbox configuration only once with its authentication, cloned repos, and skills.
 
-## Sandboxes (project-scoped)
-
-Sandboxes are isolated compute environments that workflow **agents** can run code in. They live at the project level so multiple workflows across multiple apps can reuse the same pre-baked image. See **[Sandboxes](/features/sandboxes/)** for the full guide.
-
-![Sandboxes list at the project level](../../../assets/portal/60-sandbox-list.png)
-
-## Two ways to use a sandbox
+## Ways to use a sandbox
 
 You can run agents in a sandbox **without any pre-configuration** (a clean image, just-in-time) or **with a pre-baked image** that already has your repos cloned and your skills available. Pick the path that matches what you need:
 
@@ -143,7 +137,7 @@ Click **Add** to save, and run the workflow.
 
 ---
 
-## Troubleshooting
+## Troubleshoot problems
 
 | Problem | Try |
 | --- | --- |
@@ -153,7 +147,7 @@ Click **Add** to save, and run the workflow.
 | **Input file isn't reaching the agent** | Verify the file is `.txt` or `.md` in private preview, and that the `contentType` is set in the code view if needed. |
 | **GitHub OAuth dialog never finishes** | Open the dialog again, confirm you allowed access at the account level, and that the repo belongs to that account. |
 
-## What's next
+## Related content
 
 - **[Agents](/features/agents/)** — how the agent action and tool loop work.
 - **[AI workflow assistant](/features/ai-assistant/)** — ask the assistant to design a workflow that uses an agent with a sandbox.

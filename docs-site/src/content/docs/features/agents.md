@@ -1,158 +1,191 @@
 ---
-title: Agents
-description: AI agents as first-class workflow actions, with a system prompt, a toolset, and structured outputs.
+title: Agents - Azure Logic Apps Automation
+description: Learn about AI agent actions for completing tasks in your workflow.
 sidebar:
-  order: 10
+  order: 9
 ---
 
-An **agent** is a workflow action backed by a model. Drop it onto the canvas like any other action; give it a system prompt, a toolset, and an input; downstream actions consume its output.
+In Azure Logic Apps Automation, an *agent* is a workflow action that performs the following jobs:
 
-![A workflow with an agent action](../../../assets/portal/40-agent-workflow.png)
+- Accept requests in plain language.
+- Interpret requests by using a large language model.
+- Follow system instructions that define the agent's role.
+- Call tools that complete the tasks needed to fulfill the requests.
 
-:::tip[Running code from an agent]
-For agents that need to execute code in an isolated environment (run scripts, browse a filesystem, use cloned repos), see **[Sandboxes](/features/sandboxes/)**.
-:::
+An agent can also run code and scripts, browse file systems, and operate on cloned repos with skills when you set up a *sandbox* where the agent can perform this work. This sandbox is an isolated compute environment with a micro virtual machine in your automation project.
 
-## Anatomy of an agent
+Like any other action, an agent produces structured outputs that subsequent workflow actions can use. However, an agent can accept freeform, unstructured, and unpredictable inputs.
 
-The agent node has a five-tab panel: **Parameters**, **Connection**, **Settings**, **Agent Harness**, and **Knowledge**. Together they configure everything below.
+## Agent versus deterministic workflow
 
-![Agent Parameters tab — model, system + user message, built-in tools, Finish configuring with Copilot](../../../assets/portal/90-agent-parameters-tab.png)
+The following table helps you choose whether to use an agent versus a *deterministic* workflow:
 
-| Field | Where it lives | What it is |
-| --- | --- | --- |
-| **Agent kind** | Parameters tab → AI model dropdown | Native (platform-driven loop) or Foundry (Azure AI Foundry Agent Service). See *Native vs Foundry* below. |
-| **AI model** | Parameters tab → AI model | The model deployment to call (e.g. `gpt-4`, `gpt-5`). For Foundry agents, this is the Foundry assistant. |
-| **Model connection** | Connection tab | The credential / endpoint used to reach the model. Pick an existing connection or click *Create new AI model*. |
-| **System message** | Parameters tab → System message | The agent's role and constraints. Supports the full expression language. |
-| **User message** | Parameters tab → User message | The agent's input on each invocation. Usually an expression that pulls from the trigger body or a previous action. |
-| **Toolset** | Sub-actions inside the agent loop on the canvas + **Built-in Tools** toggle on Parameters | What the agent may call. See *Adding tools to an agent* below. |
-| **Knowledge sources** | Knowledge tab | Optional grounding documents / indexes the agent can retrieve from at runtime. See [Knowledge bases](/features/knowledge-bases/). |
-| **Iteration bounds** | Settings tab | Max tool-call iterations so a runaway loop can't burn through cost. |
-| **Sandbox / Agent Harness** | Agent Harness tab | Isolated compute the agent runs code in. See [Sandboxes](/features/sandboxes/). |
+| Agent | Deterministic workflow |
+|---|---|
+| Run unpredictable actions based on input. | Run predictable actions known in advance. |
+| Handle unstructured or unpredictable inputs with variable behavior. | Handle structured inputs with repeatable behaviour. |
+| Prioritize flexibility and reasoning. | Prioritize cost and low latency. |
 
-## Native vs Foundry agents
+## Native versus Foundry agents
 
-Two flavours of agent are supported and selected per-action:
+Azure Logic Apps Automation supports native agents and Microsoft Foundry agents driven by Foundry Agent Service. The following table compares the differences between these agents:
 
-| | **Native agent** | **Foundry agent** |
-| --- | --- | --- |
-| Runtime | The platform's built-in agent loop drives every iteration | Hands off to Azure AI Foundry Agent Service |
-| Tools the model can call | Your custom action tools (sub-actions on the canvas) + the built-in **Code Interpreter** toggle | Foundry-managed tools (Foundry's Code Interpreter, File Search, function calling) and Foundry-side resources |
-| Where the loop runs | In the workflow runtime; each iteration shows up as actions in the execution log | Inside Foundry; the platform sees a single agent call with the final output |
-| Connections used | Your model deployment via a workflow connection | Your Foundry project's connection |
-| When to pick it | You want tight integration with workflow connectors and per-iteration visibility in the run history | You've already built an Assistant in Foundry, or want Foundry-managed file search / built-in tool stack |
+| Aspect | Native agent | Foundry agent |
+|---|---|---|
+| Intent | - You want tight integration with workflow connectors. <br><br>- You want action and per-iteration visibility in the workflow run history. | - You have an assistant you built in Foundry. <br><br>- You want to use Foundry's built-in capabilities. |
+| Agent tools | Use the platform's connector actions and built-in code interpreter as tools. | Use Foundry's built-in capabilities like file search, function calling, code interpreter, and resources. |
+| Model connection | Use your own model deployment through a workflow connection. | Use your Foundry project's connection. |
+| Runtime | Drive each iteration with the built-in agent loop. | Hand off work to Azure AI Foundry Agent Service. |
+| Where the loop runs | In the workflow runtime. <br><br>The platform shows the actions from each iteration in the execution log through the workflow run history. | In Foundry. <br><br>The platform shows a single agent call and the final output. |
 
-The choice is set in the Parameters tab's AI model dropdown. Switching between them is just a config change — the rest of the workflow doesn't care.
+## Native agent concepts and components
 
-## The agent loop
+You can choose from the following native agent types:
 
-When a **native** agent action executes, the runtime:
+| Area | Workflow agent | Coding agent |
+|---|---|---|
+| Primary focus | Business processes | Software development, as a component in a larger automated process |
+| Works with | Services, systems, apps, data, approvals | Repositories, code, files, scripts, tests, development assets, and developer workflows.|
+| Tools | Connectors, REST APIs, MCP servers, knowledge bases, other workflows | Code interpreters, repositiories, shells, runtimes, terminals, developer tools and environments |
+| Optimizes | Business outcomes | Software artifacts |
+| Common use cases | Onboarding, support, operations, and finance | Generate and refactor code, create unit tests, review pull requests, and find repository defects |
 
-1. Sends the system prompt + input to the model.
-2. If the model picks a tool, the runtime invokes it and feeds the result back.
-3. Repeats until the model produces a final answer or the loop hits its bound.
-4. Returns the final answer plus structured outputs to the rest of the workflow.
+After you add an agent action to your workflow, you need to set up the agent to work the way you want. The following table introduces agent-related configuration concepts and components:
 
-Each iteration is its own entry in the [run history](/features/runs-and-monitoring/) — you can see the model's tool-call decision, the tool's inputs and outputs, and how long each step took.
+| Tab | Section or field | Description |
+|---|---|---|
+| Parameters | AI model | - Native: The model deployment to use like `gpt-5`. <br><br>- Foundry: The Foundry assistant. <br><br>**Note**: Changes to the model are only configuration changes and don't affect the rest of the worklow. <br><br>For more information, see [Native versus Foundry agents](#native-versus-foundry-agents). |
+| Parameters | System message | The description about the agent's role, purpose, behavior, and constraints. Supports the full expression language. <br><br>For more information, see [Best practices](#best-practices). |
+| Parameters | User message | The user prompt or question for the agent to answer. <br><br>This input usually originates from the workflow trigger or a preceding action as body content in expression format. <br><br>For more information, see [Best practices](#best-practices). |
+| Parameters | Input files <br>(Coding agent only) | The files to add and use as input in the isolated [sandbox](sandbox/) environment. | 
+| Parameters | Built-in tools | Code interpreter: The agent's capability to run JavaScript in an isolated [sandbox](sandbox/) environment. |
+| Parameters | Tools | The actions, MCP servers, or workflows that the agent can call as tools. |
+| Connection | Connections | The configuration with the credentials and endpoint to access the model. You can create a connection or select an existing connection. |
+| Settings | - Timeout <br>- Loop count <br>- Secure inputs <br>- Secure outputs | <br>- The timeout and iteration limit to prevent runaway loops from burning up budget. <br><br>- The settings to hide inputs and outputs in workflow run history. |
+| Agent harness <br>(Coding agent only) | - Execution environment <br>- Sandbox configuration | Harness type: The runtime to use for agent execution. <br><br>- Sandbox: The microsoft virtual machine image that you created as sandbox in the project. If none exist, uses the default base image.  |
+| Knowledge | Knowledge | Optional documents, knowledge bases, or indexes that the agent can retrieve and use at runtime to ground requests in a specific domain. <br><br>For more information, see [Knowledge bases](knowledge-bases/). |
+| Code | Code view | The agent's underlying read-only JSON definition. |
 
-Downstream actions can read the agent's outputs with the expression language:
+## How a native agent works
+
+The following high-level process describes the steps that run for a native agent loop action:
+
+1. Send the system prompt and input to the model.
+1. If the model chooses a tool, the runtime calls the tool.
+1. The runtime feeds the results from the tool back to the model.
+1. Repeat until the model produces the final answer, or the loop reaches its iteration limit.
+1. Return the final answer plus structured outputs to the remaining workflow.
+
+Downstream workflow actions can reference the agent's outputs by using the following expressions:
 
 ```
-@outputs('AgentName')['lastAssistantMessage']
-@outputs('AgentName')['structuredOutput']?['someField']
+@outputs('<agent-name>')['<structured-output>']?['<field-name>']
+@outputs('<agent-name>')['<final-assistant-message>']
 ```
 
-### Agent parameters — feeding values into tools
+## Agent best practices
 
-When the model calls one of the agent's custom tools, it provides arguments based on the tool's parameter schema. Inside a tool's action you read those arguments with the **`agentParameters(...)`** expression function:
+- Write unambiguous system messages and user messages. Agents work better with clear, specific, and detailed instructions, not vague intent.
+- Keep agent toolsets small. For example, fewer than 10 tools is better than 20 tools. Large toolsets increase the risk for model confusion.
+- Use verb-centric tool names, like `get_current_time` or `find_order` to help the model correctly choose tools.
+- Spend time on tool descriptions, which matter more than names to help the model choose tools.
+- For long-running or expensive tools, set a timeout or iteration limit that matches the expected task difficulty. That way, a stuck tool doesn't burn up the agent's iteration budget.
+- Rather than reparse the agent's final answer, use the agent's structured outputs instead in subsequent workflow actions.
+
+## Agent run history
+
+After an agent loop completes, the monitoring view shows the [workflow run history](runs-and-monitoring/) with each iteration in its own entry. The chat history shows the full conversation:
+
+- Each user message.
+- Each tool call that the model makes, including the arguments.
+- Each tool's inputs and outputs.
+- The duration for each step.
+- The model's final answer.
+
+This view helps you more easily answer the question "Why did the agent do that", compared to viewing the same data in the agent action's outputs alone.
+
+## Native agent tools
+
+You can enable or add the following tools to your native agent:
+
+| Tool type | Description |
+|---|---|
+| Built-in | Code interpreter: The model can run JavaScript in an isolated environment. |
+| Custom | Any built-in or managed connector action, MCP server, or workflow that you can call. |
+
+### Code interpreter
+
+When you need the agent to perfom the following tasks, enable the code interpeter capability on the agent:
+
+- Calculate numbers, run algorithms, or transform complex data structures that the model can't reliably handle.
+- Parse, filter, or reshape JSON and arrays returned from other tools.
+- Generate dynamic content such as regular expression extraction, templating, and formatting.
+
+#### How code interpreter works
+
+With the code interpreter enabled, the agent runs the following high-level steps:
+
+1. The model decides they need to call the code interpreter tool by using the `code` argument.
+1. The runtime creates and runs JavaScript in an isolated process.
+1. The output flows as a tool result back into the chat history.
+1. The model reads the result.
+1. The model calls another tool or produces the final answer.
+
+For workflow agents, the code interpreter doesn't need a sandbox. For coding agents that need a richer execution environment, create a [sandbox](sandbox/), and then set up the sandbox on the coding agent's **Agent harness** tab. 
+
+#### Code interpreter limitations
+
+| Limitation | Description |
+|---|---|
+| JavaScript only | No Python or other runtimes. |
+| No network access | No HTTP calls from the execution environment. Instead, add an **HTTP** action as an agent tool. |
+| No file system access | No reading or writing files. Instead, pass inputs through the agent's chat context. |
+| Shorter timeout per execution | Long-running snippets are cut off. Instead, make frequent small calls, not a big one. |
+| Limited memory and CPU | Code interpreter is suitable for transformations, not heavy compute. |
+
+If your agent needs non-JavaScript runtimes, network access, or a file system, set up and use a [sandbox](/features/sandboxes/), rather than the code interpreter.
+
+### Custom tools
+
+You can create custom tools for an agent to use by using a built-in or managed connector action, MCP server, or workflow that you can call. Each tool needs the following items:
+
+| Requirement | Description |
+|---|---|
+| Tool name | The agent uses this name to call the tool. |
+| Description | The agent uses this description to choose the correct tool. |
+| Agent parameters | The agent uses these parameter names and descriptions as a schema to populate tool parameter arguments at run time. |
+
+> [!IMPORTANT]
+>
+> The agent's reasoning process and accuracy at run time is only as good as your descriptions. Clearly and precisely specify what the tool does, when to call the tool, and what each parameter means.
+
+#### Tool parameters
+
+When the model calls an agent's custom tools, the model provides arguments based on the tool's parameter schema. The agent uses this schema to feed parameter values to the tool at run time. To access these arguments inside a tool action, use the following expression with the `agentParameters()` function:
 
 ```
-@agentParameters('orderId')         // value the agent passed for the orderId param
-@agentParameters('limit')
+@agentParameters('orderId') // Return the value passed by the agent for the `orderId` parameter.
+@agentParameters('limit')   // Return the value passed by the agent for the `limit` parameter.
 ```
 
-This is the bridge between what the model decided to send and the workflow logic that runs the tool. The function name is camelCase — `agentParameters(...)` — in both the standard expression language and inline JavaScript actions. (A legacy lowercase form, `@agentparameters(...)`, also works in the standard language for backward compatibility.)
+The `@agentParameters('<parameter-name>')` expression works as a bridge between the arguments that the model sends to the tool and the workflow that runs the tool. 
 
-### Chat log in monitoring
+> [!NOTE]
+>
+> The function name uses camel case (`agentParameters()`) in both the standard expression language and JavaScript actions. For backward compatibility, the legacy lowercase format, `@agentparameters()`, also works in the standard expression language.
 
-When you open a run that includes an agent, the **bottom panel** in the monitoring view has a **Chat** tab that shows the full conversation: every user message, every tool call the model made (with arguments), every tool result the runtime fed back, and the model's final answer. That same data is also available structurally in the agent action's outputs, but the chat view is the fastest way to debug "why did the agent do that?".
+## Mix code interpreter and custom tools
 
-## Adding tools to an agent
+An agent can use both the [code interpreter](#code-interpreter) tool and [custom tools](#custom-tools). The following table describes some example common patterns:
 
-Tools come in two flavours.
-
-### Built-in tools (toggle in the agent's Parameters tab)
-
-The agent node's **Parameters** tab exposes platform-provided tools you can turn on with a switch — currently **Code Interpreter** (see below). For agents that need a richer execution environment (cloned repos, custom skills, more languages), turn on a **sandbox** in the **Agent Harness** tab — see [Sandboxes](/features/sandboxes/).
-
-![Agent Parameters tab with the Built-in Tools section](../../../assets/portal/82-agent-tools-tab.png)
-
-#### Code Interpreter
-
-The **Code Interpreter** built-in tool lets the model write and execute **JavaScript** at runtime inside an isolated Node.js sandbox. It's the right choice when the agent needs to:
-
-- Crunch numbers, run algorithms, or transform data structures the model can't reliably do by hand.
-- Parse, filter, or reshape JSON / arrays returned from other tools.
-- Generate dynamic content (regex extraction, templating, formatting).
-
-The agent loop with Code Interpreter looks like:
-
-1. The model decides it needs to compute something, emits a tool call with a `code` argument.
-2. The runtime executes the JavaScript in an isolated process.
-3. The output flows back into the chat history as a tool result.
-4. The model reads the result and either continues with another tool or produces a final answer.
-
-**Turning it on.** Open the agent's **Parameters** tab and flip the **Code Interpreter** switch under *Built-in Tools*. That's it — no separate connection or sandbox required for built-in execution.
-
-**Mixing with custom tools.** Code Interpreter composes with custom action tools (see below). A common pattern: query a database action → transform the rows with Code Interpreter → call an HTTP tool to post the result.
-
-| Real-world flow | Tool sequence |
-| --- | --- |
-| Daily report | `code_interpreter` (aggregate) → `Send_Email` |
-| ETL | `Query_Database` → `code_interpreter` (transform) → `Insert_Records` |
+| Real-world use case | Tool use pattern |
+|---|---|
+| Get data, transform, and post result | `Query_Database` → `code_interpreter` (transform) → `HTTP_Post` |
+| Send daily report | `code_interpreter` (aggregate) → `Send_Email` |
+| Extract, Transform, Load (ETL) | `Query_Database` → `code_interpreter` (transform) → `Insert_Records` |
 | API submission | `code_interpreter` (validate) → `HTTP_Request` (submit) → `code_interpreter` (parse response) |
 
-**Limitations of Code Interpreter:**
+## Related content
 
-- **JavaScript only.** No Python, no other runtimes.
-- **No network access.** The sandbox can't make HTTP calls — use an HTTP action tool for that.
-- **No file system.** No reading or writing files; pass inputs through the agent's chat context.
-- **Per-execution timeout.** Long-running snippets are cut off; favour many small calls over one big one.
-- **Memory / CPU bounded.** The sandbox is sized for transformations, not heavy compute.
-
-For anything that needs network, a real filesystem, or non-JS runtimes, use a **[sandbox](/features/sandboxes/)** instead of Code Interpreter.
-
-### Custom tools (action nodes inside the agent loop)
-
-Anything the model should be able to call goes on the canvas as a child action of the agent node — typically a connector action, an HTTP call, or a sub-workflow invocation. Each tool gets:
-
-- A **name** the agent uses to reference it.
-- A **description** the agent reads when deciding which tool to invoke.
-- A **parameter schema** the agent fills with arguments at call time.
-
-![A workflow with an agent and a `get_current_time` tool attached](../../../assets/portal/40-agent-workflow.png)
-
-To add one: click **+** inside the agent boundary on the canvas, pick the action, and fill in its description. The agent's reasoning at runtime is only as good as those descriptions, so write them like docstrings: what the tool does, when to call it, and what each parameter means.
-
-### Practical guidance
-
-- Keep **toolsets small** (3–7 tools usually beats 20). Large toolsets confuse the model.
-- Make tool **names verb-like** (`get_current_time`, `lookup_order`) — easier for the model to reason about.
-- **Descriptions matter more than names.** Spend time on them.
-- For long-running or expensive tools, set a **timeout** so a stuck tool doesn't burn through the agent's iteration budget.
-
-## When to use an agent vs a deterministic workflow
-
-| Use a deterministic workflow when… | Use an agent when… |
-| --- | --- |
-| The steps are known up front | The steps depend on the input |
-| You need exact, repeatable behaviour | You're handling free-form text or messy inputs |
-| Cost and latency matter most | Flexibility and reasoning matter more |
-
-## Authoring tips
-
-- Keep system prompts **specific** — agents follow good instructions, not vague aspirations.
-- Give agents **few, sharp tools** — large toolsets confuse the model.
-- Set **iteration bounds** that match expected difficulty.
-- Use the agent's structured outputs rather than re-parsing its final message.
+- [**Quickstart**](../getting-started/quickstart/)
+- [**Workflows**](workflows)
