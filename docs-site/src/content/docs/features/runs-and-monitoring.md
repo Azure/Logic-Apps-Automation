@@ -1,11 +1,11 @@
 ---
 title: Runs and monitoring
-description: Real-time run history, execution trends, per-action performance, and failure analysis.
+description: Learn about real-time workflow run history, execution trends, per-action performance, and failure analysis.
 sidebar:
   order: 11
 ---
 
-Every workflow run is captured and inspectable from the portal. You see what fired, what each action returned, and how long every step took.
+In Azure Logic Apps Automation, the [portal](https://auto.azure.com) records information about each workflow run. You can review each workflow operation along with the inputs, outputs, and duration.
 
 ## Triggering a run
 
@@ -71,3 +71,6 @@ The application-wide **Analytics** tab rolls runs up into trends: success/failur
 ## Alerts
 
 The runtime emits standard logs and metrics that downstream observability tools (App Insights, Log Analytics, your SIEM) can ingest. Wire alert rules on failure rate or latency thresholds for production workflows.
+
+## Related content
+

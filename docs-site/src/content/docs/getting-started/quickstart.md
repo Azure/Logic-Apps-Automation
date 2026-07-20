@@ -284,8 +284,8 @@ The portal saves your changes in draft mode until you publish.
 
 ## Next steps
 
-- [Designer](/features/visual-designer/)
-- [AI assistant](/features/ai-assistant/)
-- [Connectors](/features/connectors/)
-- [Runs and monitoring](/features/runs-and-monitoring/)
-- [Report a bug](/support/report-a-bug/)
+- [Designer](../features/visual-designer/)
+- [AI assistant](../features/ai-assistant/)
+- [Connectors](../features/connectors/)
+- [Runs and monitoring](../features/runs-and-monitoring/)
+- [Report a bug](../support/report-a-bug/)

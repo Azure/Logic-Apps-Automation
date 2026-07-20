@@ -31,14 +31,14 @@ The following table describes some common managed connector operations:
 | Operation group | Operation | Description |
 |---|---|---|
 | Azure Storage | Various | Manage blob, queue, file, and table storage. |
-| **Office 365 Outlook** | Various | Manage email, calendars, and contacts. |
+| **Office 365 Outlook** | Various | Manage email, calendars, and contacts. |     
 | **SharePoint** | Various | Manage files and folders. |
 | **File System** | Various | Manage files on the host or a mounted file share. |
 | **Service Bus** | Various | Manage queues, subscriptions, and topics. |
 | **Event Hubs** | Various | Manage events. |
 | **Azure Cosmos DB** | Various | Manage documents and stored procedures. |
 | **SQL Server** | Various | Manage queries, rows, and stored procedures in Azure SQL or SQL Server. |
-| **CustomJS** | **Execute JavaScript Code** | Run code snippets inline with your workflow. | 
+| **Inline Code** | **Execute JavaScript code** | Run code snippets inline with your workflow. | 
 
 ## HTTP for everything else
 
@@ -46,5 +46,7 @@ If the service you want to connect doesn't have a prebuilt connector, use the bu
 
 ## Related content
 
-- [**Quickstart**](../getting-started/quickstart/)
-- [**Workflows**](workflows)
+- [Quickstart](../getting-started/quickstart.md#3-create-your-workflow)
+- [Visual designer](designer)
+- [AI assistant](ai-assistant)
+- [Connectors](connectors)

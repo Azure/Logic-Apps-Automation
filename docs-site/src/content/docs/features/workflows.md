@@ -35,7 +35,7 @@ Here are some example actions that can run in a worklow:
 | **Control** | - **Condition** <br>- **Switch** <br>- **For each** <br>- **Until** | Change the flow based on meeting specific criteria. |
 | **Data Operations** | - **Compose** <br>- **Parse JSON** <br>- **Select** <br>- **Filter array** <br>- **Join** | Perform data shaping. |
 | **Variables** | - **Initliaze variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Store and manage variable values. |
-| Inline code | **Execute JavaScript Code** | Run code snippets inline with your workflow. | 
+| **Inline Code** | **Execute JavaScript code** | Run code snippets inline with your workflow. | 
 | Service provider-based | Service Bus, Azure Blob Storage, Azure Queues  | Run service-based operations natively and directly on the platform's runtime. |
 | Managed connectors | Outlook, SharePoint, Salesforce, and so on | Perform a task like **Send an email** or **Upload a file**. Run in global multi-tenant Azure. Usually requires a connection. |
 | [Agents](agents) | AI-driven actions with a system prompt and a toolset. |
@@ -56,7 +56,7 @@ Action parameters also accept *dynamic* output from preceding steps in the same 
 
 ## Javascript code actions
 
-For logic that's hard to represent as an expression, you can add and run Javascript by using the **Execute JavaScript Code** action. For example, tasks such as string parsing, complex data shaping, and multi-step calculation might require you to perform these tasks using code. The JavaScript action runs in a sandbox with the Node.js runtime, accepts JSON inputs from the workflow, and returns a value that subsquent workflow actions can use.
+For logic that's hard to represent as an expression, you can add and run Javascript by using the **Inline Code** action named **Execute JavaScript code**. For example, tasks such as string parsing, complex data shaping, and multi-step calculation might require you to perform these tasks using code. The JavaScript action runs in a sandbox with the Node.js runtime, accepts JSON inputs from the workflow, and returns a value that subsquent workflow actions can use.
 
 > [!NOTE]
 >
@@ -108,7 +108,7 @@ The following table describes common example triggers that run in draft versus p
 | Event-driven, such as **Service Bus**, **Event Hubs**, **Azure Queues** | Varies | No, must publish | Publish, and then push an event to the target resource. |
 | Polls a service or system endpoint | Varies | No, must publish | Publish, and then trigger the event in the target service or system. |
 
-## Code view + IntelliSense
+## Code view and IntelliSense
 
 The platform provides a code view where you can edit the workflow's underlying JSON definition. The designer uses this same JSON definition, which stays synchronized with the code editor. The code editor is the same and is available everywhere that code appears, such as the workflow code view, inline code actions, and expression editor.
 

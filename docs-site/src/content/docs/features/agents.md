@@ -2,7 +2,7 @@
 title: Agents - Azure Logic Apps Automation
 description: Learn about AI agent actions for completing tasks in your workflow.
 sidebar:
-  order: 9
+  order: 8 
 ---
 
 In Azure Logic Apps Automation, an *agent* is a workflow action that performs the following jobs:
@@ -58,11 +58,11 @@ After you add an agent action to your workflow, you need to set up the agent to 
 | Parameters | System message | The description about the agent's role, purpose, behavior, and constraints. Supports the full expression language. <br><br>For more information, see [Best practices](#best-practices). |
 | Parameters | User message | The user prompt or question for the agent to answer. <br><br>This input usually originates from the workflow trigger or a preceding action as body content in expression format. <br><br>For more information, see [Best practices](#best-practices). |
 | Parameters | Input files <br>(Coding agent only) | The files to add and use as input in the isolated [sandbox](sandbox/) environment. | 
-| Parameters | Built-in tools | Code interpreter: The agent's capability to run JavaScript in an isolated [sandbox](sandbox/) environment. |
+| Parameters | Built-in tools | Code interpreter: The agent's capability to run JavaScript in an isolated runtime process. |
 | Parameters | Tools | The actions, MCP servers, or workflows that the agent can call as tools. |
 | Connection | Connections | The configuration with the credentials and endpoint to access the model. You can create a connection or select an existing connection. |
 | Settings | - Timeout <br>- Loop count <br>- Secure inputs <br>- Secure outputs | <br>- The timeout and iteration limit to prevent runaway loops from burning up budget. <br><br>- The settings to hide inputs and outputs in workflow run history. |
-| Agent harness <br>(Coding agent only) | - Execution environment <br>- Sandbox configuration | Harness type: The runtime to use for agent execution. <br><br>- Sandbox: The microsoft virtual machine image that you created as sandbox in the project. If none exist, uses the default base image.  |
+| Agent harness <br>(Coding agent only) | - Execution environment <br>- Sandbox configuration | Harness type: The runtime to use for agent execution. <br><br>- Sandbox: The microsoft virtual machine image that you created as sandbox in the project. If none exist, uses the default base image. |
 | Knowledge | Knowledge | Optional documents, knowledge bases, or indexes that the agent can retrieve and use at runtime to ground requests in a specific domain. <br><br>For more information, see [Knowledge bases](knowledge-bases/). |
 | Code | Code view | The agent's underlying read-only JSON definition. |
 
@@ -110,7 +110,7 @@ You can enable or add the following tools to your native agent:
 
 | Tool type | Description |
 |---|---|
-| Built-in | Code interpreter: The model can run JavaScript in an isolated environment. |
+| Built-in | Code interpreter: The model can write and execute JavaScript at runtime. Code execution stays isolated and happens in-proceses within your app's node worker. This isolation provides strong separation from the host runtime in the following ways: <br><br>- Code execution uses its own limited memory, which prevents consuming all available resources. <br><br>- Code execution can't directly access the host memory, file system, or network. <br><br>- Failures stay isolated, so any crashes in generated code don't affect the runtime process. |
 | Custom | Any built-in or managed connector action, MCP server, or workflow that you can call. |
 
 ### Code interpreter
@@ -127,18 +127,18 @@ With the code interpreter enabled, the agent runs the following high-level steps
 
 1. The model decides they need to call the code interpreter tool by using the `code` argument.
 1. The runtime creates and runs JavaScript in an isolated process.
-1. The output flows as a tool result back into the chat history.
+1. The output flows back to the chat history as a tool result.
 1. The model reads the result.
 1. The model calls another tool or produces the final answer.
 
-For workflow agents, the code interpreter doesn't need a sandbox. For coding agents that need a richer execution environment, create a [sandbox](sandbox/), and then set up the sandbox on the coding agent's **Agent harness** tab. 
+If you're using a coding agent that needs a richer execution environment, create a [sandbox](sandbox/), and then set up that sandbox on the agent's **Agent harness** tab. 
 
 #### Code interpreter limitations
 
 | Limitation | Description |
 |---|---|
 | JavaScript only | No Python or other runtimes. |
-| No network access | No HTTP calls from the execution environment. Instead, add an **HTTP** action as an agent tool. |
+| No network access | No HTTP calls from the runtime. Instead, add an **HTTP** action as an agent tool. |
 | No file system access | No reading or writing files. Instead, pass inputs through the agent's chat context. |
 | Shorter timeout per execution | Long-running snippets are cut off. Instead, make frequent small calls, not a big one. |
 | Limited memory and CPU | Code interpreter is suitable for transformations, not heavy compute. |
@@ -187,5 +187,6 @@ An agent can use both the [code interpreter](#code-interpreter) tool and [custom
 
 ## Related content
 
-- [**Quickstart**](../getting-started/quickstart/)
-- [**Workflows**](workflows)
+- [Quickstart](../getting-started/quickstart/)
+- [Knowledge bases](knowledge-bases/)
+- [Sandboxes](sandboxes/)

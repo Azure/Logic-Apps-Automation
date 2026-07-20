@@ -56,7 +56,7 @@ Azure Logic Apps Automation introduces the following core components and concept
 | [Sandbox](../features/sandboxes/) | An isolated micro virtual machine environment where agents run code and can optionally use cloned repos and skills. |
 | [Runs and monitoring](../features/runs-and-monitoring/) | Get real-time streaming for draft workflow runs, review run history, work with drafts, trigger and action inputs and outputs, and so on. |
 
-## Next
+## Next steps
 
-- [**Set up**](setup/)
-- [**Quickstart**](quickstart/)
+- [Set up](setup/)
+- [Quickstart](quickstart/)
