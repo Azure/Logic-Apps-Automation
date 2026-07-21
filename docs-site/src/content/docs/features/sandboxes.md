@@ -46,43 +46,35 @@ This sandbox provides the fastest and easiest way for you to try running code in
 
 1. In the action information window, select the **Agent harness** tab.
 
-1. Under **Execution environment**, for **Harness type**, select the harness runtime to use for agent execution.
+1. Under **Execution environment**, for **Harness type**, select **GHCP (GitHub Copilot)** as the harness runtime to use for agent execution.
 
-   **GHCP (GitHub Copilot)** is the default harness and currently the only available option.
+   **GHCP (GitHub Copilot)** is the default harness and the only available option at this time.
 
 1. Under **Sandbox configuration**, for **Sandbox**, keep the default base image.
 
    To create and use your own sandbox, see [Prebuilt sandbox](#prebuilt-sandbox).
 
-1. To have the agent process files from upstream actions, in the **Input files** section, drag the relevant output into the `input-files` target.
+1. Optionally, to add files from upstream actions for the agent to process, follow these steps:
 
-### Step 3 — (Optional) Pass input files to the agent
+   1. In the coding agent information window, select the **Parameters** tab.
 
-If you want the agent to process files produced by upstream actions, add them in the **Input Files** section. Drag the relevant output from a previous action into the input-files target.
+   1. In the **Input files** section, select **Add item**.
+   
+   1. For **Name**, enter a name for the item.
 
-:::caution[Private preview limit]
-**Input Files supports `.txt` and `.md` today.** Coverage for additional formats (e.g., `.csv`) will land before Public Preview. For now, if your file is `.csv`, add a `contentType` field in the code view (see the next step).
-:::
+   1. For **Content**, enter an expression that references the output from a preceding workflow action.
 
-### Step 4 — Save and (optionally) tweak the code view
+      For example, the following sample gets the body output from an action named **Get blob**:
 
-Click **Add** to save the harness settings.
+      `@{body('Get_blob')}`
 
-That's it — the next time the workflow runs, the agent will execute inside a fresh sandbox.
+1. When you finish, close the action information window.
 
-If you need to send content with a type that's not included in the user experience like a .csv file, change to the workflow's **Code** view and add the field directly:
-
-```json
-"contentType": "text/csv"
-```
-
-
-
----
+   When the workflow runs again, the agent runs code inside the sandbox.
 
 ## Prebuilt sandbox
 
-When you need your agent needs to work with your code repositories, set up a prebuilt disk image that includes your cloned repositories and installed skills. You can then use this sandbox when you set up your agent harness. Subsequent workflow runs spin up instances from this image to reduce cold starts.
+When you need your agent needs to work with your code repositories, set up a prebuilt disk image that includes your cloned repositories and installed skills. You can then use this sandbox to set up your agent harness. Subsequent workflow runs spin up instances from this image to reduce cold starts.
 
 ### Step 1 - Create the sandbox
 
