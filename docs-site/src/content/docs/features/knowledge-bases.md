@@ -46,7 +46,7 @@ Use that view to debug "the agent answered from stale data" or "the agent didn't
 
 ## Status — private preview
 
-Knowledge bases are in **private preview** today. The tab appears in the portal when the feature is enabled for your project. Some things will tighten before public preview:
+Knowledge bases are in **private preview** today. The tab appears in the portal when the feature is enabled for your environment. Some things will tighten before public preview:
 
 - Document Upload size / format limits.
 - Per-source token-budget controls.

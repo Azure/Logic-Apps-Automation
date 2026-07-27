@@ -10,8 +10,8 @@ Most of what you'll do on the platform comes down to six building blocks. This p
 
 | Concept | When to read it |
 | --- | --- |
-| **[Projects and applications](/features/projects-and-applications/)** | The resource hierarchy — projects, applications, workflows, sandboxes. |
-| **[Permissions](/features/permissions/)** | Project + app scopes, role matrix, owners, and how to share. |
+| **[Environments and applications](/features/projects-and-applications/)** | The resource hierarchy — environments, applications, workflows, sandboxes. |
+| **[Permissions](/features/permissions/)** | Environment + app scopes, role matrix, owners, and how to share. |
 | **[Visual designer](/features/visual-designer/)** | The drag-and-drop canvas and how to author nodes. |
 | **[AI workflow assistant](/features/ai-assistant/)** | Describing workflows in natural language and iterating with the assistant. |
 | **[Workflows](/features/workflows/)** | Triggers, actions, control flow, expressions, JavaScript, IntelliSense, stateful vs stateless. |
