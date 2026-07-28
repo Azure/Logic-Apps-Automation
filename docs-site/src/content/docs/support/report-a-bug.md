@@ -20,7 +20,7 @@ A great bug report has five pieces:
 1. **What you did** — the steps to reproduce, ideally with a workflow name, a run ID, or a screenshot.
 2. **What you expected** — what should have happened.
 3. **What actually happened** — the error message, broken output, or unexpected behaviour.
-4. **Where you hit it** — workspace and project name, browser, approximate time.
+4. **Where you hit it** — workspace and environment name, browser, approximate time.
 5. **Anything else useful** — console errors, network responses, screenshots, or short screen recordings.
 
 ## Security issues

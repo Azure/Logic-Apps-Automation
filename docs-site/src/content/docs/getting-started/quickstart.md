@@ -9,21 +9,21 @@ This page walks the whole loop: open an app, create a workflow, save it as a dra
 
 ## 1. Open an application
 
-From your project's **Applications** tab, click an app. The app shell opens with five sections in the left rail — **Workflows**, **Connections**, **Parameters**, **Analytics**, and **Settings**.
+From your environment's **Applications** tab, click an app. The app shell opens with five sections in the left rail — **Workflows**, **Connections**, **Parameters**, **Analytics**, and **Settings**.
 
 ![Workflows tab inside an application](../../../assets/portal/04-workflows-list.png)
 
 The **Workflows** tab is your default view: a workflow builder at the top and the list of existing workflows below.
 
 :::tip[No applications yet?]
-A fresh project starts empty. Click **Create application** on the project's **Applications** tab, give it a name, and submit.
+A fresh environment starts empty. Click **Create application** on the environment's **Applications** tab, give it a name, and submit.
 
 ![Applications list with Create application + Status column](../../../assets/portal/80-apps-list.png)
 ![Create Application dialog](../../../assets/portal/81-create-app-dialog.png)
 
 App provisioning takes a minute or two — watch the **Status** column flip from *Building* to **Ready** before opening it.
 
-Want collaborators? Open the application's **Settings → User permissions** tab and invite them, or invite them at the project level if they need access to every app. See [Permissions](/features/permissions/).
+Want collaborators? Open the application's **Settings → User permissions** tab and invite them, or invite them at the environment level if they need access to every app. See [Permissions](/features/permissions/).
 :::
 
 ## 2. Pick a path: assistant or scratch

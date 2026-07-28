@@ -15,9 +15,9 @@ A **sandbox** is an isolated compute environment (a microVM, powered by Azure De
 - Operate on cloned source-control repositories.
 - Invoke skills bundled with those repos.
 
-Sandboxes live at the **project** level — multiple workflows across multiple apps can target the same sandbox, and the sandbox setup (auth, cloned repos, skills) is configured once.
+Sandboxes live at the **environment** level — multiple workflows across multiple apps can target the same sandbox, and the sandbox setup (auth, cloned repos, skills) is configured once.
 
-![Sandboxes list at the project level](../../../assets/portal/60-sandbox-list.png)
+![Sandboxes list at the environment level](../../../assets/portal/60-sandbox-list.png)
 
 ## Two ways to use a sandbox
 
@@ -34,8 +34,8 @@ You can run agents in a sandbox **without any pre-configuration** (a clean image
 
 For either path:
 
-- A [project](/features/projects-and-applications/#project) you have access to.
-- An [application](/features/projects-and-applications/#application) inside that project.
+- An [environment](/features/projects-and-applications/#environment) you have access to.
+- An [application](/features/projects-and-applications/#application) inside that environment.
 - A workflow inside the application — see [Quickstart](/getting-started/quickstart/) if you need to create one.
 
 ## Option 1 — Just-in-time sandbox
@@ -89,14 +89,14 @@ Use this path when the agent needs your codebase available. You build a **pre-ba
 | Auth | ADO | GitHub |
 | --- | --- | --- |
 | **PAT** | ✓ | ✓ |
-| **Managed Identity** | ✓ (give the project's MI read access to the repo) | — |
+| **Managed Identity** | ✓ (give the environment's MI read access to the repo) | — |
 | **OAuth** | — | ✓ |
 
 ![Auth type options for a sandbox repository](../../../assets/portal/63-sandbox-auth-options.png)
 
 ### Step 1 — Create the sandbox configuration
 
-In your project, open the **Sandboxes** tab and click **New sandbox**.
+In your environment, open the **Sandboxes** tab and click **New sandbox**.
 
 ![New sandbox configuration dialog](../../../assets/portal/61-sandbox-new.png)
 
