@@ -12,7 +12,7 @@ In Azure Logic Apps Automation, a *knowledge base* is an external context source
 
 > [!NOTE]
 >
-> This capability is in private preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 >
 > The following items are under refinement:
 >

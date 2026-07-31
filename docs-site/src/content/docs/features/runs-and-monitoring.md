@@ -70,7 +70,7 @@ The application-wide **Analytics** tab rolls runs up into trends: success/failur
 
 ## Alerts
 
-The runtime emits standard logs and metrics that downstream observability tools (App Insights, Log Analytics, your SIEM) can ingest. Wire alert rules on failure rate or latency thresholds for production workflows.
+The platform runtime emits standard logs and metrics that downstream observability tools (App Insights, Log Analytics, your SIEM) can ingest. Wire alert rules on failure rate or latency thresholds for production workflows.
 
 ## Related content
 
