@@ -54,7 +54,7 @@ This sandbox provides the fastest and easiest way for you to try running code in
 
    To create and use your own sandbox, see [Prebuilt sandbox](#prebuilt-sandbox).
 
-1. Optionally, to add files from upstream actions for the agent to process, follow these steps:
+1. To optionally add files from upstream actions for the agent to process, follow these steps:
 
    1. In the coding agent information window, select the **Parameters** tab.
 
@@ -62,9 +62,9 @@ This sandbox provides the fastest and easiest way for you to try running code in
    
    1. For **Name**, enter a name for the item.
 
-   1. For **Content**, enter an expression that references the output from a preceding workflow action.
+   1. For **Content**, enter an expression that gets the body output from an upstream action in your workflow.
 
-      For example, the following sample gets the body output from an action named **Get blob**:
+      For example, the following expression gets the output from an action named **Get blob**:
 
       `@{body('Get_blob')}`
 
@@ -120,18 +120,24 @@ When you need your agent needs to work with your code repositories, set up a pre
 
 1. In the action information window, select the **Agent harness** tab.
 
-1. Under **Execution environment**, for **Harness type**, select the harness runtime to use for agent execution and to match the sandbox.
+1. Under **Execution environment**, for **Harness type**, select **GHCP (GitHub Copilot)** as the harness runtime to use for agent execution.
 
-1. Under **Sandbox configuration**, select the sandbox that you created in your project.
+   **GHCP (GitHub Copilot)** is the default harness and the only available option at this time.
 
-<br><br>- Sandbox: The microsoft virtual machine image that you created as sandbox in the project. If none exist, uses the default base image. |
+1. Under **Sandbox configuration**, select the sandbox you created in your project.
 
-3. (Optional) Add **skills paths** by clicking **Repository skills** and pointing at the directories inside the cloned repo where your skills live.
+   After you select your sandbox, the **Repository skills** section appears. If your repository has skills for your agent to use, specify those skill paths in this section.
 
-Click **Add** to save, and run the workflow.
+1. To optionally point your agent at skills in your repository, provide the following information:
 
+   | Property | Description |
+   |---|---|
+   | **Repository** | The repository name. |
+   | **Skills folder path** | The path to the skills folder. |
 
----
+1. When you finish, close the action information window.
+
+   When the workflow runs again, the agent runs code inside the sandbox.
 
 ## Troubleshoot problems
 
