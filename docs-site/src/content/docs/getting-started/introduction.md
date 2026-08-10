@@ -1,12 +1,14 @@
 ---
 title: Introduction - Azure Logic Apps Automation
-description: This service gives developers the power to automate unpredictable processes and create runtime-adaptable workflows by using the designer, AI workflow assistant, and connectors library.
+description: This service gives you the power to automate unpredictable processes and run dynamic workflows by using a designer, AI workflow assistant, and a connectors library.
 sidebar:
   order: 1
   label: Introduction
 ---
 
-Automate unpredictable processes and create AI-driven workflows that adapt at runtime with Azure Logic Apps Automation. Start by describing the workflow behavior you want in the AI assistant, or build your workflow one component at a time in the designer. Connect the services, systems, apps, and data that you already use by selecting from 1,400+ prebuilt and ready-to-use connectors.
+# What is Azure Logic Apps Automation?
+
+When you need to automate unpredictable processes and create AI-driven workflows that adapt at runtime, use Azure Logic Apps Automation. Start by describing the workflow behavior you want in the AI assistant, or build your workflow one component at a time in the designer. Connect the services, systems, apps, and data that you already use by choosing from 1,400+ prebuilt and ready-to-use connectors.
 
 You can find all these capabilities by signing in to the [Azure Logic Apps Automation portal](https://auto.azure.com). You don't need to locally install or run any other tools.
 
@@ -52,8 +54,8 @@ Azure Logic Apps Automation introduces the following core components and concept
 | [Designer](../features/visual-designer/) | The canvas where you manually add your workflow's trigger and actions. |
 | [Connectors](../features/connectors/) | The catalog that provides integrations with other services, systems, apps, and data. |
 | [Agents](../features/agents/) | Add native or Foundry agents, agent loops, set up agent parameters, add agent tools such as code interpreter, and monitor the chat log. |
-| [Knowledge](../features/knowledge-bases/) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
-| [Sandbox](../features/sandboxes/) | An isolated micro virtual machine environment where agents run code and can optionally use cloned repos and skills. |
+| [Knowledge](../features/knowledge-bases/) (preview) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. |
+| [Sandbox](../features/sandboxes/) (preview) | An isolated micro virtual machine environment where agents run code and can optionally use cloned repos and skills. |
 | [Runs and monitoring](../features/runs-and-monitoring/) | Get real-time streaming for draft workflow runs, review run history, work with drafts, trigger and action inputs and outputs, and so on. |
 
 ## Next steps

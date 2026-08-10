@@ -19,7 +19,7 @@ You can create your own sandboxes inside your project where workflows across app
 
 > [!NOTE]
 >
-> This capability is in private preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).ss
 
 ## Sandbox types
 
