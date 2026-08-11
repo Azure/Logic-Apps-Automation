@@ -11,7 +11,7 @@ To support access and sharing resources with others, Azure Logic Apps Automation
 
 | Aspect | Description |
 |---|---|
-| Resource owner | Each resource has an owner property independent from roles. The resource creator automatically becomes the owner. |
+| Resource owner | Each resource has a single owner and has an owner property independent from roles. The resource creator automatically becomes the owner. |
 | Resource scopes | The following scopes work independently from each other: <br><br>- Project (organization) <br>- App (content) <br>- Sandbox (shared resources) <br><br>For example, you can have a role on a project, app, sandbox, or all these. |
 | Roles | The following roles control the tasks that they can perform on resources: <br><br>- **Contributor** (administrator) <br>- **Author** (creator) <br>- **Reader** (read only) |
 | App visibility and privacy | Apps are private and invisible to other project members unless you explicitly grant access. |

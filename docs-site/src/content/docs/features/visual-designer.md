@@ -1,29 +1,33 @@
 ---
-title: Visual designer
-description: A drag-and-drop canvas for designing workflows with conditions, loops, parallel branches, and nested logic.
+title: Designer
+description: Learn about the visual drag-and-drop canvas where you can design workflows with actions, control flow with conditions, loops, parallel branches, and set up nested logic.
 sidebar:
   order: 4
 ---
 
-The **visual designer** is where workflows take shape. It's a drag-and-drop canvas built for developers — every node has a parameters panel, a code view, and an outputs view, so you can move fluidly between the visual representation and the underlying JSON.
+In Azure Logic Apps Automation, the *designer* provides a visual drag-and-drop canvas where developers can shape workflows. Every workflow component, such as the trigger, each action, agent, and MCP server, has a parameters pane for inputs and settings, code view, and outputs view so you can easily move between the visual representation and the underlying JSON.
 
-![A workflow on the canvas](../../../assets/portal/20-designer-canvas.png)
+:::image type="content" source="media/visual-designer/designer.png" alt-text="Screenshot that shows the designer with an example workflow." lightbox="media/visual-designer/designer.png":::
 
-## What you can build on the canvas
+## What you can build on the designer
 
-- **Triggers** — start a workflow from an HTTP call, a schedule, a queue message, an event, or another workflow.
-- **Actions** — call connectors, run inline JavaScript, or invoke sub-workflows.
-- **Control flow** — `if` / `else`, `switch`, `for-each`, `do-until`, and parallel branches.
-- **Nested logic** — group actions into scopes; nest control-flow constructs as deeply as you need.
-- **Variables and expressions** — capture intermediate values and reference them with Logic-Apps-style expressions.
+The following table describes only some of the components that you can use on the designer to build your workflow:
+
+| Component | Description |
+|---|---|
+| Trigger | Starts the workflow from an HTTP call, a schedule recurrence, a queue message, an event, or another workflow. |
+| Action | Run one or more steps that perform tasks on other services, systems, apps, and data, execute inline JavaScript, or call other workflows. |
+| Control flow | Structure your workflow with `if-else`, `switch`, `for-each`, `do-until`, and parallel branch constructs. |
+| Nested logic | Group actions into scopes. Nest control flow constructs as deeply as you need. |
+| Variables and expressions | Capture intermediate values and reference them by using expressions. |
 
 ## Conditional branches
 
-The designer renders control-flow constructs visually. A workflow with conditions and parallel branches looks like this:
+The designer visually renders control flow constructs. For example, a workflow with a condition and parallel branches looks like the the following sample:
 
-![Workflow with conditional branches](../../../assets/portal/41-condition-branches.png)
+:::image type="content" source="media/visual-designer/condition-branches.png" alt-text="Screenshot that shows the designer and example workflow with condtional and parallel branches." lightbox="media/visual-designer/condition-branches.png":::
 
-## Editing nodes
+## Edit nodes
 
 Click any node to open its **Parameters / Code / About** panel. Or open the entire workflow's JSON side-by-side with the canvas:
 
@@ -31,6 +35,12 @@ Click any node to open its **Parameters / Code / About** panel. Or open the enti
 
 Changes you make in one view appear instantly in the other.
 
-## Saving and running
+## Save and run workflows
 
-Changes are kept in **draft mode** until you publish. Drafts let you iterate without affecting the running workflow. When you publish, the runtime picks up the new definition and the next trigger fires the latest version. Use **Test your draft** to run the draft with a test payload before publishing.
+Changes are kept in *draft mode* until you publish. Drafts let you iterate without affecting the running workflow. When you publish, the runtime picks up the new definition and the next trigger fires the latest version. Use **Test your draft** to run the draft with a test payload before publishing.
+
+## Related content
+
+- [AI assistant](ai-assistant.md)
+- [Connectors](../features/connectors/)
+- [Report a bug](../support/report-a-bug/)

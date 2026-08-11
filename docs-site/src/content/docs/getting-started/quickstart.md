@@ -1,28 +1,56 @@
 ---
 title: Quickstart - Azure Logic Apps Automation
-description: Create apps so you can build and run workflows. Review their execution history.
+description: Create AI-driven automations by building apps and workflows. Review workflow execution history.
 sidebar:
   order: 3
   label: Quickstart
 ---
 
-This guide shows how to create or open an app in an automation project, build and run a sample workflow, and review what happened. You can use the workflow as a template and swap in what you actually want to automate.
+# Create apps and workflows
+
+In an automation project, an [*app*](introduction.md#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
+
+To keep each group of related automations self-contained in your project, create one app per logical workload or related workflows, for example, `order-processing` or `daily-reports`.
+
+In an app, each [*workflow*](introduction.md#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](introduction.md#key-components-and-concepts), followed by the steps to run, or [*actions*](introduction.md#key-components-and-concepts).
+
+When you build a business process automation, you want to define the business logic only once, and then run the automation reliably and autonomously with human oversight when necessary. For example, some automation tasks might include routing notifications, running operations in various services or systems, or monitoring data feeds. 
+
+This quickstart shows how to complete the following tasks:
+
+- Create or open an app in an existing project.
+- Build and run a sample workflow.
+- Review what happened.
+
+You can later use the workflow as a template and swap in what you actually want to automate.
 
 ## Requirements
 
-To view and create apps and workflows in a project, you need access to that project. If you don't have access, contact the project owner so they can add you as a project member. 
+- A Microsoft work or school account in the same Microsoft Entra tenant as the project creator-owner.
+
+  Your account must exist in the same tenant so the project creator-owner can add you to the project. You don't need an Azure subscription to create apps and workflows in an automation project.
+
+- Access to the [Azure Logic Apps Automation portal](https://auto.azure.com).
+
+- **Contributor** or **Author** role on the project resource to create apps and workflows.
+
+  > [!NOTE]
+  >
+  > The project **Reader** role doesn't have enough permissions to create apps.
+
+  If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
 
 ## 1. Open your project
 
-1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com).
+1. Sign to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
-   The portal opens and shows every project where you have access. If you don't see the projects you expect, contact the project owner to check whether you have access.
+   The portal opens and shows every project where you have access. If you don't see the expected projects, contact the project creator-owner to check whether you have the correct permissions.
 
    :::image type="content" source="media/quickstart/projects-list.png" alt-text="Screenshot shows the portal and projects list." lightbox="media/quickstart/projects-list.png":::
 
 1. On the **Projects** tab, select your project.
 
-   The portal opens the project and shows the **Apps** list. The following example shows an empty project:
+   The portal opens the project and shows the **Apps** page. The following example shows an empty project:
 
    :::image type="content" source="media/quickstart/apps-list.png" alt-text="Screenshot shows an empty project without apps." lightbox="media/quickstart/apps-list.png":::
 
@@ -36,13 +64,13 @@ If your project doesn't include an app to store and organize workflows, follow t
 
 1. In the project, on the **Apps** page, select **Create app**.
 
-1. In the **Create application** box, enter a name for your app, and select **Create**.
+1. In the **Create application** box, for **Application name**, enter a name for your app, and select **Create**.
 
    :::image type="content" source="media/quickstart/create-application-box.png" alt-text="Screenshot shows the Create application box with example app name." lightbox="media/quickstart/create-application-box.png":::
 
    The portal might take a couple minutes to create your app.
 
-1. To check when the app is ready for you to open, review the **Status** column.
+1. To check that the app is ready for you to open and continue, review the **Status** column.
 
 1. After app creation completes, select your app.
 
@@ -50,15 +78,63 @@ If your project doesn't include an app to store and organize workflows, follow t
 
    :::image type="content" source="media/quickstart/workflows-list.png" alt-text="Screenshot shows an empty app without workflows." lightbox="media/quickstart/workflows-list.png":::
 
-   As the app creator, you automatically become the app owner and have the [**Contributor** role](../features/permissions.md#app-roles) on the app resource. At this point, only you can view the app and its contents. By design, the app is invisible to others except for the project owner and contributors who can view the app metadata.
+   At this point, only you can view the app and its contents. By design, the app is invisible to others except for the project owner and contributors who can view the app metadata.
 
-1. To add people so they can build workflows in your app, follow these steps:
+1. Before others can create workflows in your app, [add them as app members](#add-app-members).
 
-   1. On the app sidebar, select **Settings**.
+## App ownership and privacy
 
-   1. On the **User permissions** tab, select **Add user**. Browse and select the person, or enter their email address.
-   
-      If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](../features/permissions).
+As the app creator, you automatically:
+
+- Become the app owner and appear in the **Owner** app property, which is a property, not a permission level. You can't clear or remove this property value.
+- Have [**Contributor** role permissions](../features/permissions.md#app-roles) on the app resource.
+
+App privacy works as follows:
+
+- Apps are always automatically private. Only app creator-owners can view and access their app's contents, such as workflows, connections, settings, and so on.
+
+- Project owners and contributors can view app metadata for governance. However, they can't view workflow content, connections, or workflow run history.
+
+- Other project members can't view the app unless the app creator-owner adds them to the app and gives them the appropriate permissions.
+
+  Apps often contain automations that connect to personal accounts. The default privacy model keeps sensitive data obscured and invisible to others unless the app creator-owner chooses otherwise.
+
+For more information, see [Permissions](permissions.md).
+
+## Add app members
+
+To add team members to your app so they can build workflows, follow these steps:
+
+> [!NOTE]
+>
+> If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](../features/permissions).
+
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), on the **Projects** page, select the project that contains your app.
+
+1. On the **Apps** page, select the app. On the app sidebar, select **Settings**.
+
+1. On the **Settings** page, select the **User permissions** tab, and complete the following steps:
+
+   1. In the **Users** section, select **Add user**.
+
+   1. On the **Add role assignment** pane, in the **Select user** box, browse for the person you want. Or, enter their email address.
+
+      The **Select user** list shows only people in the same Microsoft Entra tenant as you.
+
+   1. From the results, select the person you want.
+
+1. After the **Role** section appears, select the role the person needs, based on the principle of least privilege, and then select **Add**.
+
+   The following table describes the available roles at the app level, what they can do, and what they can't do:
+
+   | Role | Can | Can't |
+   |------|-----|-------|
+   | **Reader** (view only) | - View workflows, connections, and parameters. <br>- View workflow run history. | - Create, edit, or delete anything. <br>- Trigger or cancel workflow runs. |
+   | **Contributor** | - View and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Trigger, cancel, and resubmit workflow runs. <br>- Manage app permissions. | Delete the app. (owner only) |
+
+   > [!NOTE]
+   >
+   > By design, the **Author** role is unavailable at the app level.
 
 ## 3. Create your workflow
 
@@ -281,6 +357,14 @@ The portal saves your changes in draft mode until you publish.
 |---------|-----|
 | **Sign in loop or single sign-on (SSO) error** | Clear your cookies for the following URLs, and sign in again: <br><br>- `https://auto.azure.com` <br>- `https://login.microsoftonline.com` |
 | **Portal appears empty** | Perform a hard refresh (Keyboard: `Cmd/Ctrl + Shift + R`). If the problem persists, [report a bug](/support/report-a-bug/). |
+
+| Problem | Cause | Resolution |
+|---------|-------|------------|
+| "I can't create an app." | You have the project **Reader** role. | Ask a project **Contributor** to upgrade you to project **Author** or **Contributor**. |
+| "I can't view any apps in the project." | By default, apps are private and invisible to others except the app creator-owner. | Ask the app owner to add you to the app, or make you a project **Contributor**, if you only need to view the app metadata for governance. |
+| "I can't manage permissions on apps." | You need the app **Contributor** role. | Ask the app owner or a **Contributor** to make you an app **Contributor**. |
+| "An app lost its owner." | When an app owner leaves your Microsoft Entra tenant, you get the following results: <br><br>- Existing members keep their access. <br><br>- Only the **Project Owner** can delete the app. <br><br>- The app still appears in the project's governance view. |
+| "I can't delete apps." | Only the app owner can delete their app. | Contact the app owner. If the owner is unavailable, and the app is orphaned, the project owner can delete orphaned apps. |
 
 ## Next steps
 
