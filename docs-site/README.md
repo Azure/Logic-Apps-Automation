@@ -1,10 +1,6 @@
-# Logic Apps Automation Docs Site — Maintenance Guide
+# Azure Logic Apps Automation Docs Site — Maintenance Guide
 
-Documentation for the workflow automation platform. This README is the entry
-point for **anyone touching the docs site** — humans and AI agents alike. It
-covers the project layout, every common operation (add a page, cut a release
-note, replace a screenshot, embed a video, deploy), and the conventions that
-keep the site consistent.
+Documentation for the workflow automation platform. This README is the entry point for **anyone touching the docs site** — humans and AI agents alike. It covers the project layout, every common operation (add a page, cut a release note, replace a screenshot, embed a video, deploy), and the conventions that keep the site consistent.
 
 - 🌐 **Live (canary):** https://lemon-mud-0e10bdd1e.7.azurestaticapps.net
 - ⚙️ **Built with:** [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) + [Plyr](https://plyr.io) (videos)
@@ -50,11 +46,7 @@ docs-site/
 │   └── videos/                    ← self-hosted MP4 clips (see ./public/videos/README.md)
 └── src/
     ├── assets/
-    │   ├── logo.svg               ← logo on the landing page hero
-    │   └── portal/                ← portal screenshots (numbered, kebab-case)
-    │       ├── 01-login.png
-    │       ├── 02-projects.png
-    │       └── …
+    │   └── logo.svg               ← logo on the landing page hero
     ├── components/
     │   └── Video.astro            ← <Video> embed (Plyr-backed, MP4 / YouTube / Vimeo)
     ├── content.config.ts          ← Starlight content collection schema
@@ -62,6 +54,9 @@ docs-site/
         └── docs/
             ├── index.mdx          ← landing page
             ├── getting-started/
+            │   ├── media/
+            |   |   ├── quickstart/           ← portal screenshots for this doc (lowercase)
+            |   |   └── setup/                ← portal screenshots for this doc (lowercase)
             │   ├── introduction.md
             │   ├── setup.md
             │   └── quickstart.md
@@ -69,6 +64,9 @@ docs-site/
             │   ├── index.mdx
             │   └── platform-overview.mdx
             ├── features/
+            │   ├── media/
+            |   |   ├── visual-designer/      ← portal screenshots for this doc (lowercase)
+            |   |   └── runs-and-monitoring/  ← portal screenshots for this doc (lowercase)
             │   ├── projects-and-applications.md
             │   ├── permissions.md
             │   ├── visual-designer.md
@@ -87,9 +85,7 @@ docs-site/
                 └── feature-request.md
 ```
 
-**Sidebar** is auto-generated from these folders (`autogenerate` in
-`astro.config.mjs`). Adding a page = drop a file in the right folder. No
-config edit needed.
+**Sidebar** is auto-generated from these folders (`autogenerate` in `astro.config.mjs`). Adding a page = drop a file in the right folder. No config edit needed.
 
 ---
 
@@ -97,8 +93,7 @@ config edit needed.
 
 ### Add a new page
 
-Pick the section, copy an existing page nearby, rename, and edit the
-frontmatter. The page appears in the sidebar automatically.
+Pick the section, copy an existing page nearby, rename, and edit the frontmatter. The page appears in the sidebar automatically.
 
 ```bash
 # Example: add a "triggers" reference page
@@ -150,9 +145,7 @@ than bloating the changelog.
 
 ### Add or replace a portal screenshot
 
-Screenshots live under `src/assets/portal/` and use the naming convention
-`NN-description.png` (where `NN` matches the capture order — see existing
-numbering for grouping).
+Screenshots must be PNG files and live in the corresponding `<doc-filename>` folder, which in turn, exists in the parent `<section-name>/media` folder. Screenshot file names use the following naming convention: `<short-description>.png`.
 
 To capture against your local portal (running at `http://localhost:4200`):
 
@@ -173,26 +166,23 @@ node -e "
       await signIn.click(); await page.waitForTimeout(2500);
     }
     // navigate to the page you want, then:
-    await page.screenshot({ path: 'src/assets/portal/NN-name.png' });
+    await page.screenshot({ path: 'src/content/docs/<section-name>/media/<screenshot-name>.png' });
     await browser.close();
   })();
 "
 ```
 
-Reference the screenshot from a `.md`:
+Astro automatically optimizes images at build time (PNG → WebP, responsive `srcset`), so don't precompress.
+
+To reference the screenshot from a `.md` file, use the following link:
 
 ```markdown
-![What the screenshot shows](../../../assets/portal/NN-name.png)
+:::image type="content" source="../../../content/docs/`<section-name>`/media/`<screenshot-name>`.png" alt-text="Screenshot that shows `<screenshot-description>`." lightbox="../../../assets/content/docs/`<section-name>`/media/`<screenshot-name>`.png":::
 ```
-
-Astro auto-optimises images at build (PNG → WebP, responsive `srcset`), so
-don't pre-compress.
 
 ### Add a video
 
-Videos use the **`<Video>` Astro component** at
-[`src/components/Video.astro`](./src/components/Video.astro), which wraps the
-[Plyr](https://plyr.io) player. One component, three source kinds — Plyr's
+Videos use the **`<Video>` Astro component** at [`src/components/Video.astro`](./src/components/Video.astro), which wraps the [Plyr](https://plyr.io) player. One component, three source kinds — Plyr's
 JS + CSS lazy-load only on pages that actually contain a video.
 
 #### What `<Video>` gives you

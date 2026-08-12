@@ -27,17 +27,21 @@ The designer visually renders control flow constructs. For example, a workflow w
 
 :::image type="content" source="media/visual-designer/condition-branches.png" alt-text="Screenshot that shows the designer and example workflow with condtional and parallel branches." lightbox="media/visual-designer/condition-branches.png":::
 
-## Edit nodes
+## View and edit component information
 
-Click any node to open its **Parameters / Code / About** panel. Or open the entire workflow's JSON side-by-side with the canvas:
+To view a component's parameters, code, or other information, on the designer, select that component.
 
-![Code view side-by-side with the canvas](../../../assets/portal/21-code-view.png)
+## View and edit underlying JSON
 
-Changes you make in one view appear instantly in the other.
+To view the entire workflow's underlying JSON alongside the designer, on the bottom toolbar, select **Code**. Changes that you make in one view instantly appear in the other.
+
+:::image type="content" source="media/visual-designer/code-view.png" alt-text="Screenshot shows the designer alongside with the entire workflow's underlying JSON code view." lightbox="media/visual-designer/code-view.png":::
 
 ## Save and run workflows
 
-Changes are kept in *draft mode* until you publish. Drafts let you iterate without affecting the running workflow. When you publish, the runtime picks up the new definition and the next trigger fires the latest version. Use **Test your draft** to run the draft with a test payload before publishing.
+All the edits you make to a workflow stay in a *draft* version until you publish. Drafts let you iterate without affecting the workflow running in production. When you publish, the runtime picks up the new workflow definition, the draft becomes the live version, and the next trigger fires the latest version.
+
+To run a draft workflow with a test payload before you publish, see [Test for missing setup details](../getting-started/quickstart.md#5-test-for-missing-setup-details).
 
 ## Related content
 
