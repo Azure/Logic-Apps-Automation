@@ -19,7 +19,7 @@ You can create your own sandboxes inside your project where workflows across app
 
 > [!NOTE]
 >
-> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).ss
+> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 
 ## Sandbox types
 
@@ -34,7 +34,7 @@ You can run agents in the following kinds of sandboxes:
 
 - Access to your automation [project](projects-and-applications/#project).
 - An [app](projects-and-applications/#apps) in your project.
-- A [workflow](workflows) in your app and a [coding agent](agents.md#) in the workflow.
+- A [workflow](workflows) in your app and a [coding agent](agents#native-agent-concepts-and-components) in the workflow.
 
 ## Just-in-time sandbox
 
@@ -74,7 +74,7 @@ This sandbox provides the fastest and easiest way for you to try running code in
 
 ## Prebuilt sandbox
 
-When you need your agent needs to work with your code repositories, set up a prebuilt disk image that includes your cloned repositories and installed skills. You can then use this sandbox to set up your agent harness. Subsequent workflow runs spin up instances from this image to reduce cold starts.
+When your agent needs to work with your code repositories, set up a prebuilt disk image that includes your cloned repositories and installed skills. You can then use this sandbox to set up your agent harness. Subsequent workflow runs spin up instances from this image to reduce cold starts.
 
 ### Step 1 - Create the sandbox
 
@@ -144,9 +144,9 @@ When you need your agent needs to work with your code repositories, set up a pre
 | Problem | Try |
 |---|---|
 | The agent action doesn't show the agent harness tab. | Make sure you selected a coding agent, not a different action. |
-| Sandbox state is stuck at 'Building...' | Refresh the sandbox list. If the status for a small repository still says 'Building...' for more than 10 minutes, check the repo URL and credentials. |
-| Sandbox state shows 'Failed' | Open the error message details for more information. Common causes: Bad URL, expired PAT, managed identity needs read access. |
-| Agent doesn't use your added input files. | Confirm that the file  `.txt` or `.md` in private preview, and that the `contentType` is set in the code view if needed. |
+| Sandbox state is stuck at `Building...` | Refresh the sandbox list. If the status for a small repository still says `Building...` for more than 10 minutes, check the repo URL and credentials. |
+| Sandbox state shows `Failed` | Open the error message details for more information. Common causes: bad URL, expired PAT, managed identity needs read access. |
+| Agent doesn't use your added input files. | Confirm that the file uses `.txt` or `.md` in private preview, and that the `contentType` is set in the code view if needed. |
 | **GitHub OAuth dialog never finishes** | Open the dialog again, confirm you allowed access at the account level, and that the repo belongs to that account. |
 
 ## Related content

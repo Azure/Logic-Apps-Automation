@@ -41,10 +41,10 @@ To view the entire workflow's underlying JSON alongside the designer, on the bot
 
 All the edits you make to a workflow stay in a *draft* version until you publish. Drafts let you iterate without affecting the workflow running in production. When you publish, the runtime picks up the new workflow definition, the draft becomes the live version, and the next trigger fires the latest version.
 
-To run a draft workflow with a test payload before you publish, see [Test for missing setup details](../getting-started/quickstart.md#5-test-for-missing-setup-details).
+To run a draft workflow with a test payload before you publish, see [Test for missing setup details](../getting-started/quickstart#5-test-for-missing-setup-details).
 
 ## Related content
 
-- [AI assistant](ai-assistant.md)
-- [Connectors](../features/connectors/)
+- [AI assistant](ai-assistant)
+- [Connectors](connectors)
 - [Report a bug](../support/report-a-bug/)

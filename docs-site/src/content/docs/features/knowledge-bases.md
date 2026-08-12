@@ -29,9 +29,9 @@ You can attach multiple context sources to an agent. The runtime retrieves infor
 | Source | Description | When to choose |
 |---|---|---|
 | File upload | Documents that you directly upload to an agent or projects | You want the platform to chunk and embed the content. |
-| [Azure AI Search](/azure/search/search-what-is-azure-search) | Search indexes that you manage in Azure AI Search | You already haves search indexes or want granular control over chunking and scoring. |
-| [Microsoft Foundry IQ](/azure/foundry/agents/concepts/what-is-foundry-iq) | Knowledge indexes in Microsoft Foundry | You already work in the Foundry ecosystem and want managed retrieval. |
-| [Microsoft 365 Copilot Work IQ](/microsoft-365/copilot/extensibility/work-iq/) | Work IQ knowledge connector | Tenant-scoped knowledge surfaced through Microsoft 365 / Work IQ |
+| [Azure AI Search](https://learn.microsoft.com/azure/search/search-what-is-azure-search) | Search indexes that you manage in Azure AI Search | You already haves search indexes or want granular control over chunking and scoring. |
+| [Microsoft Foundry IQ](https://learn.microsoft.com/azure/foundry/agents/concepts/what-is-foundry-iq) | Knowledge indexes in Microsoft Foundry | You already work in the Foundry ecosystem and want managed retrieval. |
+| [Microsoft 365 Copilot Work IQ](https://learn.microsoft.com/microsoft-365/copilot/extensibility/work-iq/) | Work IQ knowledge connector | Tenant-scoped knowledge surfaced through Microsoft 365 / Work IQ |
 
 ## Create a knowledge base
 

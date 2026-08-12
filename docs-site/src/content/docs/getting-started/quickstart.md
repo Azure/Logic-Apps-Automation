@@ -8,11 +8,11 @@ sidebar:
 
 # Create apps and workflows
 
-In an automation project, an [*app*](introduction.md#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
+In an automation project, an [*app*](introduction#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
 
 To keep each group of related automations self-contained in your project, create one app per logical workload or related workflows, for example, `order-processing` or `daily-reports`.
 
-In an app, each [*workflow*](introduction.md#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](introduction.md#key-components-and-concepts), followed by the steps to run, or [*actions*](introduction.md#key-components-and-concepts).
+In an app, each [*workflow*](introduction#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](introduction#key-components-and-concepts), followed by the steps to run, or [*actions*](introduction#key-components-and-concepts).
 
 When you build a business process automation, you want to define the business logic only once, and then run the automation reliably and autonomously with human oversight when necessary. For example, some automation tasks might include routing notifications, running operations in various services or systems, or monitoring data feeds. 
 
@@ -87,7 +87,7 @@ If your project doesn't include an app to store and organize workflows, follow t
 As the app creator, you automatically:
 
 - Become the app owner and appear in the **Owner** app property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](../features/permissions.md#app-roles) on the app resource.
+- Have [**Contributor** role permissions](../features/permissions#app-roles) on the app resource.
 
 App privacy works as follows:
 
@@ -99,7 +99,7 @@ App privacy works as follows:
 
   Apps often contain automations that connect to personal accounts. The default privacy model keeps sensitive data obscured and invisible to others unless the app creator-owner chooses otherwise.
 
-For more information, see [Permissions](permissions.md).
+For more information, see [Permissions](permissions).
 
 ## Add app members
 

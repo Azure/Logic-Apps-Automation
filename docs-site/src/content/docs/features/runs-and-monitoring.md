@@ -13,7 +13,7 @@ All the edits you make to a workflow stay in a *draft* version until you publish
 
 ## Trigger a run before publishing
 
-Before you publish, you can test draft workflows that start with the HTTP trigger or any manual-style trigger by providing a sample payload. For more information, see [Test for missing setup details](../getting-started/quickstart.md#5-test-for-missing-setup-details).
+Before you publish, you can test draft workflows that start with the HTTP trigger or any manual-style trigger by providing a sample payload. For more information, see [Test for missing setup details](../getting-started/quickstart#5-test-for-missing-setup-details).
 
 > [!NOTE]
 >
@@ -67,10 +67,10 @@ At the app level, on the sidebar, the **Analytics** page aggregates and shows wo
 
 :::image type="content" source="media/runs-and-monitoring/analytics.png" alt-text="{alt-text}" lightbox="media/runs-and-monitoring/analytics.png":::
 
-The platform runtime emits standard logs and metrics that downstream observability tools, such as Azure Application Insights, Log Analytics, or your own security information and event management (SEIM) system can ingest. Set up rules and send alerts based on failure rates or latency thresholds for your production workflows.
+The platform runtime emits standard logs and metrics that downstream observability tools, such as Azure Application Insights, Log Analytics, or your own security information and event management (SIEM) system can ingest. Set up rules and send alerts based on failure rates or latency thresholds for your production workflows.
 
 ## Related content
 
-- [Designer](visual-designer.md)
-- [Set up](../getting-started/setup.md)
-- [Quickstart](../getting-started/quickstart.md)
+- [Designer](visual-designer)
+- [Set up](../getting-started/setup)
+- [Quickstart](../getting-started/quickstart)

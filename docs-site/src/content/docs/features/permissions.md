@@ -40,8 +40,8 @@ The following table describes project roles in detail:
 
 For more information, see:
 
-- [Create an automation project](../getting-started/setup.md#2-create-a-project)
-- [Add project members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-projects#add-project-members)
+- [Create an automation project](../getting-started/setup#create-your-project)
+- [Add project members](../getting-started/setup#add-project-members)
 
 ### Project members
 
@@ -55,12 +55,12 @@ The following table describes the best role to choose when you add project membe
 
 > [!NOTE]
 >
-> As a reminder, project members can't automatically view apps or access app content for privacy and security reasons unless they have the appropriate role on those apps.
+> For privacy and security reasons, project members can't automatically view apps or access app content unless they have the appropriate role on those apps.
 >
 > For more information, see:
 >
-> - [Create an app](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications)
-> - [Add app members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications#add-application-members)
+> - [Create an app](../getting-started/quickstart#2-create-an-app)
+> - [Add app members](../getting-started/quickstart#add-app-members)
 
 ## App roles
 
@@ -81,8 +81,8 @@ The following table describes app roles in detail:
 
 For more information, see:
 
-- [Create an app](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications)
-- [Add app members](/azure/logic-apps/automation/quickstart-create-dynamic-automation-applications#add-application-members)
+- [Create an app](../getting-started/quickstart#2-create-an-app)
+- [Add app members](../getting-started/quickstart#add-app-members)
 
 ## App privacy and visibility
 

@@ -16,16 +16,16 @@ Azure Logic Apps Automation organizes your work at the following levels:
 
 | Level | Contents |
 |-------|----------|
-| [*Project*](introduction.md#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the project creator and default owner, you control access and governance at this level. |
-| [*App*](introduction.md#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
-| [*Workflow*](introduction.md#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](introduction.md#key-components-and-concepts)) and the steps ([*actions*](introduction.md#key-components-and-concepts)) to run. |
+| [*Project*](introduction#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the project creator and default owner, you control access and governance at this level. |
+| [*App*](introduction#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
+| [*Workflow*](introduction#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](introduction#key-components-and-concepts)) and the steps ([*actions*](introduction#key-components-and-concepts)) to run. |
 
 This guide shows how to create a project if you don't have one yet and add team members to your project.
 
 For more information, see:
 
-- [What is Azure Logic Apps Automation](introduction.md)
-- [Key concepts and terminology](introduction.md#key-components-and-concepts)
+- [What is Azure Logic Apps Automation](introduction)
+- [Key concepts and terminology](introduction#key-components-and-concepts)
 
 ## Requirements
 
@@ -55,7 +55,7 @@ For more information, see:
    | Property | Description |
    |----------|-------------|
    | **Subscription** | Your Azure subscription. |
-   | **Resource group** | The [Azure resource group](/azure/azure-resource-manager/management/overview#terminology) for organizing your project resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
+   | **Resource group** | The [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your project resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
    | **Region** | The Azure region closest to your end users or the components that your workflows need to use. |
    | **Name** | A unique project name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
 
@@ -69,17 +69,17 @@ For more information, see:
 
 1. Before others can work in your project to create apps and workflows, [add them as project members](#add-project-members).
 
-1. Before you or others can start building workflows, [create an app](quickstart.md#2-create-an-app) as a deployable package for your workflows.
+1. Before you or others can start building workflows, [create an app](quickstart#2-create-an-app) as a deployable package for your workflows.
 
 ## Project ownership and privacy
 
 As the project creator, you automatically:
 
 - Become the project owner and appear in the **Project Owner** project property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](../features/permissions.md#project-roles) on the project resource.
+- Have [**Contributor** role permissions](../features/permissions#project-roles) on the project resource.
 - Have administrator-level permissions to delete the project and its resources, such as apps or sandboxes, including items you don't own. Non-owner members with the **Contributor** role can't perform these tasks.
 
-For more information, see [Permissions](permissions.md).
+For more information, see [Permissions](permissions).
 
 ## Add project members
 
