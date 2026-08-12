@@ -42,7 +42,7 @@ You can later use the workflow as a template and swap in what you actually want 
 
 ## 1. Open your project
 
-1. Sign to the [Azure Logic Apps Automation portal](https://auto.azure.com).
+1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
    The portal opens and shows every project where you have access. If you don't see the expected projects, contact the project creator-owner to check whether you have the correct permissions.
 
@@ -144,7 +144,7 @@ To add team members to your app so they can build workflows, follow these steps:
 
 1. After the portal opens the designer, choose an option to start creating your workflow.
 
-   | Opation | Path |
+   | Option | Path |
    |---------|------|
    | **AI assistant** | Generate your workflow on the designer, based on your description about what the workflow does. <br><br>For more information, see [Generate workflow with assistant](#3a-generate-workflow-with-assistant). |
    | **Designer** | Add the trigger and each action from the connectors library. |
@@ -239,7 +239,7 @@ On the designer, the bottom toolbar gives you the following controls, which are 
 | **Add** | Add an operation anywhere on the designer. |
 | **Code** | View the raw underlying JSON alongside the designer. |
 | **Test** | Run the workflow with a test payload without publishing. |
-| **Copilot** | Open the AI assistant alonside the designer to iterate over you workflow. |
+| **Copilot** | Open the AI assistant alongside the designer to iterate over your workflow. |
 
 ## 4. Edit your workflow with AI or in code
 
@@ -249,7 +249,7 @@ To continue editing your workflow, you have the following options:
 
 - Describe your changes in natural language by opening the AI assistant.
 
-- Directly edit the workflow's underlying JSON definition by switching to the code editor. Changes stay synchronized between the code editor and the designer.
+- Directly edit the workflow's underlying JSON definition by switching to the code editor. Changes stay synchronized between the code editor and designer.
 
   The following example shows the AI assistant with instructions to edit a workflow:
 
@@ -335,7 +335,7 @@ To run a published workflow and monitor the progress, follow these steps:
 
 ## 8. Examine the run history
 
-To explore the run history with more details, follow these steps:
+To explore the run history in more detail, follow these steps:
 
 1. On the **Runs** tab, select the run you want.
 
@@ -351,25 +351,11 @@ For example, you might ask the assistant to `add error handling to the HTTP acti
 
 The portal saves your changes in draft mode until you publish.
 
-## Troubleshoot problems
-
-| Problem | Try |
-|---------|-----|
-| **Sign in loop or single sign-on (SSO) error** | Clear your cookies for the following URLs, and sign in again: <br><br>- `https://auto.azure.com` <br>- `https://login.microsoftonline.com` |
-| **Portal appears empty** | Perform a hard refresh (Keyboard: `Cmd/Ctrl + Shift + R`). If the problem persists, [report a bug](/support/report-a-bug/). |
-
-| Problem | Cause | Resolution |
-|---------|-------|------------|
-| "I can't create an app." | You have the project **Reader** role. | Ask a project **Contributor** to upgrade you to project **Author** or **Contributor**. |
-| "I can't view any apps in the project." | By default, apps are private and invisible to others except the app creator-owner. | Ask the app owner to add you to the app, or make you a project **Contributor**, if you only need to view the app metadata for governance. |
-| "I can't manage permissions on apps." | You need the app **Contributor** role. | Ask the app owner or a **Contributor** to make you an app **Contributor**. |
-| "An app lost its owner." | When an app owner leaves your Microsoft Entra tenant, you get the following results: <br><br>- Existing members keep their access. <br><br>- Only the **Project Owner** can delete the app. <br><br>- The app still appears in the project's governance view. |
-| "I can't delete apps." | Only the app owner can delete their app. | Contact the app owner. If the owner is unavailable, and the app is orphaned, the project owner can delete orphaned apps. |
-
 ## Next steps
 
-- [Designer](../features/visual-designer/)
-- [AI assistant](../features/ai-assistant/)
-- [Connectors](../features/connectors/)
-- [Runs and monitoring](../features/runs-and-monitoring/)
-- [Report a bug](../support/report-a-bug/)
+- [Troubleshoot problems](troubleshoot)
+- [Designer](../features/visual-designer)
+- [AI assistant](../features/ai-assistant)
+- [Connectors](../features/connectors)
+- [Runs and monitoring](../features/runs-and-monitoring)
+- [Report a bug](../support/report-a-bug)
