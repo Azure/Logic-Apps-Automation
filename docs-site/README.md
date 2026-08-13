@@ -55,8 +55,8 @@ docs-site/
             ├── index.mdx          ← landing page
             ├── getting-started/
             │   ├── media/
-            |   |   ├── quickstart/           ← portal screenshots for corresponding doc (lowercase)
-            |   |   └── setup/                ← portal screenshots for corresponding doc (lowercase)
+            |   |   ├── quickstart/           ← portal screenshots for related doc (lowercase)
+            |   |   └── setup/                ← portal screenshots for related doc (lowercase)
             │   ├── introduction.md
             │   ├── quickstart.md
             │   └── setup.md
@@ -65,8 +65,8 @@ docs-site/
             │   └── platform-overview.mdx
             ├── features/
             │   ├── media/
-            |   |   ├── visual-designer/      ← portal screenshots for corresponding doc (lowercase)
-            |   |   └── runs-and-monitoring/  ← portal screenshots for corresponding doc (lowercase)
+            |   |   ├── visual-designer/      ← portal screenshots for related doc (lowercase)
+            |   |   └── runs-and-monitoring/  ← portal screenshots for related doc (lowercase)
             │   ├── agents.md
             │   ├── ai-assistant.md
             │   ├── connectors.md
@@ -134,18 +134,16 @@ Edit [`src/content/docs/release-notes/changelog.md`](./src/content/docs/release-
 ```markdown
 ## 1.4.0 — 2026-06-10
 
-- 🚀 **Sandboxes:** Public preview now supports `.csv` input files without
-  the manual `contentType` override.
+- 🚀 **Sandboxes:** Public preview now supports `.csv` input files without the manual `contentType` override.
 - ✨ **Designer:** Agent Harness tab persists draft selections across reloads.
 - 🐛 **Monitoring:** Fixed missing run output when payload was empty.
 ```
 
-For larger releases, link out to a longer write-up under `guides/` rather
-than bloating the changelog.
+For larger releases, link out to a longer write-up under `guides/` rather than bloating the changelog.
 
 ### Add or replace a portal screenshot
 
-Screenshots must be PNG files and live in the corresponding `<doc-filename>` folder, which in turn, exists in the parent `<section-name>/media` folder. Screenshot file names use the following naming convention: `<short-description>.png`.
+Screenshots must be PNG files and live in the respective parent `<section-name>/media/` folder within the related `<doc-filename>` folder. Screenshot file names use the following naming convention: `<image-short-name>.png` without articles like "a", "the", and so on in the file name.
 
 To capture against your local portal (running at `http://localhost:4200`):
 
@@ -166,7 +164,7 @@ node -e "
       await signIn.click(); await page.waitForTimeout(2500);
     }
     // navigate to the page you want, then:
-    await page.screenshot({ path: 'src/content/docs/<section-name>/media/<screenshot-name>.png' });
+    await page.screenshot({ path: 'src/content/docs/<section-name>/media/<doc-filename>/<image-short-name>.png' });
     await browser.close();
   })();
 "
@@ -177,13 +175,12 @@ Astro automatically optimizes images at build time (PNG → WebP, responsive `sr
 To reference the screenshot from a `.md` file, use the following link:
 
 ```markdown
-:::image type="content" source="../../../content/docs/`<section-name>`/media/`<screenshot-name>`.png" alt-text="Screenshot that shows `<screenshot-description>`." lightbox="../../../assets/content/docs/`<section-name>`/media/`<screenshot-name>`.png":::
+:::image type="content" source="media/`<doc-filename>`/`<image-short-name>`.png" alt-text="Screenshot that shows `<ux-description>`." lightbox="media/`<doc-filename>`/`<image-short-name>`.png":::
 ```
 
 ### Add a video
 
-Videos use the **`<Video>` Astro component** at [`src/components/Video.astro`](./src/components/Video.astro), which wraps the [Plyr](https://plyr.io) player. One component, three source kinds — Plyr's
-JS + CSS lazy-load only on pages that actually contain a video.
+Videos use the **`<Video>` Astro component** at [`src/components/Video.astro`](./src/components/Video.astro), which wraps the [Plyr](https://plyr.io) player. One component, three source kinds — Plyr's JS + CSS lazy-load only on pages that actually contain a video.
 
 #### What `<Video>` gives you
 
@@ -207,8 +204,7 @@ JS + CSS lazy-load only on pages that actually contain a video.
 
 #### Usage
 
-The component requires an **MDX** file. If your target page is `.md`, rename it
-to `.mdx` first (the file path / URL stays the same).
+The component requires an **MDX** file. If your target page is `.md`, rename it to `.mdx` first (the file path / URL stays the same).
 
 ```mdx
 import Video from '../../../components/Video.astro';
@@ -244,14 +240,12 @@ Props:
 | > 60 s or > 25 MB | YouTube unlisted / Vimeo / Azure Blob | Keep the repo lean; get a real CDN + transcoding. |
 | Sensitive / private | Azure Blob in the canary RG (private container + signed URL), or Vimeo private | Stay inside the boundary. |
 
-See [`public/videos/README.md`](./public/videos/README.md) for size / encoding
-conventions (1080p H.264, `+faststart`, ≤ 25 MB) and an `ffmpeg` cookbook for
+See [`public/videos/README.md`](./public/videos/README.md) for size / encoding conventions (1080p H.264, `+faststart`, ≤ 25 MB) and an `ffmpeg` cookbook for
 re-encoding screen captures.
 
 #### The summary walk-through on the landing page
 
-[`src/content/docs/index.mdx`](./src/content/docs/index.mdx) reserves a
-commented-out `<Video>` block for the platform walk-through. To enable it:
+[`src/content/docs/index.mdx`](./src/content/docs/index.mdx) reserves a commented-out `<Video>` block for the platform walk-through. To enable it:
 
 1. Drop `public/videos/overview.mp4` (and optional `overview-poster.png`).
 2. Un-comment the block — that's it.
@@ -260,9 +254,7 @@ Or replace the `src` with a YouTube watch URL.
 
 #### Per-feature videos
 
-Same pattern. Rename the feature page from `.md` to `.mdx`, import the
-component, and drop the `<Video>` block right under the page summary so the
-video lands above the fold.
+Same pattern. Rename the feature page from `.md` to `.mdx`, import the component, and drop the `<Video>` block right under the page summary so the video lands above the fold.
 
 ```mdx
 ---
@@ -283,10 +275,7 @@ The **AI workflow assistant** is the fastest path from idea to running workflow�
 
 ### Add a demo (video walk-through page)
 
-The **Demos** section (`src/content/docs/demos/`) hosts dedicated pages for
-each video walk-through. Each demo gets its own page so it can carry context
-(what's in the video, jump-to-the-right-minute table, "where to go after
-watching" links) and so it's reachable via the sidebar and search.
+The **Demos** section (`src/content/docs/demos/`) hosts dedicated pages for each video walk-through. Each demo gets its own page so it can carry context (what's in the video, jump-to-the-right-minute table, "where to go after watching" links) and so it's reachable via the sidebar and search.
 
 #### Add a new demo
 
@@ -321,16 +310,12 @@ watching" links) and so it's reachable via the sidebar and search.
 | Self-hosted MP4 in `public/videos/`, YouTube unlisted, Vimeo, or any URL that allows iframe embedding | `<Video src="…" title="…" />` — inline Plyr player |
 | SharePoint personal-share, Stream-on-SharePoint *share* URL, or anywhere that sets `X-Frame-Options` | A styled link-out button (the iframe would render an X-Frame-Options error page) |
 
-The platform-overview demo is currently a link-out because the asset lives
-on personal SharePoint; the code carries a commented-out `<Video>` block
-ready to swap in when the asset moves to an embeddable host.
+The platform-overview demo is currently a link-out because the asset lives on personal SharePoint; the code carries a commented-out `<Video>` block ready to swap in when the asset moves to an embeddable host.
 
 #### Use aka.ms / stable shortlinks
 
-For demo URLs, prefer an `aka.ms/...` shortlink over the raw asset URL. The
-redirect target can change without touching the docs (e.g. when the video
-moves from SharePoint to YouTube to a custom domain), and the link in the
-docs keeps working.
+For demo URLs, prefer an `aka.ms/...` shortlink over the raw asset URL. The redirect target can change without touching the docs (e.g. when the video
+moves from SharePoint to YouTube to a custom domain), and the link in the docs keeps working.
 
 #### Troubleshooting
 
@@ -395,11 +380,10 @@ hero:                       # only with template: splash
 
 - **Sentence-case** headings — "Get started", not "Get Started".
 - **No gerunds** headings - "Get started", not "Getting started".
-- **Imperative voice** for instructions — "Run the build", not "You should run the build".
-- **Site-absolute paths** with trailing slash for cross-links:
-  `[Quickstart](/getting-started/quickstart/)`.
-- **Relative paths** for images, three levels up from a content file:
-  `![…](../../../assets/portal/01-login.png)`.
+- **Imperative voice** for customer actions and instructions — "Run the build", not "You should run the build".
+- **Voice** stays product-neutral. Don't reference internal codenames, use jargon, or marketing messaging.
+- **Site-absolute paths** with trailing slash for cross-links: `[Quickstart](/getting-started/quickstart/)`
+- **Relative paths** for images, one level up from a content file: `:::image type="content" source="media/<related-doc-filename>/<image-filename>.png" alt-text="Screenshot that shows <ux-description>." lightbox="<related-doc-filename>/<image-filename>.png":::`.
 - **Callouts** sparingly:
 
   ```markdown
@@ -410,9 +394,7 @@ hero:                       # only with template: splash
   ```
 
 - **Code blocks** get a `title="…"` attribute when referring to a real file.
-- **Tabs / cards** require renaming the file to `.mdx` and importing Starlight
-  components.
-- Keep the voice **product-neutral** — don't reference internal codenames.
+- **Tabs / cards** require renaming the file to `.mdx` and importing Starlight components.
 
 ---
 
@@ -461,7 +443,7 @@ This section is a structured map for AI agents working on the docs.
 - [ ] `sidebar.order` is set if order matters (lower = earlier).
 - [ ] Body starts at H2 (the H1 comes from frontmatter `title`).
 - [ ] Internal links are site-absolute with trailing slash.
-- [ ] Image paths use `../../../assets/...` from a content file.
+- [ ] Image paths use `media/<doc-filename>/...` from a content file.
 - [ ] Voice is sentence-case, imperative, product-neutral.
 - [ ] `npm run check` passes (no broken links, no frontmatter errors).
 - [ ] `npm run build` succeeds.
@@ -483,9 +465,8 @@ This section is a structured map for AI agents working on the docs.
    ```
 
 3. Open with a 1-paragraph summary; break into H2 sections below.
-4. Add the page to the table in `features/overview.md`.
-5. Cross-link from any related feature page.
-6. Run `npm run check && npm run build`.
+4. Cross-link from any related feature page.
+5. Run `npm run check && npm run build`.
 
 **Cut a release note.**
 

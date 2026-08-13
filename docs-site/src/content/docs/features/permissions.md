@@ -40,8 +40,8 @@ The following table describes project roles in detail:
 
 For more information, see:
 
-- [Create an automation project](../getting-started/setup#create-your-project)
-- [Add project members](../getting-started/setup#add-project-members)
+- [Create an automation project](/getting-started/setup#create-your-project)
+- [Add project members](/getting-started/setup#add-project-members)
 
 ### Project members
 
@@ -59,8 +59,8 @@ The following table describes the best role to choose when you add project membe
 >
 > For more information, see:
 >
-> - [Create an app](../getting-started/quickstart#2-create-an-app)
-> - [Add app members](../getting-started/quickstart#add-app-members)
+> - [Create an app](/getting-started/quickstart#2-create-an-app)
+> - [Add app members](/getting-started/quickstart#add-app-members)
 
 ## App roles
 
@@ -81,8 +81,8 @@ The following table describes app roles in detail:
 
 For more information, see:
 
-- [Create an app](../getting-started/quickstart#2-create-an-app)
-- [Add app members](../getting-started/quickstart#add-app-members)
+- [Create an app](/getting-started/quickstart#2-create-an-app)
+- [Add app members](/getting-started/quickstart#add-app-members)
 
 ## App privacy and visibility
 
@@ -129,5 +129,5 @@ Project owners can perform the following tasks on sandboxes:
 ## Related content
 
 - [Quickstart](/getting-started/quickstart/)
-- [Designer](visual-designer)
-- [Connectors](connectors)
+- [Designer](/features/visual-designer/)
+- [Connectors](/features/connectors/)

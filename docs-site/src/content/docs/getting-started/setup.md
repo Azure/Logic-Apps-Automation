@@ -76,10 +76,10 @@ For more information, see:
 As the project creator, you automatically:
 
 - Become the project owner and appear in the **Project Owner** project property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](../features/permissions#project-roles) on the project resource.
+- Have [**Contributor** role permissions](/features/permissions#project-roles) on the project resource.
 - Have administrator-level permissions to delete the project and its resources, such as apps or sandboxes, including items you don't own. Non-owner members with the **Contributor** role can't perform these tasks.
 
-For more information, see [Permissions](permissions).
+For more information, see [Permissions](/features/permissions/).
 
 ## Add project members
 
@@ -117,5 +117,5 @@ Before others can create apps and workflows in your project, add them as project
 
 ## Next
 
-- [Quickstart](quickstart)
-- [Troubleshoot problems](troubleshoot)
+- [Quickstart](/getting-started/quickstart/)
+- [Troubleshoot problems](/getting-started/troubleshoot/)

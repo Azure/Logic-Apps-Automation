@@ -24,5 +24,5 @@ sidebar:
 
 ## Next
 
-- [Set up](setup)
-- [Quickstart](quickstart)
+- [Set up](/getting-started/setup/)
+- [Quickstart](/getting-started/quickstart/)

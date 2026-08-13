@@ -87,7 +87,7 @@ If your project doesn't include an app to store and organize workflows, follow t
 As the app creator, you automatically:
 
 - Become the app owner and appear in the **Owner** app property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](../features/permissions#app-roles) on the app resource.
+- Have [**Contributor** role permissions](/features/permissions#app-roles) on the app resource.
 
 App privacy works as follows:
 
@@ -99,7 +99,7 @@ App privacy works as follows:
 
   Apps often contain automations that connect to personal accounts. The default privacy model keeps sensitive data obscured and invisible to others unless the app creator-owner chooses otherwise.
 
-For more information, see [Permissions](permissions).
+For more information, see [Permissions](/features/permissions/).
 
 ## Add app members
 
@@ -107,7 +107,7 @@ To add team members to your app so they can build workflows, follow these steps:
 
 > [!NOTE]
 >
-> If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](../features/permissions).
+> If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](/features/permissions).
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), on the **Projects** page, select the project that contains your app.
 
@@ -292,7 +292,7 @@ To quickly find any missing configuration information while you work in draft mo
 
    :::image type="content" source="media/quickstart/draft-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, draft workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/draft-workflow-run-history.png":::
 
-For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](../features/workflows#triggers-that-fire-in-draft-versus-published-mode).
+For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](/features/workflows#triggers-that-fire-in-draft-versus-published-mode).
 
 ## 6. Publish draft to production
 
@@ -353,9 +353,9 @@ The portal saves your changes in draft mode until you publish.
 
 ## Next steps
 
-- [Troubleshoot problems](troubleshoot)
-- [Designer](../features/visual-designer)
-- [AI assistant](../features/ai-assistant)
-- [Connectors](../features/connectors)
-- [Runs and monitoring](../features/runs-and-monitoring)
-- [Report a bug](../support/report-a-bug)
+- [Troubleshoot problems](/getting-started/troubleshoot/)
+- [Designer](/features/visual-designer/)
+- [AI assistant](/features/ai-assistant/)
+- [Connectors](/features/connectors/)
+- [Runs and monitoring](/features/runs-and-monitoring/)
+- [Report a bug](/support/report-a-bug/)

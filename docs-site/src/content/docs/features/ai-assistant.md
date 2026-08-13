@@ -48,5 +48,5 @@ No, the assistant only generates the workflow shape. You need to provide environ
 ## Related content
 
 - [Quickstart](/getting-started/quickstart/)
-- [Designer](visual-designer)
-- [Connectors](connectors)
+- [Designer](/features/visual-designer/)
+- [Connectors](/features/connectors/)

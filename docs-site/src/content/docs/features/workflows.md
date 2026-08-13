@@ -9,7 +9,7 @@ In Azure Logic Apps Automation, a *workflow* is an automation workload that begi
 
 You build a workflow by using the designer or the AI workflow assistant. The platform's runtime executes the workflow.
 
-To get started, see [Quickstart](../getting-started/quickstart).
+To get started, see [Quickstart](/getting-started/quickstart/).
 
 ## Stateful versus stateless
 
@@ -38,7 +38,7 @@ Here are some example actions that can run in a workflow:
 | **Inline Code** | **Execute JavaScript code** | Run code snippets inline with your workflow. | 
 | Service provider-based | Service Bus, Azure Blob Storage, Azure Queues  | Run service-based operations natively and directly on the platform's runtime. |
 | Managed connectors | Outlook, SharePoint, Salesforce, and so on | Perform a task like **Send an email** or **Upload a file**. Run in global multitenant Azure. Usually requires a connection. |
-| [Agents](agents) | AI-driven actions with a system prompt and a toolset. |
+| [Agents](/features/agents/) | AI-driven actions with a system prompt and a toolset. |
 
 ## Expressions and dynamic content
 
@@ -123,7 +123,7 @@ The editor offers the following capabilities:
 
 ## Related content
 
-- [Quickstart](../getting-started/quickstart#3-create-your-workflow)
-- [Visual designer](designer)
-- [AI assistant](ai-assistant)
-- [Connectors](connectors)
+- [Quickstart](/getting-started/quickstart#3-create-your-workflow)
+- [Visual designer](/features/designer/)
+- [AI assistant](/features/ai-assistant/)
+- [Connectors](/features/connectors/)
