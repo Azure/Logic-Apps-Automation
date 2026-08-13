@@ -89,6 +89,63 @@ docs-site/
 
 ---
 
+## Conventions
+
+- **Voice**
+  - Professional, collegial, and constructive. See [Brand voice - Microsoft Learn](https://learn.microsoft.com/style-guide/brand-voice-above-all-simple-human).
+  - Focus on customers and the problems they need to solve.
+  - Stay product and feature neutral. Don't use internal language, such as codenames or jargon, culture-specific phrases, marketing messaging, or colloquialisms.
+  - Use active verbs for headings, not gerunds. For example, "Get started", not "Getting started".
+  - Use imperative voice for customer steps. For example, "Run the build", not "You should run the build".
+  - Use American English spelling.
+  - For more information, see:
+    - [Top 10 steps for Microsoft Style and voice](https://learn.microsoft.com/style-guide/top-10-tips-style-voice#project-friendliness)
+    - [Writing step-by-step instructions](https://learn.microsoft.com/style-guide/procedures-instructions/writing-step-by-step-instructions)
+- **Capitalization and lettercase**
+  - **Sentence case** for headings. Capitalize only the first litter, for example, "Get started", not "Get Started". See [Capitalization - Microsoft Learn](https://learn.microsoft.com/style-guide/capitalization#sentence-style-capitalization-in-titles-and-headings).
+  - **Title case** for all formal and official names. Capitalize the first letter for every noun in product, services, and some feature names.
+  - **All uppercase** only for acronyms. 
+  - **Lower case** for resource names in sentences:
+    - "logic app", not "Logic App"
+    - "logic apps", not "Logic Apps"
+- **Product names**
+  - Always use full name where appropriate, for example:
+    - "Azure Logic Apps Automation"
+    - "Azure Logic Apps"
+    - "Azure Logic Apps Standard"
+    - "Azure Logic Apps Consumption"
+  - Always use the current, not obsolete terminology:
+  - "Microsoft Entra" or "Microsoft Entra ID", not "Azure AD", "AAD", or "Azure Active Directory"
+  - "Managed identity", not "Managed service identity", "MSI, or "Managed Service Identity"
+- **Acronyms**
+  - Avoid unless industry familiar and widely-understood, for example, "HTTP".
+  - Don't create or use for For Microsoft product and feature names. Always spell out to support search engine results.
+  - See [Acronyms - Microsoft Learn](https://learn.microsoft.com/style-guide/acronyms).
+- **Formatting**
+  - **Bold** only for UI or UX elements. See [UI elements](https://learn.microsoft.com/contribute/content/text-formatting-guidelines#ui-elements).
+  - *Italics* only for new terminiology on first use, followed by the term explanation. See [New term introductions](https://learn.microsoft.com/contribute/content/text-formatting-guidelines#new-term-introductions).
+  - See [Formatting text in instructions](https://learn.microsoft.com/style-guide/procedures-instructions/formatting-text-in-instructions)
+- **Bullet lists** only for non-sequential items. For easy scanning and readability, put any series exceeding two items in a separate bullet list. Don't use for steps or instructions.
+- **Numbered lists** only for sequential series with steps or tasks. Don't use bullet lists.
+- **Site-absolute paths** with trailing slash for cross-links: `[Quickstart](/getting-started/quickstart/)`
+- **Relative paths** for images, organized in their own respective content file folder within a `media` folder  the parent section: `:::image type="content" source="media/<related-doc-filename>/<image-filename>.png" alt-text="Screenshot that shows <ux-description>." lightbox="media/<related-doc-filename>/<image-filename>.png":::`.
+- **Callouts** only for alerts - use sparingly. See [Alerts - Microsoft Learn](https://learn.microsoft.com/contribute/content/markdown-reference): 
+
+  ```markdown
+  :::note     non-essential or non-mandatory helpful information
+  :::tip      optional hints or faster ways to achieve a goal
+  :::caution  alerts to actions with sub-optimal results, minor data interruptions, unintended but non-descrutive side effects
+  :::danger   alerts to actions that result in severe, harmful hazards, such as critical security vulnerabilites, permanent data loss, hardware damage, or system failure 
+  ```
+
+- **Code blocks** get a `title="…"` attribute when referring to a real file.
+- **Punctuation**
+  - Straight quotes, not curly quotes
+  - Include the last comma in a list of items.
+- **Tabs / cards** require renaming the file to `.mdx` and importing Starlight components.
+
+---
+
 ## Common tasks
 
 ### Add a new page
@@ -101,6 +158,14 @@ cp src/content/docs/features/workflows.md src/content/docs/features/triggers.md
 # Edit title/description/sidebar.order in the frontmatter, write the body
 npm run check && npm run build
 ```
+
+### Update an existing page
+
+Edit it. Hot-reload picks it up. Run `npm run check` before pushing.
+
+### Hide a page from the sidebar (keep it reachable by URL)
+
+Add `sidebar: { hidden: true }` to the page's frontmatter.
 
 ### Add a new top-level section
 
@@ -145,6 +210,8 @@ For larger releases, link out to a longer write-up under `guides/` rather than b
 
 Screenshots must be PNG files and live in the respective parent `<section-name>/media/` folder within the related `<doc-filename>` folder. Screenshot file names use the following naming convention: `<image-short-name>.png` without articles like "a", "the", and so on in the file name.
 
+Astro automatically optimizes images at build time (PNG → WebP, responsive `srcset`), so don't precompress.
+
 To capture against your local portal (running at `http://localhost:4200`):
 
 ```bash
@@ -169,8 +236,6 @@ node -e "
   })();
 "
 ```
-
-Astro automatically optimizes images at build time (PNG → WebP, responsive `srcset`), so don't precompress.
 
 To reference the screenshot from a `.md` file, use the following link:
 
@@ -240,8 +305,7 @@ Props:
 | > 60 s or > 25 MB | YouTube unlisted / Vimeo / Azure Blob | Keep the repo lean; get a real CDN + transcoding. |
 | Sensitive / private | Azure Blob in the canary RG (private container + signed URL), or Vimeo private | Stay inside the boundary. |
 
-See [`public/videos/README.md`](./public/videos/README.md) for size / encoding conventions (1080p H.264, `+faststart`, ≤ 25 MB) and an `ffmpeg` cookbook for
-re-encoding screen captures.
+See [`public/videos/README.md`](./public/videos/README.md) for size / encoding conventions (1080p H.264, `+faststart`, ≤ 25 MB) and an `ffmpeg` cookbook for re-encoding screen captures.
 
 #### The summary walk-through on the landing page
 
@@ -327,14 +391,6 @@ moves from SharePoint to YouTube to a custom domain), and the link in the docs k
 | Captions don't appear | Plyr expects `<track kind="captions">` inside the `<video>`. Add a `.vtt` file to `public/videos/` and pass a `<track>` slot (component currently doesn't expose this — extend `Video.astro` if you need it). |
 | Page loads slower after adding a video | Expected only on pages with a video — Plyr lazy-loads (~33 KB gz). Pages without a video are untouched. |
 
-### Update an existing page
-
-Edit it. Hot-reload picks it up. Run `npm run check` before pushing.
-
-### Hide a page from the sidebar (keep it reachable by URL)
-
-Add `sidebar: { hidden: true }` to the page's frontmatter.
-
 ---
 
 ## Frontmatter reference
@@ -373,28 +429,6 @@ hero:                       # only with template: splash
       variant: primary
 ---
 ```
-
----
-
-## Conventions
-
-- **Sentence-case** headings — "Get started", not "Get Started".
-- **No gerunds** headings - "Get started", not "Getting started".
-- **Imperative voice** for customer actions and instructions — "Run the build", not "You should run the build".
-- **Voice** stays product-neutral. Don't reference internal codenames, use jargon, or marketing messaging.
-- **Site-absolute paths** with trailing slash for cross-links: `[Quickstart](/getting-started/quickstart/)`
-- **Relative paths** for images, one level up from a content file: `:::image type="content" source="media/<related-doc-filename>/<image-filename>.png" alt-text="Screenshot that shows <ux-description>." lightbox="<related-doc-filename>/<image-filename>.png":::`.
-- **Callouts** sparingly:
-
-  ```markdown
-  :::note     informational
-  :::tip      helpful nudges
-  :::caution  heads-up
-  :::danger   hard warning
-  ```
-
-- **Code blocks** get a `title="…"` attribute when referring to a real file.
-- **Tabs / cards** require renaming the file to `.mdx` and importing Starlight components.
 
 ---
 
