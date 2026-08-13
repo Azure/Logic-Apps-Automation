@@ -55,27 +55,27 @@ docs-site/
             ├── index.mdx          ← landing page
             ├── getting-started/
             │   ├── media/
-            |   |   ├── quickstart/           ← portal screenshots for this doc (lowercase)
-            |   |   └── setup/                ← portal screenshots for this doc (lowercase)
+            |   |   ├── quickstart/           ← portal screenshots for corresponding doc (lowercase)
+            |   |   └── setup/                ← portal screenshots for corresponding doc (lowercase)
             │   ├── introduction.md
-            │   ├── setup.md
-            │   └── quickstart.md
+            │   ├── quickstart.md
+            │   └── setup.md
             ├── demos/             ← short video walk-throughs (.mdx — uses <Video>)
             │   ├── index.mdx
             │   └── platform-overview.mdx
             ├── features/
             │   ├── media/
-            |   |   ├── visual-designer/      ← portal screenshots for this doc (lowercase)
-            |   |   └── runs-and-monitoring/  ← portal screenshots for this doc (lowercase)
-            │   ├── projects-and-applications.md
-            │   ├── permissions.md
-            │   ├── visual-designer.md
+            |   |   ├── visual-designer/      ← portal screenshots for corresponding doc (lowercase)
+            |   |   └── runs-and-monitoring/  ← portal screenshots for corresponding doc (lowercase)
+            │   ├── agents.md
             │   ├── ai-assistant.md
             │   ├── connectors.md
-            │   ├── workflows.md
-            │   ├── agents.md
+            │   ├── permissions.md
+            │   ├── projects-and-applications.md
+            │   ├── runs-and-monitoring.md
             │   ├── sandboxes.md
-            │   └── runs-and-monitoring.md
+            │   ├── visual-designer.md
+            │   └── workflows.md
             ├── guides/            ← stub for how-tos (auto-shown when populated)
             ├── reference/         ← stub for technical reference
             ├── release-notes/
