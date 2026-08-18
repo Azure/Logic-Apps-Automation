@@ -77,6 +77,9 @@ docs-site/
             │   ├── visual-designer.md
             │   └── workflows.md
             ├── guides/            ← stub for how-tos (auto-shown when populated)
+            │   ├── media/
+            |   |   └── create-knowledge-bases/  ← portal screenshots for related doc (lowercase)
+            │   └── create-knowledge-bases.md
             ├── reference/         ← stub for technical reference
             ├── release-notes/
             │   └── changelog.md

@@ -1,5 +1,5 @@
 ---
-title: Create a knowledge base - Azure Logic Apps Automation
+title: Create knowledge bases - Azure Logic Apps Automation
 description: Create and attach external knowledge sources so agents can ground their answers in your data.
 sidebar:
   order: 2
@@ -8,15 +8,27 @@ sidebar:
     variant: tip
 ---
 
-In Azure Logic Apps Automation, create a *knowledge base* as an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers.
+In Azure Logic Apps Automation, create a [*knowledge base*](/features/knowledge-bases/) as an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers.
 
-## Prerequisites
+## Requirements
 
+- A Microsoft work or school account in the same Microsoft Entra tenant as the project creator-owner.
 
+  Your account must exist in the same tenant so the project creator-owner can add you to the project. You don't need an Azure subscription to create apps and workflows in an automation project.
+
+- Access to the [Azure Logic Apps Automation portal](https://auto.azure.com).
+
+- **Contributor** or **Author** role on the project resource to create knowledge bases.
+
+  > [!NOTE]
+  >
+  > The project **Reader** role doesn't have enough permissions to create knowledge bases.
+
+  If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
 
 ## Create a knowledge base
 
-Before you can attach a knowledge base, other than files to upload, create the knowledge base or add an existing source to your project. 
+Before you can attach a knowledge base to your agent, other than files to upload, create the knowledge base or add an existing source to your project. 
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
 
