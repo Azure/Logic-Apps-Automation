@@ -38,7 +38,7 @@ Here are some example actions that can run in a worklow:
 | **Inline Code** | **Execute JavaScript code** | Run code snippets inline with your workflow. | 
 | Service provider-based | Service Bus, Azure Blob Storage, Azure Queues  | Run service-based operations natively and directly on the platform's runtime. |
 | Managed connectors | Outlook, SharePoint, Salesforce, and so on | Perform a task like **Send an email** or **Upload a file**. Run in global multi-tenant Azure. Usually requires a connection. |
-| [Agents](agents) | AI-driven actions with a system prompt and a toolset. |
+| [Agents](../features/agents/) | AI-driven actions with a system prompt and a toolset. |
 
 ## Expressions and dynamic content
 
