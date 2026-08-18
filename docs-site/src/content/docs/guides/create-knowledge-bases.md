@@ -8,6 +8,8 @@ sidebar:
     variant: tip
 ---
 
+# Create knowledge bases for your projects
+
 In Azure Logic Apps Automation, create a [*knowledge base*](/features/knowledge-bases/) as an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers.
 
 > [!NOTE]

@@ -8,6 +8,8 @@ sidebar:
     variant: tip
 ---
 
+# Create sandboxes for your project
+
 In Azure Logic Apps Automation, create a [*sandbox*](/features/sandboxes/) as an isolated compute environment where [agents](/features/agents/) can run code in workflows. 
 
 > [!NOTE]
@@ -151,7 +153,7 @@ When your agent needs to work with your code repositories, set up a prebuilt dis
 
 ## Related content
 
-- [Agents](/features/agents/)
 - [Sandboxes](/features/sandboxes/)
+- [Agents](/features/agents/)
 - [Connectors](/features/connectors/)
 - [Runs and monitoring](/features/runs-and-monitoring/)

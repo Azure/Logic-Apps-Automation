@@ -8,11 +8,15 @@ sidebar:
     variant: tip
 ---
 
-In Azure Logic Apps Automation, a *knowledge base* is an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers. For more information, see [Create knowledge bases](/guides/create-knowledge-bases/).
+# What are knowledge bases
 
 > [!NOTE]
 >
 > This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+
+In Azure Logic Apps Automation, a *knowledge base* is an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers. For more information, see [Create knowledge bases](/guides/create-knowledge-bases/).
+
+> [!NOTE]
 >
 > The following items are under refinement:
 >
