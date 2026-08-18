@@ -19,7 +19,7 @@ Built-in operations run natively in the same process as the platform's runtime a
 | **HTTP** | **HTTP** | Send generic REST API calls like `GET` or `POST`. |
 | **Control** | - **Condition** <br>- **Switch** <br>- **For each** <br>- **Until** | Change the flow based on meeting specific criteria. |
 | **Data Operations** | - **Compose** <br>- **Parse JSON** <br>- **Select** <br>- **Filter array** <br>- **Join** | Perform data shaping. |
-| **Variables** | - **Initliaze variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Create and manage variable values. |
+| **Variables** | - **Initialize variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Create and manage variable values. |
 | **AI Agents** | **Workflow Agent**, **Coding agent** | Run agents that use models to perform tasks or execute code. |
 
 ## Managed connectors
@@ -30,7 +30,7 @@ The following table describes some common managed connector operations:
 
 | Operation group | Operation | Description |
 |---|---|---|
-| Azure Storage | Various | Manage blob, queue, file, and table storage. |
+| **Azure Storage** | Various | Manage blob, queue, file, and table storage. |
 | **Office 365 Outlook** | Various | Manage email, calendars, and contacts. |     
 | **SharePoint** | Various | Manage files and folders. |
 | **File System** | Various | Manage files on the host or a mounted file share. |
@@ -46,7 +46,7 @@ If the service you want to connect doesn't have a prebuilt connector, use the bu
 
 ## Related content
 
-- [Quickstart](../getting-started/quickstart.md#3-create-your-workflow)
-- [Visual designer](designer)
-- [AI assistant](ai-assistant)
-- [Connectors](connectors)
+- [Quickstart](/getting-started/quickstart#3-create-your-workflow)
+- [Visual designer](/features/designer/)
+- [AI assistant](/features/ai-assistant/)
+- [Connectors](/features/connectors/)

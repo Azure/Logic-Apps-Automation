@@ -8,7 +8,7 @@ sidebar:
     variant: tip
 ---
 
-In Azure Logic Apps Automation, create a *knowledge base* as an external context source that an [agent](../features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers.
+In Azure Logic Apps Automation, create a *knowledge base* as an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers.
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ At the next run time, the agent retrieves related information from the source be
 
 ## Troubleshoot information retrieval problems
 
-To debug problems related to agent responses based on stale data or not finding the correct information, open the [workflow run history](runs-and-monitoring/) so you can examine the query and retrieved information. Each time that the agent retrieves information is a step in the agent's iterations. These steps appear as entries under the agent action's inputs and outputs:
+To debug problems related to agent responses based on stale data or not finding the correct information, open the [workflow run history](/features/runs-and-monitoring/) so you can examine the query and retrieved information. Each time that the agent retrieves information is a step in the agent's iterations. These steps appear as entries under the agent action's inputs and outputs:
 
 - **Inputs**: Shows the query used by the runtime. The model often rewrites the agent's instructions.
 - **Outputs**: Shows the retrieved information with a relevance score per result.
@@ -54,7 +54,7 @@ Usually, these problems arise due to chunking or queries with rewritten instruct
 
 ## Related content
 
-- [Agents](../features/agents/)
-- [Sandboxes](../features/sandboxes/)
-- [Connectors](../features/connectors/../features/)
-- [Runs and monitoring](../features/runs-and-monitoring/)
+- [Agents](/features/agents/)
+- [Sandboxes](/features/sandboxes/)
+- [Connectors](/features/connectors/)
+- [Runs and monitoring](/features/runs-and-monitoring/)

@@ -55,27 +55,27 @@ docs-site/
             ├── index.mdx          ← landing page
             ├── getting-started/
             │   ├── media/
-            |   |   ├── quickstart/           ← portal screenshots for this doc (lowercase)
-            |   |   └── setup/                ← portal screenshots for this doc (lowercase)
+            |   |   ├── quickstart/           ← portal screenshots for related doc (lowercase)
+            |   |   └── setup/                ← portal screenshots for related doc (lowercase)
             │   ├── introduction.md
-            │   ├── setup.md
-            │   └── quickstart.md
+            │   ├── quickstart.md
+            │   └── setup.md
             ├── demos/             ← short video walk-throughs (.mdx — uses <Video>)
             │   ├── index.mdx
             │   └── platform-overview.mdx
             ├── features/
             │   ├── media/
-            |   |   ├── visual-designer/      ← portal screenshots for this doc (lowercase)
-            |   |   └── runs-and-monitoring/  ← portal screenshots for this doc (lowercase)
-            │   ├── projects-and-applications.md
-            │   ├── permissions.md
-            │   ├── visual-designer.md
+            |   |   ├── visual-designer/      ← portal screenshots for related doc (lowercase)
+            |   |   └── runs-and-monitoring/  ← portal screenshots for related doc (lowercase)
+            │   ├── agents.md
             │   ├── ai-assistant.md
             │   ├── connectors.md
-            │   ├── workflows.md
-            │   ├── agents.md
+            │   ├── permissions.md
+            │   ├── projects-and-applications.md
+            │   ├── runs-and-monitoring.md
             │   ├── sandboxes.md
-            │   └── runs-and-monitoring.md
+            │   ├── visual-designer.md
+            │   └── workflows.md
             ├── guides/            ← stub for how-tos (auto-shown when populated)
             ├── reference/         ← stub for technical reference
             ├── release-notes/
@@ -86,6 +86,63 @@ docs-site/
 ```
 
 **Sidebar** is auto-generated from these folders (`autogenerate` in `astro.config.mjs`). Adding a page = drop a file in the right folder. No config edit needed.
+
+---
+
+## Conventions
+
+- **Voice**
+  - Professional, collegial, and constructive. See [Brand voice - Microsoft Learn](https://learn.microsoft.com/style-guide/brand-voice-above-all-simple-human).
+  - Focus on customers and the problems they need to solve.
+  - Stay product and feature neutral. Don't use internal language, such as codenames or jargon, culture-specific phrases, marketing messaging, or colloquialisms.
+  - Use active verbs for headings, not gerunds. For example, "Get started", not "Getting started".
+  - Use imperative voice for customer steps. For example, "Run the build", not "You should run the build".
+  - Use American English spelling.
+  - For more information, see:
+    - [Top 10 steps for Microsoft Style and voice](https://learn.microsoft.com/style-guide/top-10-tips-style-voice#project-friendliness)
+    - [Writing step-by-step instructions](https://learn.microsoft.com/style-guide/procedures-instructions/writing-step-by-step-instructions)
+- **Capitalization and lettercase**
+  - **Sentence case** for headings. Capitalize only the first litter, for example, "Get started", not "Get Started". See [Capitalization - Microsoft Learn](https://learn.microsoft.com/style-guide/capitalization#sentence-style-capitalization-in-titles-and-headings).
+  - **Title case** for all formal and official names. Capitalize the first letter for every noun in product, services, and some feature names.
+  - **All uppercase** only for acronyms. 
+  - **Lower case** for resource names in sentences:
+    - "logic app", not "Logic App"
+    - "logic apps", not "Logic Apps"
+- **Product names**
+  - Always use full name where appropriate, for example:
+    - "Azure Logic Apps Automation"
+    - "Azure Logic Apps"
+    - "Azure Logic Apps Standard"
+    - "Azure Logic Apps Consumption"
+  - Always use the current, not obsolete terminology:
+  - "Microsoft Entra" or "Microsoft Entra ID", not "Azure AD", "AAD", or "Azure Active Directory"
+  - "Managed identity", not "Managed service identity", "MSI, or "Managed Service Identity"
+- **Acronyms**
+  - Avoid unless industry familiar and widely-understood, for example, "HTTP".
+  - Don't create or use for For Microsoft product and feature names. Always spell out to support search engine results.
+  - See [Acronyms - Microsoft Learn](https://learn.microsoft.com/style-guide/acronyms).
+- **Formatting**
+  - **Bold** only for UI or UX elements. See [UI elements](https://learn.microsoft.com/contribute/content/text-formatting-guidelines#ui-elements).
+  - *Italics* only for new terminiology on first use, followed by the term explanation. See [New term introductions](https://learn.microsoft.com/contribute/content/text-formatting-guidelines#new-term-introductions).
+  - See [Formatting text in instructions](https://learn.microsoft.com/style-guide/procedures-instructions/formatting-text-in-instructions)
+- **Bullet lists** only for non-sequential items. For easy scanning and readability, put any series exceeding two items in a separate bullet list. Don't use for steps or instructions.
+- **Numbered lists** only for sequential series with steps or tasks. Don't use bullet lists.
+- **Site-absolute paths** with trailing slash for cross-links: `[Quickstart](/getting-started/quickstart/)`
+- **Relative paths** for images, organized in their own respective content file folder within a `media` folder  the parent section: `:::image type="content" source="media/<related-doc-filename>/<image-filename>.png" alt-text="Screenshot that shows <ux-description>." lightbox="media/<related-doc-filename>/<image-filename>.png":::`.
+- **Callouts** only for alerts - use sparingly. See [Alerts - Microsoft Learn](https://learn.microsoft.com/contribute/content/markdown-reference): 
+
+  ```markdown
+  :::note     non-essential or non-mandatory helpful information
+  :::tip      optional hints or faster ways to achieve a goal
+  :::caution  alerts to actions with sub-optimal results, minor data interruptions, unintended but non-descrutive side effects
+  :::danger   alerts to actions that result in severe, harmful hazards, such as critical security vulnerabilites, permanent data loss, hardware damage, or system failure 
+  ```
+
+- **Code blocks** get a `title="…"` attribute when referring to a real file.
+- **Punctuation**
+  - Straight quotes, not curly quotes
+  - Include the last comma in a list of items.
+- **Tabs / cards** require renaming the file to `.mdx` and importing Starlight components.
 
 ---
 
@@ -101,6 +158,14 @@ cp src/content/docs/features/workflows.md src/content/docs/features/triggers.md
 # Edit title/description/sidebar.order in the frontmatter, write the body
 npm run check && npm run build
 ```
+
+### Update an existing page
+
+Edit it. Hot-reload picks it up. Run `npm run check` before pushing.
+
+### Hide a page from the sidebar (keep it reachable by URL)
+
+Add `sidebar: { hidden: true }` to the page's frontmatter.
 
 ### Add a new top-level section
 
@@ -134,18 +199,18 @@ Edit [`src/content/docs/release-notes/changelog.md`](./src/content/docs/release-
 ```markdown
 ## 1.4.0 — 2026-06-10
 
-- 🚀 **Sandboxes:** Public preview now supports `.csv` input files without
-  the manual `contentType` override.
+- 🚀 **Sandboxes:** Public preview now supports `.csv` input files without the manual `contentType` override.
 - ✨ **Designer:** Agent Harness tab persists draft selections across reloads.
 - 🐛 **Monitoring:** Fixed missing run output when payload was empty.
 ```
 
-For larger releases, link out to a longer write-up under `guides/` rather
-than bloating the changelog.
+For larger releases, link out to a longer write-up under `guides/` rather than bloating the changelog.
 
 ### Add or replace a portal screenshot
 
-Screenshots must be PNG files and live in the corresponding `<doc-filename>` folder, which in turn, exists in the parent `<section-name>/media` folder. Screenshot file names use the following naming convention: `<short-description>.png`.
+Screenshots must be PNG files and live in the respective parent `<section-name>/media/` folder within the related `<doc-filename>` folder. Screenshot file names use the following naming convention: `<image-short-name>.png` without articles like "a", "the", and so on in the file name.
+
+Astro automatically optimizes images at build time (PNG → WebP, responsive `srcset`), so don't precompress.
 
 To capture against your local portal (running at `http://localhost:4200`):
 
@@ -166,24 +231,21 @@ node -e "
       await signIn.click(); await page.waitForTimeout(2500);
     }
     // navigate to the page you want, then:
-    await page.screenshot({ path: 'src/content/docs/<section-name>/media/<screenshot-name>.png' });
+    await page.screenshot({ path: 'src/content/docs/<section-name>/media/<doc-filename>/<image-short-name>.png' });
     await browser.close();
   })();
 "
 ```
 
-Astro automatically optimizes images at build time (PNG → WebP, responsive `srcset`), so don't precompress.
-
 To reference the screenshot from a `.md` file, use the following link:
 
 ```markdown
-:::image type="content" source="../../../content/docs/`<section-name>`/media/`<screenshot-name>`.png" alt-text="Screenshot that shows `<screenshot-description>`." lightbox="../../../assets/content/docs/`<section-name>`/media/`<screenshot-name>`.png":::
+:::image type="content" source="media/`<doc-filename>`/`<image-short-name>`.png" alt-text="Screenshot that shows `<ux-description>`." lightbox="media/`<doc-filename>`/`<image-short-name>`.png":::
 ```
 
 ### Add a video
 
-Videos use the **`<Video>` Astro component** at [`src/components/Video.astro`](./src/components/Video.astro), which wraps the [Plyr](https://plyr.io) player. One component, three source kinds — Plyr's
-JS + CSS lazy-load only on pages that actually contain a video.
+Videos use the **`<Video>` Astro component** at [`src/components/Video.astro`](./src/components/Video.astro), which wraps the [Plyr](https://plyr.io) player. One component, three source kinds — Plyr's JS + CSS lazy-load only on pages that actually contain a video.
 
 #### What `<Video>` gives you
 
@@ -207,8 +269,7 @@ JS + CSS lazy-load only on pages that actually contain a video.
 
 #### Usage
 
-The component requires an **MDX** file. If your target page is `.md`, rename it
-to `.mdx` first (the file path / URL stays the same).
+The component requires an **MDX** file. If your target page is `.md`, rename it to `.mdx` first (the file path / URL stays the same).
 
 ```mdx
 import Video from '../../../components/Video.astro';
@@ -244,14 +305,11 @@ Props:
 | > 60 s or > 25 MB | YouTube unlisted / Vimeo / Azure Blob | Keep the repo lean; get a real CDN + transcoding. |
 | Sensitive / private | Azure Blob in the canary RG (private container + signed URL), or Vimeo private | Stay inside the boundary. |
 
-See [`public/videos/README.md`](./public/videos/README.md) for size / encoding
-conventions (1080p H.264, `+faststart`, ≤ 25 MB) and an `ffmpeg` cookbook for
-re-encoding screen captures.
+See [`public/videos/README.md`](./public/videos/README.md) for size / encoding conventions (1080p H.264, `+faststart`, ≤ 25 MB) and an `ffmpeg` cookbook for re-encoding screen captures.
 
 #### The summary walk-through on the landing page
 
-[`src/content/docs/index.mdx`](./src/content/docs/index.mdx) reserves a
-commented-out `<Video>` block for the platform walk-through. To enable it:
+[`src/content/docs/index.mdx`](./src/content/docs/index.mdx) reserves a commented-out `<Video>` block for the platform walk-through. To enable it:
 
 1. Drop `public/videos/overview.mp4` (and optional `overview-poster.png`).
 2. Un-comment the block — that's it.
@@ -260,9 +318,7 @@ Or replace the `src` with a YouTube watch URL.
 
 #### Per-feature videos
 
-Same pattern. Rename the feature page from `.md` to `.mdx`, import the
-component, and drop the `<Video>` block right under the page summary so the
-video lands above the fold.
+Same pattern. Rename the feature page from `.md` to `.mdx`, import the component, and drop the `<Video>` block right under the page summary so the video lands above the fold.
 
 ```mdx
 ---
@@ -283,10 +339,7 @@ The **AI workflow assistant** is the fastest path from idea to running workflow�
 
 ### Add a demo (video walk-through page)
 
-The **Demos** section (`src/content/docs/demos/`) hosts dedicated pages for
-each video walk-through. Each demo gets its own page so it can carry context
-(what's in the video, jump-to-the-right-minute table, "where to go after
-watching" links) and so it's reachable via the sidebar and search.
+The **Demos** section (`src/content/docs/demos/`) hosts dedicated pages for each video walk-through. Each demo gets its own page so it can carry context (what's in the video, jump-to-the-right-minute table, "where to go after watching" links) and so it's reachable via the sidebar and search.
 
 #### Add a new demo
 
@@ -321,16 +374,12 @@ watching" links) and so it's reachable via the sidebar and search.
 | Self-hosted MP4 in `public/videos/`, YouTube unlisted, Vimeo, or any URL that allows iframe embedding | `<Video src="…" title="…" />` — inline Plyr player |
 | SharePoint personal-share, Stream-on-SharePoint *share* URL, or anywhere that sets `X-Frame-Options` | A styled link-out button (the iframe would render an X-Frame-Options error page) |
 
-The platform-overview demo is currently a link-out because the asset lives
-on personal SharePoint; the code carries a commented-out `<Video>` block
-ready to swap in when the asset moves to an embeddable host.
+The platform-overview demo is currently a link-out because the asset lives on personal SharePoint; the code carries a commented-out `<Video>` block ready to swap in when the asset moves to an embeddable host.
 
 #### Use aka.ms / stable shortlinks
 
-For demo URLs, prefer an `aka.ms/...` shortlink over the raw asset URL. The
-redirect target can change without touching the docs (e.g. when the video
-moves from SharePoint to YouTube to a custom domain), and the link in the
-docs keeps working.
+For demo URLs, prefer an `aka.ms/...` shortlink over the raw asset URL. The redirect target can change without touching the docs (e.g. when the video
+moves from SharePoint to YouTube to a custom domain), and the link in the docs keeps working.
 
 #### Troubleshooting
 
@@ -341,14 +390,6 @@ docs keeps working.
 | Self-hosted MP4 won't seek | The source server must serve `Accept-Ranges: bytes`. SWA does this automatically for `/docs/videos/*` via `staticwebapp.config.json`. External hosts may not. |
 | Captions don't appear | Plyr expects `<track kind="captions">` inside the `<video>`. Add a `.vtt` file to `public/videos/` and pass a `<track>` slot (component currently doesn't expose this — extend `Video.astro` if you need it). |
 | Page loads slower after adding a video | Expected only on pages with a video — Plyr lazy-loads (~33 KB gz). Pages without a video are untouched. |
-
-### Update an existing page
-
-Edit it. Hot-reload picks it up. Run `npm run check` before pushing.
-
-### Hide a page from the sidebar (keep it reachable by URL)
-
-Add `sidebar: { hidden: true }` to the page's frontmatter.
 
 ---
 
@@ -388,31 +429,6 @@ hero:                       # only with template: splash
       variant: primary
 ---
 ```
-
----
-
-## Conventions
-
-- **Sentence-case** headings — "Get started", not "Get Started".
-- **No gerunds** headings - "Get started", not "Getting started".
-- **Imperative voice** for instructions — "Run the build", not "You should run the build".
-- **Site-absolute paths** with trailing slash for cross-links:
-  `[Quickstart](/getting-started/quickstart/)`.
-- **Relative paths** for images, three levels up from a content file:
-  `![…](../../../assets/portal/01-login.png)`.
-- **Callouts** sparingly:
-
-  ```markdown
-  :::note     informational
-  :::tip      helpful nudges
-  :::caution  heads-up
-  :::danger   hard warning
-  ```
-
-- **Code blocks** get a `title="…"` attribute when referring to a real file.
-- **Tabs / cards** require renaming the file to `.mdx` and importing Starlight
-  components.
-- Keep the voice **product-neutral** — don't reference internal codenames.
 
 ---
 
@@ -461,7 +477,7 @@ This section is a structured map for AI agents working on the docs.
 - [ ] `sidebar.order` is set if order matters (lower = earlier).
 - [ ] Body starts at H2 (the H1 comes from frontmatter `title`).
 - [ ] Internal links are site-absolute with trailing slash.
-- [ ] Image paths use `../../../assets/...` from a content file.
+- [ ] Image paths use `media/<doc-filename>/...` from a content file.
 - [ ] Voice is sentence-case, imperative, product-neutral.
 - [ ] `npm run check` passes (no broken links, no frontmatter errors).
 - [ ] `npm run build` succeeds.
@@ -483,9 +499,8 @@ This section is a structured map for AI agents working on the docs.
    ```
 
 3. Open with a 1-paragraph summary; break into H2 sections below.
-4. Add the page to the table in `features/overview.md`.
-5. Cross-link from any related feature page.
-6. Run `npm run check && npm run build`.
+4. Cross-link from any related feature page.
+5. Run `npm run check && npm run build`.
 
 **Cut a release note.**
 

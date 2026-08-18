@@ -38,8 +38,8 @@ The following table describes project contents in more detail:
 | Item | Description |
 |------|-------------|
 | [Apps](#apps) | The deployable package for your workflows, connections, parameters, analytics data, and app settings. |
-| [Knowledge](knowledge-bases) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
-| [Sandboxes](sandboxes) | The isolated micro, virtual machine, compute environments where workflow agents run code and can optionally use cloned repos and skills. |
+| [Knowledge](/features/knowledge-bases/) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
+| [Sandboxes](/features/sandboxes/) | The isolated micro, virtual machine, compute environments where workflow agents run code and can optionally use cloned repos and skills. |
 | Settings | Project-level user permissions and environment variables. |
 
 ## Apps
@@ -52,7 +52,7 @@ The following table describes app contents in more detail:
 
 | Item | Description |
 |------|-------------|
-| [Workflows](workflows) | The automation workloads that exist in an app and include the starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
+| [Workflows](/features/workflows/) | The automation workloads that exist in an app and include the starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
 | Connections | The reusable, authenticated bindings that connect to external services such as Teams, SharePoint, and Service Bus. |
 | Parameters | The named values referenced in workflows like environment-specific URLs, timeouts, and feature flags. |
 | Analytics | Run trends, success and failure rates, and per-action latency. |
@@ -69,5 +69,5 @@ The following table describes app contents in more detail:
 
 ## Related content
 
-- [Setup](../getting-started/setup)
-- [Quickstart](../getting-started/quickstart)
+- [Set up](/getting-started/setup/)
+- [Quickstart](/getting-started/quickstart/)

@@ -8,11 +8,11 @@ sidebar:
 
 # Create apps and workflows
 
-In an automation project, an [*app*](introduction.md#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
+In an automation project, an [*app*](/getting-started/introduction#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
 
 To keep each group of related automations self-contained in your project, create one app per logical workload or related workflows, for example, `order-processing` or `daily-reports`.
 
-In an app, each [*workflow*](introduction.md#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](introduction.md#key-components-and-concepts), followed by the steps to run, or [*actions*](introduction.md#key-components-and-concepts).
+In an app, each [*workflow*](/getting-started/introduction#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](/getting-started/introduction#key-components-and-concepts), followed by the steps to run, or [*actions*](/getting-started/introduction#key-components-and-concepts).
 
 When you build a business process automation, you want to define the business logic only once, and then run the automation reliably and autonomously with human oversight when necessary. For example, some automation tasks might include routing notifications, running operations in various services or systems, or monitoring data feeds. 
 
@@ -42,7 +42,7 @@ You can later use the workflow as a template and swap in what you actually want 
 
 ## 1. Open your project
 
-1. Sign to the [Azure Logic Apps Automation portal](https://auto.azure.com).
+1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
    The portal opens and shows every project where you have access. If you don't see the expected projects, contact the project creator-owner to check whether you have the correct permissions.
 
@@ -87,7 +87,7 @@ If your project doesn't include an app to store and organize workflows, follow t
 As the app creator, you automatically:
 
 - Become the app owner and appear in the **Owner** app property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](../features/permissions.md#app-roles) on the app resource.
+- Have [**Contributor** role permissions](/features/permissions#app-roles) on the app resource.
 
 App privacy works as follows:
 
@@ -99,7 +99,7 @@ App privacy works as follows:
 
   Apps often contain automations that connect to personal accounts. The default privacy model keeps sensitive data obscured and invisible to others unless the app creator-owner chooses otherwise.
 
-For more information, see [Permissions](permissions.md).
+For more information, see [Permissions](/features/permissions/).
 
 ## Add app members
 
@@ -107,7 +107,7 @@ To add team members to your app so they can build workflows, follow these steps:
 
 > [!NOTE]
 >
-> If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](../features/permissions).
+> If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](/features/permissions).
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), on the **Projects** page, select the project that contains your app.
 
@@ -144,7 +144,7 @@ To add team members to your app so they can build workflows, follow these steps:
 
 1. After the portal opens the designer, choose an option to start creating your workflow.
 
-   | Opation | Path |
+   | Option | Path |
    |---------|------|
    | **AI assistant** | Generate your workflow on the designer, based on your description about what the workflow does. <br><br>For more information, see [Generate workflow with assistant](#3a-generate-workflow-with-assistant). |
    | **Designer** | Add the trigger and each action from the connectors library. |
@@ -239,7 +239,7 @@ On the designer, the bottom toolbar gives you the following controls, which are 
 | **Add** | Add an operation anywhere on the designer. |
 | **Code** | View the raw underlying JSON alongside the designer. |
 | **Test** | Run the workflow with a test payload without publishing. |
-| **Copilot** | Open the AI assistant alonside the designer to iterate over you workflow. |
+| **Copilot** | Open the AI assistant alongside the designer to iterate over your workflow. |
 
 ## 4. Edit your workflow with AI or in code
 
@@ -249,7 +249,7 @@ To continue editing your workflow, you have the following options:
 
 - Describe your changes in natural language by opening the AI assistant.
 
-- Directly edit the workflow's underlying JSON definition by switching to the code editor. Changes stay synchronized between the code editor and the designer.
+- Directly edit the workflow's underlying JSON definition by switching to the code editor. Changes stay synchronized between the code editor and designer.
 
   The following example shows the AI assistant with instructions to edit a workflow:
 
@@ -292,7 +292,7 @@ To quickly find any missing configuration information while you work in draft mo
 
    :::image type="content" source="media/quickstart/draft-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, draft workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/draft-workflow-run-history.png":::
 
-For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](../features/workflows#triggers-that-fire-in-draft-versus-published-mode).
+For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](/features/workflows#triggers-that-fire-in-draft-versus-published-mode).
 
 ## 6. Publish draft to production
 
@@ -335,7 +335,7 @@ To run a published workflow and monitor the progress, follow these steps:
 
 ## 8. Examine the run history
 
-To explore the run history with more details, follow these steps:
+To explore the run history in more detail, follow these steps:
 
 1. On the **Runs** tab, select the run you want.
 
@@ -351,25 +351,11 @@ For example, you might ask the assistant to `add error handling to the HTTP acti
 
 The portal saves your changes in draft mode until you publish.
 
-## Troubleshoot problems
-
-| Problem | Try |
-|---------|-----|
-| **Sign in loop or single sign-on (SSO) error** | Clear your cookies for the following URLs, and sign in again: <br><br>- `https://auto.azure.com` <br>- `https://login.microsoftonline.com` |
-| **Portal appears empty** | Perform a hard refresh (Keyboard: `Cmd/Ctrl + Shift + R`). If the problem persists, [report a bug](/support/report-a-bug/). |
-
-| Problem | Cause | Resolution |
-|---------|-------|------------|
-| "I can't create an app." | You have the project **Reader** role. | Ask a project **Contributor** to upgrade you to project **Author** or **Contributor**. |
-| "I can't view any apps in the project." | By default, apps are private and invisible to others except the app creator-owner. | Ask the app owner to add you to the app, or make you a project **Contributor**, if you only need to view the app metadata for governance. |
-| "I can't manage permissions on apps." | You need the app **Contributor** role. | Ask the app owner or a **Contributor** to make you an app **Contributor**. |
-| "An app lost its owner." | When an app owner leaves your Microsoft Entra tenant, you get the following results: <br><br>- Existing members keep their access. <br><br>- Only the **Project Owner** can delete the app. <br><br>- The app still appears in the project's governance view. |
-| "I can't delete apps." | Only the app owner can delete their app. | Contact the app owner. If the owner is unavailable, and the app is orphaned, the project owner can delete orphaned apps. |
-
 ## Next steps
 
-- [Designer](../features/visual-designer/)
-- [AI assistant](../features/ai-assistant/)
-- [Connectors](../features/connectors/)
-- [Runs and monitoring](../features/runs-and-monitoring/)
-- [Report a bug](../support/report-a-bug/)
+- [Troubleshoot problems](/getting-started/troubleshoot/)
+- [Designer](/features/visual-designer/)
+- [AI assistant](/features/ai-assistant/)
+- [Connectors](/features/connectors/)
+- [Runs and monitoring](/features/runs-and-monitoring/)
+- [Report a bug](/support/report-a-bug/)

@@ -9,7 +9,7 @@ In Azure Logic Apps Automation, a *workflow* is an automation workload that begi
 
 You build a workflow by using the designer or the AI workflow assistant. The platform's runtime executes the workflow.
 
-To get started, see [Quickstart](../getting-started/quickstart).
+To get started, see [Quickstart](/getting-started/quickstart/).
 
 ## Stateful versus stateless
 
@@ -27,22 +27,22 @@ Here are some example triggers that can start a workflow:
 
 ## Actions
 
-Here are some example actions that can run in a worklow:
+Here are some example actions that can run in a workflow:
 
 | Action group | Action | Description |
 |---|---|---|
 | **HTTP** | **HTTP** | Send generic REST calls like `GET` or `POST`. |
 | **Control** | - **Condition** <br>- **Switch** <br>- **For each** <br>- **Until** | Change the flow based on meeting specific criteria. |
 | **Data Operations** | - **Compose** <br>- **Parse JSON** <br>- **Select** <br>- **Filter array** <br>- **Join** | Perform data shaping. |
-| **Variables** | - **Initliaze variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Store and manage variable values. |
+| **Variables** | - **Initialize variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Store and manage variable values. |
 | **Inline Code** | **Execute JavaScript code** | Run code snippets inline with your workflow. | 
 | Service provider-based | Service Bus, Azure Blob Storage, Azure Queues  | Run service-based operations natively and directly on the platform's runtime. |
-| Managed connectors | Outlook, SharePoint, Salesforce, and so on | Perform a task like **Send an email** or **Upload a file**. Run in global multi-tenant Azure. Usually requires a connection. |
-| [Agents](../features/agents/) | AI-driven actions with a system prompt and a toolset. |
+| Managed connectors | Outlook, SharePoint, Salesforce, and so on | Perform a task like **Send an email** or **Upload a file**. Run in global multitenant Azure. Usually requires a connection. |
+| [Agents](/features/agents/) | AI-driven actions with a system prompt and a toolset. |
 
 ## Expressions and dynamic content
 
-Trigger and action parameters accept literal values and calculated values. For calculated values, you can use an [*expression*](/azure/logic-apps/workflow-definition-language-schema#expressions) to call prebuilt [*functions*](/azure/logic-apps/expression-functions-reference) by using the platform's expression language. The same expression syntax works wherever you can specify a value, for example, in parameters, conditions, loops, and agent system prompts.
+Trigger and action parameters accept literal values and calculated values. For calculated values, use an [*expression*](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-schema#expressions) to call prebuilt [*functions*](https://learn.microsoft.com/azure/logic-apps/expression-functions-reference) by using the platform's expression language. The same expression syntax works wherever you can specify a value, for example, in parameters, conditions, loops, and agent system prompts.
 
 Here are some example expressions, which always start with the `@` character when you work with the underlying JSON, but aren't required when you work with the designer:
 
@@ -52,11 +52,11 @@ Here are some example expressions, which always start with the `@` character whe
 
 `@if(empty(variables('orders')), 'none', 'present')`
 
-Action parameters also accept *dynamic* output from preceding steps in the same workflow. The designer lets you select this output whereever you can specify a value. In the underlying JSON, this output appears as expressions such as `@triggerBody()` and `outputs('<action-name')`.
+Action parameters also accept *dynamic* output from preceding steps in the same workflow. The designer lets you select this output wherever you can specify a value. In the underlying JSON, this output appears as expressions such as `@triggerBody()` and `outputs('<action-name')`.
 
-## Javascript code actions
+## JavaScript code actions
 
-For logic that's hard to represent as an expression, you can add and run Javascript by using the **Inline Code** action named **Execute JavaScript code**. For example, tasks such as string parsing, complex data shaping, and multi-step calculation might require you to perform these tasks using code. The JavaScript action runs in a sandbox with the Node.js runtime, accepts JSON inputs from the workflow, and returns a value that subsquent workflow actions can use.
+For logic that's hard to represent as an expression, add and run JavaScript by using the **Inline Code** action named **Execute JavaScript code**. For example, you might need to use code for tasks such as string parsing, complex data shaping, and multistep calculation. The JavaScript action runs in a sandbox with the Node.js runtime, accepts JSON inputs from the workflow, and returns a value that subsequent workflow actions can use.
 
 > [!NOTE]
 >
@@ -93,7 +93,7 @@ For triggers that work in draft mode, you can experiment and quickly iterate by 
 
 - You can test any trigger that you can manually run.
 
-  The rule means you can iterate quickly on **Request**-based trigger workflows, and then publish after everything works as expected.
+  This rule means you can iterate quickly on **Request**-based trigger workflows, and then publish after everything works as expected.
 
 - You can only run time-based or event-based triggers in published mode.
 
@@ -118,12 +118,12 @@ The editor offers the following capabilities:
 |---|---|
 | IntelliSense (auto-complete) | Start typing in the editor to view matching action types, expression functions, and known properties from the workflow schema. To display the popup, press **Ctrl + Space** or **⌃ Space**. |
 | Function signature help | Start typing the function name to view the signature and parameter information. |
-| Parameter help | Move your mouse pointer over an parameter to view the type and description. |
+| Parameter help | Move your mouse pointer over a parameter to view the type and description. |
 | Schema-aware validation and diagnostics | Find invalid action types, malformed expressions, and missing required parameters, which appear underlined with a tooltip about the problem. |
 
 ## Related content
 
-- [Quickstart](../getting-started/quickstart.md#3-create-your-workflow)
-- [Visual designer](designer)
-- [AI assistant](ai-assistant)
-- [Connectors](connectors)
+- [Quickstart](/getting-started/quickstart#3-create-your-workflow)
+- [Visual designer](/features/designer/)
+- [AI assistant](/features/ai-assistant/)
+- [Connectors](/features/connectors/)

@@ -8,7 +8,7 @@ sidebar:
 
 ## Create projects to store apps and workflows
 
-When your team builds automation solutions, keep your apps, their workflows, connections, and other items organized, secure, and separate so that unrelated work don't cross boundaries. Otherwise, automation assets are harder to manage, govern, and scale as your team grows.
+When your team builds automation solutions, keep your apps, their workflows, connections, and other items organized, secure, and separate so that unrelated work doesn't cross boundaries. Otherwise, automation assets become harder to manage, govern, and scale as your team grows.
 
 In Azure Logic Apps Automation, a *project* is a top-level, isolated container that solves this problem by providing its own compute, networking, security, and governance. As your first step, create a project to store your apps and their contents. You can create a project per team, business area, or scenario so your teams can independently build and manage their automations.
 
@@ -16,16 +16,16 @@ Azure Logic Apps Automation organizes your work at the following levels:
 
 | Level | Contents |
 |-------|----------|
-| [*Project*](introduction.md#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the project creator and default owner, you control access and governance at this level. |
-| [*App*](introduction.md#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
-| [*Workflow*](introduction.md#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](introduction.md#key-components-and-concepts)) and the steps ([*actions*](introduction.md#key-components-and-concepts)) to run. |
+| [*Project*](/getting-started/introduction#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the project creator and default owner, you control access and governance at this level. |
+| [*App*](/getting-started/introduction#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
+| [*Workflow*](/getting-started/introduction#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](/getting-started/introduction#key-components-and-concepts)) and the steps ([*actions*](/getting-started/introduction#key-components-and-concepts)) to run. |
 
 This guide shows how to create a project if you don't have one yet and add team members to your project.
 
 For more information, see:
 
-- [What is Azure Logic Apps Automation](introduction.md)
-- [Key concepts and terminology](introduction.md#key-components-and-concepts)
+- [What is Azure Logic Apps Automation](/getting-started/introduction/)
+- [Key concepts and terminology](/getting-started/introduction#key-components-and-concepts)
 
 ## Requirements
 
@@ -33,18 +33,18 @@ For more information, see:
 
   > [!NOTE]
   >
-  > You need an Azure subscription only to create projects. Make sure that your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
+    > You need an Azure subscription only to create projects. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
 - To add a team member to your project and for them to create apps and workflows, they need the following items:
 
   - A Microsoft work or school account in your Microsoft Entra tenant. No Azure subscription necessary.
   - Access to the automation portal.
 
-  For more information about Microsoft Entra tenants, see [Tenant configurations](/entra/identity-platform/v2-overview#tenant-configurations).
+  For more information about Microsoft Entra tenants, see [Tenant configurations](https://learn.microsoft.com/entra/identity-platform/v2-overview#tenant-configurations).
 
 ## Create your project
 
-1. Sign to the [Azure Logic Apps Automation portal](https://auto.azure.com) with your Azure account.
+1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com) with your Azure account.
 
    :::image type="content" source="media/setup/sign-in.png" alt-text="Screenshot shows the Azure Logic Apps Automation portal home page for sign in." lightbox="media/setup/sign-in.png":::
 
@@ -55,7 +55,7 @@ For more information, see:
    | Property | Description |
    |----------|-------------|
    | **Subscription** | Your Azure subscription. |
-   | **Resource group** | The [Azure resource group](/azure/azure-resource-manager/management/overview#terminology) for organizing your project resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
+   | **Resource group** | The [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your project resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
    | **Region** | The Azure region closest to your end users or the components that your workflows need to use. |
    | **Name** | A unique project name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
 
@@ -69,21 +69,21 @@ For more information, see:
 
 1. Before others can work in your project to create apps and workflows, [add them as project members](#add-project-members).
 
-1. Before you or others can start building workflows, [create an app](quickstart.md#2-create-an-app) as a deployable package for your workflows.
+1. Before you or others can start building workflows, [create an app](/getting-started/quickstart#2-create-an-app) as a deployable package for your workflows.
 
 ## Project ownership and privacy
 
 As the project creator, you automatically:
 
 - Become the project owner and appear in the **Project Owner** project property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](../features/permissions.md#project-roles) on the project resource.
+- Have [**Contributor** role permissions](/features/permissions#project-roles) on the project resource.
 - Have administrator-level permissions to delete the project and its resources, such as apps or sandboxes, including items you don't own. Non-owner members with the **Contributor** role can't perform these tasks.
 
-For more information, see [Permissions](permissions.md).
+For more information, see [Permissions](/features/permissions/).
 
 ## Add project members
 
-Before others can create apps and workflows in your project, follow these steps to add them as project members:
+Before others can create apps and workflows in your project, add them as project members:
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), find and open your project.
 
@@ -117,5 +117,5 @@ Before others can create apps and workflows in your project, follow these steps 
 
 ## Next
 
-- [**Quickstart**](/getting-started/quickstart/)
-- [**Troubleshoot problems**](/getting-started/troubleshoot/)
+- [Quickstart](/getting-started/quickstart/)
+- [Troubleshoot problems](/getting-started/troubleshoot/)
