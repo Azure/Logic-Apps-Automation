@@ -42,7 +42,7 @@ In Azure Logic Apps Automation, create a [*knowledge base*](/features/knowledge-
 
 ## Create a knowledge base
 
-Before you can attach a knowledge base to your agent, other than files to upload, create the knowledge base or add an existing source to your project. 
+Before you can attach a knowledge base to your agent, other than files to upload, create the knowledge base or add an existing knowledge source to your project. 
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
 
@@ -50,11 +50,33 @@ Before you can attach a knowledge base to your agent, other than files to upload
 
 1. Select **Add file** or **Add knowledge source** > **Add file**.
 
+   :::image type="content" source="media/create-knowledge-bases/create-knowledge-base.png" alt-text="Screenshot shows the Add file box for the knowledge base name and description." lightbox="media/create-knowledge-bases/create-knowledge-base.png":::
+
    1. Enter a name and description for your knowledge base.
 
    1. Drag or browse and select the files you want. Select **Add file**.
 
-## Attach a knowledge source
+   :::image type="content" source="media/create-knowledge-bases/add-file.png" alt-text="Screenshot shows the Add file box for the knowledge base name and description." lightbox="media/create-knowledge-bases/add-file.png":::
+
+## Add another knowledge base
+
+To add another knowledge base when you have existing ones, follow these steps:
+
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
+
+1. On the project sidebar, select **Knowledge**.
+
+   The portal opens your existing knowledge base.
+
+1. In the **Knowledge** section, select **Add file**.
+
+1. In the **Add file** box, for **Knowledge Hub**, select **Create new**.
+
+   1. Enter a name and description for your knowledge base.
+
+   1. Drag or browse and select the files you want. Select **Add file**.
+
+## Attach a knowledge source to your agent
 
 1. In your workflow, on the designer, select the agent action.
 

@@ -12,7 +12,7 @@ In Azure Logic Apps Automation, an *agent* is a workflow action that performs th
 - Follow system instructions that define the agent's role.
 - Call tools that complete the tasks needed to fulfill the requests.
 
-An agent can also run code and scripts, browse file systems, and operate on cloned repos with skills when you set up a *sandbox* where the agent can perform this work. This sandbox is an isolated compute environment with a micro virtual machine in your automation project.
+An agent can also run code and scripts, browse file systems, and operate on cloned repos with skills when you set up a [*sandbox*](/features/sandboxes/) where the agent can perform this work. This sandbox is an isolated compute environment with a micro virtual machine in your automation project.
 
 Like any other action, an agent produces structured outputs that subsequent workflow actions can use. However, an agent can accept freeform, unstructured, and unpredictable inputs.
 
@@ -91,18 +91,6 @@ Downstream workflow actions can reference the agent's outputs by using the follo
 - Spend time on tool descriptions, which matter more than names to help the model choose tools.
 - For long-running or expensive tools, set a timeout or iteration limit that matches the expected task difficulty. That way, a stuck tool doesn't burn up the agent's iteration budget.
 - Rather than reparse the agent's final answer, use the agent's structured outputs instead in subsequent workflow actions.
-
-## Agent run history
-
-After an agent loop completes, the monitoring view shows the [workflow run history](/features/runs-and-monitoring/) with each iteration in its own entry. The chat history shows the full conversation:
-
-- Each user message.
-- Each tool call that the model makes, including the arguments.
-- Each tool's inputs and outputs.
-- The duration for each step.
-- The model's final answer.
-
-This view helps you more easily answer the question "Why did the agent do that", compared to viewing the same data in the agent action's outputs alone.
 
 ## Native agent tools
 
@@ -184,6 +172,18 @@ An agent can use both the [code interpreter](#code-interpreter) tool and [custom
 | Send daily report | `code_interpreter` (aggregate) → `Send_Email` |
 | Extract, Transform, Load (ETL) | `Query_Database` → `code_interpreter` (transform) → `Insert_Records` |
 | API submission | `code_interpreter` (validate) → `HTTP_Request` (submit) → `code_interpreter` (parse response) |
+
+## Agent run history
+
+After an agent loop completes, the monitoring view shows the [workflow run history](/features/runs-and-monitoring/) with each iteration in its own entry. The chat history shows the full conversation:
+
+- Each user message.
+- Each tool call that the model makes, including the arguments.
+- Each tool's inputs and outputs.
+- The duration for each step.
+- The model's final answer.
+
+This view helps you more easily answer the question "Why did the agent do that", compared to viewing the same data in the agent action's outputs alone.
 
 ## Related content
 

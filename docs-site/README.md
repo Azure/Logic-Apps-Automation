@@ -78,8 +78,10 @@ docs-site/
             │   └── workflows.md
             ├── guides/            ← stub for how-tos (auto-shown when populated)
             │   ├── media/
-            |   |   └── create-knowledge-bases/  ← portal screenshots for related doc (lowercase)
-            │   └── create-knowledge-bases.md
+            |   |   ├── create-knowledge-bases/  ← portal screenshots for related doc (lowercase)
+            |   |   └── create-sandboxes/        ← portal screenshots for related doc (lowercase)
+            │   ├── create-knowledge-bases.md
+            │   └── create-sandboxes.md
             ├── reference/         ← stub for technical reference
             ├── release-notes/
             │   └── changelog.md
