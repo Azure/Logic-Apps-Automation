@@ -1,5 +1,5 @@
 ---
-title: Create sandboxes - Azure Logic Apps Automation
+title: Create sandboxes
 description: Create isolated virtual machine environments where agents can run code, optionally work with repositories, and invoke skills.
 sidebar:
   order: 3
@@ -8,13 +8,9 @@ sidebar:
     variant: tip
 ---
 
-# Create sandboxes for your project
+::: note This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 
 In Azure Logic Apps Automation, create a [*sandbox*](/features/sandboxes/) as an isolated compute environment where [agents](/features/agents/) can run code in workflows. 
-
-> [!NOTE]
->
-> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 
 ## Requirements
 
@@ -28,9 +24,7 @@ In Azure Logic Apps Automation, create a [*sandbox*](/features/sandboxes/) as an
 
 - **Contributor** or **Author** role on the [project resource](/features/projects-and-applications/#project) to create sandboxes.
 
-  > [!NOTE]
-  >
-  > The project **Reader** role doesn't have enough permissions to create sandboxes.
+  ::: note The project **Reader** role doesn't have enough permissions to create sandboxes.
 
   If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
 

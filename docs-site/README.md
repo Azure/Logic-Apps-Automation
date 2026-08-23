@@ -383,8 +383,7 @@ The platform-overview demo is currently a link-out because the asset lives on pe
 
 #### Use aka.ms / stable shortlinks
 
-For demo URLs, prefer an `aka.ms/...` shortlink over the raw asset URL. The redirect target can change without touching the docs (e.g. when the video
-moves from SharePoint to YouTube to a custom domain), and the link in the docs keeps working.
+For demo URLs, prefer an `aka.ms/...` shortlink over the raw asset URL. The redirect target can change without touching the docs, for example, when the video moves from SharePoint to YouTube to a custom domain, and the link in the docs keeps working.
 
 #### Troubleshooting
 

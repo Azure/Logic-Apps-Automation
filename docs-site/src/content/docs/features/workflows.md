@@ -1,5 +1,5 @@
 ---
-title: Workflows - Azure Logic Apps Automation
+title: Workflows
 description: Learn about workflow components and capabilities such as triggers, actions, expressions, code view, and IntelliSense.
 sidebar:
   order: 6
@@ -58,9 +58,7 @@ Action parameters also accept *dynamic* output from preceding steps in the same 
 
 For logic that's hard to represent as an expression, add and run JavaScript by using the **Inline Code** action named **Execute JavaScript code**. For example, you might need to use code for tasks such as string parsing, complex data shaping, and multistep calculation. The JavaScript action runs in a sandbox with the Node.js runtime, accepts JSON inputs from the workflow, and returns a value that subsequent workflow actions can use.
 
-> [!NOTE]
->
-> Use JavaScript actions sparingly. Most transformations are easier to parse and understand as a chain of actions. The JavaScript sandbox can't make network calls. For network-bound logic, use the **HTTP** action instead.
+:::note Use JavaScript actions sparingly. Most transformations are easier to parse and understand as a chain of actions. The JavaScript sandbox can't make network calls. For network-bound logic, use the **HTTP** action instead.
 
 ```js
 // Action: Inline JavaScript Code
@@ -83,9 +81,7 @@ The following table provides more information about draft versus published mode:
 | Identifier | **Draft** label | **Published** label |
 | Run history | Appears in the **Version** section under **Drafts** in monitoring view | Appears in the **Version** section under **Published** in monitoring view |
 
-> [!CAUTION]
->
-> When you publish your draft, you immediately replace the published version. No intermediate or separate "deploy" action exists. The next time when the trigger fires, the updated workflow runs. 
+:::caution  When you publish your draft, you immediately replace the published version. No intermediate or separate "deploy" action exists. The next time when the trigger fires, the updated workflow runs. 
 
 ### Experiments and fast iteration
 

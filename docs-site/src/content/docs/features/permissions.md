@@ -1,5 +1,5 @@
 ---
-title: Permissions - Azure Logic Apps Automation
+title: Permissions
 description: Learn about resource ownership and permissions for access to projects and apps.
 sidebar:
   order: 2
@@ -53,9 +53,7 @@ The following table describes the best role to choose when you add project membe
 | Create apps and shared resources | **Author** |
 | Only view project settings and shared resources | **Reader** |
 
-> [!NOTE]
->
-> For privacy and security reasons, project members can't automatically view apps or access app content unless they have the appropriate role on those apps.
+:::note For privacy and security reasons, project members can't automatically view apps or access app content unless they have the appropriate role on those apps.
 >
 > For more information, see:
 >
@@ -71,13 +69,11 @@ The following table describes app roles in detail:
 | **Contributor** | - View, create, and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Run, cancel, or resubmit workflow runs. <br>- Delete workflows. <br>- Manage app permissions. | Delete apps they don't own. |
 | **Reader** | - View workflows, connections, and parameters. <br>- View workflow run history. <br><br>**Tip**: Assign to app members for onboarding, demos, audits, and other tasks that don't need edit access. | - Create, edit, or delete anything. <br>- Run or cancel workflow runs. <br>- Manage app permissions. |
 
-> [!NOTE]
->
-> As a reminder, project owners and those with project-level **Contributor** roles can view all the apps and their metadata in a project. Project owners can delete any resource in their projects. However, project owners and contributors can't view, edit, or access workflow content, connections, and run history. This boundary lets administrators manage resources without viewing and accessing private data.
-> 
-> App members automatically get the project-level **Reader** role so they can find project-related resources. They can find the app in their **Shared with you** view.
->
-> By design, apps don't have the **Author** role. 
+- As a reminder, project owners and those with project-level **Contributor** roles can view all the apps and their metadata in a project. Project owners can delete any resource in their projects. However, project owners and contributors can't view, edit, or access workflow content, connections, and run history. This boundary lets administrators manage resources without viewing and accessing private data.
+
+- App members automatically get the project-level **Reader** role so they can find project-related resources. They can find the app in their **Shared with you** view.
+
+- By design, apps don't have the **Author** role. 
 
 For more information, see:
 

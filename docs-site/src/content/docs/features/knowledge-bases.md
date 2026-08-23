@@ -1,5 +1,5 @@
 ---
-title: Knowledge bases - Azure Logic Apps Automation
+title: Knowledge bases
 description: Learn about attaching external knowledge sources so agents can ground their answers in your data.
 sidebar:
   order: 9
@@ -8,23 +8,17 @@ sidebar:
     variant: tip
 ---
 
-# What are knowledge bases
-
-> [!NOTE]
->
-> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+:::note This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 
 In Azure Logic Apps Automation, a *knowledge base* is an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers. For more information, see [Create knowledge bases](/guides/create-knowledge-bases/).
 
-> [!NOTE]
->
-> The following items are under refinement:
->
-> - Document upload size and format limits.
-> - Per-source token budget controls.
-> - Granular permissions on which project members can attach a source.
->
-> If you encounter problems, [report a bug](/support/report-a-bug/) so your feedback can help shape future releases.
+The following items are under development:
+
+- Document upload size and format limits.
+- Per-source token budget controls.
+- Granular permissions on which project members can attach a source.
+
+  If you encounter problems, [report a bug](/support/report-a-bug/) so your feedback can help shape future releases.
 
 ## Supported source types
 

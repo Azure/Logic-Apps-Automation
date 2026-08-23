@@ -1,5 +1,5 @@
 ---
-title: Project structure - Azure Logic Apps Automation
+title: Project structure
 description: Learn about projects, apps, knowledge bases, sandboxes, and their relationships for organizing your work.
 sidebar:
   order: 1

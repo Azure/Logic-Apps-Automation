@@ -15,9 +15,7 @@ All the edits you make to a workflow stay in a *draft* version until you publish
 
 Before you publish, you can test draft workflows that start with the HTTP trigger or any manual-style trigger by providing a sample payload. For more information, see [Test for missing setup details](/getting-started/quickstart#5-test-for-missing-setup-details).
 
-> [!NOTE]
->
-> Schedule-based or event-driven workflows require you to publish them before they run. Their runs automatically appear in the run history after their triggers fire.
+:::note Schedule-based or event-driven workflows require you to publish them before they run. Their runs automatically appear in the run history after their triggers fire.
 
 ## Real-time run status streaming
 

@@ -1,5 +1,5 @@
 ---
-title: Agents - Azure Logic Apps Automation
+title: Agents
 description: Learn about AI agent actions for completing tasks in your workflow.
 sidebar:
   order: 8 
@@ -143,9 +143,7 @@ You can create custom tools for an agent to use by using a built-in or managed c
 | Description | The agent uses this description to choose the correct tool. |
 | Agent parameters | The agent uses these parameter names and descriptions as a schema to populate tool parameter arguments at run time. |
 
-> [!IMPORTANT]
->
-> The agent's reasoning process and accuracy at run time is only as good as your descriptions. Clearly and precisely specify what the tool does, when to call the tool, and what each parameter means.
+:::caution The agent's reasoning process and accuracy at run time is only as good as your descriptions. Clearly and precisely specify what the tool does, when to call the tool, and what each parameter means.
 
 #### Tool parameters
 
@@ -158,9 +156,7 @@ When the model calls an agent's custom tools, the model provides arguments based
 
 The `@agentParameters('<parameter-name>')` expression works as a bridge between the arguments that the model sends to the tool and the workflow that runs the tool. 
 
-> [!NOTE]
->
-> The function name uses camel case (`agentParameters()`) in both the standard expression language and JavaScript actions. For backward compatibility, the legacy lowercase format, `@agentparameters()`, also works in the standard expression language.
+:::note The function name uses camel case (`agentParameters()`) in both the standard expression language and JavaScript actions. For backward compatibility, the legacy lowercase format, `@agentparameters()`, also works in the standard expression language.
 
 ## Mix code interpreter and custom tools
 

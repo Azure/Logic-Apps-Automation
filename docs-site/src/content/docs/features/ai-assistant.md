@@ -1,5 +1,5 @@
 ---
-title: AI workflow assistant - Azure Logic Apps Automation 
+title: AI workflow assistant
 description: Learn how the AI assistant automates workflow creation by using natural language. The assistant designs, builds, and iterates over workflows with you.
 sidebar:
   order: 5

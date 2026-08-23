@@ -1,5 +1,5 @@
 ---
-title: Create knowledge bases - Azure Logic Apps Automation
+title: Create knowledge bases
 description: Create and attach external knowledge sources so agents can ground their answers in your data.
 sidebar:
   order: 2
@@ -8,21 +8,17 @@ sidebar:
     variant: tip
 ---
 
-# Create knowledge bases for your projects
+:::note This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 
 In Azure Logic Apps Automation, create a [*knowledge base*](/features/knowledge-bases/) as an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers.
 
-> [!NOTE]
->
-> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
->
-> The following items are under refinement:
->
-> - Document upload size and format limits.
-> - Per-source token budget controls.
-> - Granular permissions on which project members can attach a source.
->
-> If you encounter problems, [report a bug](/support/report-a-bug/) so your feedback can help shape future releases.
+The following items are under development:
+
+- Document upload size and format limits.
+- Per-source token budget controls.
+- Granular permissions on which project members can attach a source.
+
+If you encounter problems, [report a bug](/support/report-a-bug/) so your feedback can help shape future releases.
 
 ## Requirements
 
@@ -34,9 +30,7 @@ In Azure Logic Apps Automation, create a [*knowledge base*](/features/knowledge-
 
 - **Contributor** or **Author** role on the [project resource](/features/projects-and-applications/#project) to create knowledge bases.
 
-  > [!NOTE]
-  >
-  > The project **Reader** role doesn't have enough permissions to create knowledge bases.
+  ::: note The project **Reader** role doesn't have enough permissions to create knowledge bases.
 
   If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
 

@@ -31,7 +31,7 @@ export default defineConfig({
 		starlight({
 			title: 'Docs',
 			description:
-				'Build, automate, and ship workflows with a visual designer, an AI assistant, and a library of connectors.',
+				'Build, automate, and ship workflows with a visual designer, an AI assistant, and a connectors library.',
 			logo: {
 				src: './src/assets/logo.svg',
 				replacesTitle: false,

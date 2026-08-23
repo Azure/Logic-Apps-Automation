@@ -1,5 +1,5 @@
 ---
-title: Sandboxes - Azure Logic Apps Automation
+title: Sandboxes
 description: Learn about isolated virtual machine environments where agents can run code, optionally work with repositories, and invoke skills.
 sidebar:
   order: 10
@@ -8,11 +8,7 @@ sidebar:
     variant: tip
 ---
 
-# What are sandboxes
-
-> [!NOTE]
->
-> This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+:::note This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 
 In Azure Logic Apps Automation, a *sandbox* is an isolated compute environment where [agents](/features/agents/) can run code in workflows. This environment is a micro virtual machine image, powered by Azure Developer Compute, where your agent can perform the following tasks:
 

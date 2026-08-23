@@ -32,9 +32,7 @@ You can later use the workflow as a template and swap in what you actually want 
 
 - **Contributor** or **Author** role on the project resource to create apps and workflows.
 
-  > [!NOTE]
-  >
-  > The project **Reader** role doesn't have enough permissions to create apps.
+  :::note The project **Reader** role doesn't have enough permissions to create apps.
 
   If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
 
@@ -103,9 +101,7 @@ For more information, see [Permissions](/features/permissions/).
 
 To add team members to your app so they can build workflows, follow these steps:
 
-> [!NOTE]
->
-> If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](/features/permissions).
+:::note If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](/features/permissions).
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), on the **Projects** page, select the project that contains your app.
 
@@ -130,9 +126,7 @@ To add team members to your app so they can build workflows, follow these steps:
    | **Reader** (view only) | - View workflows, connections, and parameters. <br>- View workflow run history. | - Create, edit, or delete anything. <br>- Trigger or cancel workflow runs. |
    | **Contributor** | - View and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Trigger, cancel, and resubmit workflow runs. <br>- Manage app permissions. | Delete the app. (owner only) |
 
-   > [!NOTE]
-   >
-   > By design, the **Author** role is unavailable at the app level.
+   :::note By design, the **Author** role is unavailable at the app level.
 
 ## 3. Create your workflow
 
@@ -161,9 +155,7 @@ To add team members to your app so they can build workflows, follow these steps:
 
    :::image type="content" source="media/quickstart/generated-workflow.png" alt-text="Screenshot shows the workflow designer and assistant-generated workflow." lightbox="media/quickstart/generated-workflow.png":::
 
-   > [!NOTE]
-   >
-   > Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But it doesn't know your credentials or environment-specific values. Before your first workflow run succeeds, you need to complete any required follow-up tasks.
+   :::note Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But it doesn't know your credentials or environment-specific values. Before your first workflow run succeeds, you need to complete any required follow-up tasks.
 
 1. Complete any remaining follow-up tasks that your workflow needs to run successfully, for example:
 

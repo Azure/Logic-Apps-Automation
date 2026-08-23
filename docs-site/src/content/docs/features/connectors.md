@@ -1,5 +1,5 @@
 ---
-title: Connectors - Azure Logic Apps Automation
+title: Connectors
 description: Learn about prebuilt integrations that easily connect you to 1,400+ services, systems, SaaS apps, databases, and REST APIs.
 sidebar:
   order: 7

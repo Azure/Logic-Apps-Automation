@@ -29,9 +29,7 @@ For more information, see:
 
 - An Azure account and subscription that uses a Microsoft work or school account so you can create projects. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
 
-  > [!NOTE]
-  >
-    > You need an Azure subscription only to create projects. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
+  :::note You need an Azure subscription only to create projects. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
 - To add a team member to your project and for them to create apps and workflows, they need the following items:
 
@@ -59,9 +57,7 @@ For more information, see:
 
 1. When you finish, select **Create**.
 
-   > [!NOTE]
-   >
-   > The project creation process might take several minutes to finish.
+   :::note The project creation process might take several minutes to finish.
 
 1. After the portal creates your project, select your project.
 
@@ -105,13 +101,11 @@ Before others can create apps and workflows in your project, add them as project
    | **Author** | - Create apps, sandbox configurations, and shared resources. <br>- View the project settings, members list, and sandbox configurations. | - Edit the project settings and manage project members. <br>- View apps or their content without explicit app-level permissions. |
    | **Contributor** | - View and edit project settings, manage the project, and manage project members. <br>- Create apps, but view only metadata for others' apps. <br>- Create and edit sandbox configurations. <br>- View workflows, connections, and parameters. <br>- Create, edit, and delete workflows. <br>- Create and edit connections. <br>- View workflow run history. <br>- Trigger and cancel workflow runs. <br>- Manage app permissions. | - Delete the project (owner only). <br>- View app content without explicit app level permissions. |
 
-   > [!NOTE]
-   >
-   > By default, apps are always private, which means that only their creators (owners) can view and access their apps. They're invisible to other project members until the creator-owner explicitly shares them.
-   >
-   > Project contributors or owners can view app metadata for governance, but not the content. Apps often contain automation that connects to personal accounts. So, privacy by default keeps this data obscured unless explicitly shared.
-   >
-   > App owners or contributors can explicitly add members by granting app-level roles. To grant access to a specific app, open that app, go to **Settings**, **User permissions**, and add the member you want.
+   By default, apps are always private, which means that only their creators (owners) can view and access their apps. They're invisible to other project members until the creator-owner explicitly shares them.
+   
+   Project contributors or owners can view app metadata for governance, but not the content. Apps often contain automation that connects to personal accounts. So, privacy by default keeps this data obscured unless explicitly shared.
+   
+   sApp owners or contributors can explicitly add members by granting app-level roles. To grant access to a specific app, open that app, go to **Settings**, **User permissions**, and add the member you want.
 
 ## Next
 
