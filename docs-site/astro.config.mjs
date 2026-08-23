@@ -52,7 +52,7 @@ export default defineConfig({
 					items: [{ autogenerate: { directory: 'demos' } }],
 				},
 				{
-					label: 'Features',
+					label: 'Concepts',
 					items: [{ autogenerate: { directory: 'features' } }],
 				},
 				{

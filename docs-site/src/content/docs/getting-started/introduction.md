@@ -1,12 +1,10 @@
 ---
-title: Introduction - Azure Logic Apps Automation
+title: About Azure Logic Apps Automation
 description: Automate unpredictable business processes and create AI-driven, dynamic, and adaptable workflows with a designer, AI workflow assistant, and a connectors library by using Azure Logic Apps Automation.
 sidebar:
   order: 1
   label: Introduction
 ---
-
-# What is Azure Logic Apps Automation?
 
 When you need to automate unpredictable business processes or create AI-driven, agentic, and dynamically running workflows, Azure Logic Apps Automation gives you the power to create automations that don't follow fixed, deterministic paths. Start by describing what you want to automate in the AI assistant, or build one workflow component at a time in the designer. Connect the existing services, systems, apps, and data that you already use by choosing from 1,400+ prebuilt connectors. You can find all these capabilities by signing in to the [Azure Logic Apps Automation portal](https://auto.azure.com). You don't need to locally install or run any other tools on your computer.
 

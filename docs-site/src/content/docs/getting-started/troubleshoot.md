@@ -1,12 +1,10 @@
 ---
-title: Troubleshoot problems - Azure Logic Apps Automation
+title: Troubleshoot problemss
 description: Learn how to resolve common problems that might happen in Azure Logic Apps Automation.
 sidebar:
   order: 5
   label: Troubleshoot problems
 ---
-
-# Troubleshoot problems
 
 | Problem | Resolution |
 |---------|------------|

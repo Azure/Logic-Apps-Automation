@@ -1,12 +1,10 @@
 ---
-title: Set up - Azure Logic Apps Automation
+title: Set up
 description: Create projects to store your apps and workflows.
 sidebar:
   order: 2
   label: Set up
 ---
-
-## Create projects to store apps and workflows
 
 When your team builds automation solutions, keep your apps, their workflows, connections, and other items organized, secure, and separate so that unrelated work doesn't cross boundaries. Otherwise, automation assets become harder to manage, govern, and scale as your team grows.
 

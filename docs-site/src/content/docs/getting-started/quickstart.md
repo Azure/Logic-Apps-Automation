@@ -1,12 +1,10 @@
 ---
-title: Quickstart - Azure Logic Apps Automation
+title: Quickstart - Create apps and workflows
 description: Create AI-driven automations by building apps and workflows. Review workflow execution history.
 sidebar:
   order: 3
   label: Quickstart
 ---
-
-# Create apps and workflows
 
 In an automation project, an [*app*](/getting-started/introduction#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
 
