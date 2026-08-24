@@ -45,13 +45,13 @@ To view more details for a specific run, select that run.
 
 The **Execution log** opens and shows every workflow step in chronological order:
 
-:::image type="content" source="media/runs-and-monitoring/draft-run-history.png" alt-text="Screenshot shows example workflow run history with Monitoring tab that includes Execution log and other run details." lightbox="media/runs-and-monitoring/draft-run-history.png":::
+![Screenshot that shows example workflow run history with Monitoring tab that includes Execution log and other run details.](media/runs-and-monitoring/draft-run-history.png)
 
 To view the inputs and outputs for each operation, in the **Execution log**, select an operation. The panel to the right shows outputs, inputs, and properties. 
 
 The following example shows the output for a selected action:
 
-:::image type="content" source="media/runs-and-monitoring/action-output.png" alt-text="Screenshot shows the Execution log with selected sample action and example output." lightbox="media/runs-and-monitoring/action-output.png":::
+![Screenshot that shows the Execution log with selected sample action and example output.](media/runs-and-monitoring/action-output.png)
 
 For triggers, you can view the incoming or outgoing request, fire time, or queue message.
 
@@ -65,7 +65,7 @@ To rerun the workflow with the same trigger payload, on the run details header, 
 
 At the app level, on the sidebar, the **Analytics** page aggregates and shows workflow runs data as trends, such as success and failure rates, per-action latency, and recent failures with one-step drill-in view.
 
-:::image type="content" source="media/runs-and-monitoring/analytics.png" alt-text="{alt-text}" lightbox="media/runs-and-monitoring/analytics.png":::
+![Screenshot that shows the Analytics page with aggregated workflow run information.](media/runs-and-monitoring/analytics.png)
 
 The platform runtime emits standard logs and metrics that downstream observability tools, such as Azure Application Insights, Log Analytics, or your own security information and event management (SIEM) system can ingest. Set up rules and send alerts based on failure rates or latency thresholds for your production workflows.
 

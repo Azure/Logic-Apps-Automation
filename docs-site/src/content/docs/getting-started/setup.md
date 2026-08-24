@@ -44,7 +44,7 @@ For more information, see:
 
 1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com) with your Azure account.
 
-   :::image type="content" source="media/setup/sign-in.png" alt-text="Screenshot shows the Azure Logic Apps Automation portal home page for sign in." lightbox="media/setup/sign-in.png":::
+   ![Screenshot that shows the Azure Logic Apps Automation portal home page for sign in.](media/setup/sign-in.png)
 
 1. On the **Projects** tab, select **Create project**.
 

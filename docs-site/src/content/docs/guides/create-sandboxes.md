@@ -46,7 +46,7 @@ This sandbox provides the fastest and easiest way for you to try running code in
 
 1. In the action information window, select the **Agent harness** tab.
 
-   :::image type="content" source="media/create-sandboxes/agent-harness.png" alt-text="Screenshot shows the automation portal with an open project, app, and workflow in the designer. The coding agent is selected so the information pane is open and the Agent Harness tab is selected." lightbox="media/create-sandboxes/agent-harness.png":::
+   ![Screenshot that shows the automation portal with an open project, app, and workflow in the designer. The coding agent is selected so the information pane is open and the Agent Harness tab is selected.](media/create-sandboxes/agent-harness.png)
 
 1. Under **Execution environment**, for **Harness type**, select **GHCP (GitHub Copilot)** as the harness runtime to use for agent execution.
 
@@ -84,7 +84,7 @@ When your agent needs to work with your code repositories, set up a prebuilt dis
 
 1. On the project sidebar, select **Sandboxes**, and then select **Create**.
 
-   :::image type="content" source="media/create-sandboxes/create-sandbox.png" alt-text="Screenshot shows the automation portal with an open project, Sandboxes menu item selected and Create button selected." lightbox="media/create-sandboxes/create-sandbox.png":::
+   ![Screenshot that shows the automation portal with an open project, Sandboxes menu item selected and Create button selected.](media/create-sandboxes/create-sandbox.png)
 
 1. In the sandbox setup window, provide the following information:
 

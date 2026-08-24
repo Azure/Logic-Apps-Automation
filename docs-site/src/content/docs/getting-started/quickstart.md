@@ -44,13 +44,13 @@ You can later use the workflow as a template and swap in what you actually want 
 
    The portal opens and shows every project where you have access. If you don't see the expected projects, contact the project creator-owner to check whether you have the correct permissions.
 
-   ![Screenshot shows the portal and projects list.](media/quickstart/projects-list.png)
+   ![Screenshot that shows the portal and projects list.](media/quickstart/projects-list.png)
 
 1. On the **Projects** tab, select your project.
 
    The portal opens the project and shows the **Apps** page. The following example shows an empty project:
 
-   :::image type="content" source="media/quickstart/apps-list.png" alt-text="Screenshot shows an empty project without apps." lightbox="media/quickstart/apps-list.png":::
+   ![Screenshot that shows an empty project without apps.](media/quickstart/apps-list.png)
 
 1. If the project is empty, go to the next section to create an app. 
 
@@ -64,7 +64,7 @@ If your project doesn't include an app to store and organize workflows, follow t
 
 1. In the **Create application** box, for **Application name**, enter a name for your app, and select **Create**.
 
-   :::image type="content" source="media/quickstart/create-application-box.png" alt-text="Screenshot shows the Create application box with example app name." lightbox="media/quickstart/create-application-box.png":::
+   ![Screenshot that shows the Create application box with example app name.](media/quickstart/create-application-box.png)
 
    The portal might take a couple minutes to create your app.
 
@@ -74,8 +74,7 @@ If your project doesn't include an app to store and organize workflows, follow t
 
    The portal opens the app and shows the **Workflows** list. The following example shows an empty app:
 
-   ![Screenshot shows an empty app without workflows.](med
-ia/quickstart/workflows-list.png)
+   ![Screenshot that shows an empty app without workflows.](media/quickstart/workflows-list.png)
 
    At this point, only you can view the app and its contents. By design, the app is invisible to others except for the project owner and contributors who can view the app metadata.
 
@@ -157,14 +156,14 @@ If people need access to every app in the project, they need access at the proje
 
    The following example shows the AI assistant and a workflow description:
 
-   :::image type="content" source="media/quickstart/prompt-assistant.png" alt-text="Screenshot shows the workflow designer with AI assistant pane and workflow description." lightbox="media/quickstart/prompt-assistant.png":::
+   ![Screenshot that shows the workflow designer with AI assistant pane and workflow description.](media/quickstart/prompt-assistant.png)
 
    The following example shows the assistant-generated workflow:
 
-   :::image type="content" source="media/quickstart/generated-workflow.png" alt-text="Screenshot shows the workflow designer and assistant-generated workflow." lightbox="media/quickstart/generated-workflow.png":::
+   ![Screenshot that shows the workflow designer and assistant-generated workflow.](media/quickstart/generated-workflow.png)
 
-   :::note
-   Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But it doesn't know your credentials or environment-specific values. Before your first workflow run succeeds, you need to complete any required follow-up tasks.
+   :::important
+   Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But the assistant doesn't know your credentials or environment-specific values. Before you run your first workflow, complete any required follow-up tasks.
    :::
 
 1. Complete any remaining follow-up tasks that your workflow needs to run successfully, for example:
@@ -193,11 +192,11 @@ Every workflow starts with a trigger, which identifies the event or condition th
 
 1. On the empty designer, select **Add a trigger**.
 
-   :::image type="content" source="media/quickstart/empty-designer.png" alt-text="Screenshot shows the empty workflow designer and placeholder named Add a trigger." lightbox="media/quickstart/empty-designer.png":::
+   ![Screenshot that shows the empty workflow designer and placeholder named Add a trigger.](media/quickstart/empty-designer.png)
 
 1. When the **Add a trigger** pane opens, search or browse the triggers. Select the trigger you want. 
 
-   :::image type="content" source="media/quickstart/add-trigger.png" alt-text="Screenshot shows the empty workflow designer and the pane for Add a trigger." lightbox="media/quickstart/add-trigger.png":::
+   ![Screenshot that shows the empty workflow designer and the pane for Add a trigger.](media/quickstart/add-trigger.png)
 
    For example:
 
@@ -210,7 +209,7 @@ Every workflow starts with a trigger, which identifies the event or condition th
 
    Your selected trigger appears on the designer, like the following example:
    
-   :::image type="content" source="media/quickstart/added-trigger.png" alt-text="Screenshot shows the workflow designer and selected example trigger." lightbox="media/quickstart/added-trigger.png":::
+   ![Screenshot that shows the workflow designer and selected example trigger.](media/quickstart/added-trigger.png)
 
 ### Add an action
 
@@ -220,7 +219,7 @@ After the trigger, an action performs a specific task in the workflow.
 
 1. When the **Add an action** pane opens, search or browse the actions. Select the action you want. 
 
-   :::image type="content" source="media/quickstart/add-action.png" alt-text="Screenshot shows the workflow designer, an example trigger, and the pane for Add an action." lightbox="media/quickstart/add-action.png":::
+   ![Screenshot that shows the workflow designer, an example trigger, and the pane for Add an action.](media/quickstart/add-action.png)
 
 1. In the action information box, enter any required details for the action to work, and then close the box.
 
@@ -228,7 +227,7 @@ After the trigger, an action performs a specific task in the workflow.
 
    For actions that run in parallel, branches automatically appear on the designer. For example, the following workflow shows these branches and includes a final response back to the caller who sent the request:
 
-   :::image type="content" source="media/quickstart/branched-workflow.png" alt-text="Screenshot shows the workflow designer and completed branched workflow." lightbox="media/quickstart/branched-workflow.png":::
+   ![Screenshot that shows the workflow designer and completed branched workflow.](media/quickstart/branched-workflow.png)
 
 ### Other designer actions
 
@@ -253,17 +252,17 @@ To continue editing your workflow, you have the following options:
 
   The following example shows the AI assistant with instructions to edit a workflow:
 
-  :::image type="content" source="media/quickstart/edit-copilot.png" alt-text="Screenshot shows the workflow designer and Copilot pane with instructions in the chat box." lightbox="media/quickstart/edit-copilot.png":::
+  ![Screenshot that shows the workflow designer and Copilot pane with instructions in the chat box.](media/quickstart/edit-copilot.png)
 
   The following example shows the open code editor where you can directly edit a workflow's JSON definition:
 
-  :::image type="content" source="media/quickstart/code-view.png" alt-text="Screenshot shows the workflow designer and code editor side by side." lightbox="media/quickstart/code-view.png":::
+  ![Screenshot that shows the workflow designer and code editor side by side.](media/quickstart/code-view.png)
 
 ## 5. Test for missing setup details
 
 When you create or edit a workflow in the designer, you always work on a *draft* version. For example, note the **Draft** label on the designer's title bar:
 
-:::image type="content" source="media/quickstart/draft-label.png" alt-text="Screenshow shows the workflow designer and highlighted Draft label." lightbox=""media/quickstart/draft-label.png"":::
+![Screenshow shows the workflow designer and highlighted Draft label.](media/quickstart/draft-label.png)
 
 To quickly find any missing configuration information while you work in draft mode, you can test workflows that start with HTTP triggers. To test non-HTTP triggers, [first publish your draft](#6-publish-draft-to-production).
 
@@ -282,7 +281,7 @@ To quickly find any missing configuration information while you work in draft mo
 
    The following example shows the sample JSON body input:
 
-   :::image type="content" source="media/quickstart/test-draft-workflow-payload.png" alt-text="Screenshot shows the test draft workflow box with example JSON body input." lightbox="media/quickstart/test-draft-workflow-payload.png":::
+   ![Screenshot that shows the test draft workflow box with example JSON body input.](media/quickstart/test-draft-workflow-payload.png)
 
 1. After you finish, select **Test Draft**.
 
@@ -290,7 +289,7 @@ To quickly find any missing configuration information while you work in draft mo
 
    The following example shows a successful run, run history, execution log, and other information about each operation in the workflow run:
 
-   :::image type="content" source="media/quickstart/draft-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, draft workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/draft-workflow-run-history.png":::
+   ![Screenshot that shows Monitoring tab, draft workflow run progress, run history, execution log, and other run information.](media/quickstart/draft-workflow-run-history.png)
 
 For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](/features/workflows/#triggers-that-fire-in-draft-versus-published-mode).
 
@@ -302,7 +301,7 @@ To promote your draft workflow to production, follow these steps:
 
 1. To switch to the published workflow, next to **Publish**, from the vertical ellipses (**...**) menu, select **View published version**.
 
-   :::image type="content" source="media/quickstart/view-published-version.png" alt-text="Screenshot shows the Designer tab, Publish menu, and selected option for View published version." lightbox="media/quickstart/view-published-version.png":::
+   ![Screenshot that shows the Designer tab, Publish menu, and selected option for View published version.](media/quickstart/view-published-version.png)
 
 ## 7. Run and monitor your workflow
 
@@ -323,7 +322,7 @@ To run a published workflow and monitor the progress, follow these steps:
 
    The following example shows sample JSON body input and includes the automatically generated and callable endpoint URL, which you can use to call and trigger the workflow:
 
-   :::image type="content" source="media/quickstart/run-workflow-payload.png" alt-text="Screenshot shows the run workflow box and example JSON body input." lightbox="media/quickstart/run-workflow-payload.png":::
+   ![Screenshot that shows the run workflow box and example JSON body input.](media/quickstart/run-workflow-payload.png)
 
 1. After you finish, select **Run**.
 
@@ -331,7 +330,7 @@ To run a published workflow and monitor the progress, follow these steps:
 
    The following example shows a successful run, run history, execution log, and other information about each operation in the workflow run:
 
-   :::image type="content" source="media/quickstart/published-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, published workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/published-workflow-run-history.png":::
+   ![Screenshot that shows the Monitoring tab, published workflow run progress, run history, execution log, and other run information.](media/quickstart/published-workflow-run-history.png)
 
 ## 8. Examine the run history
 

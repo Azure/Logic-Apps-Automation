@@ -133,7 +133,7 @@ docs-site/
 - **Bullet lists** only for non-sequential items. For easy scanning and readability, put any series exceeding two items in a separate bullet list. Don't use for steps or instructions.
 - **Numbered lists** only for sequential series with steps or tasks. Don't use bullet lists.
 - **Site-absolute paths** with trailing slash for cross-links: `[Quickstart](/getting-started/quickstart/)`
-- **Relative paths** for images, organized in their own respective content file folder within a `media` folder  the parent section: `:::image type="content" source="media/<related-doc-filename>/<image-filename>.png" alt-text="Screenshot that shows <ux-description>." lightbox="media/<related-doc-filename>/<image-filename>.png":::`.
+- **Relative paths** for images, organized in their own respective content file folder within a `media` folder  the parent section: `![Screenshot that sshows <alt-text-ux-description>.](media/<related-doc-filename>/<image-filename>.png)`.
 - **Callouts** only for alerts - use sparingly. See [Alerts - Microsoft Learn](https://learn.microsoft.com/contribute/content/markdown-reference): 
 
   ```markdown
@@ -253,10 +253,10 @@ node -e "
 "
 ```
 
-To reference the screenshot from a `.md` file, use the following link:
+To reference the screenshot from a `.md` file, use the following link, replace placeholder text, and use the specified literal text:
 
 ```markdown
-:::image type="content" source="media/`<doc-filename>`/`<image-short-name>`.png" alt-text="Screenshot that shows `<ux-description>`." lightbox="media/`<doc-filename>`/`<image-short-name>`.png":::
+![Screenshot that shows <alt-text-ux-description>.](media/<related-doc-filename>/<image-filename>.png)
 ```
 
 ### Add a video

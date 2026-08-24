@@ -7,7 +7,7 @@ sidebar:
 
 In Azure Logic Apps Automation, the *designer* provides a visual drag-and-drop canvas where developers can shape workflows. Every workflow component, such as the trigger, each action, agent, and MCP server, has a parameters pane for inputs and settings, code view, and outputs view so you can easily move between the visual representation and the underlying JSON.
 
-:::image type="content" source="media/visual-designer/designer.png" alt-text="Screenshot that shows the designer with an example workflow." lightbox="media/visual-designer/designer.png":::
+![Screenshot that shows the designer with an example workflow.](media/visual-designer/designer.png)
 
 ## What you can build on the designer
 
@@ -25,7 +25,7 @@ The following table describes only some of the components that you can use on th
 
 The designer visually renders control flow constructs. For example, a workflow with a condition and parallel branches looks like the the following sample:
 
-:::image type="content" source="media/visual-designer/condition-branches.png" alt-text="Screenshot that shows the designer and example workflow with condtional and parallel branches." lightbox="media/visual-designer/condition-branches.png":::
+![Screenshot that shows the designer and example workflow with condtional and parallel branches.](media/visual-designer/condition-branches.png)
 
 ## View and edit component information
 
@@ -35,7 +35,7 @@ To view a component's parameters, code, or other information, on the designer, s
 
 To view the entire workflow's underlying JSON alongside the designer, on the bottom toolbar, select **Code**. Changes that you make in one view instantly appear in the other.
 
-:::image type="content" source="media/visual-designer/code-view.png" alt-text="Screenshot shows the designer alongside with the entire workflow's underlying JSON code view." lightbox="media/visual-designer/code-view.png":::
+![Screenshot that shows the designer alongside with the entire workflow's underlying JSON code view.](media/visual-designer/code-view.png)
 
 ## Save and run workflows
 

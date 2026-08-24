@@ -48,13 +48,13 @@ Before you can attach a knowledge base to your agent, other than files to upload
 
 1. Select **Add file** or **Add knowledge source** > **Add file**.
 
-   :::image type="content" source="media/create-knowledge-bases/create-knowledge-base.png" alt-text="Screenshot shows the Add file box for the knowledge base name and description." lightbox="media/create-knowledge-bases/create-knowledge-base.png":::
+   ![Screenshot that shows the Add file box for the knowledge base name and description.](media/create-knowledge-bases/create-knowledge-base.png)
 
    1. Enter a name and description for your knowledge base.
 
    1. Drag or browse and select the files you want. Select **Add file**.
 
-   :::image type="content" source="media/create-knowledge-bases/add-file.png" alt-text="Screenshot shows the Add file box for the knowledge base name and description." lightbox="media/create-knowledge-bases/add-file.png":::
+   ![Screenshot that shows the Add file box for the knowledge base name and description.](media/create-knowledge-bases/add-file.png)
 
 ## Add another knowledge base
 
