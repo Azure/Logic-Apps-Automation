@@ -8,7 +8,7 @@ sidebar:
 
 When you need to automate unpredictable business processes or create AI-driven, agentic, and dynamically running workflows, Azure Logic Apps Automation gives you the power to create automations that don't follow fixed, deterministic paths. Start by describing what you want to automate in the AI assistant, or build one workflow component at a time in the designer. Connect the existing services, systems, apps, and data that you already use by choosing from 1,400+ prebuilt connectors. You can find all these capabilities by signing in to the [Azure Logic Apps Automation portal](https://auto.azure.com). You don't need to locally install or run any other tools on your computer.
 
-For stable, repetitive processes with defined behavior and predictable steps, consider trying [Azure Logic Apps Standard or Consumption](https://learn.microsoft.com/azure/logic-apps/automation/compare-automation-services#compare-azure-logic-apps-automation-with-azure-logic-apps) instead.
+For stable, repetitive processes with defined behavior and predictable steps, consider trying [Azure Logic Apps Standard or Consumption](https://learn.microsoft.com/azure/logic-apps/automation/compare-automation-services#compare-azure-logic-apps-automation-with-azure-logic-apps).
 
 ## Why use Azure Logic Apps Automation
 
@@ -33,7 +33,7 @@ When your team's success is measured by outcomes, and each request can take a di
 
 For more information, see:
 
-- [What is Azure Logic Apps Automation on Microsoft Learn](https://learn.microsoft.com/azure/logic-apps/dynamic-workflow-automation-introduction)
+- [What is Azure Logic Apps Automation on Microsoft Learn](https://learn.microsoft.com/azure/logic-apps/automation/dynamic-workflow-automation-introduction)
 - [Compare automation services](https://learn.microsoft.com/azure/logic-apps/automation/compare-automation-services#compare-azure-logic-apps-automation-with-azure-logic-apps)
 
 ## Build workflows with AI or the designer
