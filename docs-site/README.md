@@ -96,6 +96,8 @@ docs-site/
 
 ## Conventions
 
+To make sure content uses consistent voice and other quality criteria as Microsoft Learn, review and follow these conventions. For questions, contact the content developer for Azure Logic Apps.
+
 - **Voice**
   - Professional, collegial, and constructive. See [Brand voice - Microsoft Learn](https://learn.microsoft.com/style-guide/brand-voice-above-all-simple-human).
   - Focus on customers and the problems they need to solve.
