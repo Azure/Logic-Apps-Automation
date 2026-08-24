@@ -103,6 +103,7 @@ docs-site/
   - Use active verbs for headings, not gerunds. For example, "Get started", not "Getting started".
   - Use imperative voice for customer steps. For example, "Run the build", not "You should run the build".
   - Use American English spelling.
+  - Follow [Accessiblity rules for UI interactions](https://learn.microsoft.com/en-us/style-guide/procedures-instructions/describing-interactions-with-ui). For example, use "select", not "click".
   - For more information, see:
     - [Top 10 steps for Microsoft Style and voice](https://learn.microsoft.com/style-guide/top-10-tips-style-voice#project-friendliness)
     - [Writing step-by-step instructions](https://learn.microsoft.com/style-guide/procedures-instructions/writing-step-by-step-instructions)
@@ -401,7 +402,7 @@ For demo URLs, prefer an `aka.ms/...` shortlink over the raw asset URL. The redi
 | Symptom | Try |
 | --- | --- |
 | Player doesn't render | Confirm the page is `.mdx` (not `.md`) and you imported `Video` from the right relative path. Check the browser console for the dynamic `import('plyr')` error. |
-| Poster shows but video won't play | Browser blocked autoplay (expected — Plyr respects this). User has to click play. |
+| Poster shows but video won't play | Browser blocked autoplay (expected — Plyr respects this). User has to select play. |
 | Self-hosted MP4 won't seek | The source server must serve `Accept-Ranges: bytes`. SWA does this automatically for `/docs/videos/*` via `staticwebapp.config.json`. External hosts may not. |
 | Captions don't appear | Plyr expects `<track kind="captions">` inside the `<video>`. Add a `.vtt` file to `public/videos/` and pass a `<track>` slot (component currently doesn't expose this — extend `Video.astro` if you need it). |
 | Page loads slower after adding a video | Expected only on pages with a video — Plyr lazy-loads (~33 KB gz). Pages without a video are untouched. |
@@ -473,12 +474,12 @@ This section is a structured map for AI agents working on the docs.
 | --- | --- |
 | Add a feature concept page | `src/content/docs/features/<slug>.md` |
 | Add a demo (video walk-through) page | `src/content/docs/demos/<slug>.mdx` — `.mdx` so it can import `<Video>`. See *Add a demo* below. |
-| Add a how-to recipe | `src/content/docs/guides/<slug>.md` |
+| Add a how-to article | `src/content/docs/guides/<slug>.md` |
 | Add a technical reference page | `src/content/docs/reference/<slug>.md` |
 | Update the changelog | `src/content/docs/release-notes/changelog.md` |
 | Update support entry points | `src/content/docs/support/{report-a-bug,feature-request}.md` |
 | Add a new sidebar group | `astro.config.mjs` — add entry to `sidebar` array |
-| Add a portal screenshot | `src/assets/portal/NN-name.png` |
+| Add a portal screenshot | `src/content/docs/<section-name>/media/<doc-file-name>/<image-file-name>.png` |
 | Add a video (self-hosted) | `public/videos/<name>.mp4` (+ optional `<name>-poster.png`); see `public/videos/README.md` for encoding |
 | Embed a video on a page | Rename target page to `.mdx`; `import Video from '../../../components/Video.astro';` then `<Video src="..." title="..." />`. Auto-detects MP4 vs YouTube vs Vimeo and wraps Plyr lazily. |
 | Update logo / favicon | `src/assets/logo.svg`, `public/favicon.svg` |
@@ -492,7 +493,7 @@ This section is a structured map for AI agents working on the docs.
 - [ ] `sidebar.order` is set if order matters (lower = earlier).
 - [ ] Body starts at H2 (the H1 comes from frontmatter `title`).
 - [ ] Internal links are site-absolute with trailing slash.
-- [ ] Image paths use `media/<doc-filename>/...` from a content file.
+- [ ] Image paths use `media/<doc-file-name>/...` from a content file.
 - [ ] Voice is sentence-case, imperative, product-neutral.
 - [ ] `npm run check` passes (no broken links, no frontmatter errors).
 - [ ] `npm run build` succeeds.
@@ -513,7 +514,7 @@ This section is a structured map for AI agents working on the docs.
    ---
    ```
 
-3. Open with a 1-paragraph summary; break into H2 sections below.
+3. Open with a 1-paragraph summary. Break into H2 sections below.
 4. Cross-link from any related feature page.
 5. Run `npm run check && npm run build`.
 
@@ -528,7 +529,7 @@ This section is a structured map for AI agents working on the docs.
 **Replace a portal screenshot.**
 
 1. Capture the new shot at `1440×900`, `deviceScaleFactor: 2`.
-2. Save with the **same filename** as the old one under `src/assets/portal/`
+2. Save with the **same filename** as the old one under `src/content/docs/<section-name>/media/<doc-file-name>/`
    — Astro re-optimises on the next build.
 
 **Embed a video (self-hosted MP4 or YouTube).**

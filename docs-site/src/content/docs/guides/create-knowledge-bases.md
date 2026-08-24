@@ -38,9 +38,9 @@ If you encounter problems, [report a bug](/support/report-a-bug/) so your feedba
 
   If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
 
-## Create a knowledge base
+## 1. Create a knowledge base
 
-Before you can attach a knowledge base to your agent, other than files to upload, create the knowledge base or add an existing knowledge source to your project. 
+Before you can attach a knowledge source to your agent, other than files to upload, create the knowledge base or add an existing knowledge source to your project. 
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
 
@@ -55,6 +55,8 @@ Before you can attach a knowledge base to your agent, other than files to upload
    1. Drag or browse and select the files you want. Select **Add file**.
 
    ![Screenshot that shows the Add file box for the knowledge base name and description.](media/create-knowledge-bases/add-file.png)
+
+1. Continue to [Attach a knowledge source to your agent](#attach-a-knowledge-source-to-your-agent).
 
 ## Add another knowledge base
 
@@ -74,7 +76,7 @@ To add another knowledge base when you have existing ones, follow these steps:
 
    1. Drag or browse and select the files you want. Select **Add file**.
 
-## Attach a knowledge source to your agent
+## 2. Attach a knowledge source to your agent
 
 1. In your workflow, on the designer, select the agent action.
 

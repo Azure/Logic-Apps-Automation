@@ -78,7 +78,7 @@ This sandbox provides the fastest and easiest way for you to try running code in
 
 When your agent needs to work with your code repositories, set up a prebuilt disk image that includes your cloned repositories and installed skills. You can then use this sandbox to set up your agent harness. Subsequent workflow runs spin up instances from this image to reduce cold starts.
 
-### Step 1 - Create the sandbox
+### 1. Create the sandbox
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
 
@@ -116,7 +116,7 @@ When your agent needs to work with your code repositories, set up a prebuilt dis
 
    When the build completes, the **State** property changes from **Building** to **Ready**.
 
-### Step 2 - Set up the agent with your sandbox
+### 2. Set up the agent with your sandbox
 
 1. In your project, open your app and your workflow.
 
