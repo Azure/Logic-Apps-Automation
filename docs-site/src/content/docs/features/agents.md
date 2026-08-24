@@ -145,6 +145,7 @@ You can create custom tools for an agent to use by using a built-in or managed c
 
 :::caution
 The agent's reasoning process and accuracy at run time is only as good as your descriptions. Clearly and precisely specify what the tool does, when to call the tool, and what each parameter means.
+:::
 
 #### Tool parameters
 

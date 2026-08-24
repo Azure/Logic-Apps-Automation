@@ -44,7 +44,7 @@ You can later use the workflow as a template and swap in what you actually want 
 
    The portal opens and shows every project where you have access. If you don't see the expected projects, contact the project creator-owner to check whether you have the correct permissions.
 
-   :::image type="content" source="media/quickstart/projects-list.png" alt-text="Screenshot shows the portal and projects list." lightbox="media/quickstart/projects-list.png":::
+   ![Screenshot shows the portal and projects list.](media/quickstart/projects-list.png)
 
 1. On the **Projects** tab, select your project.
 
@@ -74,7 +74,8 @@ If your project doesn't include an app to store and organize workflows, follow t
 
    The portal opens the app and shows the **Workflows** list. The following example shows an empty app:
 
-   :::image type="content" source="media/quickstart/workflows-list.png" alt-text="Screenshot shows an empty app without workflows." lightbox="media/quickstart/workflows-list.png":::
+   ![Screenshot shows an empty app without workflows.](med
+ia/quickstart/workflows-list.png)
 
    At this point, only you can view the app and its contents. By design, the app is invisible to others except for the project owner and contributors who can view the app metadata.
 

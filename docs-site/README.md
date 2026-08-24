@@ -124,7 +124,7 @@ docs-site/
   - "Managed identity", not "Managed service identity", "MSI, or "Managed Service Identity"
 - **Acronyms**
   - Avoid unless industry familiar and widely-understood, for example, "HTTP".
-  - Don't create or use for For Microsoft product and feature names. Always spell out to support search engine results.
+  - Don't create or use acronyms for Microsoft product and feature names. Always spell out to support search engine results.
   - See [Acronyms - Microsoft Learn](https://learn.microsoft.com/style-guide/acronyms).
 - **Formatting**
   - **Bold** only for UI or UX elements. See [UI elements](https://learn.microsoft.com/contribute/content/text-formatting-guidelines#ui-elements).
