@@ -6,11 +6,11 @@ sidebar:
   label: Quickstart
 ---
 
-In an automation project, an [*app*](/getting-started/introduction#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
+In an automation project, an [*app*](/getting-started/introduction/#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
 
 To keep each group of related automations self-contained in your project, create one app per logical workload or related workflows, for example, `order-processing` or `daily-reports`.
 
-In an app, each [*workflow*](/getting-started/introduction#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](/getting-started/introduction#key-components-and-concepts), followed by the steps to run, or [*actions*](/getting-started/introduction#key-components-and-concepts).
+In an app, each [*workflow*](/getting-started/introduction/#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](/getting-started/introduction/#key-components-and-concepts), followed by the steps to run, or [*actions*](/getting-started/introduction/#key-components-and-concepts).
 
 When you build a business process automation, you want to define the business logic only once, and then run the automation reliably and autonomously with human oversight when necessary. For example, some automation tasks might include routing notifications, running operations in various services or systems, or monitoring data feeds. 
 
@@ -32,7 +32,9 @@ You can later use the workflow as a template and swap in what you actually want 
 
 - **Contributor** or **Author** role on the project resource to create apps and workflows.
 
-  :::note The project **Reader** role doesn't have enough permissions to create apps.
+  :::note
+  The project **Reader** role doesn't have enough permissions to create apps.
+  :::
 
   If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
 
@@ -83,7 +85,8 @@ If your project doesn't include an app to store and organize workflows, follow t
 As the app creator, you automatically:
 
 - Become the app owner and appear in the **Owner** app property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](/features/permissions#app-roles) on the app resource.
+
+- Have [**Contributor** role permissions](/features/permissions/#app-roles) on the app resource.
 
 App privacy works as follows:
 
@@ -101,7 +104,9 @@ For more information, see [Permissions](/features/permissions/).
 
 To add team members to your app so they can build workflows, follow these steps:
 
-:::note If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](/features/permissions).
+:::note
+If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](/features/permissions).
+:::
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), on the **Projects** page, select the project that contains your app.
 
@@ -126,7 +131,9 @@ To add team members to your app so they can build workflows, follow these steps:
    | **Reader** (view only) | - View workflows, connections, and parameters. <br>- View workflow run history. | - Create, edit, or delete anything. <br>- Trigger or cancel workflow runs. |
    | **Contributor** | - View and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Trigger, cancel, and resubmit workflow runs. <br>- Manage app permissions. | Delete the app. (owner only) |
 
-   :::note By design, the **Author** role is unavailable at the app level.
+   :::note
+   By design, the **Author** role is unavailable at the app level.
+   :::
 
 ## 3. Create your workflow
 
@@ -155,7 +162,9 @@ To add team members to your app so they can build workflows, follow these steps:
 
    :::image type="content" source="media/quickstart/generated-workflow.png" alt-text="Screenshot shows the workflow designer and assistant-generated workflow." lightbox="media/quickstart/generated-workflow.png":::
 
-   :::note Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But it doesn't know your credentials or environment-specific values. Before your first workflow run succeeds, you need to complete any required follow-up tasks.
+   :::note
+   Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But it doesn't know your credentials or environment-specific values. Before your first workflow run succeeds, you need to complete any required follow-up tasks.
+   :::
 
 1. Complete any remaining follow-up tasks that your workflow needs to run successfully, for example:
 
@@ -282,7 +291,7 @@ To quickly find any missing configuration information while you work in draft mo
 
    :::image type="content" source="media/quickstart/draft-workflow-run-history.png" alt-text="Screenshot shows Monitoring tab, draft workflow run progress, run history, execution log, and other run information." lightbox="media/quickstart/draft-workflow-run-history.png":::
 
-For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](/features/workflows#triggers-that-fire-in-draft-versus-published-mode).
+For commonly-used triggers that fire in draft mode versus published mode, see [Workflows](/features/workflows/#triggers-that-fire-in-draft-versus-published-mode).
 
 ## 6. Publish draft to production
 

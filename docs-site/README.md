@@ -137,10 +137,21 @@ docs-site/
 - **Callouts** only for alerts - use sparingly. See [Alerts - Microsoft Learn](https://learn.microsoft.com/contribute/content/markdown-reference): 
 
   ```markdown
-  :::note     non-essential or non-mandatory helpful information
-  :::tip      optional hints or faster ways to achieve a goal
-  :::caution  alerts to actions with sub-optimal results, minor data interruptions, unintended but non-descrutive side effects
-  :::danger   alerts to actions that result in severe, harmful hazards, such as critical security vulnerabilites, permanent data loss, hardware damage, or system failure 
+  :::note    // Additional helpful information
+  <text>
+  :::
+  
+  :::tip     // Optional hints or faster ways to achieve a goal
+  <text>
+  :::
+
+  :::caution // Alerts to actions with sub-optimal results, minor data interruptions, unintended but non-descrutive side effects
+  <text>
+  :::
+
+  :::danger  // Alerts to actions that result in severe, harmful hazards, such as critical security vulnerabilites, permanent data loss, hardware damage, or system failure
+  <text>
+  :::
   ```
 
 - **Code blocks** get a `title="…"` attribute when referring to a real file.

@@ -46,7 +46,7 @@ If the service you want to connect doesn't have a prebuilt connector, use the bu
 
 ## Related content
 
-- [Quickstart](/getting-started/quickstart#3-create-your-workflow)
+- [Quickstart](/getting-started/quickstart/#3-create-your-workflow)
 - [Visual designer](/features/designer/)
 - [AI assistant](/features/ai-assistant/)
 - [Connectors](/features/connectors/)

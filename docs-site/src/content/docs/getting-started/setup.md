@@ -14,22 +14,24 @@ Azure Logic Apps Automation organizes your work at the following levels:
 
 | Level | Contents |
 |-------|----------|
-| [*Project*](/getting-started/introduction#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the project creator and default owner, you control access and governance at this level. |
-| [*App*](/getting-started/introduction#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
-| [*Workflow*](/getting-started/introduction#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](/getting-started/introduction#key-components-and-concepts)) and the steps ([*actions*](/getting-started/introduction#key-components-and-concepts)) to run. |
+| [*Project*](/getting-started/introduction/#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the project creator and default owner, you control access and governance at this level. |
+| [*App*](/getting-started/introduction/#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
+| [*Workflow*](/getting-started/introduction/#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](/getting-started/introduction/#key-components-and-concepts)) and the steps ([*actions*](/getting-started/introduction/#key-components-and-concepts)) to run. |
 
 This guide shows how to create a project if you don't have one yet and add team members to your project.
 
 For more information, see:
 
 - [What is Azure Logic Apps Automation](/getting-started/introduction/)
-- [Key concepts and terminology](/getting-started/introduction#key-components-and-concepts)
+- [Key concepts and terminology](/getting-started/introduction/#key-components-and-concepts)
 
 ## Requirements
 
 - An Azure account and subscription that uses a Microsoft work or school account so you can create projects. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
 
-  :::note You need an Azure subscription only to create projects. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
+  :::note
+  You need an Azure subscription only to create projects. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
+  :::
 
 - To add a team member to your project and for them to create apps and workflows, they need the following items:
 
@@ -57,20 +59,22 @@ For more information, see:
 
 1. When you finish, select **Create**.
 
-   :::note The project creation process might take several minutes to finish.
+   :::note
+   The project creation process might take several minutes to finish.
+   :::
 
 1. After the portal creates your project, select your project.
 
 1. Before others can work in your project to create apps and workflows, [add them as project members](#add-project-members).
 
-1. Before you or others can start building workflows, [create an app](/getting-started/quickstart#2-create-an-app) as a deployable package for your workflows.
+1. Before you or others can start building workflows, [create an app](/getting-started/quickstart/#2-create-an-app) as a deployable package for your workflows.
 
 ## Project ownership and privacy
 
 As the project creator, you automatically:
 
 - Become the project owner and appear in the **Project Owner** project property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](/features/permissions#project-roles) on the project resource.
+- Have [**Contributor** role permissions](/features/permissions/#project-roles) on the project resource.
 - Have administrator-level permissions to delete the project and its resources, such as apps or sandboxes, including items you don't own. Non-owner members with the **Contributor** role can't perform these tasks.
 
 For more information, see [Permissions](/features/permissions/).
