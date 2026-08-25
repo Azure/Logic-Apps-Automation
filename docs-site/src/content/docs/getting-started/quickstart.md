@@ -44,7 +44,7 @@ You can later use the workflow as a template and swap in what you actually want 
 
    The portal opens and shows every environment where you have access. If you don't see the expected environments, contact the environment creator-owner to check whether you have the correct permissions.
 
-   ![Screenshot that shows the portal and environments list.](media/quickstart/environments-list.png)
+   ![Screenshot that shows the portal and environments list.](media/quickstart/projects-list.png)
 
 1. On the **Environments** tab, select your environment.
 
