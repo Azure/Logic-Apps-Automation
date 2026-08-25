@@ -1,6 +1,6 @@
 ---
 title: Set up
-description: Create projects to store your apps and workflows.
+description: Create environments to store your apps and workflows.
 sidebar:
   order: 2
   label: Set up
@@ -8,17 +8,17 @@ sidebar:
 
 When your team builds automation solutions, keep your apps, their workflows, connections, and other items organized, secure, and separate so that unrelated work doesn't cross boundaries. Otherwise, automation assets become harder to manage, govern, and scale as your team grows.
 
-In Azure Logic Apps Automation, a *project* is a top-level, isolated container that solves this problem by providing its own compute, networking, security, and governance. As your first step, create a project to store your apps and their contents. You can create a project per team, business area, or scenario so your teams can independently build and manage their automations.
+In Azure Logic Apps Automation, an *environment* is a top-level, isolated container that solves this problem by providing its own compute, networking, security, and governance. As your first step, create an environment to store your apps and their contents. You can create an environment per team, business area, or scenario so your teams can independently build and manage their automations.
 
 Azure Logic Apps Automation organizes your work at the following levels:
 
 | Level | Contents |
 |-------|----------|
-| [*Project*](/getting-started/introduction/#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the project creator and default owner, you control access and governance at this level. |
+| [*Environment*](/getting-started/introduction/#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the environment creator and default owner, you control access and governance at this level. |
 | [*App*](/getting-started/introduction/#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
 | [*Workflow*](/getting-started/introduction/#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](/getting-started/introduction/#key-components-and-concepts)) and the steps ([*actions*](/getting-started/introduction/#key-components-and-concepts)) to run. |
 
-This guide shows how to create a project if you don't have one yet and add team members to your project.
+This guide shows how to create an environment if you don't have one yet and add team members to your environment.
 
 For more information, see:
 
@@ -27,65 +27,65 @@ For more information, see:
 
 ## Requirements
 
-- An Azure account and subscription that uses a Microsoft work or school account so you can create projects. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
+- An Azure account and subscription that uses a Microsoft work or school account so you can create environments. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
 
   :::note
-  You need an Azure subscription only to create projects. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
+  You need an Azure subscription only to create environments. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
   :::
 
-- To add a team member to your project and for them to create apps and workflows, they need the following items:
+- To add a team member to your environment and for them to create apps and workflows, they need the following items:
 
   - A Microsoft work or school account in your Microsoft Entra tenant. No Azure subscription necessary.
   - Access to the automation portal.
 
   For more information about Microsoft Entra tenants, see [Tenant configurations](https://learn.microsoft.com/entra/identity-platform/v2-overview#tenant-configurations).
 
-## Create your project
+## Create your environment
 
 1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com) with your Azure account.
 
    ![Screenshot that shows the Azure Logic Apps Automation portal home page for sign in.](media/setup/sign-in.png)
 
-1. On the **Projects** tab, select **Create project**.
+1. On the **Environments** tab, select **Create environment**.
 
-1. In the **Create automation project** box, provide the following information:
+1. In the **Create automation environment** box, provide the following information:
 
    | Property | Description |
    |----------|-------------|
    | **Subscription** | Your Azure subscription. |
-   | **Resource group** | The [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your project resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
+   | **Resource group** | The [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your environment resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
    | **Region** | The Azure region closest to your end users or the components that your workflows need to use. |
-   | **Name** | A unique project name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
+   | **Name** | A unique environment name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
 
 1. When you finish, select **Create**.
 
    :::note
-   The project creation process might take several minutes to finish.
+   The environment creation process might take several minutes to finish.
    :::
 
-1. After the portal creates your project, select your project.
+1. After the portal creates your environment, select your environment.
 
-1. Before others can work in your project to create apps and workflows, [add them as project members](#add-project-members).
+1. Before others can work in your environment to create apps and workflows, [add them as environment members](#add-environment-members).
 
 1. Before you or others can start building workflows, [create an app](/getting-started/quickstart/#2-create-an-app) as a deployable package for your workflows.
 
-## Project ownership and privacy
+## Environment ownership and privacy
 
-As the project creator, you automatically:
+As the environment creator, you automatically:
 
-- Become the project owner and appear in the **Project Owner** project property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](/features/permissions/#project-roles) on the project resource.
-- Have administrator-level permissions to delete the project and its resources, such as apps or sandboxes, including items you don't own. Non-owner members with the **Contributor** role can't perform these tasks.
+- Become the environment owner and appear in the **Owner** environment property, which is a property, not a permission level. You can't clear or remove this property value.
+- Have [**Contributor** role permissions](/features/permissions/#environment-roles) on the environment resource.
+- Have administrator-level permissions to delete the environment and its resources, such as apps or sandboxes, including items you don't own. Non-owner members with the **Contributor** role can't perform these tasks.
 
 For more information, see [Permissions](/features/permissions/).
 
-## Add project members
+## Add environment members
 
-Before others can create apps and workflows in your project, add them as project members:
+Before others can create apps and workflows in your environment, add them as environment members:
 
-1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), find and open your project.
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), find and open your environment.
 
-1. On your project home page, on the sidebar, select **Settings**.
+1. On your environment home page, on the sidebar, select **Settings**.
 
 1. In the **Users** section, select **Add user**.
 
@@ -97,17 +97,17 @@ Before others can create apps and workflows in your project, add them as project
 
 1. After the **Role** section appears, select the role the person needs, based on the principle of least privilege, and then select **Add**.
 
-   The following table describes the available roles at the project level, what they can do, and what they can't do:
+   The following table describes the available roles at the environment level, what they can do, and what they can't do:
 
    | Role | Can | Can't |
    |------|-----|-------|
-   | **Reader** (view only) | - View only the project settings, members list, sandbox configurations, and shared resources. <br>- View workflow run history. | - Create, edit, or delete anything. <br>- View apps. <br>- Trigger or cancel workflow runs. <br>- Manage permissions. |
-   | **Author** | - Create apps, sandbox configurations, and shared resources. <br>- View the project settings, members list, and sandbox configurations. | - Edit the project settings and manage project members. <br>- View apps or their content without explicit app-level permissions. |
-   | **Contributor** | - View and edit project settings, manage the project, and manage project members. <br>- Create apps, but view only metadata for others' apps. <br>- Create and edit sandbox configurations. <br>- View workflows, connections, and parameters. <br>- Create, edit, and delete workflows. <br>- Create and edit connections. <br>- View workflow run history. <br>- Trigger and cancel workflow runs. <br>- Manage app permissions. | - Delete the project (owner only). <br>- View app content without explicit app level permissions. |
+   | **Reader** (view only) | - View only the environment settings, members list, sandbox configurations, and shared resources. <br>- View workflow run history. | - Create, edit, or delete anything. <br>- View apps. <br>- Trigger or cancel workflow runs. <br>- Manage permissions. |
+   | **Author** | - Create apps, sandbox configurations, and shared resources. <br>- View the environment settings, members list, and sandbox configurations. | - Edit the environment settings and manage environment members. <br>- View apps or their content without explicit app-level permissions. |
+   | **Contributor** | - View and edit environment settings, manage the environment, and manage environment members. <br>- Create apps, but view only metadata for others' apps. <br>- Create and edit sandbox configurations. <br>- View workflows, connections, and parameters. <br>- Create, edit, and delete workflows. <br>- Create and edit connections. <br>- View workflow run history. <br>- Trigger and cancel workflow runs. <br>- Manage app permissions. | - Delete the environment (owner only). <br>- View app content without explicit app level permissions. |
 
-   By default, apps are always private, which means that only their creators (owners) can view and access their apps. They're invisible to other project members until the creator-owner explicitly shares them.
+   By default, apps are always private, which means that only their creators (owners) can view and access their apps. They're invisible to other environment members until the creator-owner explicitly shares them.
    
-   Project contributors or owners can view app metadata for governance, but not the content. Apps often contain automation that connects to personal accounts. So, privacy by default keeps this data obscured unless explicitly shared.
+   Environment contributors or owners can view app metadata for governance, but not the content. Apps often contain automation that connects to personal accounts. So, privacy by default keeps this data obscured unless explicitly shared.
    
    sApp owners or contributors can explicitly add members by granting app-level roles. To grant access to a specific app, open that app, go to **Settings**, **User permissions**, and add the member you want.
 

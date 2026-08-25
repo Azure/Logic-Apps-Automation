@@ -6,9 +6,9 @@ sidebar:
   label: Quickstart
 ---
 
-In an automation project, an [*app*](/getting-started/introduction/#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
+In an automation environment, an [*app*](/getting-started/introduction/#key-components-and-concepts) provides a deployable and scalable package for related workflows, connections, parameters, analytics, and settings so they deploy and scale together. Without this boundary, automations for different business processes can get disorganized, making them harder to independently test, monitor, and update.
 
-To keep each group of related automations self-contained in your project, create one app per logical workload or related workflows, for example, `order-processing` or `daily-reports`.
+To keep each group of related automations self-contained in your environment, create one app per logical workload or related workflows, for example, `order-processing` or `daily-reports`.
 
 In an app, each [*workflow*](/getting-started/introduction/#key-components-and-concepts) is the automation workload that starts with a single starting event, or [*trigger*](/getting-started/introduction/#key-components-and-concepts), followed by the steps to run, or [*actions*](/getting-started/introduction/#key-components-and-concepts).
 
@@ -16,7 +16,7 @@ When you build a business process automation, you want to define the business lo
 
 This quickstart shows how to complete the following tasks:
 
-- Create or open an app in an existing project.
+- Create or open an app in an existing environment.
 - Build and run a sample workflow.
 - Review what happened.
 
@@ -24,43 +24,43 @@ You can later use the workflow as a template and swap in what you actually want 
 
 ## Requirements
 
-- A Microsoft work or school account in the same Microsoft Entra tenant as the project creator-owner.
+- A Microsoft work or school account in the same Microsoft Entra tenant as the environment creator-owner.
 
-  Your account must exist in the same tenant so the project creator-owner can add you to the project. You don't need an Azure subscription to create apps and workflows in an automation project.
+  Your account must exist in the same tenant so the environment creator-owner can add you to the environment. You don't need an Azure subscription to create apps and workflows in an automation environment.
 
 - Access to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
-- **Contributor** or **Author** role on the project resource to create apps and workflows.
+- **Contributor** or **Author** role on the environment resource to create apps and workflows.
 
   :::note
-  The project **Reader** role doesn't have enough permissions to create apps.
+  The environment **Reader** role doesn't have enough permissions to create apps.
   :::
 
-  If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
+  If you don't have environment access, contact the environment creator-owner so they can add you with the required permissions.
 
-## 1. Open your project
+## 1. Open your environment
 
 1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
-   The portal opens and shows every project where you have access. If you don't see the expected projects, contact the project creator-owner to check whether you have the correct permissions.
+   The portal opens and shows every environment where you have access. If you don't see the expected environments, contact the environment creator-owner to check whether you have the correct permissions.
 
-   ![Screenshot that shows the portal and projects list.](media/quickstart/projects-list.png)
+   ![Screenshot that shows the portal and environments list.](media/quickstart/environments-list.png)
 
-1. On the **Projects** tab, select your project.
+1. On the **Environments** tab, select your environment.
 
-   The portal opens the project and shows the **Apps** page. The following example shows an empty project:
+   The portal opens the environment and shows the **Apps** page. The following example shows an empty environment:
 
-   ![Screenshot that shows an empty project without apps.](media/quickstart/apps-list.png)
+   ![Screenshot that shows an empty environment without apps.](media/quickstart/apps-list.png)
 
-1. If the project is empty, go to the next section to create an app. 
+1. If the environment is empty, go to the next section to create an app. 
 
    Otherwise, select the app where you want to create your workflow, and skip to [Create your workflow](#3-create-your-workflow).
 
 ## 2. Create an app
 
-If your project doesn't include an app to store and organize workflows, follow these steps to create an app:
+If your environment doesn't include an app to store and organize workflows, follow these steps to create an app:
 
-1. In the project, on the **Apps** page, select **Create app**.
+1. In the environment, on the **Apps** page, select **Create app**.
 
 1. In the **Create application** box, for **Application name**, enter a name for your app, and select **Create**.
 
@@ -76,7 +76,7 @@ If your project doesn't include an app to store and organize workflows, follow t
 
    ![Screenshot that shows an empty app without workflows.](media/quickstart/workflows-list.png)
 
-   At this point, only you can view the app and its contents. By design, the app is invisible to others except for the project owner and contributors who can view the app metadata.
+   At this point, only you can view the app and its contents. By design, the app is invisible to others except for the environment owner and contributors who can view the app metadata.
 
 1. Before others can create workflows in your app, [add them as app members](#add-app-members).
 
@@ -92,9 +92,9 @@ App privacy works as follows:
 
 - Apps are always automatically private. Only app creator-owners can view and access their app's contents, such as workflows, connections, settings, and so on.
 
-- Project owners and contributors can view app metadata for governance. However, they can't view workflow content, connections, or workflow run history.
+- Environment owners and contributors can view app metadata for governance. However, they can't view workflow content, connections, or workflow run history.
 
-- Other project members can't view the app unless the app creator-owner adds them to the app and gives them the appropriate permissions.
+- Other environment members can't view the app unless the app creator-owner adds them to the app and gives them the appropriate permissions.
 
   Apps often contain automations that connect to personal accounts. The default privacy model keeps sensitive data obscured and invisible to others unless the app creator-owner chooses otherwise.
 
@@ -105,10 +105,10 @@ For more information, see [Permissions](/features/permissions/).
 To add team members to your app so they can build workflows, follow these steps:
 
 :::note
-If people need access to every app in the project, they need access at the project level. For more information, see [Permissions](/features/permissions).
+If people need access to every app in the environment, they need access at the environment level. For more information, see [Permissions](/features/permissions).
 :::
 
-1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), on the **Projects** page, select the project that contains your app.
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), on the **Environments** page, select the environment that contains your app.
 
 1. On the **Apps** page, select the app. On the app sidebar, select **Settings**.
 

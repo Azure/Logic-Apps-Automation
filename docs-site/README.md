@@ -1,6 +1,6 @@
 # Azure Logic Apps Automation Docs Site — Maintenance Guide
 
-Documentation for the workflow automation platform. This README is the entry point for **anyone touching the docs site** — humans and AI agents alike. It covers the project layout, every common operation (add a page, cut a release note, replace a screenshot, embed a video, deploy), and the conventions that keep the site consistent.
+Documentation for the workflow automation platform. This README is the entry point for **anyone touching the docs site** — humans and AI agents alike. It covers the environment layout, every common operation (add a page, cut a release note, replace a screenshot, embed a video, deploy), and the conventions that keep the site consistent.
 
 - 🌐 **Live (canary):** https://lemon-mud-0e10bdd1e.7.azurestaticapps.net
 - ⚙️ **Built with:** [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) + [Plyr](https://plyr.io) (videos)

@@ -9,30 +9,30 @@ sidebar:
 ---
 
 :::note
-This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your environment enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 :::
 
 In Azure Logic Apps Automation, create a [*sandbox*](/features/sandboxes/) as an isolated compute environment where [agents](/features/agents/) can run code in workflows. 
 
 ## Requirements
 
-- A Microsoft work or school account in the same Microsoft Entra tenant as the project creator-owner.
+- A Microsoft work or school account in the same Microsoft Entra tenant as the environment creator-owner.
 
-  Your account must exist in the same tenant so the project creator-owner can add you to the project. You don't need an Azure subscription to create apps and workflows in an automation project.
+  Your account must exist in the same tenant so the environment creator-owner can add you to the environment. You don't need an Azure subscription to create apps and workflows in an automation environment.
 
 - Access to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
-- Access to your automation [project](/features/projects-and-applications/#project).
+- Access to your automation [environment](/features/projects-and-applications/#environment).
 
-- **Contributor** or **Author** role on the [project resource](/features/projects-and-applications/#project) to create sandboxes.
+- **Contributor** or **Author** role on the [environment resource](/features/projects-and-applications/#environment) to create sandboxes.
 
   :::note
-  The project **Reader** role doesn't have enough permissions to create sandboxes.
+  The environment **Reader** role doesn't have enough permissions to create sandboxes.
   :::
 
-  If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
+  If you don't have environment access, contact the environment creator-owner so they can add you with the required permissions.
 
-- An [app](/features/projects-and-applications/#apps) in your project.
+- An [app](/features/projects-and-applications/#apps) in your environment.
 
 - A [workflow](/features/workflows/) in your app and a [coding agent](/features/agents/#native-agent-concepts-and-components) in the workflow.
 
@@ -40,13 +40,13 @@ In Azure Logic Apps Automation, create a [*sandbox*](/features/sandboxes/) as an
 
 This sandbox provides the fastest and easiest way for you to try running code in an isolated environment.
 
-1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project, app, and workflow.
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your environment, app, and workflow.
 
 1. On the workflow designer, select the coding agent action.
 
 1. In the action information window, select the **Agent harness** tab.
 
-   ![Screenshot that shows the automation portal with an open project, app, and workflow in the designer. The coding agent is selected so the information pane is open and the Agent Harness tab is selected.](media/create-sandboxes/agent-harness.png)
+   ![Screenshot that shows the automation portal with an open environment, app, and workflow in the designer. The coding agent is selected so the information pane is open and the Agent Harness tab is selected.](media/create-sandboxes/agent-harness.png)
 
 1. Under **Execution environment**, for **Harness type**, select **GHCP (GitHub Copilot)** as the harness runtime to use for agent execution.
 
@@ -80,11 +80,11 @@ When your agent needs to work with your code repositories, set up a prebuilt dis
 
 ### 1. Create the sandbox
 
-1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your environment.
 
-1. On the project sidebar, select **Sandboxes**, and then select **Create**.
+1. On the environment sidebar, select **Sandboxes**, and then select **Create**.
 
-   ![Screenshot that shows the automation portal with an open project, Sandboxes menu item selected and Create button selected.](media/create-sandboxes/create-sandbox.png)
+   ![Screenshot that shows the automation portal with an open environment, Sandboxes menu item selected and Create button selected.](media/create-sandboxes/create-sandbox.png)
 
 1. In the sandbox setup window, provide the following information:
 
@@ -98,7 +98,7 @@ When your agent needs to work with your code repositories, set up a prebuilt dis
 
    | Authentication | Azure DevOps | GitHub |
    |---|---|---|
-   | Managed identity | Yes, give repository read access to the project's managed identity | No |
+   | Managed identity | Yes, give repository read access to the environment's managed identity | No |
    | Personal access token (PAT) | Yes | Yes |
    | OAuth | No | Yes |
 
@@ -118,7 +118,7 @@ When your agent needs to work with your code repositories, set up a prebuilt dis
 
 ### 2. Set up the agent with your sandbox
 
-1. In your project, open your app and your workflow.
+1. In your environment, open your app and your workflow.
 
 1. On the workflow designer, select the coding agent action.
 
@@ -128,7 +128,7 @@ When your agent needs to work with your code repositories, set up a prebuilt dis
 
    **GHCP (GitHub Copilot)** is the default harness and the only available option at this time.
 
-1. Under **Sandbox configuration**, select the sandbox you created in your project.
+1. Under **Sandbox configuration**, select the sandbox you created in your environment.
 
    After you select your sandbox, the **Repository skills** section appears. If your repository has skills for your agent to use, specify those skill paths in this section.
 

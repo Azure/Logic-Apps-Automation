@@ -70,9 +70,9 @@ Azure Logic Apps Automation introduces the following core components and concept
 
 | Component or concept | Description |
 |----------------------|-------------|
-| [Project](/features/projects-and-applications/) | The top-level container resource that stores your *apps*, *knowledge bases*, *sandboxes*, and project settings. |
+| [Environment](/features/projects-and-applications/) | The top-level container resource that stores your *apps*, *knowledge bases*, *sandboxes*, and environment settings. |
 | [App](/features/projects-and-applications/) | The second-level deployable package resource that stores your *workflows*, *connections*, *parameters*, analytics data, and app settings. |
-| [Settings](/features/permissions/) | The user permissions at the project and app levels that control resource access and sharing for collaboration through roles and ownership. |
+| [Settings](/features/permissions/) | The user permissions at the environment and app levels that control resource access and sharing for collaboration through roles and ownership. |
 | [Workflow](/features/workflows/) | The automation workload that includes operations such as the starting event (*trigger*) and the tasks to perform or control flow (*actions*). Workflows are stateful or stateless. They support expressions, IntelliSense, inline code execution such as JavaScript, and more. |
 | [AI assistant](/features/ai-assistant/) | The interface where you can describe and update workflows by using natural language and iterating with the assistant. |
 | [Designer](/features/visual-designer/) | The canvas where you manually add your workflow's trigger and actions. |

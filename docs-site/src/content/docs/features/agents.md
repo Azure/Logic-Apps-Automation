@@ -12,7 +12,7 @@ In Azure Logic Apps Automation, an *agent* is a workflow action that performs th
 - Follow system instructions that define the agent's role.
 - Call tools that complete the tasks needed to fulfill the requests.
 
-An agent can also run code and scripts, browse file systems, and operate on cloned repos with skills when you set up a [*sandbox*](/features/sandboxes/) where the agent can perform this work. This sandbox is an isolated compute environment with a micro virtual machine in your automation project.
+An agent can also run code and scripts, browse file systems, and operate on cloned repos with skills when you set up a [*sandbox*](/features/sandboxes/) where the agent can perform this work. This sandbox is an isolated compute environment with a micro virtual machine in your automation environment.
 
 Like any other action, an agent produces structured outputs that subsequent workflow actions can use. However, an agent can accept freeform, unstructured, and unpredictable inputs.
 
@@ -62,7 +62,7 @@ After you add an agent action to your workflow, set up the agent to work the way
 | Parameters | Tools | The actions, MCP servers, or workflows that the agent can call as tools. |
 | Connection | Connections | The configuration with the credentials and endpoint to access the model. You can create a connection or select an existing connection. |
 | Settings | - Timeout <br>- Loop count <br>- Secure inputs <br>- Secure outputs | <br>- The timeout and iteration limit to prevent runaway loops from burning up budget. <br><br>- The settings to hide inputs and outputs in workflow run history. |
-| Agent harness <br>(Coding agent only) | - Execution environment <br>- Sandbox configuration | Harness type: The runtime to use for agent execution. <br><br>- Sandbox: The Microsoft virtual machine image that you created as sandbox in the project. If none exist, uses the default base image. |
+| Agent harness <br>(Coding agent only) | - Execution environment <br>- Sandbox configuration | Harness type: The runtime to use for agent execution. <br><br>- Sandbox: The Microsoft virtual machine image that you created as sandbox in the environment. If none exist, uses the default base image. |
 | Knowledge | Knowledge | Optional documents, knowledge bases, or indexes that the agent can retrieve and use at runtime to ground requests in a specific domain. <br><br>For more information, see [Knowledge bases](/features/knowledge-bases/). |
 | Code | Code view | The agent's underlying read-only JSON definition. |
 

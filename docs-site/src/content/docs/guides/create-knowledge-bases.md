@@ -9,7 +9,7 @@ sidebar:
 ---
 
 :::note
-This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your project enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your environment enables this capability, the user experience appears in the [portal](https://auto.azure.com).
 :::
 
 In Azure Logic Apps Automation, create a [*knowledge base*](/features/knowledge-bases/) as an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers.
@@ -18,33 +18,33 @@ The following items are under development:
 
 - Document upload size and format limits.
 - Per-source token budget controls.
-- Granular permissions on which project members can attach a source.
+- Granular permissions on which environment members can attach a source.
 
 If you encounter problems, [report a bug](/support/report-a-bug/) so your feedback can help shape future releases.
 
 ## Requirements
 
-- A Microsoft work or school account in the same Microsoft Entra tenant as the project creator-owner.
+- A Microsoft work or school account in the same Microsoft Entra tenant as the environment creator-owner.
 
-  Your account must exist in the same tenant so the project creator-owner can add you to the project. You don't need an Azure subscription to create apps and workflows in an automation project.
+  Your account must exist in the same tenant so the environment creator-owner can add you to the environment. You don't need an Azure subscription to create apps and workflows in an automation environment.
 
 - Access to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
-- **Contributor** or **Author** role on the [project resource](/features/projects-and-applications/#project) to create knowledge bases.
+- **Contributor** or **Author** role on the [environment resource](/features/projects-and-applications/#environment) to create knowledge bases.
 
   :::note
-  The project **Reader** role doesn't have enough permissions to create knowledge bases.
+  The environment **Reader** role doesn't have enough permissions to create knowledge bases.
   :::
 
-  If you don't have project access, contact the project creator-owner so they can add you with the required permissions.
+  If you don't have environment access, contact the environment creator-owner so they can add you with the required permissions.
 
 ## 1. Create a knowledge base
 
-Before you can attach a knowledge source to your agent, other than files to upload, create the knowledge base or add an existing knowledge source to your project. 
+Before you can attach a knowledge source to your agent, other than files to upload, create the knowledge base or add an existing knowledge source to your environment. 
 
-1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your environment.
 
-1. On the project sidebar, select **Knowledge**.
+1. On the environment sidebar, select **Knowledge**.
 
 1. Select **Add file** or **Add knowledge source** > **Add file**.
 
@@ -62,9 +62,9 @@ Before you can attach a knowledge source to your agent, other than files to uplo
 
 To add another knowledge base when you have existing ones, follow these steps:
 
-1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your project.
+1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your environment.
 
-1. On the project sidebar, select **Knowledge**.
+1. On the environment sidebar, select **Knowledge**.
 
    The portal opens your existing knowledge base.
 
