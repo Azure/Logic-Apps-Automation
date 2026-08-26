@@ -1,61 +1,42 @@
 ---
 title: Knowledge bases
-description: Attach external knowledge sources so agents can ground their answers in your data.
+description: Learn about attaching external knowledge sources so agents can ground their answers in your data.
 sidebar:
-  order: 8
+  order: 9
   badge:
     text: preview
     variant: tip
 ---
 
-A **knowledge base** is an external source of context an [agent](/features/agents/) can search during its reasoning. Instead of relying only on what's baked into the model's training, the agent retrieves relevant passages from your docs, tickets, code, or data and uses them to ground its answer.
+:::note
+This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your environment enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+:::
 
-The Knowledge tab on the agent panel is the surface for attaching them.
+In Azure Logic Apps Automation, a *knowledge base* is an external context source that an [agent](/features/agents/) can search during reasoning. Rather than rely only on a model's training, the agent gets the relevant information from your files, docs, code, and data to ground its answers. For more information, see [Create knowledge bases](/guides/create-knowledge-bases/).
 
-![Agent Knowledge tab — Add knowledge source](../../../assets/portal/92-agent-knowledge-tab.png)
+The following items are under development:
+
+- Document upload size and format limits.
+- Per-source token budget controls.
+- Granular permissions on which environment members can attach a source.
+
+  If you encounter problems, [report a bug](/support/report-a-bug/) so your feedback can help shape future releases.
 
 ## Supported source types
 
-| Source | What it is | When to pick it |
-| --- | --- | --- |
-| **Azure AI Search** | An index you maintain in Azure AI Search (vector + keyword) | You already have a search index, or want fine control over chunking / scoring |
-| **Foundry IQ** | A knowledge index hosted in Azure AI Foundry | You're already in the Foundry ecosystem and want managed retrieval |
-| **Document Upload** | Documents you upload directly into the platform | You don't have an existing index; you want the platform to chunk + embed |
-| **Work IQ** | Work IQ knowledge connector | Tenant-scoped knowledge surfaced through Microsoft 365 / Work IQ |
+You can attach multiple context sources to an agent. The runtime retrieves information across these sources and merges the top results.
 
-You can attach more than one source to the same agent — the runtime fans out the retrieval and merges the top results across sources.
+| Source | Description | When to choose |
+|---|---|---|
+| File upload | Documents that you directly upload to an agent or environments | You want the platform to chunk and embed the content. |
+| [Azure AI Search](https://learn.microsoft.com/azure/search/search-what-is-azure-search) | Search indexes that you manage in Azure AI Search | You already haves search indexes or want granular control over chunking and scoring. |
+| [Microsoft Foundry IQ](https://learn.microsoft.com/azure/foundry/agents/concepts/what-is-foundry-iq) | Knowledge indexes in Microsoft Foundry | You already work in the Foundry ecosystem and want managed retrieval. |
+| [Microsoft 365 Copilot Work IQ](https://learn.microsoft.com/microsoft-365/copilot/extensibility/work-iq/) | Work IQ knowledge connector | Tenant-scoped knowledge surfaced through Microsoft 365 / Work IQ |
 
-## Attaching a source
+## Related content
 
-1. Open the agent action and switch to the **Knowledge** tab.
-2. Click **Add knowledge source**.
-3. Pick the type (AI Search, Foundry IQ, Document Upload, or Work IQ).
-4. Fill in the connection details — for AI Search you point at an index; for Foundry IQ you select a Foundry connection; for Document Upload you upload a file.
-5. Save.
-
-The next time the agent runs, retrieval happens before the model call: the agent's input + system prompt are used to query each attached source, the top passages are inlined into the model's context, and the model decides which (if any) to cite.
-
-## How retrieval shows up in run history
-
-Every retrieval is a step in the agent's iteration. In the [run detail](/features/runs-and-monitoring/), you'll see the retrieval as a separate entry under the agent action:
-
-- **Inputs** — the query the runtime issued (often the user message rewritten by the model).
-- **Outputs** — the passages retrieved, with a relevance score per result.
-
-Use that view to debug "the agent answered from stale data" or "the agent didn't find the right snippet" — both usually trace back to chunking or query rewriting.
-
-## Status — private preview
-
-Knowledge bases are in **private preview** today. The tab appears in the portal when the feature is enabled for your environment. Some things will tighten before public preview:
-
-- Document Upload size / format limits.
-- Per-source token-budget controls.
-- Granular permissions on which workspace members can attach a source.
-
-If you hit something rough, [report a bug](/support/report-a-bug/) — the feedback is shaping the GA shape.
-
-## Where to go next
-
-- **[Agents](/features/agents/)** — the rest of the agent surface (tools, sandboxes, parameters).
-- **[Sandboxes](/features/sandboxes/)** — pair a knowledge base with a sandbox so the agent can both retrieve and execute code on the result.
-- **[Runs and monitoring](/features/runs-and-monitoring/)** — read the retrieval inputs / outputs after a run.
+- [Create knowledge bases](/guides/create-knowledge-bases/)
+- [Agents](/features/agents/)
+- [Sandboxes](/features/sandboxes/)
+- [Connectors](/features/connectors)
+- [Runs and monitoring](/features/runs-and-monitoring/)

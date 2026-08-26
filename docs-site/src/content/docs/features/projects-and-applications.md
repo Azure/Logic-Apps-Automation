@@ -1,75 +1,73 @@
 ---
-title: Environments and applications
-description: The resource hierarchy — environments, applications, workflows, and the surfaces that connect them.
+title: Environment structure
+description: Learn about environments, apps, knowledge bases, sandboxes, and their relationships for organizing your work.
 sidebar:
-  order: 2
+  order: 1
 ---
 
-Your work is organised into a three-level hierarchy. Each level shows up in the portal's breadcrumb and left rail.
+Azure Logic Apps Automation organizes your automation using the following hierarchy and structure:
 
 ```
-Environment ─┬─ Application ─┬─ Workflow ─┬─ Designer
-             │               │            └─ Monitoring (runs)
-             │               ├─ Connections
-             │               ├─ Parameters
-             │               ├─ Analytics
-             │               └─ Settings (env vars, user permissions)
-             ├─ Sandboxes (environment-scoped, see Sandboxes page)
-             └─ Settings (user permissions)
+Environment
+   ├─ Apps
+   │   ├─ Workflows
+   |   |     ├─ Designer
+   |   |     └─ Monitoring (workflow runs and history)
+   |   |
+   │   ├─ Connections
+   │   ├─ Parameters
+   │   ├─ Analytics
+   │   └─ Settings (environment variables, app permissions)
+   │
+   ├─ Knowledge
+   ├─ Sandboxes
+   └─ Settings (environment permissions)
 ```
 
 ## Environment
 
-The top-level container. An **environment** holds applications, sandboxes, and environment-wide settings. It also defines who has access — RBAC is granted at the environment boundary.
+An environment is the top-level container resource that stores your apps, knowledge bases, sandboxes, and environment settings. As the environment creator, you're automatically the environment owner. You manage access and governance for environment resources at the environment level. To control who can access environment resources, environment settings use role-based access control (RBAC).
 
-![Environments dashboard](../../../assets/portal/02-projects.png)
+When to create an environment:
 
-When to create a new environment: when you want isolation (separate access control, separate quota, separate billing context) or a new business domain.
+- Isolation: Separate access control, limits, quotas, billing context 
+- Context: New or separate business domain
 
-## Application
+The following table describes the environment contents in more detail:
 
-An application is a **deployable unit** inside an environment. It holds:
+| Item | Description |
+|------|-------------|
+| [Apps](#apps) | The deployable package for your workflows, connections, parameters, analytics data, and app settings. |
+| [Knowledge](/features/knowledge-bases/) | Include Azure AI Search, Foundry IQ, Document Upload, or Work IQ so an agent can ground responses in your data. (preview) |
+| [Sandboxes](/features/sandboxes/) | The isolated micro, virtual machine, compute environments where workflow agents run code and can optionally use cloned repos and skills. |
+| Settings | Environment-level user permissions and environment variables. |
 
-| Tab | What it's for |
-| --- | --- |
-| **Workflows** | The automations themselves — what this app actually does. |
-| **Connections** | Reusable, authenticated bindings to external services (Teams, SharePoint, Service Bus, etc.). |
-| **Parameters** | Named values referenced in workflows — environment-specific URLs, timeouts, feature flags. |
-| **Analytics** | Run trends, success/failure rates, per-action latency. |
-| **Settings** | App-level environment variables and user permissions. |
+## Apps
 
-![Applications inside an environment](../../../assets/portal/03-apps.png)
+In your environment, an app is a deployable resource that stores your workflows, connections, parameters, analytics data, and app settings. Many teams have several apps per environment where each app maps to a logical service like `order-processing`, `notifications`, and `daily-reports`.
 
-Most teams have a handful of apps per environment — one per logical service (e.g., `order-processing`, `notifications`, `daily-reports`).
+As the app creator, you're automatically the app owner. You manage access and governance for app resources at the app level. To control who can access app resources, app settings use role-based access control (RBAC).
 
-### Creating an app
+The following table describes app contents in more detail:
 
-From the environment's **Applications** tab, click **Create Application** and give it a name.
+| Item | Description |
+|------|-------------|
+| [Workflows](/features/workflows/) | The automation workloads that exist in an app and include the starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
+| Connections | The reusable, authenticated bindings that connect to external services such as Teams, SharePoint, and Service Bus. |
+| Parameters | The named values referenced in workflows like environment-specific URLs, timeouts, and feature flags. |
+| Analytics | Run trends, success and failure rates, and per-action latency. |
+| Settings| App-level user permissions and environment variables. |
 
-![Applications list with the Create Application button + Status column](../../../assets/portal/80-apps-list.png)
-![Create Application dialog](../../../assets/portal/81-create-app-dialog.png)
+## Choose the work level for your work
 
-Provisioning takes a minute or two — the **Status** column starts as *Building* and flips to **Ready** once the runtime is up. Don't open or wire up the app until it's Ready.
+| Item to add | Level |
+|-------------|-------|
+| New automation | New workflow in the related app. |
+| New logical service for a different team, connection set, or service level objective (SLO) | New app in the related environment. |
+| Separate business domain or access boundary | New environment. |
+| New code execution environment for agents with cloned repos | New sandbox in the related environment. |
 
-### Sharing an app
+## Related content
 
-Apps are private to the creator by default. To invite collaborators, open the application's **Settings → User permissions** tab and add users by email — or grant environment-scope access for someone who should see every app. See **[Permissions](/features/permissions/)** for the full model.
-
-## Workflow
-
-The unit of automation. A workflow lives inside one app, has one trigger and a tree of actions, and is edited on the visual canvas or via the assistant. See [Workflows](/features/workflows/) for the full surface.
-
-![Workflows inside an application](../../../assets/portal/04-workflows-list.png)
-
-## Sandboxes (environment-scoped)
-
-Sandboxes are isolated compute environments that workflow **agents** can run code in. They live at the environment level so multiple workflows across multiple apps can reuse the same pre-baked image. See **[Sandboxes](/features/sandboxes/)** for the full guide.
-
-## Picking the right level for new work
-
-| You're adding… | Put it at… |
-| --- | --- |
-| A new automation | A workflow inside an existing app |
-| A new logical surface (different team, different SLOs, different connection set) | A new app inside the same environment |
-| A separate access boundary or business domain | A new environment |
-| A new code execution environment for agents (with cloned repos) | A new sandbox inside the environment |
+- [Set up](/getting-started/setup/)
+- [Quickstart](/getting-started/quickstart/)

@@ -1,57 +1,52 @@
 ---
 title: AI workflow assistant
-description: Describe what you want to automate in plain language. The assistant designs, builds, and iterates on workflows with you.
+description: Learn how the AI assistant automates workflow creation by using natural language. The assistant designs, builds, and iterates over workflows with you.
 sidebar:
   order: 5
 ---
 
-The **AI workflow assistant** is the fastest path from idea to running workflow. Describe what you want in natural language and the assistant generates a workflow, drops the right connectors in, and explains its choices. Iterate by sending follow-up messages — the assistant edits the workflow in place.
+In Azure Logic Apps Automation, the AI assistant generates a workflow based on your description for the task you want to automate. Just describe the task behavior and results, and the assistant builds a workflow that you can edit with follow-up instructions. You can use the assistant as your primary workflow builder, which offers parity with the workflow designer. Both use the same workflow schema, connector catalog, and expressions language. For example, you can edit a generated workflow in the designer and vice versa.
 
-## Starting from a prompt
+## What the assistant does
 
-On the **Workflows** tab, the build hero accepts a plain-language description of what you want to automate. Type, then hit **Build**.
+- Generates a workflow from a plain language prompt.
+- Selects the most appropriate trigger and actions for your described workload.
+- Edits an existing workflow when you provide more instructions.
 
-![Describe-your-workflow prompt](../../../assets/portal/50-assistant-prompt-typed.png)
+## How the assistant works
 
-The assistant emits a workflow definition; the canvas re-renders with the steps it picked.
+1. You provide your prompt through Copilot in the designer. Copilot describes the plan and reasoning for the workflow to build.
+1. The assistant generates the workflow definition using the same JSON that the designer reads.
+1. Review each component on the designer canvas. Edit the components that you need to configure or change.
+1. Provide a follow-up prompt to refine your workflow. For example, `"Replace sequential execution with parallel branches"` or `"Add error handling to the HTTP action"`.
 
-## Iterating inside the designer
+## Common FAQs
 
-Inside the designer, the **Copilot** button (bottom toolbar) opens the assistant alongside the canvas. Use it to refine an existing workflow — *"add retry on the HTTP call"*, *"swap Teams for Slack"*, *"add an agent that summarises the result before posting"*.
+### Q: What are best practices to generate easy-to-validate workflows?
 
-![Copilot pane open inside the designer](../../../assets/portal/22-copilot-pane.png)
+Make sure to describe your workflows with clarity and precision. Specify the trigger, actions, services, systems, and results you want. Ambiguous prompts produce vague workflows.
 
-The pane keeps a chat history per workflow so you can scroll back through edits.
+Here are some example prompts that show clarity and precision:
 
-## What you can ask for
+- `"When I get an email where the subject includes 'invoice', save the attachment to Blob Storage and post a message to Teams."`
+- `"Every weekday at 9 AM, get yesterday's failed runs for this workflow and email me a summary."`
+- `"When a new Service Bus message arrives, call this HTTP endpoint. If you get a 5xx message, retry three times with backoff."`
 
-- *"When I get an email with 'invoice' in the subject, save the attachment to Blob Storage and post a Teams message."*
-- *"Every weekday at 9 a.m., pull yesterday's failed runs from this workflow and email me a summary."*
-- *"On a new Service Bus message, call this HTTP endpoint, and if it returns a 5xx, retry three times with backoff."*
+### Q: Does a generated workflow use the same schema as a workflow I build with the designer?
 
-## How it works
+Yes, an assistant-generated workflow uses the same underlying JSON schema as if you built the same workflow with the designer. This schema includes trigger and action definitions, required expressions, and so on.
 
-1. You send a prompt. The assistant streams its reasoning and the workflow it's building.
-2. The assistant emits a workflow definition (the same JSON the designer reads).
-3. The canvas re-renders. You inspect every node and edit anything you want.
-4. Send a follow-up message to refine — *"Use parallel branches instead of sequential"*, *"Add error handling to the HTTP action"*, etc.
+### Q: Does the assistant also configure the workflow?
 
-## Before the first run — finish the wiring
+No, the assistant only generates the workflow shape. You need to provide environment-specific details, for example: 
 
-Copilot scaffolds the workflow shape but **can't supply environment-specific configuration**. Before your generated workflow runs successfully you'll need to:
+- Configure a connection for each connector-based action. You can create the connection at the app level or on each operation.
+- Provide parameter values that the assistant leaves empty. Required parameters show red outlines or asterisks.
+- Resolve any prompts that show **Finish configuring with Copilot** on operations.
+- Validate workflow behavior as early as possible. To find missing configuration items before you publish the workflow, use the designer's **Test** capability.
 
-- **Configure connections** for every connector action. Either pre-create them on the app's [**Connections** tab](/features/connectors/) or create them inline from each action's *Connection* tab.
-- **Fill required parameters** the assistant left blank — fields with red outlines or asterisks.
-- **Resolve any "Finish configuring with Copilot" prompts** that appear on individual nodes.
+## Related content
 
-![Agent action with a "Finish configuring with Copilot" prompt](../../../assets/portal/82-agent-tools-tab.png)
-
-The fastest validation is the designer's **Test your draft** button — it surfaces missing config before you bother publishing. See the [Quickstart](/getting-started/quickstart/) for the end-to-end loop.
-
-## Where it fits
-
-The assistant is a **first-class authoring surface**, not a chatbot bolted on. It uses the same workflow schema as the designer, the same connector catalog, and the same expression language. Anything the assistant generates, you can edit by hand — and vice-versa.
-
-## Limits
-
-The assistant does its best work with **specific prompts**. Vague asks (*"automate my workflow"*) produce vague workflows. Tell it which trigger, which services, which destinations.
+- [Quickstart](/getting-started/quickstart/)
+- [Designer](/features/visual-designer/)
+- [Connectors](/features/connectors/)

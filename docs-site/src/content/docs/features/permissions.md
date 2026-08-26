@@ -1,215 +1,131 @@
 ---
 title: Permissions
-description: Two-scope role-based access model — environments, apps, owners, and how to share.
+description: Learn about resource ownership and permissions for access to environments and apps.
 sidebar:
-  order: 3
+  order: 2
 ---
 
-Access to the platform is controlled by a simple two-scope role model, plus a separate **owner** property on each resource. This page covers the model, the role matrix, and the most common sharing workflows.
+To support access and sharing resources with others, Azure Logic Apps Automation uses a permissions model based on resource scopes and roles. The platform also provides a separate ownership property on each resource. This article describes this model and common sharing scenarios.
 
-## At a glance
+## High level summary
 
-- **Two independent scopes** — *Environment* (organisational) and *Application* (content).
-- **Three permission levels** — *Contributor* (admin), *Author* (creator), *Reader* (view-only).
-- **Owner** is a resource property, not a permission level. The creator is the owner.
-- **Apps are private by default** — invisible to other environment members until you explicitly share them.
-- **App-scope grant auto-adds environment Reader** — so collaborators can reach the environment resources the app depends on.
+| Aspect | Description |
+|---|---|
+| Resource owner | Each resource has a single owner and has an owner property independent from roles. The resource creator automatically becomes the owner. |
+| Resource scopes | The following scopes work independently from each other: <br><br>- Environment (organization) <br>- App (content) <br>- Sandbox (shared resources) <br><br>For example, you can have a role on an environment, app, sandbox, or all these. |
+| Roles | The following roles control the tasks that they can perform on resources: <br><br>- **Contributor** (administrator) <br>- **Author** (creator) <br>- **Reader** (read only) |
+| App visibility and privacy | Apps are private and invisible to other environment members unless you explicitly grant access. |
 
----
+## Resource owner
 
-## Scopes and roles
+Each resource has an **Owner** property with the following attributes:
 
-The two scopes are evaluated independently. A user can have a role at the environment scope, at the app scope, or both.
+| Rule | Description |
+|---|---|
+| Set at creation | The resource creator is automatically the owner. |
+| One owner per resource | Each resource, such as an environment, app, or sandbox, has only one owner. |
+| Read only | The **Owner** property is read only. |
+| Role-independent | Typically, the resource owner automatically gets the **Contributor** role. However, owner and contributor are separate, independent concepts. |
+| Permitted actions | Resource owners can delete their own resources, including any resource contents they don't own. For example, environment owners can delete their own environments along with any environment contents they don't own. <br><br>**Note**: Contributors alone can't delete resources unless they're also the owners. |
 
-### Environment-scope roles
+## Environment roles
 
-| Role | Can do | Cannot do |
-| --- | --- | --- |
-| **Contributor** | Read + modify environment settings · invite, update, remove members · create apps · list all apps (metadata only) · create / modify sandbox configurations | Delete the environment (owner-only) · access app contents without app-scope permission |
-| **Author** | Read environment settings + member list · create new apps · create sandbox configurations · read sandbox configurations | Modify environment settings · manage other users · see apps they weren't invited to · access app contents without app-scope permission |
-| **Reader** | Read environment settings + member list · read sandbox configurations | Create, modify, or delete anything · see any apps (they're private by default) |
+The following table describes environment roles in detail:
 
-### App-scope roles
+| Role | Allowed | Not allowed |
+|---|---|---|
+| **Contributor** | - View and edit environment settings. <br>- Invite, update, and remove members. <br>- Create apps and view apps (metadata only). <br>- Create and edit sandbox configurations. <br><br>**Example**: Can view app metadata such as the name, owner, and date. <br><br>**Note**: Environment owners can delete any resources in their environment such as apps and sandboxes, including any they don't own. | <br>- Delete the environment as the owner. <br>- Access app content without app-scoped permission. <br><br>**Example**: Can't access app content such as workflows, connections, and run history. |
+| **Author** | - View environment settings and members. <br>- Create and edit apps. <br>- View, create, and edit sandbox configurations. | - Edit environment settings. <br>- Manage other members. <br>- View and access apps without app-scoped permission. |
+| **Reader** | - View environment settings and members. <br>- View sandbox configurations. | - Create, edit, or delete anything. <br>- View any apps, which are automatically private. <br><br>**Note**: If you have access to an app, you automatically get the **Reader** role on the parent environment. This role lets you view environment resources that the app needs.|
+
+For more information, see:
+
+- [Create an automation environment](/getting-started/setup/#create-your-environment)
+- [Add environment members](/getting-started/setup/#add-environment-members)
+
+### Environment members
+
+The following table describes the best role to choose when you add environment members:
+
+| Member task | Role |
+|---|---|
+| Manage an environment, invite members, view all app metadata | **Contributor** |
+| Create apps and shared resources | **Author** |
+| Only view environment settings and shared resources | **Reader** |
 
 :::note
-*Author* is intentionally not available at app scope — only **Contributor** and **Reader**.
+For privacy and security reasons, environment members can't automatically view apps or access app content unless they have the appropriate role on those apps.
+
+For more information, see:
+
+- [Create an app](/getting-started/quickstart/#2-create-an-app)
+- [Add app members](/getting-started/quickstart/#add-app-members)
 :::
 
-| Role | Can do | Cannot do |
-| --- | --- | --- |
-| **Contributor** | Read + modify workflows, connections, parameters · view run history · trigger / cancel / resubmit runs · manage app permissions | Delete the app (owner-only) |
-| **Reader** | Read workflows, connections, parameters · view run history | Create, modify, or delete anything · trigger or cancel runs |
+## App roles
 
-### Cross-scope behaviour
+The following table describes app roles in detail:
 
-- An **Environment Contributor** sees app *metadata* (name, owner, dates) but **cannot** access app *contents* (workflows, connections).
-- An **Environment Owner** has an admin override on sub-resources — they can delete *any* app or sandbox in the environment, even ones they don't own.
-- When a user is granted app-scope permission, they **automatically receive environment Reader** — enough to reach the environment resources the app depends on.
+| Role | Allowed | Not allowed |
+|---|---|---|
+| **Contributor** | - View, create, and edit workflows, connections, and parameters. <br>- View workflow run history. <br>- Run, cancel, or resubmit workflow runs. <br>- Delete workflows. <br>- Manage app permissions. | Delete apps they don't own. |
+| **Reader** | - View workflows, connections, and parameters. <br>- View workflow run history. <br><br>**Tip**: Assign to app members for onboarding, demos, audits, and other tasks that don't need edit access. | - Create, edit, or delete anything. <br>- Run or cancel workflow runs. <br>- Manage app permissions. |
 
----
+- As a reminder, environment owners and those with environment-level **Contributor** roles can view all the apps and their metadata in an environment. Environment owners can delete any resource in their environments. However, environment owners and contributors can't view, edit, or access workflow content, connections, and run history. This boundary lets administrators manage resources without viewing and accessing private data.
 
-## Owner
+- App members automatically get the environment-level **Reader** role so they can find environment-related resources. They can find the app in their **Shared with you** view.
 
-**Owner** is a property on the resource itself, set when the resource is created.
+- By design, apps don't have the **Author** role. 
 
-| Rule | Detail |
-| --- | --- |
-| Set on creation | The creator automatically becomes owner. |
-| One owner per resource | Each environment / app has exactly one. |
-| Cannot be removed | The owner flag can't be cleared. |
-| Orthogonal to roles | An owner typically has Contributor permission too, but they're separate concepts. |
+For more information, see:
 
-### Owner-only actions
+- [Create an app](/getting-started/quickstart/#2-create-an-app)
+- [Add app members](/getting-started/quickstart/#add-app-members)
 
-| Scope | Only the owner can |
-| --- | --- |
-| Environment | Delete the environment |
-| App | Delete the app |
+## App privacy and visibility
 
-Even Contributors can't perform these actions.
+Apps often contain workflows that access and handle sensitive data. When you create an app, other environment members don't automatically get the permissions to find, view, or access that app. For management and governance, environment owners and contributors can find and view your app metadata. They can't view or access your app content.
 
----
+This behavior makes sure that private data stays private unless you explicitly grant access. Only app owners and contributors can add others to an app by assigning the appropriate app-scoped role.
 
-## Privacy by default
+## Orphaned apps
 
-When you create an app, it's **invisible** to everyone else in the environment — only you (the owner) can see and access it. Environment Contributors / Owners can see app metadata for governance but **not** the app's contents.
+If an app owner leaves your organization, the app becomes orphaned with the following results:
 
-This matters because apps often contain automations connected to personal accounts (email, calendar, OneDrive). Privacy by default keeps that data private until you explicitly share it.
+- The app's **Owner** property shows that the owner is unknown or departed.
+- Existing members keep their access.
+- The app still appears in the environment's apps list.
+- Only the environment owner can delete the app.
 
-To share an app, the owner (or an app Contributor) explicitly invites users by granting them an app-scope role.
+## Sandbox roles
 
----
+The following table describes sandbox roles in detail:
 
-## Common tasks
+| Role | Allowed | Not allowed |
+|---|---|---|
+| Contributor | - View and create sandboxes. <br><br>- Edit and delete sandboxes they create and own. | Edit and delete sandboxes they don't create or own. |
+| Author | - View and create sandboxes. <br><br>- Edit and delete sandboxes they create and own. | Edit and delete sandboxes they don't create or own. |
+| Reader | View sandboxes. | Create, edit, or delete sandboxes. |
 
-### Create an environment
+Environment owners can perform the following tasks on sandboxes:
 
-1. Open the portal at **[auto.azure.com](https://auto.azure.com)**.
-2. Click **Create environment**, give it a name, pick a region.
-3. Click **Create**.
+| Allowed | Not allowed |
+|---|---|
+| View, create, and delete sandboxes, including any they don't create or own. | Edit any resource they don't create or own. |
 
-You become the **Environment Owner** automatically, receive **Contributor** permission at environment scope, and can immediately add members, create apps, and create sandbox configurations.
-
-### Invite someone to an environment
-
-1. Open the environment → **Settings** → **User permissions** tab.
-2. Click **Add user**.
-3. Enter the email and pick a role.
-
-![Environment — User permissions tab](../../../assets/portal/70-project-user-permissions.png)
-
-| The user needs to… | Give them |
-| --- | --- |
-| Manage the environment, invite others, see all app metadata | **Contributor** |
-| Create new apps and shared resources | **Author** |
-| Just view environment settings and shared resources | **Reader** |
-
-:::caution[They still won't see your apps]
-Apps stay invisible. To grant access to a specific app, switch to that app's **Settings → User permissions** tab.
-:::
-
-### Create an app
-
-1. Open the environment.
-2. Click **Create app**, name it, click **Create**.
-
-You become the **App Owner**, receive **Contributor** permission at app scope, and the app is private to you by default.
-
-### Share an app with a collaborator
-
-1. Open the app → **Settings** → **User permissions** tab.
-2. Click **Add user**.
-
-![App — User permissions tab](../../../assets/portal/71-app-user-permissions.png)
-
-3. Enter the user's email and pick a role (Contributor for full edit access, Reader for view-only).
-
-![Add role assignment](../../../assets/portal/72-app-add-user.png)
-
-#### What a Contributor can do
-
-| Action | Allowed |
-| --- | :---: |
-| View workflows, connections, parameters | ✅ |
-| Create / edit / delete workflows | ✅ |
-| Create / edit connections | ✅ |
-| View run history | ✅ |
-| Trigger / cancel runs | ✅ |
-| Manage app permissions | ✅ |
-| **Delete the app** | ❌ (owner-only) |
-
-The collaborator automatically receives environment-level **Reader** so they can reach related environment resources, and they'll see the app under their **Shared with you** view.
-
-#### What a Reader can do
-
-| Action | Allowed |
-| --- | :---: |
-| View workflows, connections, parameters | ✅ |
-| View run history | ✅ |
-| Create / edit / delete anything | ❌ |
-| Trigger / cancel runs | ❌ |
-| Manage permissions | ❌ |
-
-Use Reader for demos, audits, or onboarding new team members without giving them edit access.
-
-### Create shared resources (sandboxes)
-
-1. Open the environment → **Sandboxes**.
-2. Click **New sandbox** (Author or higher at environment scope is required).
-
-| Role | Read | Create | Update | Delete |
-| --- | :---: | :---: | :---: | :---: |
-| Contributor | ✅ | ✅ | Only if you created it | Only if you created it |
-| Author | ✅ | ✅ | Only if you created it | Only if you created it |
-| Reader | ✅ | ❌ | ❌ | ❌ |
-| Environment Owner | ✅ | ✅ | Only if you created it | ✅ (any resource — admin override) |
-
-**Only the creator can update a shared resource.** The Environment Owner can delete any resource but can't edit ones they didn't create.
-
-### Govern apps as an environment admin
-
-Environment Owner / Contributor see every app in the environment for governance purposes — name, owner, creation date, last modified — but **not** workflow contents, connections, or run history.
-
-| Action | Environment Owner | Environment Contributor |
-| --- | :---: | :---: |
-| View app metadata | ✅ | ✅ |
-| Read workflow content | ❌ | ❌ |
-| Edit workflows | ❌ | ❌ |
-| Access connections | ❌ | ❌ |
-| Delete any app | ✅ | ❌ |
-
-This is the deliberate privacy boundary: admins can manage resources without seeing personal data.
-
-### Handle an orphaned app
-
-When an app's owner leaves the organisation, the app becomes **orphaned**:
-
-- Existing collaborators keep their access.
-- No one but the **Environment Owner** can delete it.
-- It still shows up in the environment's governance view.
-
-If you're the Environment Owner: open the environment app list, find the orphaned app (the owner badge will show as departed/unknown), and either leave it for the collaborators or click **Delete**.
-
----
-
-## Troubleshooting
+## Troubleshoot problems
 
 | Problem | Cause | Fix |
-| --- | --- | --- |
-| "I can't see any apps in the environment" | Apps are private by default. | Ask the app owner to add you at app scope, or get Contributor at environment scope to see the governance view (metadata only). |
-| "I can't create an app" | You have environment Reader. | Ask a Contributor to upgrade you to Author or Contributor. |
-| "I can't delete my shared resource" | Only the creator can delete a shared resource. | Ask the creator or an Environment Owner (admin override). |
-| "I can't delete an app" | Only the **App Owner** can delete an app. | Contact the App Owner. If they've left, the Environment Owner can delete orphaned apps. |
-| "I can't manage permissions on an app" | You need Contributor at app scope. | Ask an existing App Contributor or the App Owner to add or remove users. |
-| "I can't trigger a workflow run" | You have app Reader. | Ask for Contributor at app scope, or have a Contributor trigger the run for you. |
+|---|---|---|
+| "I can't see any apps in the environment" | By default, apps are private. | Ask the app owner to add you to the app, or ask the environment owner to give you the environment-level **Contributor** role if you only need to view app metadata. |
+| "I can't create an app" | You have the environment **Reader** role. | Ask an environment **Contributor** to upgrade you to the **Author** or **Contributor** role. |
+| "I can't manage permissions on an app" | You need the app **Contributor** role. | Ask an app **Contributor** or the app **Owner** to manage permissions. |
+| "I can't delete an app" | Only the app **Owner** can delete an app. | Ask the app **Owner** or environment **Owner** to delete the app. |
+| "I can't trigger a workflow run" | You have the environment **Reader** role. | Ask an app **Contributor** to upgrade your role or trigger the run for you. |
+| "I can't delete my sandbox (shared resource)" | You're not the sandbox creator. Only the creator can delete a shared resource. | Ask the sandbox creator or environment owner to delete the resource. |
 
----
+## Related content
 
-## Summary
-
-- **Two scopes** — environment and app — evaluated independently (OR logic).
-- **Three levels** at environment scope, two at app scope. Author exists only at environment scope.
-- **Owner is a property**, not a level — enables owner-only actions like delete.
-- **Apps are private by default**, even from environment admins.
-- **App-level permission auto-grants environment Reader** so collaborators can reach related resources.
-- **Environment admins can govern apps** without ever seeing their contents.
+- [Quickstart](/getting-started/quickstart/)
+- [Designer](/features/visual-designer/)
+- [Connectors](/features/connectors/)

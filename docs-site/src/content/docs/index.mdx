@@ -1,9 +1,9 @@
 ---
-title: Welcome
-description: Documentation for building, automating, and shipping workflows.
+title: Azure Logic Apps Automation
+description: Documentation for building, automating, and shipping dynamic workflows.
 template: splash
 hero:
-  tagline: "Automate anything. Just describe it."
+  tagline: "Automate workloads. Build like a startup. Ship like an enterprise."
   image:
     file: ../../assets/logo.svg
   actions:
@@ -26,19 +26,21 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-**Start here:** the [3-minute platform overview](https://aka.ms/otto-summary-doc-video) walks the whole experience end-to-end — designer, assistant, connectors, run history. Watch it once, then come back when you need specifics. The rest of this site is the long form for whatever you want to look up after.
+**Start here**: Watch the [3-minute overview video](https://aka.ms/otto-summary-doc-video) to walk through the end-to-end experience that shows the designer, assistant, connectors, and run history. Return here when you need specific details.
 
 {/*
   When the overview video moves to an embeddable host (YouTube, Vimeo, a
-  Stream-on-SharePoint embed URL), enable the inline player by:
-    1. Adding back the import next to the Card / CardGrid one above:
-       import Video from '../../components/Video.astro';
-    2. Uncommenting the block below and updating the src.
+  Stream-on-SharePoint embed URL), enable the inline player by following these steps:
 
-  Today the overview is hosted on personal SharePoint (aka.ms redirect),
-  which sets X-Frame-Options and can't be inlined. The hero CTA above
-  links out instead — same content, full-screen player, back-button comes
-  home.
+  1. Add back the import next to the Card / CardGrid one above:
+
+     `import Video from '../../components/Video.astro';`
+
+  2. Uncomment the block below and updating the source.
+
+  The overview is currently hosted on personal SharePoint (aka.ms redirect),
+  which sets X-Frame-Options and can't be inlined. The hero CTA above links 
+  out instead — same content, full-screen player, back-button comes home.
 
   <Video
     src="https://aka.ms/otto-summary-doc-video"
@@ -50,13 +52,13 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<Card title="Watch first" icon="seti:video">
-		The [3-minute platform overview](/demos/platform-overview/) walks the whole experience end-to-end. Start here if you have 3 minutes.
+		Watch the [3-minute overview](/demos/platform-overview/) that walks the whole experience end-to-end. Start here if you have 3 minutes.
 	</Card>
 	<Card title="New to the platform" icon="rocket">
-		Start with the [introduction](/getting-started/introduction/), then build your first workflow with the [Quickstart](/getting-started/quickstart/).
+	 	Start with the [introduction](/getting-started/introduction/), set up your [environment](/getting-started/setup/), then create your first app and workflow with the [Quickstart](/getting-started/quickstart/).
 	</Card>
 	<Card title="Learn the concepts" icon="open-book">
-		Read about [workflows](/features/workflows/), [agents](/features/agents/), [connectors](/features/connectors/), and the rest of the [feature surface](/features/overview/).
+		Read about [workflows](/features/workflows/), [agents](/features/agents/), [connectors](/features/connectors/), and the rest of the [feature surface](/features/).
 	</Card>
 	<Card title="Stay current" icon="document">
 		Track every release on the [changelog](/release-notes/changelog/).

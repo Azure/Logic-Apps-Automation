@@ -1,73 +1,76 @@
 ---
 title: Runs and monitoring
-description: Real-time run history, execution trends, per-action performance, and failure analysis.
+description: Learn about real-time workflow run history, execution trends, per-action performance, and failure analysis.
 sidebar:
   order: 11
 ---
 
-Every workflow run is captured and inspectable from the portal. You see what fired, what each action returned, and how long every step took.
+In Azure Logic Apps Automation, the [portal](https://auto.azure.com) records information about each workflow run. You can review each workflow's progress and status along with the inputs, outputs, and duration.
 
-## Triggering a run
+## Draft workflows versus published runs
 
-For workflows with HTTP triggers (or any other manual-style trigger), the **Monitoring** tab's **Run workflow** button opens a test-run dialog. Pick the trigger, provide a JSON body, and submit.
+All the edits you make to a workflow stay in a *draft* version until you publish. Draft workflows keep their own run history so you can test changes without affecting the workflow running in production. When you publish, the runtime picks up the new workflow definition, the draft becomes the live version, and the next trigger fires the latest version.
 
-![Run payload dialog](../../../assets/portal/31-run-payload-dialog.png)
+## Trigger a run before publishing
 
-For scheduled or event-driven workflows, runs appear automatically as the trigger fires.
+Before you publish, you can test draft workflows that start with the HTTP trigger or any manual-style trigger by providing a sample payload. For more information, see [Test for missing setup details](/getting-started/quickstart/#5-test-for-missing-setup-details).
 
-## Real-time streaming
+:::note
+Schedule-based or event-driven workflows require you to publish them before they run. Their runs automatically appear in the run history after their triggers fire.
+:::
 
-When you click **Test your draft** (or **Run workflow** on a draft), the monitoring view streams the run live — actions colour in as they start, complete, or fail, and the **Execution log** appends each new entry as the runtime emits it. No polling, no refresh.
+## Real-time run status streaming
 
-Two things to know about the streaming behaviour:
+When a draft workflow runs, the **Monitoring** tab shows a live stream for that run. Action statuses change as they start, complete, or fail. For each run, the **Execution log** automatically shows an entry for the trigger and each action as the runtime emits the information without having to poll or refresh.
 
-- **Draft runs stream over Server-Sent Events.** The canvas state, action statuses, and durations land in the panel as the runtime produces them. If the connection drops, the view falls back to polling so you still get the final outcome.
-- **Published runs use polling.** Because production triggers can fire from anywhere (a queue message, a scheduler tick, an external HTTP call), the runtime doesn't push state to a specific browser session — instead the monitoring view polls for new runs and refreshes the open detail every few seconds. The visible behaviour is essentially the same; the underlying transport is different.
+This streaming capability tightens the loop between draft and iteration. You can edit a component, select **Test**, and watch the monitoring view update. If an action fails, the error surfaces in seconds.
 
-Streaming makes the draft-iteration loop tight: edit a node, hit **Test your draft**, watch the canvas light up. If an action fails, the error surfaces in seconds.
+When you view the streaming behavior, remember the following considerations:
 
-## Run history
+- Draft workflow runs stream server-sent events.
 
-The **Monitoring** tab lists every run with status, timestamp, and duration in the left rail:
+ The designer state, action statuses, and durations appear as the runtime produces them. If the connection drops, the view falls back to polling so you still get the final results.
 
-![Run history list](../../../assets/portal/33-run-history.png)
+- Published workflow runs use polling.
 
-Filter by status, time range, or trigger via the **Filters** panel.
+  Production triggers can fire from anywhere, for example, from a queue message, external HTTP call, or scheduler event. So, the runtime doesn't push state to a specific browser session.
 
-## Run detail
+  Instead, the monitoring view polls for new runs and refreshes the open detail every few seconds. The visible behavior is essentially the same, but the underlying transport differs.
 
-Click a run to open the detail view. The canvas re-renders coloured by execution status (green = succeeded, red = failed, grey = skipped), each node shows its duration, and the **Execution log** below lists every action in order:
+## View run history
 
-![Run detail with execution log](../../../assets/portal/34-run-detail.png)
+After a draft workflow starts running, the **Monitoring** view opens and shows each workflow step and their status. In the left pane, the **Runs** tab shows the current run and any previous runs. For the current run, you can view the duration, status, and timestamp. The **Filters** section lets you filter runs by status, version, and time range.
 
-## Action inputs and outputs
+To view more details for a specific run, select that run.
 
-Click any action in the execution log (or any node on the canvas) to inspect what data it received and produced:
+The **Execution log** opens and shows every workflow step in chronological order:
 
-![Action output panel](../../../assets/portal/35-action-output.png)
+![Screenshot that shows example workflow run history with Monitoring tab that includes Execution log and other run details.](media/runs-and-monitoring/draft-run-history.png)
 
-The same panel exposes **Input**, **Output**, and **Properties** tabs — switch between them to see the full data flow:
+To view the inputs and outputs for each operation, in the **Execution log**, select an operation. The panel to the right shows outputs, inputs, and properties. 
 
-![Action input panel](../../../assets/portal/36-action-input.png)
+The following example shows the output for a selected action:
 
-Triggers behave the same way — click the trigger node to inspect the incoming request, schedule fire-time, or queue message:
+![Screenshot that shows the Execution log with selected sample action and example output.](media/runs-and-monitoring/action-output.png)
 
-![Trigger output — HTTP headers and body](../../../assets/portal/37-trigger-output.png)
+For triggers, you can view the incoming or outgoing request, fire time, or queue message.
 
 ## Errors and resubmits
 
-For failed actions, the **Output** tab shows the error message and stack trace. The run detail header has a **Rerun** button that resubmits the trigger payload — handy for retrying after a fix, or comparing behaviour across draft and published versions.
+If actions fail, next to the **Execution log**, the **Output** tab shows the error messages and stack trace.
 
-## Drafts vs published runs
+To rerun the workflow with the same trigger payload, on the run details header, select the **Rerun** button. Use this capability to retry the workflow after making a fix or to compare behavior across draft and published versions.
 
-Edits go to a **draft** version of the workflow. Drafts have their own run history so you can test changes without touching production. When you publish, the draft becomes the live version and the next trigger fires it.
+## Monitoring with analytics and alerts
 
-## Analytics
+At the app level, on the sidebar, the **Analytics** page aggregates and shows workflow runs data as trends, such as success and failure rates, per-action latency, and recent failures with one-step drill-in view.
 
-The application-wide **Analytics** tab rolls runs up into trends: success/failure rate, per-action latency, recent failures with one-click drill-in.
+![Screenshot that shows the Analytics page with aggregated workflow run information.](media/runs-and-monitoring/analytics.png)
 
-![Application Analytics tab](../../../assets/portal/07-analytics.png)
+The platform runtime emits standard logs and metrics that downstream observability tools, such as Azure Application Insights, Log Analytics, or your own security information and event management (SIEM) system can ingest. Set up rules and send alerts based on failure rates or latency thresholds for your production workflows.
 
-## Alerts
+## Related content
 
-The runtime emits standard logs and metrics that downstream observability tools (App Insights, Log Analytics, your SIEM) can ingest. Wire alert rules on failure rate or latency thresholds for production workflows.
+- [Designer](/features/visual-designer/)
+- [Set up](/getting-started/setup/)
+- [Quickstart](/getting-started/quickstart/)
