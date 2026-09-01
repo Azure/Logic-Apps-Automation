@@ -1,3 +1,11 @@
+---
+title: Azure Logic Apps Automation pricing
+description: Learn about the pricing model for Azure Logic Apps Automation, including core platform meters, optional capabilities, public preview regions, and example monthly cost calculations.
+sidebar:
+  order: 5
+  label: Pricing
+---
+
 # Azure Logic Apps Automation pricing
 
 Logic Apps Automation is Azure's fully managed platform for business process automation and orchestration, including AI-powered automation.
