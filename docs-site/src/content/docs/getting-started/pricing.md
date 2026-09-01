@@ -2,7 +2,7 @@
 title: Azure Logic Apps Automation pricing
 description: Learn about the pricing model for Azure Logic Apps Automation, including core platform meters, optional capabilities, public preview regions, and example monthly cost calculations.
 sidebar:
-  order: 5
+  order: 4
   label: Pricing
 ---
 
