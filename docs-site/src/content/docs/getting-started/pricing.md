@@ -12,11 +12,13 @@ Logic Apps Automation is Azure's fully managed platform for business process aut
 
 Logic Apps Automation uses consumption-based pricing, so you pay based on the resources and capabilities that your automations use. The billing meters fall into two groups: Core Platform meters that apply to every workflow, and Optional Capabilities that are billed only when a workflow uses them.
 
-> [!IMPORTANT]
-> Azure Logic Apps Automation is currently in public preview. Preview pricing and availability are subject to change before general availability.
+:::important
+Azure Logic Apps Automation is currently in public preview. Preview pricing and availability are subject to change before general availability.
+:::
 
-> [!NOTE]
-> The prices shown on this page are for the **East US region**. Azure prices can vary by region. To view current pricing for your region and currency, see [Pricing - Logic Apps | Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/logic-apps/).
+:::note
+The prices shown on this page are for the **East US region**. Azure prices can vary by region. To view current pricing for your region and currency, see [Pricing - Logic Apps | Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/logic-apps/).
+:::
 
 ## Core platform pricing
 
