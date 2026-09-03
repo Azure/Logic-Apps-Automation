@@ -26,9 +26,9 @@ Core Platform meters cover the managed environment, workflow execution, and run-
 
 | Component | Meter | Price | How pricing works |
 | --- | --- | ---: | --- |
-| Managed environment | Environment hour | **$0.042 per environment hour** | Charged for each hour that a managed, customer-isolated environment is provisioned. |
-| Workflow runtime | Execution-second | **$0.00008 per execution-second** | This is the core execution time per second for an Automation application. The default profile includes 1 vCPU of core compute and 2 GiB of memory. The runtime host is also active while you author workflows in the portal. |
-| Data retention | GB per month | **$0.12 per GB per month** | Charged for storage used by workflow run history. Run history is retained for up to approximately 90 days. |
+| Managed environment | Environment hour | $0.042 per environment hour | Charged for each hour that a managed, customer-isolated environment is provisioned. |
+| Workflow runtime | Execution-second | $0.00008 per execution-second | This is the core execution time per second for an Automation application. The default profile includes 1 vCPU of core compute and 2 GiB of memory. The runtime host is also active while you author workflows in the portal. |
+| Data retention | GB per month | $0.12 per GB per month | Charged for storage used by workflow run history. Run history is retained for up to approximately 90 days. |
 
 ## Optional capability pricing
 
@@ -36,11 +36,11 @@ Optional Capabilities extend a workflow with connectors, AI, managed knowledge, 
 
 | Component | Meter | Price | How pricing works |
 | --- | --- | ---: | --- |
-| Standard managed connectors | Connector action | **$0.000125 per action** | Charged each time a workflow runs an action through a Standard managed connector. |
-| Enterprise managed connectors | Connector action | **$0.001 per action** | Charged for Enterprise connector operations, including knowledge read and write transactions. |
-| AI usage | Azure Agent Credits (AACs) | **Charged as AACs** | AI usage is converted to AACs based on the selected model and token consumption for AI-assisted authoring, agent reasoning, inference, embeddings, and other AI operations. See [Azure OpenAI Service pricing](https://azure.microsoft.com/en-us/pricing/details/azure-openai/?msockid=20df8113aafb681e21499566ab416984). |
-| Knowledge storage | GB per month | **33 Azure Agent Credits (AACs) per GB per month**, equivalent to **$0.33 per GB per month** | Charged for storage used by the managed knowledge layer. Embeddings, inference, and transactions are billed separately through AI usage and connector actions. |
-| Sandbox: isolated code execution | vCPU-second and GiB-second | **$0.000024 per vCPU-second** and **$0.000003 per GiB-second** | Charged for the compute and memory consumed while custom code runs in an isolated sandbox. |
+| Standard managed connectors | Connector action | $0.000125 per action | Charged each time a workflow runs an action through a Standard managed connector. |
+| Enterprise managed connectors | Connector action | $0.001 per action | Charged for Enterprise connector operations, including knowledge read and write transactions. |
+| AI usage | Azure Agent Credits (AACs) | Charged as AACs | AI usage is converted to AACs based on the selected model and token consumption for AI-assisted authoring, agent reasoning, inference, embeddings, and other AI operations. See [Azure OpenAI Service pricing](https://azure.microsoft.com/en-us/pricing/details/azure-openai/?msockid=20df8113aafb681e21499566ab416984). |
+| Knowledge storage | GB per month | 33 Azure Agent Credits (AACs) per GB per month, equivalent to $0.33 per GB per month | Charged for storage used by the managed knowledge layer. Embeddings, inference, and transactions are billed separately through AI usage and connector actions. |
+| Sandbox: isolated code execution | vCPU-second and GiB-second | $0.000024 per vCPU-second and $0.000003 per GiB-second | Charged for the compute and memory consumed while custom code runs in an isolated sandbox. |
 
 ## Public preview regions
 
