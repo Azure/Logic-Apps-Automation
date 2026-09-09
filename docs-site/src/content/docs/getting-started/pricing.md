@@ -11,7 +11,7 @@ Azure Logic Apps Automation uses consumption-based pricing, so you pay based on 
 - Core platform meters that apply to every workflow.
 - Optional capabilities that incur charges only when a workflow uses them.
 
-:::important
+:::note
 - Azure Logic Apps Automation is currently in public preview. Preview pricing and availability are subject to change before general availability.
 
 - The prices on this page are in US dollars, are only estimates, and apply only to the East US region.
