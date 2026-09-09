@@ -58,8 +58,10 @@ docs-site/
             |   |   ├── quickstart/           ← portal screenshots for related doc (lowercase)
             |   |   └── setup/                ← portal screenshots for related doc (lowercase)
             │   ├── introduction.md
+            │   ├── pricing.md
             │   ├── quickstart.md
-            │   └── setup.md
+            │   ├── setup.md
+            │   └── troubleshoot.md
             ├── demos/             ← short video walk-throughs (.mdx — uses <Video>)
             │   ├── index.mdx
             │   └── platform-overview.mdx
@@ -133,6 +135,7 @@ To make sure content uses consistent voice and other quality criteria as Microso
   - **Bold** only for UI or UX elements. See [UI elements](https://learn.microsoft.com/contribute/content/text-formatting-guidelines#ui-elements).
   - *Italics* only for new terminiology on first use, followed by the term explanation. See [New term introductions](https://learn.microsoft.com/contribute/content/text-formatting-guidelines#new-term-introductions).
   - See [Formatting text in instructions](https://learn.microsoft.com/style-guide/procedures-instructions/formatting-text-in-instructions)
+  - Replace curly quotation marks and apostrophes with straight versions.
 - **Bullet lists** only for non-sequential items. For easy scanning and readability, put any series exceeding two items in a separate bullet list. Don't use for steps or instructions.
 - **Numbered lists** only for sequential series with steps or tasks. Don't use bullet lists.
 - **Site-absolute paths** with trailing slash for cross-links: `[Quickstart](/getting-started/quickstart/)`
