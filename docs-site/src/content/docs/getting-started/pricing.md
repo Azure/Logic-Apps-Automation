@@ -14,24 +14,12 @@ Azure Logic Apps Automation uses consumption-based pricing, so you pay based on 
 :::important
 - Azure Logic Apps Automation is currently in public preview. Preview pricing and availability are subject to change before general availability.
 
-- The prices on this page are in US dollars, apply only to the East US region, and are only estimates.
+- The prices on this page are in US dollars, are only estimates, and apply only to the East US region.
 
   Azure prices can vary by region, agreement, purchase date, currency exchange rate, and applicable taxes. For pricing in your region and currency, see [Pricing - Azure Logic Apps | Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/logic-apps/).
 
-- Pricing changes are rolling out in phases across Azure regions and might not be available in every region at the same time.
+- Pricing changes are rolling out in phases across [supported Azure regions](/getting-started/introduction/#public-preview-regions) and might not be available in every region at the same time.
 :::
-
-## Public preview regions
-
-Azure region availability determines where you can create an automation environment. Azure OpenAI model availability and quota can also vary by region and subscription. During public preview, Azure Logic Apps Automation is available in the following Azure regions:
-
-- Australia East
-- East Asia
-- North Central US
-- Southeast Asia
-- Sweden Central
-- UK South
-- West US
 
 ## Core platform pricing
 
