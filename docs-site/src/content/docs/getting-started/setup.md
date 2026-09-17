@@ -54,7 +54,7 @@ For more information, see:
    |----------|-------------|
    | **Subscription** | Your Azure subscription. |
    | **Resource group** | The [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your environment resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
-   | **Region** | The Azure region closest to your end users or the components that your workflows need to use. |
+   | **Region** | The [Azure region](/getting-started/introduction/#public-preview-regions) closest to your end users or the components that your workflows need to use. |
    | **Name** | A unique environment name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
 
 1. When you finish, select **Create**.

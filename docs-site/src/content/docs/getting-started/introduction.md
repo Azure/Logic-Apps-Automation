@@ -82,6 +82,18 @@ Azure Logic Apps Automation introduces the following core components and concept
 | [Sandbox](/features/sandboxes/) (preview) | An isolated micro virtual machine environment where agents run code and can optionally use cloned repos and skills. |
 | [Runs and monitoring](/features/runs-and-monitoring/) | Get real-time streaming for draft workflow runs, review run history, work with drafts, trigger and action inputs and outputs, and more. |
 
+## Public preview regions
+
+Azure Logic Apps Automation is currently in public preview. Azure region availability determines where you can create an automation environment. Azure OpenAI model availability and quota can also vary by region and subscription. During public preview, Azure Logic Apps Automation is available in the following Azure regions:
+
+- Australia East
+- East Asia
+- North Central US
+- Southeast Asia
+- Sweden Central
+- UK South
+- West US
+
 ## Next steps
 
 - [Set up](/getting-started/setup/)
