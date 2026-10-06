@@ -42,7 +42,7 @@ Azure Logic Apps Automation supports native agents and Microsoft Foundry agents 
 
 Choose from the following native agent types:
 
-| Area | Workflow agent | Coding agent |
+| Area | Workflow agent | Managed Agent |
 |---|---|---|
 | Primary focus | Business processes | Software development, as a component in a larger automated process |
 | Works with | Services, systems, apps, data, approvals | Repositories, code, files, scripts, tests, development assets, and developer workflows.|
@@ -57,12 +57,12 @@ After you add an agent action to your workflow, set up the agent to work the way
 | Parameters | AI model | - Native: The model deployment to use like `gpt-5`. <br><br>- Foundry: The Foundry assistant. <br><br>**Note**: Changes to the model are only configuration changes and don't affect the rest of the workflow. <br><br>For more information, see [Native versus Foundry agents](#native-versus-foundry-agents). |
 | Parameters | System message | The description about the agent's role, purpose, behavior, and constraints. Supports the full expression language. <br><br>For more information, see [Best practices](#best-practices). |
 | Parameters | User message | The user prompt or question for the agent to answer. <br><br>This input usually originates from the workflow trigger or a preceding action as body content in expression format. <br><br>For more information, see [Best practices](#best-practices). |
-| Parameters | Input files <br>(Coding agent only) | The files to add and use as input in the isolated [sandbox](/features/sandbox/) environment. | 
+| Parameters | Input files <br>(Managed Agent only) | Files to upload to the isolated [sandbox](/features/sandboxes/) workspace before the agent starts. The file content can come from an earlier workflow action. |
 | Parameters | Built-in tools | Code interpreter: The agent's capability to run JavaScript in an isolated runtime process. |
 | Parameters | Tools | The actions, MCP servers, or workflows that the agent can call as tools. |
 | Connection | Connections | The configuration with the credentials and endpoint to access the model. You can create a connection or select an existing connection. |
 | Settings | - Timeout <br>- Loop count <br>- Secure inputs <br>- Secure outputs | <br>- The timeout and iteration limit to prevent runaway loops from burning up budget. <br><br>- The settings to hide inputs and outputs in workflow run history. |
-| Agent harness <br>(Coding agent only) | - Execution environment <br>- Sandbox configuration | Harness type: The runtime to use for agent execution. <br><br>- Sandbox: The Microsoft virtual machine image that you created as sandbox in the environment. If none exist, uses the default base image. |
+| Agent harness <br>(Managed Agent only) | - Execution environment <br>- Sandbox configuration <br>- Repository skills | Harness type: The runtime to use for agent execution. <br><br>- Sandbox configuration: A reusable image with cloned repositories and a selected compute tier. If you don't select a configuration, the agent uses the clean default base image. <br><br>- Repository skills: Folders containing `SKILL.md` files from repositories in the selected sandbox configuration. |
 | Knowledge | Knowledge | Optional documents, knowledge bases, or indexes that the agent can retrieve and use at runtime to ground requests in a specific domain. <br><br>For more information, see [Knowledge bases](/features/knowledge-bases/). |
 | Code | Code view | The agent's underlying read-only JSON definition. |
 
@@ -82,6 +82,14 @@ Downstream workflow actions can reference the agent's outputs by using the follo
 @outputs('<agent-name>')['<structured-output>']?['<field-name>']
 @outputs('<agent-name>')['<final-assistant-message>']
 ```
+
+A Managed Agent can also return files through the `fileOutputs` array:
+
+```
+@outputs('<managed-agent-name>')?['fileOutputs']
+```
+
+The sandbox collects only files that the Managed Agent places at the top level of the sandbox working directory. For setup instructions and output details, see [Create sandboxes](/guides/create-sandboxes/#use-files-produced-by-a-managed-agent).
 
 ## Agent best practices
 
@@ -119,7 +127,7 @@ With the code interpreter enabled, the agent runs the following high-level steps
 1. The model reads the result.
 1. The model calls another tool or produces the final answer.
 
-If you're using a coding agent that needs a richer execution environment, create a [sandbox](/features/sandbox/), and then set up that sandbox on the agent's **Agent harness** tab. 
+If you're using a Managed Agent that needs a richer execution environment, create a [sandbox](/features/sandboxes/), and then set up that sandbox on the agent's **Agent harness** tab.
 
 #### Code interpreter limitations
 
