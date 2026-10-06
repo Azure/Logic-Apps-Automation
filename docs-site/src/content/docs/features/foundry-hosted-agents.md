@@ -7,6 +7,10 @@ sidebar:
 
 In Azure Logic Apps Automation, a *Foundry Hosted Agent* is an agent that runs in a hosted container in Microsoft Foundry. You create and manage the agent from an automation app, and then select the agent in one or more workflows in that app.
 
+:::note
+Foundry Hosted Agents are currently in preview.
+:::
+
 Use a Foundry Hosted Agent when your workflow needs:
 
 - A container-based agent hosted by Microsoft Foundry.

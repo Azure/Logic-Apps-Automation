@@ -7,6 +7,10 @@ sidebar:
 
 This guide shows how to create a Foundry Hosted Agent in an Azure Logic Apps Automation app and use the agent in a workflow.
 
+:::note
+Foundry Hosted Agents are currently in preview.
+:::
+
 ## Prerequisites
 
 To create and use a Foundry Hosted Agent, you need:
