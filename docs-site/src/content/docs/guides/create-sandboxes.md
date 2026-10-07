@@ -32,6 +32,8 @@ In Azure Logic Apps Automation, use a [*sandbox*](/features/sandboxes/) as an is
 
   If you don't have environment access, contact the environment creator-owner so they can add you with the required permissions.
 
+- To clone a private GitHub repository by using OAuth, the Logic Apps Automation GitHub App must be installed for the GitHub account or organization that owns the repository and configured with access to that repository. Go to [GitHub Apps - Logic Apps Automation](https://github.com/apps/logic-apps-automation), select **Configure**, and grant the app access to the repository. If you can't configure the installation for an organization, ask a GitHub organization owner to grant access.
+
 - To use a sandbox in a workflow:
 
   - An [app](/features/projects-and-applications/#apps) in your environment.
@@ -108,6 +110,8 @@ When a Managed Agent needs cloned repositories, repository skills, or a specific
 1. If you chose **OAuth**, follow these steps:
 
    1. Enter a recognized GitHub or Azure DevOps repository URL.
+
+   1. For a private GitHub repository, confirm that the Logic Apps Automation GitHub App has access to the repository. Go to [GitHub Apps - Logic Apps Automation](https://github.com/apps/logic-apps-automation), select **Configure**, choose the account or organization that owns the repository, and then grant access to the repository.
 
    1. Select **Connect GitHub** or **Connect Azure DevOps**, based on the repository URL.
 
