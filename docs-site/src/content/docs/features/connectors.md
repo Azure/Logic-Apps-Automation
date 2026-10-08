@@ -20,7 +20,7 @@ Built-in operations run natively in the same process as the platform's runtime a
 | **Control** | - **Condition** <br>- **Switch** <br>- **For each** <br>- **Until** | Change the flow based on meeting specific criteria. |
 | **Data Operations** | - **Compose** <br>- **Parse JSON** <br>- **Select** <br>- **Filter array** <br>- **Join** | Perform data shaping. |
 | **Variables** | - **Initialize variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Create and manage variable values. |
-| **AI Agents** | **Workflow Agent**, **Coding agent** | Run agents that use models to perform tasks or execute code. |
+| **AI Agents** | **Workflow Agent**, **Managed Agent** | Run agents that use models to perform tasks or execute code. |
 
 ## Managed connectors
 
