@@ -89,7 +89,9 @@ A Managed Agent can also return files through the `fileOutputs` array:
 @outputs('<managed-agent-name>')?['fileOutputs']
 ```
 
-The sandbox collects only files that the Managed Agent places at the top level of the sandbox working directory. For setup instructions and output details, see [Create sandboxes](/guides/create-sandboxes/#use-files-produced-by-a-managed-agent).
+For predictable files, you can configure friendly names and exact relative paths. The designer then creates named **Dynamic content** tokens that use the `fileOutputs()` function. Additional files remain available in the complete **File Outputs** collection.
+
+For setup instructions, expressions, path rules, and monitoring details, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
 
 ## Agent best practices
 
@@ -198,3 +200,4 @@ This view helps you more easily answer the question "Why did the agent do that",
 - [Quickstart](/getting-started/quickstart/)
 - [Knowledge bases](/features/knowledge-bases/)
 - [Sandboxes](/features/sandboxes/)
+- [Use Managed Agent output files](/guides/use-managed-agent-output-files/)
