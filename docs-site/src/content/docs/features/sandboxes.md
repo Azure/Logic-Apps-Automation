@@ -67,7 +67,7 @@ Each Managed Agent run receives an isolated working directory:
 
 Each item in `fileOutputs` includes the relative `path`, file `content`, and `size` in bytes. Text content is returned as a string. Binary content can be returned as an object containing a content type and base64-encoded content.
 
-For files with predictable paths, configure named output files to create friendly **Dynamic content** tokens. Files that aren't mapped are still available in the complete **File Outputs** collection. For more information, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
+For files with predictable paths, configure named output files to create friendly **Dynamic content** tokens. Files that aren't mapped are still available in the complete **Output file array**. For more information, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
 
 ## Access and ownership
 

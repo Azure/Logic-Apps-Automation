@@ -19,9 +19,9 @@ You can use output files in two ways:
 | Option | When to use |
 |---|---|
 | Named output file | You know the expected file path and want a friendly token in **Dynamic content**. |
-| File Outputs collection | The number or paths of the files can vary, or you want the complete set of files created by the agent. |
+| Output file array | The number or paths of the files can vary, or you want the complete set of files created by the agent. |
 
-Named output files don't limit what the agent can return. The **File Outputs** collection still includes additional files that aren't mapped.
+Named output files don't limit what the agent can return. The **Output file array** still includes additional files that aren't mapped.
 
 ## Configure named output files
 
@@ -77,7 +77,7 @@ The path must match the configured relative path. If the agent doesn't create th
 
 ## Use all output files
 
-Use the Managed Agent's **File Outputs** token when the file names can vary or when a later action needs the complete collection.
+Use the Managed Agent's **Output file array** token when the file names can vary or when a later action needs the complete collection.
 
 You can also enter the expression directly:
 
@@ -91,7 +91,7 @@ If you don't configure any named output files, the Managed Agent can still retur
 
 ## Handle additional files
 
-An agent can create files that aren't listed under **Output Files**. These files are included in the generic **File Outputs** collection, but they don't receive individual named tokens.
+An agent can create files that aren't listed under **Output Files**. These files are included in the generic **Output file array**, but they don't receive individual named tokens.
 
 This behavior is useful when:
 
@@ -111,7 +111,7 @@ After the workflow runs:
 
 1. In the **Execution log**, select the Managed Agent action.
 
-1. Open the files view, and then expand **Output Files**.
+1. Open the files view, and then expand **Output files**.
 
 1. Select a file name or **Open** to preview a supported file type. Select **Download** to save the file.
 
@@ -123,7 +123,7 @@ Text, image, and PDF files can open in the portal. For other file types, downloa
 |---|---|
 | A named output is missing | Confirm that the agent created the file at the exact configured relative path, including directories and the file extension. |
 | The `fileOutputs()` expression fails | Confirm the Managed Agent action name and relative path. Also confirm that the file exists in the selected run. |
-| A file appears in **File Outputs** but has no named token | Add the file under **Output Files** when its path is predictable. Additional files only appear in the generic collection. |
+| A file appears in **Output file array** but has no named token | Add the file under **Output Files** when its path is predictable. Additional files only appear in the generic array. |
 | No files are returned | Make the agent instructions explicit about the final files to create. Don't ask the agent to leave final results only inside a cloned repository or temporary directory. |
 | A relative path is rejected | Remove rooted paths, drive letters, empty segments, `.` or `..` segments, and the reserved first segment `ottofiles`. |
 | A file can't be previewed | Download the file. The portal preview supports text, images, and PDFs. |

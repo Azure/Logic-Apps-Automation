@@ -89,7 +89,7 @@ A Managed Agent can also return files through the `fileOutputs` array:
 @outputs('<managed-agent-name>')?['fileOutputs']
 ```
 
-For predictable files, you can configure friendly names and exact relative paths. The designer then creates named **Dynamic content** tokens that use the `fileOutputs()` function. Additional files remain available in the complete **File Outputs** collection.
+For predictable files, you can configure friendly names and exact relative paths. The designer then creates named **Dynamic content** tokens that use the `fileOutputs()` function. Additional files remain available in the complete **Output file array**.
 
 For setup instructions, expressions, path rules, and monitoring details, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
 
