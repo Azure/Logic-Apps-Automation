@@ -25,13 +25,23 @@ Named output files don't limit what the agent can return. The **Output file arra
 
 ## Configure named output files
 
-Add a named output for each file that later workflow actions need to use directly.
+Describe the files that the agent should create in its **System message** (system prompt). Include the purpose, format, and relative path of each expected file. For example:
+
+```text
+Create a PDF summary report at outputs/reports/summary.pdf.
+Include the main findings and recommendations.
+Return the report as a final output file.
+```
+
+To make that file available by name in later actions, tie its relative path to a friendly name under **Output Files**. The system prompt describes what to produce; the output mapping identifies which file a later action should use.
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your environment, app, and workflow.
 
 1. On the workflow designer, select the Managed Agent action.
 
 1. Select the **Parameters** tab.
+
+1. In **System message**, describe the output files to create, as in the example above.
 
 1. Under **Output Files**, select **Add item**.
 
@@ -44,7 +54,7 @@ Add a named output for each file that later workflow actions need to use directl
 
 1. Add more output files as needed, and then close the action information window.
 
-The platform tells the agent to create each declared file at its exact relative path and to create any required parent directories.
+Use the same relative path in the system prompt and the output mapping. The platform also tells the agent to create each declared file at its exact relative path and to create any required parent directories. Adding a mapping doesn't replace instructions about the file's contents.
 
 ### Relative path rules
 
@@ -55,13 +65,18 @@ Use a file path, not a directory path. Follow these rules:
 - Don't start the path with `/` or a drive letter.
 - Don't use empty path segments, `.` segments, or `..` segments.
 - Don't declare the same path more than once.
-- Don't use `ottofiles` as the first path segment. This name is reserved for internal use.
 
 ## Use a named output in a later action
 
 After you configure an output file, its friendly name appears under the Managed Agent's **Output files** group in **Dynamic content**.
 
-Select the named file token to insert it into a later action. The token uses the following expression:
+1. Open the later action, such as an action that uploads a file or sends an attachment.
+
+1. Select its file-content input, and then open **Dynamic content**.
+
+1. Under the Managed Agent's **Output files** group, select the friendly name you configured, such as **Summary report**.
+
+The designer inserts the file token for you, so you don't need to write an expression. To inspect or edit the expression behind a named token, use:
 
 ```text
 @fileOutputs('<managed-agent-name>', '<relative-path>')
@@ -75,31 +90,17 @@ For example:
 
 The path must match the configured relative path. If the agent doesn't create the file, an action that evaluates this expression fails instead of returning an empty file.
 
-## Use all output files
+## Use the output file array, including additional files
 
-Use the Managed Agent's **Output file array** token when the file names can vary or when a later action needs the complete collection.
+Use the Managed Agent's **Output file array** in **Dynamic content** when a later action needs the complete collection, including files that aren't listed under **Output Files**. You don't need to enter a raw `outputs()` expression.
 
-You can also enter the expression directly:
+This is useful when the agent decides how many files to create, file names depend on the input, or you want supporting files as well as the named report.
 
-```text
-@outputs('<managed-agent-name>')?['fileOutputs']
-```
+For example, use the array as the input to a **For each** action to upload or process every returned file. Each file in the array includes its relative path (the file name, including any folders), content, and size. Text files return text content. Binary files return encoded content with its content type.
 
-Each file in the collection includes its relative path, content, and size. Text files return text content. Binary files return encoded content with its content type.
+Named mappings and the array serve different purposes: a named token selects one expected file; the array includes all returned files. Files without a mapping don't receive individual named tokens.
 
-If you don't configure any named output files, the Managed Agent can still return files through this collection.
-
-## Handle additional files
-
-An agent can create files that aren't listed under **Output Files**. These files are included in the generic **Output file array**, but they don't receive individual named tokens.
-
-This behavior is useful when:
-
-- The agent decides how many files to create.
-- File names depend on the input.
-- You map the main files but also want logs, supporting files, or other results.
-
-In the agent instructions, clearly describe which files are final results. The platform manages the internal output location, so don't tell the agent to use the reserved `ottofiles` path.
+In the system prompt, clearly describe which files are final results, including any supporting files to return. The Managed Agent can return files through the array even if you don't configure any named output files.
 
 ## Open or download files from run history
 
@@ -125,7 +126,7 @@ Text, image, and PDF files can open in the portal. For other file types, downloa
 | The `fileOutputs()` expression fails | Confirm the Managed Agent action name and relative path. Also confirm that the file exists in the selected run. |
 | A file appears in **Output file array** but has no named token | Add the file under **Output Files** when its path is predictable. Additional files only appear in the generic array. |
 | No files are returned | Make the agent instructions explicit about the final files to create. Don't ask the agent to leave final results only inside a cloned repository or temporary directory. |
-| A relative path is rejected | Remove rooted paths, drive letters, empty segments, `.` or `..` segments, and the reserved first segment `ottofiles`. |
+| A relative path is rejected | Use a workspace-relative file path without a leading slash, drive letter, empty segments, `.` segments, or `..` segments. |
 | A file can't be previewed | Download the file. The portal preview supports text, images, and PDFs. |
 
 ## Related content
