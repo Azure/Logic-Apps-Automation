@@ -228,17 +228,9 @@ Input files work with the default and prebuilt sandboxes.
 
 ## Use files produced by a Managed Agent
 
-The Managed Agent returns files that it creates at the top level of the sandbox working directory in the `fileOutputs` array. Each array item contains:
+The Managed Agent can return files that it creates in the sandbox. You can configure friendly names for files with known paths, use the complete `fileOutputs` collection for variable results, and open or download files from run history.
 
-| Property | Description |
-|---|---|
-| `path` | The file path relative to the sandbox working directory. |
-| `content` | A string for text files, or a content envelope with the content type and base64-encoded data for binary files. |
-| `size` | The file size in bytes. |
-
-Use the following expression to get the complete array in a downstream action:
-
-`@outputs('<managed-agent-name>')?['fileOutputs']`
+For configuration steps, expressions, path rules, and troubleshooting, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
 
 ## Manage a prebuilt sandbox
 
@@ -263,12 +255,13 @@ If you created the configuration, you can perform the following actions:
 | Rebuild reports that a build is already in progress | Wait for the current build to reach **Ready** or **Failed**, and then rebuild again. |
 | OAuth doesn't show a provider-specific connect button | Make sure the repository URL is a recognized GitHub or Azure DevOps URL. |
 | The Managed Agent doesn't use an input file | Confirm that the file name isn't empty and that the content expression returns the expected value from the earlier action. Review the Managed Agent's inputs in run history. |
-| A generated file is missing from `fileOutputs` | Make sure the agent copied the final file to the top level of the sandbox working directory, not a repository or skill subdirectory. |
+| A generated file is missing from `fileOutputs` | Make the agent instructions explicit about the final files to return. For a named output, confirm that the agent created the file at the exact configured relative path. |
 | A repository skill isn't available | Confirm that the selected sandbox is **Ready**, the repository belongs to that configuration, the folder path is relative to the repository, and the folder contains `SKILL.md`. |
 
 ## Related content
 
 - [Sandboxes](/features/sandboxes/)
 - [Agents](/features/agents/)
+- [Use Managed Agent output files](/guides/use-managed-agent-output-files/)
 - [Connectors](/features/connectors/)
 - [Runs and monitoring](/features/runs-and-monitoring/)

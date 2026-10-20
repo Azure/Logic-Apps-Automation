@@ -83,13 +83,9 @@ Downstream workflow actions can reference the agent's outputs by using the follo
 @outputs('<agent-name>')['<final-assistant-message>']
 ```
 
-A Managed Agent can also return files through the `fileOutputs` array:
+A Managed Agent can also return files. Describe the files to create in its **System message**. For predictable files, tie their relative paths to friendly names under **Output files**. The designer then creates named **Dynamic content** tokens that use the `fileOutputs()` function. Use the complete **Output file array** in **Dynamic content** to work with all returned files, including additional files that aren't mapped.
 
-```
-@outputs('<managed-agent-name>')?['fileOutputs']
-```
-
-The sandbox collects only files that the Managed Agent places at the top level of the sandbox working directory. For setup instructions and output details, see [Create sandboxes](/guides/create-sandboxes/#use-files-produced-by-a-managed-agent).
+For setup instructions, expressions, path rules, and monitoring details, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
 
 ## Agent best practices
 
@@ -198,3 +194,4 @@ This view helps you more easily answer the question "Why did the agent do that",
 - [Quickstart](/getting-started/quickstart/)
 - [Knowledge bases](/features/knowledge-bases/)
 - [Sandboxes](/features/sandboxes/)
+- [Use Managed Agent output files](/guides/use-managed-agent-output-files/)

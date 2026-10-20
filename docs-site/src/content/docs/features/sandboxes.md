@@ -63,9 +63,11 @@ Each Managed Agent run receives an isolated working directory:
 - Input files that you configure on the Managed Agent are uploaded before the agent starts.
 - Cloned repositories appear as directories in the workspace.
 - Selected skills are made available under `.github/skills`.
-- Files that the agent creates at the top level of the working directory are returned in the Managed Agent's `fileOutputs`.
+- Final files that the agent creates are returned in the Managed Agent's `fileOutputs`.
 
 Each item in `fileOutputs` includes the relative `path`, file `content`, and `size` in bytes. Text content is returned as a string. Binary content can be returned as an object containing a content type and base64-encoded content.
+
+For files with predictable paths, configure named output files to create friendly **Dynamic content** tokens. Files that aren't mapped are still available in the complete **Output file array**. For more information, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
 
 ## Access and ownership
 
@@ -74,6 +76,7 @@ Environment **Contributors** and **Authors** can create sandbox configurations. 
 ## Related content
 
 - [Create sandboxes](/guides/create-sandboxes/)
+- [Use Managed Agent output files](/guides/use-managed-agent-output-files/)
 - [Agents](/features/agents/)
 - [Knowledge bases](/features/knowledge-bases/)
 - [Runs and monitoring](/features/runs-and-monitoring/)
