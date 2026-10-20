@@ -33,7 +33,7 @@ Include the main findings and recommendations.
 Return the report as a final output file.
 ```
 
-To make that file available by name in later actions, tie its relative path to a friendly name under **Output Files**. The system prompt describes what to produce; the output mapping identifies which file a later action should use.
+To make that file available by name in later actions, tie its relative path to a friendly name under **Output files**. The system prompt describes what to produce; the output mapping identifies which file a later action should use.
 
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your environment, app, and workflow.
 
@@ -43,18 +43,22 @@ To make that file available by name in later actions, tie its relative path to a
 
 1. In **System message**, describe the output files to create, as in the example above.
 
-1. Under **Output Files**, select **Add item**.
+1. Under **Output files**, select **Add Item**.
 
 1. Provide the following information:
 
    | Property | Description | Example |
    |---|---|---|
-   | **Output Name** | A friendly name that appears in **Dynamic content**. | `Summary report` |
+   | **Output name** | A friendly name that appears in **Dynamic content**. | `Summary report` |
    | **Relative path** | The exact path where the agent must create the file, relative to the sandbox workspace. | `outputs/reports/summary.pdf` |
 
 1. Add more output files as needed, and then close the action information window.
 
 Use the same relative path in the system prompt and the output mapping. The platform also tells the agent to create each declared file at its exact relative path and to create any required parent directories. Adding a mapping doesn't replace instructions about the file's contents.
+
+The following example asks the agent to create three text files and maps `complete/summary.txt` to the friendly name **Complete summary**.
+
+![Managed Agent system message and Output files mapping with output name Complete summary and relative path complete/summary.txt.](media/use-managed-agent-output-files/configure-output-files.png)
 
 ### Relative path rules
 
@@ -76,6 +80,10 @@ After you configure an output file, its friendly name appears under the Managed 
 
 1. Under the Managed Agent's **Output files** group, select the friendly name you configured, such as **Summary report**.
 
+The following example shows the named files and **Output file array** in the picker, with the `complete/summary.txt` file expression in a downstream action.
+
+![Dynamic content picker showing Output file array and three named output files, alongside a downstream action using the Complete summary file expression.](media/use-managed-agent-output-files/use-output-files.png)
+
 The designer inserts the file token for you, so you don't need to write an expression. To inspect or edit the expression behind a named token, use:
 
 ```text
@@ -92,7 +100,7 @@ The path must match the configured relative path. If the agent doesn't create th
 
 ## Use the output file array, including additional files
 
-Use the Managed Agent's **Output file array** in **Dynamic content** when a later action needs the complete collection, including files that aren't listed under **Output Files**. You don't need to enter a raw `outputs()` expression.
+Use the Managed Agent's **Output file array** in **Dynamic content** when a later action needs the complete collection, including files that aren't listed under **Output files**. In the picker shown above, select **Output file array** instead of an individual named file. You don't need to enter a raw `outputs()` expression.
 
 This is useful when the agent decides how many files to create, file names depend on the input, or you want supporting files as well as the named report.
 
@@ -112,11 +120,13 @@ After the workflow runs:
 
 1. In the **Execution log**, select the Managed Agent action.
 
-1. Open the files view, and then expand **Output files**.
+1. Select the **Files** tab, and then expand **Output files**.
 
 1. Select a file name or **Open** to preview a supported file type. Select **Download** to save the file.
 
 Text, image, and PDF files can open in the portal. For other file types, download the file to open it.
+
+![Successful workflow run with Managed Agent selected and the Files tab showing three output files with open and download controls.](media/use-managed-agent-output-files/monitor-output-files.png)
 
 ## Troubleshoot output files
 
@@ -124,7 +134,7 @@ Text, image, and PDF files can open in the portal. For other file types, downloa
 |---|---|
 | A named output is missing | Confirm that the agent created the file at the exact configured relative path, including directories and the file extension. |
 | The `fileOutputs()` expression fails | Confirm the Managed Agent action name and relative path. Also confirm that the file exists in the selected run. |
-| A file appears in **Output file array** but has no named token | Add the file under **Output Files** when its path is predictable. Additional files only appear in the generic array. |
+| A file appears in **Output file array** but has no named token | Add the file under **Output files** when its path is predictable. Additional files only appear in the generic array. |
 | No files are returned | Make the agent instructions explicit about the final files to create. Don't ask the agent to leave final results only inside a cloned repository or temporary directory. |
 | A relative path is rejected | Use a workspace-relative file path without a leading slash, drive letter, empty segments, `.` segments, or `..` segments. |
 | A file can't be previewed | Download the file. The portal preview supports text, images, and PDFs. |

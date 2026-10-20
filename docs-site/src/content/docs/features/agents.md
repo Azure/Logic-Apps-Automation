@@ -83,7 +83,7 @@ Downstream workflow actions can reference the agent's outputs by using the follo
 @outputs('<agent-name>')['<final-assistant-message>']
 ```
 
-A Managed Agent can also return files. Describe the files to create in its **System message**. For predictable files, tie their relative paths to friendly names under **Output Files**. The designer then creates named **Dynamic content** tokens that use the `fileOutputs()` function. Use the complete **Output file array** in **Dynamic content** to work with all returned files, including additional files that aren't mapped.
+A Managed Agent can also return files. Describe the files to create in its **System message**. For predictable files, tie their relative paths to friendly names under **Output files**. The designer then creates named **Dynamic content** tokens that use the `fileOutputs()` function. Use the complete **Output file array** in **Dynamic content** to work with all returned files, including additional files that aren't mapped.
 
 For setup instructions, expressions, path rules, and monitoring details, see [Use Managed Agent output files](/guides/use-managed-agent-output-files/).
 
