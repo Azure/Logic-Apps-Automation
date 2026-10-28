@@ -5,6 +5,8 @@ sidebar:
   order: 5
 ---
 
+## Overview
+
 In Azure Logic Apps Automation, the AI assistant generates a workflow based on your description for the task you want to automate. Just describe the task behavior and results, and the assistant builds a workflow that you can edit with follow-up instructions. You can use the assistant as your primary workflow builder, which offers parity with the workflow designer. Both use the same workflow schema, connector catalog, and expressions language. For example, you can edit a generated workflow in the designer and vice versa.
 
 ## What the assistant does

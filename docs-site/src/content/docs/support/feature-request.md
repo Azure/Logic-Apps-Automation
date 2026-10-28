@@ -11,7 +11,7 @@ Feature requests are welcome — especially ones with a clear user story.
 
 → [**Open a new feature request on GitHub**](https://github.com/Azure/Logic-Apps-Automation/issues/new?template=feature_request.yml)
 
-The link opens the feature-request form with labels and the priority dropdown pre-filled — you just describe the problem and the proposed experience.
+The link opens the feature-request form, where you can describe the problem and the proposed experience.
 
 ## What to include
 

@@ -45,25 +45,56 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Get started',
-					items: [{ autogenerate: { directory: 'getting-started' } }],
-				},
-				{
-					label: 'Demos',
-					items: [{ autogenerate: { directory: 'demos' } }],
+					items: [
+						{ label: 'About Logic Apps Automation', slug: 'getting-started/introduction' },
+						{ label: 'Create a workflow', slug: 'getting-started/quickstart' },
+						{ label: 'Set up an environment', slug: 'getting-started/setup' },
+						{ label: 'Billing and pricing', slug: 'getting-started/pricing' },
+					],
 				},
 				{
 					label: 'Concepts',
-					items: [{ autogenerate: { directory: 'features' } }],
+					items: [
+						{ label: 'Environments and applications', slug: 'features/projects-and-applications' },
+						{ label: 'Permissions', slug: 'features/permissions' },
+						{ label: 'Managed and built-in connectors', slug: 'features/connectors' },
+					],
 				},
 				{
-					label: 'Guides',
-					collapsed: true,
-					items: [{ autogenerate: { directory: 'guides' } }],
+					label: 'Workflows',
+					items: [
+						{ label: 'Overview', slug: 'features/workflows' },
+						{ label: 'Visual designer', slug: 'features/visual-designer' },
+						{ label: 'AI assistant', slug: 'features/ai-assistant' },
+						{ label: 'Runs and monitoring', slug: 'features/runs-and-monitoring' },
+					],
 				},
 				{
-					label: 'Reference',
+					label: 'Agents',
+					items: [
+						{ label: 'Choose an agent', slug: 'features/agents' },
+						{ label: 'Foundry hosted agents', slug: 'features/foundry-hosted-agents' },
+						{ label: 'Create a Foundry hosted agent', slug: 'guides/create-foundry-hosted-agents' },
+					],
+				},
+				{
+					label: 'Sandbox',
+					items: [
+						{ label: 'Overview', slug: 'features/sandboxes' },
+						{ label: 'Sandbox setup overview', slug: 'guides/create-sandboxes' },
+					],
+				},
+				{
+					label: 'Knowledge',
+					items: [
+						{ label: 'Overview', slug: 'features/knowledge-bases' },
+						{ label: 'Knowledge setup overview', slug: 'guides/create-knowledge-bases' },
+					],
+				},
+				{
+					label: 'Demos',
 					collapsed: true,
-					items: [{ autogenerate: { directory: 'reference' } }],
+					items: [{ autogenerate: { directory: 'demos' } }],
 				},
 				{
 					label: 'Release notes',
@@ -71,7 +102,10 @@ export default defineConfig({
 				},
 				{
 					label: 'Support',
-					items: [{ autogenerate: { directory: 'support' } }],
+					items: [
+						{ label: 'Troubleshoot', slug: 'getting-started/troubleshoot' },
+						{ autogenerate: { directory: 'support' } },
+					],
 				},
 			],
 		}),

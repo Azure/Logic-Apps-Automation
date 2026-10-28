@@ -5,6 +5,8 @@ sidebar:
   order: 8 
 ---
 
+## Overview
+
 In Azure Logic Apps Automation, an *agent* is a workflow action that performs the following tasks:
 
 - Accept requests in plain language.
@@ -12,7 +14,7 @@ In Azure Logic Apps Automation, an *agent* is a workflow action that performs th
 - Follow system instructions that define the agent's role.
 - Call tools that complete the tasks needed to fulfill the requests.
 
-An agent can also run code and scripts, browse file systems, and operate on cloned repos with skills when you set up a [*sandbox*](/features/sandboxes/) where the agent can perform this work. This sandbox is an isolated compute environment with a micro virtual machine in your automation environment.
+An agent can also run code and scripts in a [*sandbox*](/features/sandboxes/).
 
 Like any other action, an agent produces structured outputs that subsequent workflow actions can use. However, an agent can accept freeform, unstructured, and unpredictable inputs.
 
@@ -55,15 +57,15 @@ After you add an agent action to your workflow, set up the agent to work the way
 | Tab | Section or field | Description |
 |---|---|---|
 | Parameters | AI model | - Native: The model deployment to use like `gpt-5`. <br><br>- Foundry: The Foundry assistant. <br><br>**Note**: Changes to the model are only configuration changes and don't affect the rest of the workflow. <br><br>For more information, see [Native versus Foundry agents](#native-versus-foundry-agents). |
-| Parameters | System message | The description about the agent's role, purpose, behavior, and constraints. Supports the full expression language. <br><br>For more information, see [Best practices](#best-practices). |
-| Parameters | User message | The user prompt or question for the agent to answer. <br><br>This input usually originates from the workflow trigger or a preceding action as body content in expression format. <br><br>For more information, see [Best practices](#best-practices). |
-| Parameters | Input files <br>(Managed Agent only) | Files to upload to the isolated [sandbox](/features/sandboxes/) workspace before the agent starts. The file content can come from an earlier workflow action. |
-| Parameters | Built-in tools | Code interpreter: The agent's capability to run JavaScript in an isolated runtime process. |
+| Parameters | System message | The description about the agent's role, purpose, behavior, and constraints. Supports the full expression language. <br><br>For more information, see [Best practices](#agent-best-practices). |
+| Parameters | User message | The user prompt or question for the agent to answer. <br><br>This input usually originates from the workflow trigger or a preceding action as body content in expression format. <br><br>For more information, see [Best practices](#agent-best-practices). |
+| Parameters | Input files <br>(Managed Agent only) | Review the available input file settings for the agent. |
+| Parameters | Built-in tools | Code interpreter: The agent's capability to run JavaScript. |
 | Parameters | Tools | The actions, MCP servers, or workflows that the agent can call as tools. |
 | Connection | Connections | The configuration with the credentials and endpoint to access the model. You can create a connection or select an existing connection. |
 | Settings | - Timeout <br>- Loop count <br>- Secure inputs <br>- Secure outputs | <br>- The timeout and iteration limit to prevent runaway loops from burning up budget. <br><br>- The settings to hide inputs and outputs in workflow run history. |
-| Agent harness <br>(Managed Agent only) | - Execution environment <br>- Sandbox configuration <br>- Repository skills | Harness type: The runtime to use for agent execution. <br><br>- Sandbox configuration: A reusable image with cloned repositories and a selected compute tier. If you don't select a configuration, the agent uses the clean default base image. <br><br>- Repository skills: Folders containing `SKILL.md` files from repositories in the selected sandbox configuration. |
-| Knowledge | Knowledge | Optional documents, knowledge bases, or indexes that the agent can retrieve and use at runtime to ground requests in a specific domain. <br><br>For more information, see [Knowledge bases](/features/knowledge-bases/). |
+| Agent harness <br>(Managed Agent only) | - Execution environment <br>- Sandbox configuration <br>- Repository skills | Review the available harness and sandbox settings. For more information, see [Sandboxes](/features/sandboxes/). |
+| Knowledge | Knowledge | Knowledge sources an agent can use. For more information, see [Knowledge bases](/features/knowledge-bases/). |
 | Code | Code view | The agent's underlying read-only JSON definition. |
 
 ## How a native agent works
@@ -83,13 +85,7 @@ Downstream workflow actions can reference the agent's outputs by using the follo
 @outputs('<agent-name>')['<final-assistant-message>']
 ```
 
-A Managed Agent can also return files through the `fileOutputs` array:
-
-```
-@outputs('<managed-agent-name>')?['fileOutputs']
-```
-
-The sandbox collects only files that the Managed Agent places at the top level of the sandbox working directory. For setup instructions and output details, see [Create sandboxes](/guides/create-sandboxes/#use-files-produced-by-a-managed-agent).
+For sandbox setup guidance, see [Sandbox setup overview](/guides/create-sandboxes/).
 
 ## Agent best practices
 
@@ -106,7 +102,7 @@ You can enable or add the following tools to your native agent:
 
 | Tool type | Description |
 |---|---|
-| Built-in | Code interpreter: The model can write and execute JavaScript at runtime. Code execution stays isolated and happens in-process within your app's node worker. This isolation provides strong separation from the host runtime in the following ways: <br><br>- Code execution uses its own limited memory, which prevents consuming all available resources. <br><br>- Code execution can't directly access the host memory, file system, or network. <br><br>- Failures stay isolated, so any crashes in generated code don't affect the runtime process. |
+| Built-in | Code interpreter: The model can write and execute JavaScript. Confirm runtime restrictions and resource limits before use. |
 | Custom | Any built-in or managed connector action, MCP server, or workflow that you can call. |
 
 ### Code interpreter
@@ -122,7 +118,7 @@ When you need the agent to perfom the following tasks, enable the code interpete
 With the code interpreter enabled, the agent runs the following high-level steps:
 
 1. The model decides they need to call the code interpreter tool by using the `code` argument.
-1. The runtime creates and runs JavaScript in an isolated process.
+1. The runtime runs the JavaScript.
 1. The output flows back to the chat history as a tool result.
 1. The model reads the result.
 1. The model calls another tool or produces the final answer.
@@ -131,15 +127,7 @@ If you're using a Managed Agent that needs a richer execution environment, creat
 
 #### Code interpreter limitations
 
-| Limitation | Description |
-|---|---|
-| JavaScript only | No Python or other runtimes. |
-| No network access | No HTTP calls from the runtime. Instead, add an **HTTP** action as an agent tool. |
-| No file system access | No reading or writing files. Instead, pass inputs through the agent's chat context. |
-| Shorter timeout per execution | Long-running snippets are cut off. Instead, make frequent small calls, not a big one. |
-| Limited memory and CPU | Code interpreter is suitable for transformations, not heavy compute. |
-
-If your agent needs non-JavaScript runtimes, network access, or a file system, set up and use a [sandbox](/features/sandboxes/), rather than the code interpreter.
+Confirm the supported runtimes, network and file access, execution timeouts, and resource limits with your administrator before use. For additional execution options, review [sandboxes](/features/sandboxes/).
 
 ### Custom tools
 

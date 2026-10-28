@@ -1,17 +1,19 @@
 ---
 title: Connectors
-description: Learn about prebuilt integrations that easily connect you to 1,400+ services, systems, SaaS apps, databases, and REST APIs.
+description: Learn about prebuilt integrations for services, systems, SaaS apps, databases, and REST APIs.
 sidebar:
   order: 7
 ---
 
-In Azure Logic Apps Automation, a *connector* is a prebuilt integration for a service, system, SaaS app, data source, or API outside your workflow. The connector catalog includes 1,400+ connectors, so you can build most workflows without writing code.
+## Overview
+
+In Azure Logic Apps Automation, a *connector* is a prebuilt integration for a service, system, SaaS app, data source, or API outside your workflow.
 
 Connections exist inside apps where each connection stores your authentication setup. You can reuse the same connection across every workflow in the same app.
 
 ## Built-in operations
 
-Built-in operations run natively in the same process as the platform's runtime and usually don't need an external connection. The following table describes some common built-in operations:
+Built-in operations are available in the workflow designer. The following table describes some common built-in operations:
 
 | Operation group | Operation | Description |
 |---|---|---|
@@ -24,7 +26,7 @@ Built-in operations run natively in the same process as the platform's runtime a
 
 ## Managed connectors
 
-Managed connector operations run in global, multitenant Azure and expose REST APIs so you can access and work with popular cloud services, systems, apps, and databases. You usually need to set up connections that require authentication. Examples include Outlook, SharePoint, Teams, OneDrive, Salesforce, Slack, GitHub, and ServiceNow.
+Managed connectors provide operations for services, systems, apps, and databases. You usually need to set up connections that require authentication. Examples include Outlook, SharePoint, Teams, OneDrive, Salesforce, Slack, GitHub, and ServiceNow.
 
 The following table describes some common managed connector operations:
 
@@ -38,7 +40,6 @@ The following table describes some common managed connector operations:
 | **Event Hubs** | Various | Manage events. |
 | **Azure Cosmos DB** | Various | Manage documents and stored procedures. |
 | **SQL Server** | Various | Manage queries, rows, and stored procedures in Azure SQL or SQL Server. |
-| **Inline Code** | **Execute JavaScript code** | Run code snippets inline with your workflow. | 
 
 ## HTTP for everything else
 
@@ -47,6 +48,6 @@ If the service you want to connect doesn't have a prebuilt connector, use the bu
 ## Related content
 
 - [Quickstart](/getting-started/quickstart/#3-create-your-workflow)
-- [Visual designer](/features/designer/)
+- [Visual designer](/features/visual-designer/)
 - [AI assistant](/features/ai-assistant/)
 - [Connectors](/features/connectors/)

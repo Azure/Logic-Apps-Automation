@@ -5,9 +5,9 @@ sidebar:
   order: 4
 ---
 
-In Azure Logic Apps Automation, the *designer* provides a visual drag-and-drop canvas where developers can shape workflows. Every workflow component, such as the trigger, each action, agent, and MCP server, has a parameters pane for inputs and settings, code view, and outputs view so you can easily move between the visual representation and the underlying JSON.
+## Overview
 
-![Screenshot that shows the designer with an example workflow.](media/visual-designer/designer.png)
+In Azure Logic Apps Automation, the *designer* provides a visual drag-and-drop canvas where developers can shape workflows. Every workflow component, such as the trigger, each action, agent, and MCP server, has a parameters pane for inputs and settings, code view, and outputs view so you can easily move between the visual representation and the underlying JSON.
 
 ## What you can build on the designer
 
@@ -23,25 +23,29 @@ The following table describes only some of the components that you can use on th
 
 ## Conditional branches
 
-The designer visually renders control flow constructs. For example, a workflow with a condition and parallel branches looks like the the following sample:
+The designer visually renders control flow constructs. The following example shows a condition with true and false branches:
 
-![Screenshot that shows the designer and example workflow with condtional and parallel branches.](media/visual-designer/condition-branches.png)
+![Designer showing a condition with true and false branches.](media/visual-designer/condition-branches.png)
 
 ## View and edit component information
 
 To view a component's parameters, code, or other information, on the designer, select that component.
 
+The following synthetic example shows an action's parameters with fictional values:
+
+![Synthetic designer with an action's parameters pane open.](https://github.com/user-attachments/assets/d2574c87-6e31-49f9-88e9-bb37a34c55b8)
+
 ## View and edit underlying JSON
 
 To view the entire workflow's underlying JSON alongside the designer, on the bottom toolbar, select **Code**. Changes that you make in one view instantly appear in the other.
 
-![Screenshot that shows the designer alongside with the entire workflow's underlying JSON code view.](media/visual-designer/code-view.png)
+The following synthetic example illustrates the code view; it isn't a validated workflow definition:
+
+![Synthetic designer with workflow JSON shown in the code pane.](https://github.com/user-attachments/assets/19d3aa9b-08da-43d6-9e6b-4429ae9d0c70)
 
 ## Save and run workflows
 
-All the edits you make to a workflow stay in a *draft* version until you publish. Drafts let you iterate without affecting the workflow running in production. When you publish, the runtime picks up the new workflow definition, the draft becomes the live version, and the next trigger fires the latest version.
-
-To run a draft workflow with a test payload before you publish, see [Test for missing setup details](/getting-started/quickstart/#5-test-for-missing-setup-details).
+Before testing or publishing a workflow, confirm the expected behavior with your administrator and review actions that can affect connected systems. For UI steps, see [Test for missing setup details](/getting-started/quickstart/#5-test-for-missing-setup-details).
 
 ## Related content
 

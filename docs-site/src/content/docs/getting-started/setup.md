@@ -6,15 +6,17 @@ sidebar:
   label: Set up
 ---
 
-When your team builds automation solutions, keep your apps, their workflows, connections, and other items organized, secure, and separate so that unrelated work doesn't cross boundaries. Otherwise, automation assets become harder to manage, govern, and scale as your team grows.
+## Overview
 
-In Azure Logic Apps Automation, an *environment* is a top-level, isolated container that solves this problem by providing its own compute, networking, security, and governance. As your first step, create an environment to store your apps and their contents. You can create an environment per team, business area, or scenario so your teams can independently build and manage their automations.
+When your team builds automation solutions, organize your apps, workflows, connections, and other items so that your team can find and manage them as it grows.
+
+In Azure Logic Apps Automation, an *environment* is the top-level container for apps and related resources. As your first step, create an environment to store your apps and their contents. You can create an environment per team, business area, or scenario so teams can organize and manage automations in separate containers.
 
 Azure Logic Apps Automation organizes your work at the following levels:
 
 | Level | Contents |
 |-------|----------|
-| [*Environment*](/getting-started/introduction/#key-components-and-concepts) | The top-level, parent container that stores *apps*. As the environment creator and default owner, you control access and governance at this level. |
+| [*Environment*](/getting-started/introduction/#key-components-and-concepts) | The top-level parent container that stores *apps* and shared resources. |
 | [*App*](/getting-started/introduction/#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
 | [*Workflow*](/getting-started/introduction/#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](/getting-started/introduction/#key-components-and-concepts)) and the steps ([*actions*](/getting-started/introduction/#key-components-and-concepts)) to run. |
 
@@ -24,6 +26,10 @@ For more information, see:
 
 - [What is Azure Logic Apps Automation](/getting-started/introduction/)
 - [Key concepts and terminology](/getting-started/introduction/#key-components-and-concepts)
+
+## How to
+
+Review the requirements, then [create an environment](#create-your-environment) and [add members](#add-environment-members) if your team needs access.
 
 ## Requirements
 
@@ -48,14 +54,18 @@ For more information, see:
 
 1. On the **Environments** tab, select **Create environment**.
 
-1. In the **Create automation environment** box, provide the following information:
+1. In the **Create an environment** box, provide the following information:
 
    | Property | Description |
    |----------|-------------|
    | **Subscription** | Your Azure subscription. |
-   | **Resource group** | The [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your environment resources. Enter a unique name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
+   | **Resource group** | Search for or select the [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your environment resources. |
    | **Region** | The [Azure region](/getting-started/introduction/#public-preview-regions) closest to your end users or the components that your workflows need to use. |
    | **Name** | A unique environment name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
+
+   The following synthetic example uses fictional values and unrelated mock resources:
+
+   ![Synthetic Create an environment dialog with subscription, resource group, region, and name fields.](https://github.com/user-attachments/assets/cf2783ab-7176-488e-9df2-1abb1c7f0b75)
 
 1. When you finish, select **Create**.
 
@@ -71,11 +81,7 @@ For more information, see:
 
 ## Environment ownership and privacy
 
-As the environment creator, you automatically:
-
-- Become the environment owner and appear in the **Owner** environment property, which is a property, not a permission level. You can't clear or remove this property value.
-- Have [**Contributor** role permissions](/features/permissions/#environment-roles) on the environment resource.
-- Have administrator-level permissions to delete the environment and its resources, such as apps or sandboxes, including items you don't own. Non-owner members with the **Contributor** role can't perform these tasks.
+Before making ownership or access decisions, confirm ownership, inherited permissions, and delete authority with your environment administrator.
 
 For more information, see [Permissions](/features/permissions/).
 
@@ -97,19 +103,11 @@ Before others can create apps and workflows in your environment, add them as env
 
 1. After the **Role** section appears, select the role the person needs, based on the principle of least privilege, and then select **Add**.
 
-   The following table describes the available roles at the environment level, what they can do, and what they can't do:
+   For a description of environment and app roles, see [Permissions](/features/permissions/).
 
-   | Role | Can | Can't |
-   |------|-----|-------|
-   | **Reader** (view only) | - View only the environment settings, members list, sandbox configurations, and shared resources. <br>- View workflow run history. | - Create, edit, or delete anything. <br>- View apps. <br>- Trigger or cancel workflow runs. <br>- Manage permissions. |
-   | **Author** | - Create apps, sandbox configurations, and shared resources. <br>- View the environment settings, members list, and sandbox configurations. | - Edit the environment settings and manage environment members. <br>- View apps or their content without explicit app-level permissions. |
-   | **Contributor** | - View and edit environment settings, manage the environment, and manage environment members. <br>- Create apps, but view only metadata for others' apps. <br>- Create and edit sandbox configurations. <br>- View workflows, connections, and parameters. <br>- Create, edit, and delete workflows. <br>- Create and edit connections. <br>- View workflow run history. <br>- Trigger and cancel workflow runs. <br>- Manage app permissions. | - Delete the environment (owner only). <br>- View app content without explicit app level permissions. |
-
-   By default, apps are always private, which means that only their creators (owners) can view and access their apps. They're invisible to other environment members until the creator-owner explicitly shares them.
+   Before granting or requesting app access, confirm visibility, privacy, and permission behavior with your environment or app administrator.
    
-   Environment contributors or owners can view app metadata for governance, but not the content. Apps often contain automation that connects to personal accounts. So, privacy by default keeps this data obscured unless explicitly shared.
-   
-   sApp owners or contributors can explicitly add members by granting app-level roles. To grant access to a specific app, open that app, go to **Settings**, **User permissions**, and add the member you want.
+   To grant access where your current permissions allow it, open the app, go to **Settings** > **User permissions**, and add the member.
 
 ## Next
 
