@@ -11,7 +11,7 @@ Bugs are tracked on **GitHub Issues**. The fastest path to a fix is a small, rep
 
 → [**Open a new bug report on GitHub**](https://github.com/Azure/Logic-Apps-Automation/issues/new?template=bug_report.yml)
 
-The link opens the bug-report form with labels and the severity dropdown pre-filled — you fill in description, steps to reproduce, and any logs.
+The link opens the bug-report form, where you can select the affected component and describe the problem.
 
 ## What to include
 
@@ -22,6 +22,8 @@ A great bug report has five pieces:
 3. **What actually happened** — the error message, broken output, or unexpected behaviour.
 4. **Where you hit it** — workspace and environment name, browser, approximate time.
 5. **Anything else useful** — console errors, network responses, screenshots, or short screen recordings.
+
+Issues are public. Remove credentials, tokens, personal information, and sensitive data from logs, run inputs, screenshots, and other attachments before sharing them.
 
 ## Security issues
 

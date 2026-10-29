@@ -3,16 +3,19 @@ title: Create and use a Foundry Hosted Agent
 description: Create a Foundry Hosted Agent, finish its setup, and use it in an Azure Logic Apps Automation workflow.
 sidebar:
   order: 3
-  badge:
-    text: preview
-    variant: tip
 ---
+
+## Overview
 
 This guide shows how to create a Foundry Hosted Agent in an Azure Logic Apps Automation app and use the agent in a workflow.
 
 :::note
-This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your environment enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+Availability can vary by environment. If you can't find this capability in the [portal](https://auto.azure.com), check with your environment administrator.
 :::
+
+## How to
+
+Review the prerequisites, then [create the hosted agent](#create-the-hosted-agent), [finish setup](#finish-agent-setup), and [add it to a workflow](#add-the-agent-to-a-workflow).
 
 ## Prerequisites
 
@@ -45,7 +48,7 @@ To create and use a Foundry Hosted Agent, you need:
 
 1. Select **Create agent**.
 
-   Azure Logic Apps Automation creates the hosted agent container and saves the agent configuration.
+   The portal shows progress for **Creating agent container** and **Saving configuration**.
 
 1. When creation finishes, select **Open agent**.
 
@@ -126,7 +129,7 @@ From the app's **Agents** page, you can:
 - Reverify the complete setup.
 - Delete an agent that you no longer need.
 
-Deleting a Foundry Hosted Agent removes the agent from Microsoft Foundry and its configuration from the automation app. Azure Logic Apps Automation also attempts to remove the role assignments created for the agent and shows a warning if any assignments remain.
+Before deleting an agent, review the effects and required permissions. The delete dialog lists the Foundry agent, role assignments, and local configuration as cleanup steps, and reports any failures or warnings. If needed, use **Retry** and confirm the outcome and any remaining cleanup with your administrator.
 
 ## Troubleshoot problems
 

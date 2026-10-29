@@ -5,6 +5,8 @@ sidebar:
   order: 8 
 ---
 
+## Overview
+
 In Azure Logic Apps Automation, an *agent* is a workflow action that performs the following tasks:
 
 - Accept requests in plain language.
@@ -12,9 +14,57 @@ In Azure Logic Apps Automation, an *agent* is a workflow action that performs th
 - Follow system instructions that define the agent's role.
 - Call tools that complete the tasks needed to fulfill the requests.
 
-An agent can also run code and scripts, browse file systems, and operate on cloned repos with skills when you set up a [*sandbox*](/features/sandboxes/) where the agent can perform this work. This sandbox is an isolated compute environment with a micro virtual machine in your automation environment.
+Some agents can also run code and scripts in a [*sandbox*](/features/sandboxes/).
 
 Like any other action, an agent produces structured outputs that subsequent workflow actions can use. However, an agent can accept freeform, unstructured, and unpredictable inputs.
+
+## Choose an agent
+
+The designer's **Choose an Agent** picker presents these options. Other quick-add menus can show a subset and use different labels. The available choices and connections can vary by environment.
+
+The following synthetic example illustrates the picker; it might differ from your portal:
+
+![Agent picker with Workflow, Managed, Foundry prompt, and Foundry Hosted choices.](https://github.com/user-attachments/assets/d852bef1-b992-4f99-bd33-ae8f31eef1c0)
+
+| Option | When to consider it |
+|---|---|
+| **Workflow agent** | Define an agent in the workflow when you want to configure its prompts, context, and tools. |
+| **Managed agent** | Work with code, files, repositories, and skills in a sandboxed agent harness. |
+| **Foundry prompt agent** | Use a declarative Microsoft Foundry agent configured with prompts, a model, and tools. |
+| **Foundry Hosted agent** | Use an agent provisioned in a hosted container in a Foundry project. See [Foundry Hosted Agents](/features/foundry-hosted-agents/). |
+
+After you choose a type, follow the connection and configuration steps shown for that option. For a hosted agent, finish its setup before selecting it in a workflow.
+
+### Workflow agent
+
+Choose **Workflow agent** to configure an agent in the workflow. Select a model connection, or add the agent first and configure a connection in the editor. Set the system and user messages, and add the tools the agent needs. See [Native agent concepts and components](#native-agent-concepts-and-components).
+
+### Managed agent
+
+Choose **Managed agent** for work involving code and files. Review the model and harness choices offered by the designer, then configure the sandbox, repositories, skills, and input files needed for the task. Confirm your access and the available sandbox options before relying on them. See [Sandbox setup overview](/guides/create-sandboxes/).
+
+### Foundry prompt agent
+
+Choose **Foundry prompt agent** to use an agent configured in Microsoft Foundry. Select or create a compatible Foundry Agent Service connection, then review the agent and its configuration in the editor. Its **Built in tools** options include **Code interpreter** and **File search**.
+
+The following synthetic example shows an unsubmitted connection form with a fictional subscription:
+
+![Foundry connection fields with a fictional subscription and no project selected.](https://github.com/user-attachments/assets/b2fb48e7-2f3d-4bc0-8357-13f5ce5c7ce4)
+
+### Foundry Hosted agent
+
+Choose **Foundry Hosted agent** to use a hosted agent from your Foundry project. Create and finish setting up the hosted agent before selecting it in the workflow. See [Create and use a Foundry Hosted Agent](/guides/create-foundry-hosted-agents/).
+
+## Orchestrate agents
+
+Use the workflow to decide when an agent runs and what happens next:
+
+1. Pass data from a trigger or an earlier action to the agent's user message.
+1. Configure any supported actions the agent needs as tools, with descriptions that explain when to use them.
+1. Use the agent's output in a later workflow action. For a multi-agent workflow, pass the appropriate output to the next agent.
+1. Review the run history, including available agent and tool details, to understand the result.
+
+Review the inputs, tool permissions, and outputs for each agent before relying on them.
 
 ## Agent versus deterministic workflow
 
@@ -28,15 +78,9 @@ The following table helps you choose whether to use an agent versus a *determini
 
 ## Native versus Foundry agents
 
-Azure Logic Apps Automation supports native agents and Microsoft Foundry agents driven by Foundry Agent Service. The following table compares the differences between these agents:
+The designer distinguishes Workflow and Managed agents from Foundry prompt and Foundry Hosted agents. Workflow agents are configured in the workflow, while Managed agents offer a sandboxed harness for tasks involving code and files. Foundry agents use resources in a Microsoft Foundry project.
 
-| Aspect | Native agent | Foundry agent |
-|---|---|---|
-| Intent | - You want tight integration with workflow connectors. <br><br>- You want action and per-iteration visibility in the workflow run history. | - You have an assistant you built in Foundry. <br><br>- You want to use Foundry's built-in capabilities. |
-| Agent tools | Use the platform's connector actions and built-in code interpreter as tools. | Use Foundry's built-in capabilities like file search, function calling, code interpreter, and resources. |
-| Model connection | Use your own model deployment through a workflow connection. | Use your Foundry project's connection. |
-| Runtime | Drive each iteration with the built-in agent loop. | Hand off work to Azure AI Foundry Agent Service. |
-| Where the loop runs | In the workflow runtime. <br><br>The platform shows the actions from each iteration in the execution log through the workflow run history. | In Foundry. <br><br>The platform shows a single agent call and the final output. |
+For the four choices and their setup paths, see [Choose an agent](#choose-an-agent). Review the connection, tools, and settings offered for the type you select.
 
 ## Native agent concepts and components
 
@@ -46,25 +90,27 @@ Choose from the following native agent types:
 |---|---|---|
 | Primary focus | Business processes | Software development, as a component in a larger automated process |
 | Works with | Services, systems, apps, data, approvals | Repositories, code, files, scripts, tests, development assets, and developer workflows.|
-| Tools | Connectors, REST APIs, MCP servers, knowledge bases, other workflows | Code interpreters, repositories, shells, runtimes, terminals, developer tools and environments |
+| Tools | Connectors, REST APIs, MCP servers, knowledge bases, other workflows | Sandbox and repository capabilities, shells, runtimes, terminals, and developer tools |
 | Optimizes | Business outcomes | Software artifacts |
 | Common use cases | Onboarding, support, operations, and finance | Generate and refactor code, create unit tests, review pull requests, and find repository defects |
 
 After you add an agent action to your workflow, set up the agent to work the way you want. The following table introduces agent-related configuration concepts and components:
 
+Section labels can vary by editor layout and agent type.
+
 | Tab | Section or field | Description |
 |---|---|---|
-| Parameters | AI model | - Native: The model deployment to use like `gpt-5`. <br><br>- Foundry: The Foundry assistant. <br><br>**Note**: Changes to the model are only configuration changes and don't affect the rest of the workflow. <br><br>For more information, see [Native versus Foundry agents](#native-versus-foundry-agents). |
-| Parameters | System message | The description about the agent's role, purpose, behavior, and constraints. Supports the full expression language. <br><br>For more information, see [Best practices](#best-practices). |
-| Parameters | User message | The user prompt or question for the agent to answer. <br><br>This input usually originates from the workflow trigger or a preceding action as body content in expression format. <br><br>For more information, see [Best practices](#best-practices). |
-| Parameters | Input files <br>(Managed Agent only) | Files to upload to the isolated [sandbox](/features/sandboxes/) workspace before the agent starts. The file content can come from an earlier workflow action. |
-| Parameters | Built-in tools | Code interpreter: The agent's capability to run JavaScript in an isolated runtime process. |
+| Parameters | AI model | Review the model or agent configuration offered for the agent type you selected. <br><br>For more information, see [Native versus Foundry agents](#native-versus-foundry-agents). |
+| Parameters | System message | The description about the agent's role, purpose, behavior, and constraints. Supports the full expression language. <br><br>For more information, see [Best practices](#agent-best-practices). |
+| Parameters | User message | The user prompt or question for the agent to answer. <br><br>This input usually originates from the workflow trigger or a preceding action as body content in expression format. <br><br>For more information, see [Best practices](#agent-best-practices). |
+| Parameters | Input files <br>(Managed Agent only) | Review the available input file settings for the agent. |
+| Parameters | Built-in tools | Workflow agent: Code interpreter gives the agent a way to run JavaScript. |
 | Parameters | Tools | The actions, MCP servers, or workflows that the agent can call as tools. |
-| Connection | Connections | The configuration with the credentials and endpoint to access the model. You can create a connection or select an existing connection. |
-| Settings | - Timeout <br>- Loop count <br>- Secure inputs <br>- Secure outputs | <br>- The timeout and iteration limit to prevent runaway loops from burning up budget. <br><br>- The settings to hide inputs and outputs in workflow run history. |
-| Agent harness <br>(Managed Agent only) | - Execution environment <br>- Sandbox configuration <br>- Repository skills | Harness type: The runtime to use for agent execution. <br><br>- Sandbox configuration: A reusable image with cloned repositories and a selected compute tier. If you don't select a configuration, the agent uses the clean default base image. <br><br>- Repository skills: Folders containing `SKILL.md` files from repositories in the selected sandbox configuration. |
-| Knowledge | Knowledge | Optional documents, knowledge bases, or indexes that the agent can retrieve and use at runtime to ground requests in a specific domain. <br><br>For more information, see [Knowledge bases](/features/knowledge-bases/). |
-| Code | Code view | The agent's underlying read-only JSON definition. |
+| Connect or Connection | Connections | The configuration with the credentials and endpoint to access the model. You can create a connection or select an existing connection. |
+| Run settings | - Timeout <br>- Loop Count <br>- Secure Inputs <br>- Secure Outputs | Review the available timeout and iteration settings. Confirm what the secure input and output settings protect before relying on them. |
+| Harness <br>(Managed Agent only) | - Execution environment <br>- Sandbox configuration <br>- Repository skills | Review the available harness and sandbox settings. For more information, see [Sandboxes](/features/sandboxes/). |
+| Knowledge | Knowledge | Knowledge sources an agent can use. For more information, see [Knowledge bases](/features/knowledge-bases/). |
+| Code | Code view | The agent's underlying JSON definition. Edit availability depends on the workflow mode and editor. |
 
 ## How a native agent works
 
@@ -83,13 +129,7 @@ Downstream workflow actions can reference the agent's outputs by using the follo
 @outputs('<agent-name>')['<final-assistant-message>']
 ```
 
-A Managed Agent can also return files through the `fileOutputs` array:
-
-```
-@outputs('<managed-agent-name>')?['fileOutputs']
-```
-
-The sandbox collects only files that the Managed Agent places at the top level of the sandbox working directory. For setup instructions and output details, see [Create sandboxes](/guides/create-sandboxes/#use-files-produced-by-a-managed-agent).
+For sandbox setup guidance, see [Sandbox setup overview](/guides/create-sandboxes/).
 
 ## Agent best practices
 
@@ -106,12 +146,12 @@ You can enable or add the following tools to your native agent:
 
 | Tool type | Description |
 |---|---|
-| Built-in | Code interpreter: The model can write and execute JavaScript at runtime. Code execution stays isolated and happens in-process within your app's node worker. This isolation provides strong separation from the host runtime in the following ways: <br><br>- Code execution uses its own limited memory, which prevents consuming all available resources. <br><br>- Code execution can't directly access the host memory, file system, or network. <br><br>- Failures stay isolated, so any crashes in generated code don't affect the runtime process. |
+| Built-in | For Workflow agents, Code interpreter lets the model write and execute JavaScript. Confirm runtime restrictions and resource limits before use. |
 | Custom | Any built-in or managed connector action, MCP server, or workflow that you can call. |
 
 ### Code interpreter
 
-When you need the agent to perfom the following tasks, enable the code interpeter capability on the agent:
+For a Workflow agent that needs to perform the following tasks, enable its code interpreter capability:
 
 - Calculate numbers, run algorithms, or transform complex data structures that the model can't reliably handle.
 - Parse, filter, or reshape JSON and arrays returned from other tools.
@@ -121,25 +161,17 @@ When you need the agent to perfom the following tasks, enable the code interpete
 
 With the code interpreter enabled, the agent runs the following high-level steps:
 
-1. The model decides they need to call the code interpreter tool by using the `code` argument.
-1. The runtime creates and runs JavaScript in an isolated process.
+1. The model decides it needs to call the code interpreter tool by using the `code` argument.
+1. The runtime runs the JavaScript.
 1. The output flows back to the chat history as a tool result.
 1. The model reads the result.
 1. The model calls another tool or produces the final answer.
 
-If you're using a Managed Agent that needs a richer execution environment, create a [sandbox](/features/sandboxes/), and then set up that sandbox on the agent's **Agent harness** tab.
+If you're using a Managed Agent that needs a richer execution environment, create a [sandbox](/features/sandboxes/), and then set up that sandbox in the agent's **Harness** section.
 
 #### Code interpreter limitations
 
-| Limitation | Description |
-|---|---|
-| JavaScript only | No Python or other runtimes. |
-| No network access | No HTTP calls from the runtime. Instead, add an **HTTP** action as an agent tool. |
-| No file system access | No reading or writing files. Instead, pass inputs through the agent's chat context. |
-| Shorter timeout per execution | Long-running snippets are cut off. Instead, make frequent small calls, not a big one. |
-| Limited memory and CPU | Code interpreter is suitable for transformations, not heavy compute. |
-
-If your agent needs non-JavaScript runtimes, network access, or a file system, set up and use a [sandbox](/features/sandboxes/), rather than the code interpreter.
+Confirm the supported runtimes, network and file access, execution timeouts, and resource limits with your administrator before use. For additional execution options, review [sandboxes](/features/sandboxes/).
 
 ### Custom tools
 
@@ -172,7 +204,7 @@ The function name uses camel case (`agentParameters()`) in both the standard exp
 
 ## Mix code interpreter and custom tools
 
-An agent can use both the [code interpreter](#code-interpreter) tool and [custom tools](#custom-tools). The following table describes some example common patterns:
+A Workflow agent can use both the [code interpreter](#code-interpreter) tool and [custom tools](#custom-tools). The following table describes some example common patterns:
 
 | Real-world use case | Tool use pattern |
 |---|---|
@@ -183,15 +215,13 @@ An agent can use both the [code interpreter](#code-interpreter) tool and [custom
 
 ## Agent run history
 
-After an agent loop completes, the monitoring view shows the [workflow run history](/features/runs-and-monitoring/) with each iteration in its own entry. The chat history shows the full conversation:
+After an agent run, review the [workflow run history](/features/runs-and-monitoring/) and available chat or iteration details. Depending on the run and its settings, these details can include:
 
-- Each user message.
-- Each tool call that the model makes, including the arguments.
-- Each tool's inputs and outputs.
-- The duration for each step.
-- The model's final answer.
+- User and assistant messages.
+- Tool calls, arguments, and results.
+- Durations and other step details.
 
-This view helps you more easily answer the question "Why did the agent do that", compared to viewing the same data in the agent action's outputs alone.
+These details can help you understand how the agent reached its result.
 
 ## Related content
 

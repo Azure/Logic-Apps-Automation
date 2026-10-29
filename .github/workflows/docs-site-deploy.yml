@@ -103,6 +103,14 @@ jobs:
           DOCS_SITE_URL: ${{ vars.DOCS_SITE_URL || '' }}
         run: npm run build
 
+      - name: Unit test docs link checker
+        working-directory: ${{ env.DOCS_APP_LOCATION }}
+        run: python3 -m unittest discover -s scripts/tests -p 'test_*.py'
+
+      - name: Validate built docs links and fragments
+        working-directory: ${{ env.DOCS_APP_LOCATION }}
+        run: python3 scripts/validate_docs_site.py
+
       - name: Upload built site
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:

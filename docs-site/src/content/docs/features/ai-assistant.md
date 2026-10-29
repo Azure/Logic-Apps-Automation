@@ -5,18 +5,30 @@ sidebar:
   order: 5
 ---
 
-In Azure Logic Apps Automation, the AI assistant generates a workflow based on your description for the task you want to automate. Just describe the task behavior and results, and the assistant builds a workflow that you can edit with follow-up instructions. You can use the assistant as your primary workflow builder, which offers parity with the workflow designer. Both use the same workflow schema, connector catalog, and expressions language. For example, you can edit a generated workflow in the designer and vice versa.
+## Overview
+
+In Azure Logic Apps Automation, the AI assistant helps you create and edit a workflow from a description of the task. You can review the result in the designer and refine it with follow-up instructions.
+
+## How to
+
+1. Open a workflow in the designer and open the Copilot panel.
+1. Describe the starting event, the steps you want, and the result. Select **Generate**.
+1. Review the assistant's response and the workflow changes. Depending on the selected edit mode, you might need to approve a proposal, or changes might be applied automatically.
+1. Configure any missing connections and parameters. Check the trigger, actions, and expressions before testing.
+1. Continue the conversation to request a specific change, then review the result again.
+
+The composer can offer **Ask first** and **Auto-apply** modes. For full-workflow edits, it can also offer **Agent mode** and **Classic mode**. Available controls and models depend on the workflow scope and your connection.
 
 ## What the assistant does
 
 - Generates a workflow from a plain language prompt.
-- Selects the most appropriate trigger and actions for your described workload.
+- Suggests triggers and actions for your described workload.
 - Edits an existing workflow when you provide more instructions.
 
 ## How the assistant works
 
-1. You provide your prompt through Copilot in the designer. Copilot describes the plan and reasoning for the workflow to build.
-1. The assistant generates the workflow definition using the same JSON that the designer reads.
+1. You provide your prompt through Copilot in the designer.
+1. The assistant proposes or applies workflow changes using the definition that the designer reads.
 1. Review each component on the designer canvas. Edit the components that you need to configure or change.
 1. Provide a follow-up prompt to refine your workflow. For example, `"Replace sequential execution with parallel branches"` or `"Add error handling to the HTTP action"`.
 
@@ -38,7 +50,7 @@ Yes, an assistant-generated workflow uses the same underlying JSON schema as if 
 
 ### Q: Does the assistant also configure the workflow?
 
-No, the assistant only generates the workflow shape. You need to provide environment-specific details, for example: 
+The assistant can propose or apply workflow changes, but you should review the result and provide any missing environment-specific details, for example:
 
 - Configure a connection for each connector-based action. You can create the connection at the app level or on each operation.
 - Provide parameter values that the assistant leaves empty. Required parameters show red outlines or asterisks.
