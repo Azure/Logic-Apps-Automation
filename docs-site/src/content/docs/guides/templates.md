@@ -7,6 +7,8 @@ description: Create workflows from templates and prepare a template for sharing.
 
 A workflow template provides a starting definition that you can review and adapt to your own environment. The template gallery, import, and generation options can vary by environment and your access.
 
+<span id="create-workflow-from-template"></span>
+
 ## Create a workflow from a template
 
 1. Open your app's workflow list. Select **Create workflow**, then **Build from templates**.

@@ -68,7 +68,7 @@ export default defineConfig({
 							collapsed: true,
 							items: [
 								{ label: 'From scratch', slug: 'getting-started/quickstart' },
-								{ label: 'From templates', slug: 'guides/templates' },
+								{ label: 'From templates', slug: 'guides/build-from-templates' },
 								{ label: 'With the AI assistant', slug: 'features/ai-assistant' },
 							],
 						},
