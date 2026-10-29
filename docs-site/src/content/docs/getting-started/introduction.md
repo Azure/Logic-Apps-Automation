@@ -47,7 +47,7 @@ Here are other capabilities for automating workflows:
 | Agents | Add and run agents, which are actions backed by large language models (LLMs). Drag and drop on the designer like any other action. Provide a system prompt, a toolset, and inputs. Downstream actions can use the output. |
 | Knowledge bases | Attach external information sources as context that agents can search while reasoning. |
 | Sandboxes | Run agentic workflows with code in sandbox environments. |
-| Run analytics | Diagnose problems by using real-time workflow run history, execution trends, failure analysis, and per-action performance. |
+| Run analytics | Diagnose problems by using workflow run history, execution trends, and failure analysis. |
 
 ## Key components and concepts
 
@@ -56,28 +56,20 @@ Azure Logic Apps Automation introduces the following core components and concept
 | Component or concept | Description |
 |----------------------|-------------|
 | [Environment](/features/projects-and-applications/) | The top-level container resource that stores your *apps*, *knowledge bases*, *sandboxes*, and environment settings. |
-| [App](/features/projects-and-applications/) | The second-level deployable package resource that stores your *workflows*, *connections*, *parameters*, analytics data, and app settings. |
+| [App](/features/projects-and-applications/) | Organizes workflows, connections, parameters, and app settings, and provides views of runs and analytics. |
 | [Settings](/features/permissions/) | The user permissions at the environment and app levels that control resource access and sharing for collaboration through roles and ownership. |
 | [Workflow](/features/workflows/) | The automation workload that includes a starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
 | [AI assistant](/features/ai-assistant/) | The interface where you can describe and update workflows by using natural language and iterating with the assistant. |
 | [Designer](/features/visual-designer/) | The canvas where you manually add your workflow's trigger and actions. |
 | [Connectors](/features/connectors/) | The catalog that provides integrations with other services, systems, apps, and data. |
 | [Agents](/features/agents/) | Add native or Foundry agents, agent loops, set up agent parameters, add agent tools such as code interpreter, and monitor the chat log. |
-| [Knowledge](/features/knowledge-bases/) (preview) | Sources that agents can use for context. |
-| [Sandbox](/features/sandboxes/) (preview) | An environment where agents can run code. |
+| [Knowledge](/features/knowledge-bases/) | Sources that agents can use for context. |
+| [Sandbox](/features/sandboxes/) | An environment where agents can run code. |
 | [Runs and monitoring](/features/runs-and-monitoring/) | Review workflow run history and trigger and action inputs and outputs. |
 
 ## Public preview regions
 
-Azure Logic Apps Automation is currently in public preview. Azure region availability determines where you can create an automation environment. Azure OpenAI model availability and quota can also vary by region and subscription. During public preview, Azure Logic Apps Automation is available in the following Azure regions:
-
-- Australia East
-- East Asia
-- North Central US
-- Southeast Asia
-- Sweden Central
-- UK South
-- West US
+Azure Logic Apps Automation is currently in public preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). When you create an environment, review the regions offered in the portal and confirm their availability for your subscription. Azure OpenAI model availability and quota can also vary by region and subscription.
 
 ## Next steps
 

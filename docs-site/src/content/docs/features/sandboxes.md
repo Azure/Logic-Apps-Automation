@@ -3,15 +3,12 @@ title: Sandboxes
 description: Learn about sandbox environments where agents can run code.
 sidebar:
   order: 10
-  badge:
-    text: preview
-    variant: tip
 ---
 
 ## Overview
 
 :::note
-This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your environment enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+Availability can vary by environment. If you can't find this capability in the [portal](https://auto.azure.com), check with your environment administrator.
 :::
 
 In Azure Logic Apps Automation, a *sandbox* is an environment where [agents](/features/agents/) can run code in workflows. For setup guidance, see [Sandbox setup overview](/guides/create-sandboxes/).

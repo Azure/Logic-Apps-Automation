@@ -17,7 +17,7 @@ Azure Logic Apps Automation organizes your work at the following levels:
 | Level | Contents |
 |-------|----------|
 | [*Environment*](/getting-started/introduction/#key-components-and-concepts) | The top-level parent container that stores *apps* and shared resources. |
-| [*App*](/getting-started/introduction/#key-components-and-concepts) | A deployable package that stores workflows, connections, parameters, analytics, settings, and other items that your automation needs. |
+| [*App*](/getting-started/introduction/#key-components-and-concepts) | Organizes workflows, connections, parameters, and app settings, and provides views of runs and analytics. |
 | [*Workflow*](/getting-started/introduction/#key-components-and-concepts) | The automation workload itself, which includes the starting event ([*trigger*](/getting-started/introduction/#key-components-and-concepts)) and the steps ([*actions*](/getting-started/introduction/#key-components-and-concepts)) to run. |
 
 This guide shows how to create an environment if you don't have one yet and add team members to your environment.
@@ -33,15 +33,15 @@ Review the requirements, then [create an environment](#create-your-environment) 
 
 ## Requirements
 
-- An Azure account and subscription that uses a Microsoft work or school account so you can create environments. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
+- Confirm the account and subscription requirements for creating an environment with your administrator. If you need an Azure account, see [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_c4e22ddd-ca68-7d5b-5f0d-0c961983e0ef).
 
   :::note
-  You need an Azure subscription only to create environments. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
+  Confirm the subscription and access requirements for your environment. Make sure your account can access the [Azure Logic Apps Automation portal](https://auto.azure.com).
   :::
 
 - To add a team member to your environment and for them to create apps and workflows, they need the following items:
 
-  - A Microsoft work or school account in your Microsoft Entra tenant. No Azure subscription necessary.
+  - A Microsoft work or school account with the access required for the environment.
   - Access to the automation portal.
 
   For more information about Microsoft Entra tenants, see [Tenant configurations](https://learn.microsoft.com/entra/identity-platform/v2-overview#tenant-configurations).
@@ -61,7 +61,7 @@ Review the requirements, then [create an environment](#create-your-environment) 
    | **Subscription** | Your Azure subscription. |
    | **Resource group** | Search for or select the [Azure resource group](https://learn.microsoft.com/azure/azure-resource-manager/management/overview#terminology) for organizing your environment resources. |
    | **Region** | The [Azure region](/getting-started/introduction/#public-preview-regions) closest to your end users or the components that your workflows need to use. |
-   | **Name** | A unique environment name across Azure regions that uses only alphanumeric characters, hyphens (`-`), underscores (`_`), parentheses (`()`), or periods (`.`). |
+   | **Name** | Start with a lowercase letter, followed by lowercase letters, numbers, hyphens (`-`), or underscores (`_`), up to 64 characters. Follow the displayed validation for existing names. |
 
    The following synthetic example uses fictional values and unrelated mock resources:
 
@@ -77,7 +77,7 @@ Review the requirements, then [create an environment](#create-your-environment) 
 
 1. Before others can work in your environment to create apps and workflows, [add them as environment members](#add-environment-members).
 
-1. Before you or others can start building workflows, [create an app](/getting-started/quickstart/#2-create-an-app) as a deployable package for your workflows.
+1. Before you or others can start building workflows, [create an app](/getting-started/quickstart/#2-create-an-app) to organize them.
 
 ## Environment ownership and privacy
 
@@ -93,11 +93,9 @@ Before others can create apps and workflows in your environment, add them as env
 
 1. On your environment home page, on the sidebar, select **Settings**.
 
-1. In the **Users** section, select **Add user**.
+1. Select **User permissions**, and then, in the **Users** section, select **Add user**.
 
 1. On the **Add role assignment** pane, in the **Select user** box, enter the name or the email address for the person you want to add.
-
-   The **Select user** list shows only people in the same Microsoft Entra tenant as you.
 
 1. From the results, select the correctly matching person.
 

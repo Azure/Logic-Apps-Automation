@@ -3,9 +3,6 @@ title: Foundry Hosted Agents
 description: Learn how Foundry Hosted Agents run container-based agents for Azure Logic Apps Automation workflows.
 sidebar:
   order: 9
-  badge:
-    text: preview
-    variant: tip
 ---
 
 ## Overview
@@ -13,7 +10,7 @@ sidebar:
 In Azure Logic Apps Automation, a *Foundry Hosted Agent* is an agent that runs in a hosted container in Microsoft Foundry. You create and manage the agent from an automation app, and then select the agent in one or more workflows in that app.
 
 :::note
-This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your environment enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+Availability can vary by environment. If you can't find this capability in the [portal](https://auto.azure.com), check with your environment administrator.
 :::
 
 Use a Foundry Hosted Agent when your workflow needs:
@@ -56,11 +53,11 @@ The app's **Agents** page shows the Foundry Hosted Agents that belong to the app
 |---|---|
 | **Connected** | Setup completed and the agent is ready for workflow runs. |
 | **Provisioning** | The agent container or its identity and permissions are still being prepared. |
-| **Authentication failed** | A required identity doesn't have access to the Foundry resources. |
-| **Agent error** | The hosted agent reported an error. |
-| **Update available** | The hosted container version doesn't match the expected version. |
+| **Auth Failed** | A required identity doesn't have access to the Foundry resources. |
+| **Agent Error** | The agent is reachable, but its model authentication is failing. |
+| **Update Available** | The hosted container version doesn't match the expected version. |
 | **Unreachable** | Azure Logic Apps Automation couldn't reach the hosted agent. |
-| **Status unknown** | The current status couldn't be determined. |
+| **Unknown** | The agent status hasn't been checked yet. |
 
 Open an agent to review its setup progress, configuration, identities, and diagnostics. The setup process performs the following checks:
 

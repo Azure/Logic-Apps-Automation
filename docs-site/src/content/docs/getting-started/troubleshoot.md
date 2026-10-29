@@ -11,7 +11,7 @@ The following tables describe common problems you might experience and their res
 | Problem | Resolution |
 |---------|------------|
 | "You don't have access to any environment" | Ask your environment administrator to confirm your environment assignment, or create an environment if your organization allows self-service creation. |
-| Sign in loop or single sign-on (SSO) error | Clear your cookies for the following URLs, and sign in again: <br><br>- `https://auto.azure.com` <br>- `https://login.microsoftonline.com` |
+| Sign in loop or single sign-on (SSO) error | Contact your administrator for help with your account and sign-in configuration. |
 | Portal appears empty | Perform a hard refresh (Keyboard: `Cmd/Ctrl + Shift + R`). If the problem persists, [report a bug](/support/report-a-bug/). |
 
 | Problem | Resolution |

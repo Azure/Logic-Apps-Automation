@@ -3,15 +3,12 @@ title: Sandbox setup overview
 description: Review prerequisites and configuration options for agent sandboxes.
 sidebar:
   order: 3
-  badge:
-    text: preview
-    variant: tip
 ---
 
 ## Overview
 
 :::note
-This capability is in preview and subject to the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). If your environment enables this capability, the user experience appears in the [portal](https://auto.azure.com).
+Availability can vary by environment. If you can't find this capability in the [portal](https://auto.azure.com), check with your environment administrator.
 :::
 
 In Azure Logic Apps Automation, a [*sandbox*](/features/sandboxes/) is an environment where a Managed Agent can run code.
@@ -22,9 +19,9 @@ Review the requirements and available options for [default sandboxes](#use-the-d
 
 ## Requirements
 
-- A Microsoft work or school account in the same Microsoft Entra tenant as the target environment.
+- A Microsoft work or school account with access to the target environment.
 
-  Your account must exist in the same tenant so an environment administrator can add you to the environment. You don't need an Azure subscription to create apps and workflows in an automation environment.
+  Confirm account and subscription requirements with your environment administrator.
 
 - Access to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 

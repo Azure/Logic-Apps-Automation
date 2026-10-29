@@ -9,7 +9,7 @@ sidebar:
 
 In Azure Logic Apps Automation, a *connector* is a prebuilt integration for a service, system, SaaS app, data source, or API outside your workflow.
 
-Connections exist inside apps where each connection stores your authentication setup. You can reuse the same connection across every workflow in the same app.
+Workflow connections are configured in an app and store authentication settings for its workflows. Other connection types can have a different scope.
 
 ## Built-in operations
 
@@ -22,13 +22,15 @@ Built-in operations are available in the workflow designer. The following table 
 | **Control** | - **Condition** <br>- **Switch** <br>- **For each** <br>- **Until** | Change the flow based on meeting specific criteria. |
 | **Data Operations** | - **Compose** <br>- **Parse JSON** <br>- **Select** <br>- **Filter array** <br>- **Join** | Perform data shaping. |
 | **Variables** | - **Initialize variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Create and manage variable values. |
-| **AI Agents** | **Workflow Agent**, **Managed Agent** | Run agents that use models to perform tasks or execute code. |
+| **AI Agents** | [Agent options](/features/agents/#choose-an-agent) | Add an agent to a workflow. |
 
 ## Managed connectors
 
-Managed connectors provide operations for services, systems, apps, and databases. You usually need to set up connections that require authentication. Examples include Outlook, SharePoint, Teams, OneDrive, Salesforce, Slack, GitHub, and ServiceNow.
+Managed connectors provide operations for services, systems, apps, and databases. You usually need to set up connections that require authentication. Examples include Outlook, SharePoint, Teams, OneDrive, Salesforce, Slack, and ServiceNow.
 
-The following table describes some common managed connector operations:
+## Service integration examples
+
+The following table describes examples of service integrations. The connector type and available operations can vary.
 
 | Operation group | Operation | Description |
 |---|---|---|
@@ -41,6 +43,10 @@ The following table describes some common managed connector operations:
 | **Azure Cosmos DB** | Various | Manage documents and stored procedures. |
 | **SQL Server** | Various | Manage queries, rows, and stored procedures in Azure SQL or SQL Server. |
 
+## GitHub and Azure DevOps
+
+When available in your environment, the [GitHub connector](/guides/github-connector/) and [Azure DevOps connectors](/guides/azure-devops-connectors/) provide operations and event triggers for development workflows. Review the connection methods and permissions offered for the operations you choose.
+
 ## HTTP for everything else
 
 If the service you want to connect doesn't have a prebuilt connector, use the built-in **HTTP** action to access REST and JSON APIs. To create and feed strongly-typed outputs to subsequent actions in your workflow, follow the **HTTP** action with the built-in **Parse JSON** action.
@@ -50,4 +56,5 @@ If the service you want to connect doesn't have a prebuilt connector, use the bu
 - [Quickstart](/getting-started/quickstart/#3-create-your-workflow)
 - [Visual designer](/features/visual-designer/)
 - [AI assistant](/features/ai-assistant/)
-- [Connectors](/features/connectors/)
+- [GitHub connector](/guides/github-connector/)
+- [Azure DevOps connectors](/guides/azure-devops-connectors/)

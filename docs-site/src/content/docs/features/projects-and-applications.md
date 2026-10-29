@@ -39,14 +39,14 @@ The following table describes the environment contents in more detail:
 
 | Item | Description |
 |------|-------------|
-| [Apps](#apps) | The deployable package for your workflows, connections, parameters, analytics data, and app settings. |
-| [Knowledge](/features/knowledge-bases/) | Sources that agents can use for context. (preview) |
+| [Apps](#apps) | Organize workflows, connections, parameters, and app settings. |
+| [Knowledge](/features/knowledge-bases/) | Sources that agents can use for context. |
 | [Sandboxes](/features/sandboxes/) | Environments where agents can run code. |
-| Settings | Environment-level user permissions and environment variables. |
+| Settings | Environment-level user permissions and configuration. |
 
 ## Apps
 
-In your environment, an app is a deployable resource that stores your workflows, connections, parameters, analytics data, and app settings. Many teams have several apps per environment where each app maps to a logical service like `order-processing`, `notifications`, and `daily-reports`.
+In your environment, an app organizes workflows, connections, parameters, and app settings. An app also provides views of workflow runs and analytics. You can organize related workflows into apps for logical services such as `order-processing`, `notifications`, and `daily-reports`.
 
 Before making access or ownership decisions, confirm your environment's current role and ownership behavior with your administrator.
 
@@ -57,7 +57,7 @@ The following table describes app contents in more detail:
 | [Workflows](/features/workflows/) | The automation workloads that exist in an app and include the starting event (*trigger*) and the tasks to perform or control flow (*actions*). |
 | Connections | The reusable, authenticated bindings that connect to external services such as Teams, SharePoint, and Service Bus. |
 | Parameters | The named values referenced in workflows like environment-specific URLs, timeouts, and feature flags. |
-| Analytics | Run trends, success and failure rates, and per-action latency. |
+| Analytics | Run trends, status summaries, and run latency. |
 | Settings| App-level user permissions and environment variables. |
 
 ## Choose the work level for your work

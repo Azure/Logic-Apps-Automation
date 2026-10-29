@@ -47,9 +47,9 @@ export default defineConfig({
 					label: 'Get started',
 					items: [
 						{ label: 'About Logic Apps Automation', slug: 'getting-started/introduction' },
-						{ label: 'Create a workflow', slug: 'getting-started/quickstart' },
+						{ label: 'Build your first workflow', slug: 'getting-started/quickstart' },
+						{ label: 'Pricing and free grants', slug: 'getting-started/pricing' },
 						{ label: 'Set up an environment', slug: 'getting-started/setup' },
-						{ label: 'Billing and pricing', slug: 'getting-started/pricing' },
 					],
 				},
 				{
@@ -63,32 +63,84 @@ export default defineConfig({
 				{
 					label: 'Workflows',
 					items: [
-						{ label: 'Overview', slug: 'features/workflows' },
-						{ label: 'Visual designer', slug: 'features/visual-designer' },
-						{ label: 'AI assistant', slug: 'features/ai-assistant' },
-						{ label: 'Runs and monitoring', slug: 'features/runs-and-monitoring' },
+						{
+							label: 'Ways to build workflows',
+							collapsed: true,
+							items: [
+								{ label: 'From scratch', slug: 'getting-started/quickstart' },
+								{ label: 'From templates', slug: 'guides/templates' },
+								{ label: 'With the AI assistant', slug: 'features/ai-assistant' },
+							],
+						},
+						{
+							label: 'Build workflows',
+							collapsed: true,
+							items: [
+								{ label: 'Designer, nodes and branches', slug: 'features/visual-designer' },
+								{ label: 'Workflow concepts and expressions', slug: 'features/workflows' },
+							],
+						},
+						{
+							label: 'Manage workflows',
+							collapsed: true,
+							items: [
+								{ label: 'Runs and monitoring', slug: 'features/runs-and-monitoring' },
+							],
+						},
+					],
+				},
+				{
+					label: 'Templates',
+					collapsed: true,
+					items: [
+						{ label: 'Create, import and share templates', slug: 'guides/templates' },
 					],
 				},
 				{
 					label: 'Agents',
+					collapsed: true,
 					items: [
-						{ label: 'Choose an agent', slug: 'features/agents' },
-						{ label: 'Foundry hosted agents', slug: 'features/foundry-hosted-agents' },
-						{ label: 'Create a Foundry hosted agent', slug: 'guides/create-foundry-hosted-agents' },
+						{ label: 'Choose and orchestrate agents', slug: 'features/agents' },
+						{ label: 'Foundry Hosted agent', slug: 'features/foundry-hosted-agents' },
+						{ label: 'Create a Foundry Hosted agent', slug: 'guides/create-foundry-hosted-agents' },
 					],
 				},
 				{
 					label: 'Sandbox',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', slug: 'features/sandboxes' },
 						{ label: 'Sandbox setup overview', slug: 'guides/create-sandboxes' },
 					],
 				},
 				{
+					label: 'Tools',
+					collapsed: true,
+					items: [
+						{ label: 'Tools for agents', slug: 'guides/agent-tools' },
+					],
+				},
+				{
 					label: 'Knowledge',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', slug: 'features/knowledge-bases' },
 						{ label: 'Knowledge setup overview', slug: 'guides/create-knowledge-bases' },
+					],
+				},
+				{
+					label: 'Connectors',
+					collapsed: true,
+					items: [
+						{ label: 'GitHub', slug: 'guides/github-connector' },
+						{ label: 'Azure DevOps', slug: 'guides/azure-devops-connectors' },
+					],
+				},
+				{
+					label: 'Scenarios',
+					collapsed: true,
+					items: [
+						{ label: 'Agent scenarios', slug: 'guides/agent-scenarios' },
 					],
 				},
 				{

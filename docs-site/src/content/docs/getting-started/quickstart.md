@@ -14,7 +14,7 @@ Choose a trigger and actions for the task you want to automate. Configure their 
 
 This general guide doesn't yet include a complete tested example with input and expected output.
 
-Screenshots labeled synthetic show fictional, independent examples, not a single workflow or actual runs.
+Screenshots labeled synthetic show fictional, independent examples, not a single workflow or actual runs. They might differ from your portal.
 
 ## How to
 
@@ -22,9 +22,9 @@ Review the requirements, then [open an environment](#1-open-your-environment), [
 
 ## Requirements
 
-- A Microsoft work or school account in the same Microsoft Entra tenant as the environment that you want to use.
+- A Microsoft work or school account with access to the environment that you want to use.
 
-  Your account must exist in the same tenant so an environment administrator can add you to the environment. You don't need an Azure subscription to create apps and workflows in an automation environment.
+  Confirm account and subscription requirements with your environment administrator.
 
 - Access to the [Azure Logic Apps Automation portal](https://auto.azure.com).
 
@@ -91,13 +91,13 @@ If your environment doesn't include an app to store and organize workflows, foll
 
 1. In the chat box, enter your workflow description. Select **Generate**.
 
-   The following example shows the AI assistant and a workflow description:
+   The following synthetic example shows a fictional workflow description:
 
-   ![Screenshot that shows the workflow designer with AI assistant pane and workflow description.](media/quickstart/prompt-assistant.png)
+   ![Assistant composer with a fictional workflow prompt.](https://github.com/user-attachments/assets/3f261446-125b-4614-af30-f596cb6dfb14)
 
-   The following example shows the assistant-generated workflow:
+   In this synthetic example, the assistant response and partially visible workflow are fictional:
 
-   ![Screenshot that shows the workflow designer and assistant-generated workflow.](media/quickstart/generated-workflow.png)
+   ![Fictional assistant response alongside a partially visible example workflow.](https://github.com/user-attachments/assets/34789b1b-5e69-41aa-a4ed-44e916a5af72)
 
    :::important
    Generated workflows still need setup. The AI assistant generates the workflow scaffolding, such as the trigger, actions, branches, and so on. But the assistant doesn't know your credentials or environment-specific values. Before you run your first workflow, complete any required follow-up tasks.
@@ -115,7 +115,7 @@ If your environment doesn't include an app to store and organize workflows, foll
    
      - On your app sidebar, select **Connections**. Review each connection and complete the necessary setup.
 
-     - In the designer, open the information box for the connector trigger and each action. Review the **Connection** tab and complete the necessary setup.
+     - In the designer, open the information box for the connector trigger and each action. Review the **Connect** or **Connection** section and complete the necessary setup.
 
    - Resolve any prompts on the trigger or actions that show a label named **Finish configuring with Copilot**.
 
@@ -131,7 +131,7 @@ Every workflow starts with a trigger, which identifies the event or condition th
 
    The following synthetic example shows the trigger picker:
 
-   ![Synthetic designer with the Add a trigger picker open.](https://github.com/user-attachments/assets/d9d0d078-8a48-4b1a-ac19-a7dde1c7732e)
+   ![Synthetic designer with the Add a trigger picker open.](https://github.com/user-attachments/assets/e643a03c-a097-4fc8-93bd-45059eab3487)
 
 1. Search or browse the triggers in the pane, and select the trigger you want.
 
@@ -185,19 +185,15 @@ To continue editing your workflow, you have the following options:
 
 - Describe your changes in natural language by opening the AI assistant.
 
-- Directly edit the workflow's underlying JSON definition by switching to the code editor. Changes stay synchronized between the code editor and designer.
-
-  The following example shows the AI assistant with instructions to edit a workflow:
-
-  ![Screenshot that shows the workflow designer and Copilot pane with instructions in the chat box.](media/quickstart/edit-copilot.png)
+- Directly edit the workflow's underlying JSON definition by switching to the code editor. Valid changes synchronize with the designer; fix JSON errors before saving.
 
   For an illustration of the code editor, see [View and edit underlying JSON](/features/visual-designer/#view-and-edit-underlying-json).
 
 ## 5. Test for missing setup details
 
-Before using **Test**, review the workflow and its connections. A test can affect connected systems. For example, note the **Draft** label on the designer's title bar:
+Before using **Test**, review the workflow and its connections. A test can affect connected systems. The following synthetic example shows the **Draft** label on the designer's title bar:
 
-![Screenshot showing the workflow designer and highlighted Draft label.](media/quickstart/draft-label.png)
+![Synthetic workflow designer with a Draft label next to the workflow name.](https://github.com/user-attachments/assets/387999d7-9c34-4114-b309-34edc7b9eafc)
 
 If **Test** isn't available, confirm how to test the workflow with your administrator before publishing or running it.
 
@@ -205,11 +201,11 @@ If **Test** isn't available, confirm how to test the workflow with your administ
 
 1. In the **Trigger** box, confirm the selected trigger.
 
-1. In the **Test data (JSON)** box, enter a sample JSON body that matches the inputs expected by your trigger and actions.
+1. If **Test data (JSON)** appears, enter a sample JSON body that matches the inputs expected by your trigger and actions.
 
 1. After you finish, select **Test Draft**.
 
-   The **Monitoring** tab opens to show the running workflow. After the run completes, in a side window, the **Runs** tab shows the workflow's run history, including details such as status and duration.
+   The **Monitoring** tab opens to show the running workflow. The runs list shows run history, including details such as status and duration.
 
 <span id="6-publish-draft-to-production"></span>
 
@@ -221,7 +217,9 @@ Before selecting **Publish**, confirm its effect with your administrator and rev
 
 1. To switch to the published workflow, next to **Publish**, from the vertical ellipses (**...**) menu, select **View published version**.
 
-   ![Screenshot that shows the Designer tab, Publish menu, and selected option for View published version.](media/quickstart/view-published-version.png)
+   The following synthetic example shows the resulting read-only published view:
+
+   ![Synthetic published workflow view marked read-only.](https://github.com/user-attachments/assets/f725db02-08c4-4660-9e03-9ea224caa0ab)
 
 ## 7. Run and monitor your workflow
 
@@ -229,29 +227,29 @@ Before running a workflow, confirm the version, inputs, and potential effects on
 
 1. Next to the **Designer** tab, select **Monitoring**.
 
-1. Start a run by selecting **Run workflow** or **Run** from the **Runs** tab, based on which control appears in your portal view.
+1. Start a run by selecting **Run workflow**, **Run**, or **Test draft** in the monitoring view, based on which control appears in your portal view.
 
 1. In the **Trigger** box, confirm the selected trigger.
 
-1. In the **Test data (JSON)** box, enter the sample JSON body input that the trigger needs to run.
+1. Enter any input requested by the dialog. Depending on the workflow mode and trigger, it might offer **Test data (JSON)** or request fields such as **Headers**, **Query parameters**, and **Body**.
 
-1. After you finish, select **Run**.
+1. After you finish, select **Run** or **Test Draft**, as shown.
 
-   The **Monitoring** tab opens to show the running workflow. After the workflow run completes, in a side window, the **Runs** tab shows the workflow's run history, including details such as status and duration.
+   The **Monitoring** tab opens to show the running workflow. The runs list shows run history, including details such as status and duration.
 
 ## 8. Examine the run history
 
 To explore the run history in more detail, follow these steps:
 
-1. On the **Runs** tab, select the run you want.
+1. In the **Runs** list, select the run you want.
 
-   The following synthetic example shows fictional run statuses and timestamps:
+   The following synthetic example shows a fictional run overview; no action is selected:
 
-   ![Synthetic run history with a selected run and execution log.](https://github.com/user-attachments/assets/f4166df4-d122-4185-bf79-1c314805eaac)
+   ![Synthetic run overview with fictional status and execution log.](https://github.com/user-attachments/assets/9652907d-774f-4739-b522-7cda671d1f87)
 
-1. On the canvas or in the execution log, select the trigger or an action to review the values on the pane with the **Output**, **Input**, and **Properties** tabs.
+1. On the canvas or in the execution log, select the trigger or an action to review its available output, input, and properties.
 
-   If any actions failed, the same pane shows the error messages and stack trace so you can diagnose without changing context.
+   If an action failed, review its available details for error information.
 
 ## 9. Iterate on your workflow
 
@@ -282,8 +280,6 @@ For the distinction between environment and app access, see [Permissions](/featu
    1. In the **Users** section, select **Add user**.
 
    1. On the **Add role assignment** pane, in the **Select user** box, browse for the person you want. Or, enter their email address.
-
-      The **Select user** list shows only people in the same Microsoft Entra tenant as you.
 
    1. From the results, select the person you want.
 
