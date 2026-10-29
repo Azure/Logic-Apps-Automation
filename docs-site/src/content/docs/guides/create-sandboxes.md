@@ -15,7 +15,7 @@ In Azure Logic Apps Automation, a [*sandbox*](/features/sandboxes/) is an enviro
 
 ## How to
 
-Review the requirements and available options for [default sandboxes](#use-the-default-sandbox) and [prebuilt sandboxes](#create-a-prebuilt-sandbox). Detailed configuration steps aren't currently documented here.
+Review the requirements and available options for [default sandboxes](#use-the-default-sandbox) and [prebuilt sandboxes](#create-a-prebuilt-sandbox). The options available in your environment might differ.
 
 ## Requirements
 
@@ -39,13 +39,13 @@ Review the requirements and available options for [default sandboxes](#use-the-d
 
 ## Use the default sandbox
 
-This guide doesn't currently document the available harness types or default sandbox behavior.
-
 1. In the [Azure Logic Apps Automation portal](https://auto.azure.com), open your environment, app, and workflow.
 
 1. On the workflow designer, select the Managed Agent action.
 
-1. Review the agent's available sandbox settings before configuring it.
+1. In the agent's **Harness** settings, select **GHCP** (GitHub Copilot) as the harness type, if offered.
+
+1. Leave the sandbox configuration unselected to use the default base image, as described in the selector.
 
 ## Create a prebuilt sandbox
 
@@ -57,9 +57,17 @@ Identify the code and repositories your agent needs, then confirm the supported 
 
 1. On the environment sidebar, select **Sandboxes**, and then select **Create**.
 
-1. Review the configuration settings. Current resource tiers, repository requirements, and authentication methods aren't documented here.
+1. In the **New sandbox configuration** dialog, enter a unique name using lowercase letters, numbers, and hyphens; `default` is reserved.
 
-   Treat personal access tokens as secrets and follow your organization's token policy.
+1. Choose a resource tier and add at least one absolute repository URL starting with `http://` or `https://`. You can also specify a branch for each repository.
+
+1. Choose an available repository authentication method: **Managed Identity**, **PAT**, or **OAuth**. Make sure the identity or account has access to each repository.
+
+   For PAT authentication, enter a token in the **Personal Access Token** field for each repository. Treat tokens as secrets and follow your organization's token policy.
+
+   For OAuth, use the offered **Connect GitHub** or **Connect Azure DevOps** option, allow the sign-in popup, and complete sign-in and consent. A connected indicator doesn't by itself prove access to a particular repository.
+
+1. Select **Create**, then review the configuration status. Select a configuration that shows **Ready** when you attach it to the agent.
 
 ### 2. Set up the Managed Agent
 
@@ -67,11 +75,13 @@ Identify the code and repositories your agent needs, then confirm the supported 
 
 1. On the workflow designer, select the Managed Agent action.
 
-1. Review the agent's available sandbox settings. Current harness and configuration availability aren't documented here.
+1. In the agent's **Harness** settings, select **GHCP** (GitHub Copilot) as the harness type, if offered.
+
+1. Select the ready sandbox configuration. Verify the agent's model connection and other required settings before running the workflow.
 
 #### How Azure Logic Apps Automation places skills for GitHub Copilot
 
-Skill placement in Azure Logic Apps Automation isn't currently documented here. For general GitHub Copilot CLI guidance, see [Add skills](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills).
+In **Repository Skills**, select **Add skill**, choose a repository from the sandbox configuration, and enter the relative path of a skills folder containing `SKILL.md`. Then select **Add**. Confirm that the folder exists in the repository. For general GitHub Copilot CLI guidance, see [Add skills](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills).
 
 ## Pass input files to a Managed Agent
 
@@ -85,12 +95,12 @@ Output file behavior and formats aren't currently documented here. Confirm where
 
 On the environment's **Sandboxes** page, select a configuration to review its state, creation time, resource tier, repositories, authentication types, and any build error.
 
-If your current access allows sandbox management, you can perform the following actions:
+If your current access allows sandbox management, you can perform the following actions. Available controls can vary by user and configuration.
 
 | Action | Result |
 |---|---|
-| **Edit** | Review and change available settings. |
-| **Rebuild** | Review the configuration before starting a rebuild. |
+| **Edit** | Save your changes and review the configuration status. If a build starts, wait for **Ready** before attaching it. You might need to re-enter PATs for PAT-authenticated repositories. |
+| **Rebuild** | Start a new build using the configuration. Re-enter the token for each PAT-authenticated repository when prompted. |
 | **Delete** | Review the effects before deleting a configuration. |
 
 ## Troubleshoot problems

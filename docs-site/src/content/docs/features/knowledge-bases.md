@@ -17,7 +17,7 @@ If you encounter problems, [report a bug](/support/report-a-bug/).
 
 ## Supported source types
 
-Current source types, limits, and permission requirements aren't documented here.
+Where available, you can add files to a file hub and attach a ready hub to an agent. See [Knowledge setup overview](/guides/create-knowledge-bases/#1-create-a-knowledge-base). Other source types, service limits, and permission requirements aren't documented here.
 
 ## Related content
 

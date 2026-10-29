@@ -15,6 +15,8 @@ The GitHub connector provides operations for repositories, issues, pull requests
 1. Select the repository owner and repository, then complete the operation's required fields.
 1. Review the workflow and test it with a repository and data you're authorized to use.
 
+You can also start in the app's **Connections** page. If **Add connection** is available, select it, choose **Connectors**, use **Search connectors** to find GitHub, and follow the fields offered for the selected connector. Return to the workflow operation and select that connection. A sandbox repository connection is separate from an app's workflow connection; see [Sandbox setup](/guides/create-sandboxes/#1-create-the-configuration).
+
 For example, an issue event trigger can start a workflow when an issue is opened, edited, or closed. A pull request event trigger can respond to events such as opening or updating a pull request. Review the operation's event details and filters before depending on them.
 
 ## Authentication and permissions

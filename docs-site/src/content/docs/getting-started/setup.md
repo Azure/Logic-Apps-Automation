@@ -50,8 +50,6 @@ Review the requirements, then [create an environment](#create-your-environment) 
 
 1. Sign in to the [Azure Logic Apps Automation portal](https://auto.azure.com) with your Azure account.
 
-   ![Screenshot that shows the Azure Logic Apps Automation portal home page for sign in.](media/setup/sign-in.png)
-
 1. On the **Environments** tab, select **Create environment**.
 
 1. In the **Create an environment** box, provide the following information:

@@ -83,7 +83,7 @@ If your environment doesn't include an app to store and organize workflows, foll
    | Option | Path |
    |---------|------|
    | **AI assistant** | Generate your workflow on the designer, based on your description about what the workflow does. <br><br>For more information, see [Generate workflow with assistant](#3a-generate-a-workflow-with-the-assistant). |
-   | **Designer** | Add the trigger and each action from the connectors library. |
+   | **Designer** | Add the trigger and each action from the connectors library. <br><br>For more information, see [Build a workflow with the designer](#3b-build-a-workflow-with-the-designer). |
 
 ## 3a. Generate a workflow with the assistant
 
@@ -144,9 +144,7 @@ Every workflow starts with a trigger, which identifies the event or condition th
 
 1. In the trigger information box, enter any required details, and then close the box.
 
-   Your selected trigger appears on the designer, like the following example:
-   
-   ![Screenshot that shows the workflow designer and selected example trigger.](media/quickstart/added-trigger.png)
+   Your selected trigger appears on the designer.
 
 ### Add an action
 
@@ -156,15 +154,11 @@ After the trigger, an action performs a specific task in the workflow.
 
 1. When the **Add an action** pane opens, search or browse the actions. Select the action you want. 
 
-   ![Screenshot that shows the workflow designer, an example trigger, and the pane for Add an action.](media/quickstart/add-action.png)
-
 1. In the action information box, enter any required details for the action to work, and then close the box.
 
    Your selected action appears on the designer.
 
-   For actions that run in parallel, branches automatically appear on the designer. For example, the following workflow shows these branches and includes a final response back to the caller who sent the request:
-
-   ![Screenshot that shows the workflow designer and completed branched workflow.](media/quickstart/branched-workflow.png)
+   To run actions in parallel, use branches on the designer and review each branch's actions and dependencies.
 
 ### Other designer actions
 

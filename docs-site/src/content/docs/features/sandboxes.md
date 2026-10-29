@@ -19,7 +19,7 @@ The setup guide covers the [default sandbox](/guides/create-sandboxes/#use-the-d
 
 ## Prebuilt sandbox contents
 
-Current resource tiers, repository options, and authentication methods aren't documented here.
+Where available, a configuration lets you choose a resource tier and add repositories with an offered authentication method. See [Create a prebuilt sandbox](/guides/create-sandboxes/#create-a-prebuilt-sandbox). Confirm available tiers and repository access in your environment.
 
 ## Build and management lifecycle
 

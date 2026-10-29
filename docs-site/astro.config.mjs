@@ -132,6 +132,7 @@ export default defineConfig({
 					label: 'Connectors',
 					collapsed: true,
 					items: [
+						{ label: 'Overview', slug: 'features/connectors' },
 						{ label: 'GitHub', slug: 'guides/github-connector' },
 						{ label: 'Azure DevOps', slug: 'guides/azure-devops-connectors' },
 					],

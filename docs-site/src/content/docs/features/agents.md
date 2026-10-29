@@ -161,7 +161,7 @@ For a Workflow agent that needs to perform the following tasks, enable its code 
 
 With the code interpreter enabled, the agent runs the following high-level steps:
 
-1. The model decides they need to call the code interpreter tool by using the `code` argument.
+1. The model decides it needs to call the code interpreter tool by using the `code` argument.
 1. The runtime runs the JavaScript.
 1. The output flows back to the chat history as a tool result.
 1. The model reads the result.

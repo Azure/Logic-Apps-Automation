@@ -62,6 +62,8 @@ In a workflow definition, workflow-language expressions start with `@`. For exam
 
 Action parameters also accept *dynamic* output from preceding steps in the same workflow. The designer lets you select this output wherever you can specify a value. In the underlying JSON, this output appears as expressions such as `@triggerBody()` and `@outputs('<action-name>')`.
 
+For example, if an earlier action named `GetUser` returns a body containing `{"name": "Alex"}`, `@body('GetUser')['name']` references the value `Alex`. Use your action's name and the fields in its actual output; the structure depends on the operation.
+
 ### JavaScript expressions
 
 Workflow definitions also support JavaScript expressions enclosed in `${...}`. For example, `${(10 + 5) * 2 - 1}` evaluates to `29`, and `${10 > 5 ? 'yes' : 'no'}` evaluates to `yes`. These are expressions used as values, not separate workflow actions.

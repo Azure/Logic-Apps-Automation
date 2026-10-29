@@ -15,6 +15,8 @@ Azure DevOps connector operations cover Boards work items and queries, Repos rep
 1. Provide the organization and any required project, repository, work item, or pipeline information.
 1. Review the selected operation and test with resources and data you're authorized to use.
 
+You can also start in the app's **Connections** page. If **Add connection** is available, select it, choose **Connectors**, use **Search connectors** to find the connector, and follow its available connection fields. Return to the workflow operation and select that connection. A sandbox repository connection is separate from an app's workflow connection; see [Sandbox setup](/guides/create-sandboxes/#1-create-the-configuration).
+
 For example, Boards operations can retrieve work items or run queries; Repos operations can work with repositories and pull requests; and Pipelines operations can inspect pipeline runs. Some triggers use Azure DevOps Service Hooks to respond to events. Check the trigger's filters and required permissions before using it.
 
 ## Authentication and permissions
