@@ -1,6 +1,6 @@
 ---
 title: Billing and pricing
-description: Learn about the billing and pricing model for Azure Logic Apps Automation, including core platform meters, optional capabilities, public preview regions, and example monthly cost calculations.
+description: Learn about the billing and pricing model for Azure Logic Apps Automation, including free grants, core platform meters, optional capabilities, and example monthly cost calculations.
 sidebar:
   order: 4
   label: Pricing
@@ -11,6 +11,8 @@ Azure Logic Apps Automation uses consumption-based pricing, so you pay based on 
 - Core platform meters that apply to every workflow.
 - Optional capabilities that incur charges only when a workflow uses them.
 
+Each Azure subscription includes [free grants](#free-grants) for one eligible environment. You pay only for usage beyond the included grants. The managed environment grant lasts for the first 60 days; the other grants reset monthly.
+
 :::note
 - Azure Logic Apps Automation is currently in public preview. Preview pricing and availability are subject to change before general availability.
 
@@ -20,6 +22,35 @@ Azure Logic Apps Automation uses consumption-based pricing, so you pay based on 
 
 - Pricing changes are rolling out in phases across [supported Azure regions](/getting-started/introduction/#public-preview-regions) and might not be available in every region at the same time.
 :::
+
+## Free grants
+
+The following free grants apply per Azure subscription and are tied to one eligible environment. Usage within the included limits is free. Usage beyond these limits is billed at the rates in [Core platform pricing](#core-platform-pricing) and [Optional capability pricing](#optional-capability-pricing).
+
+| Category | Component | Free grant per subscription | Grant period |
+| --- | --- | --- | --- |
+| Core platform | Managed environment | One environment | First 60 days from environment creation; one-time grant |
+| Core platform | Workflow runtime | 108,000 execution seconds (30 hours) | Monthly |
+| Core platform | Data retention | 1 GB | Monthly |
+| Optional capabilities | Standard managed connector calls | 1,000 calls | Monthly |
+| Optional capabilities | Enterprise managed connector calls | 500 calls | Monthly |
+| Optional capabilities | Knowledge storage | 1 GB | Monthly |
+| Optional capabilities | AI usage | 1,100 Azure Agent Credits (AACs) | Monthly |
+| Optional capabilities | Sandbox - isolated code execution | 18,000 seconds (5 hours) | Monthly |
+
+After the first 60 days, the managed environment incurs the environment-hour charge. The other free grants continue to reset monthly for the eligible environment.
+
+### Use your free grants
+
+The first eligible new environment that you create in a subscription receives the free grants. If you already use Azure Logic Apps Automation, create a new environment to receive them. Look for the **Free** tag next to the environment name to identify the environment with the grants.
+
+To track your monthly limits and usage, open the environment, go to **Settings**, and select the **Free Grants** tab.
+
+:::caution
+Free grants are tied to the eligible environment. If you delete this environment, you permanently lose access to the grants. Creating another environment doesn't restore them.
+:::
+
+For the announcement, see [Announcing free grant and pricing for Logic Apps Automation](https://techcommunity.microsoft.com/blog/integrationsonazureblog/%F0%9F%92%B2announcing-free-grant-and-pricing-for-logic-apps-automation/4562264).
 
 ## Core platform pricing
 
@@ -45,7 +76,7 @@ Optional capabilities extend a workflow's functionality with connectors, AI, man
 
 ## Example monthly cost
 
-The following example shows how charges from different meters contribute to the estimated monthly cost by using East US pricing in US dollars. These usage numbers are only illustrative estimates and don't represent any recommended configuration or a typical customer workload.
+The following example shows how charges from different meters contribute to the estimated monthly cost by using East US pricing in US dollars, before applying free grants. For an eligible environment, deduct the applicable [free grants](#free-grants) from usage before calculating charges. These usage numbers are only illustrative estimates and don't represent any recommended configuration or a typical customer workload.
 
 Suppose an organization has the following monthly usage:
 
@@ -60,6 +91,6 @@ Suppose an organization has the following monthly usage:
 | Sandbox | 100 executions <br><br>For 10 seconds, each execution uses 1 vCPU and 2 GiB of memory. | Executions: 100 × 10 seconds × 1 vCPU × $0.000024 <br><br>Memory: 100 × 10 seconds × 2 GiB × $0.000003 | Executions: $0.024 <br><br>Memory: $0.006 |
 | AI usage | Excluded | Charged as AACs, based on selected model and token consumption | Additional AAC charges |
 
-Estimated monthly total, excluding AI usage: $46.97
+Estimated monthly total before free grants, excluding AI usage: $46.97
 
 The final bill might be higher or lower, based on an automation app's total execution time, retained data, connector activity, AI usage, and sandbox resource consumption. For AI rates, see [Azure OpenAI Service pricing](https://azure.microsoft.com/en-us/pricing/details/azure-openai/?msockid=20df8113aafb681e21499566ab416984).
