@@ -50,8 +50,6 @@ To track your monthly limits and usage, open the environment, go to **Settings**
 Free grants are tied to the eligible environment. If you delete this environment, you permanently lose access to the grants. Creating another environment doesn't restore them.
 :::
 
-For the announcement, see [Announcing free grant and pricing for Logic Apps Automation](https://techcommunity.microsoft.com/blog/integrationsonazureblog/%F0%9F%92%B2announcing-free-grant-and-pricing-for-logic-apps-automation/4562264).
-
 ## Core platform pricing
 
 Core platform meters cover the managed environment, workflow execution, and run history storage required to host and run your automations.
