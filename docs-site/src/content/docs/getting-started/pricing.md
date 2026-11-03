@@ -19,8 +19,6 @@ Each Azure subscription includes [free grants](#free-grants) for one eligible en
 - The prices on this page are in US dollars, are only estimates, and apply only to the East US region.
 
   Azure prices can vary by region, agreement, purchase date, currency exchange rate, and applicable taxes. For pricing in your region and currency, see [Pricing - Azure Logic Apps | Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/logic-apps/).
-
-- Pricing changes are rolling out in phases across [supported Azure regions](/getting-started/introduction/#public-preview-regions) and might not be available in every region at the same time.
 :::
 
 ## Free grants
