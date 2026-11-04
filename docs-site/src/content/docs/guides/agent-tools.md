@@ -41,6 +41,6 @@ For actions with external effects, decide how a person should review the result 
 
 ## Related content
 
-- [Choose an agent](/features/agents/#choose-an-agent)
+- [The options and how to choose](/guides/agent-options/)
 - [Sandbox setup overview](/guides/create-sandboxes/)
 - [Runs and monitoring](/features/runs-and-monitoring/)

@@ -20,6 +20,8 @@ Like any other action, an agent produces structured outputs that subsequent work
 
 ## Choose an agent
 
+For the decision guide and setup paths for each option, see [The options and how to choose](/guides/agent-options/).
+
 The designer's **Choose an Agent** picker presents these options. Other quick-add menus can show a subset and use different labels. The available choices and connections can vary by environment.
 
 The following synthetic example illustrates the picker; it might differ from your portal:
@@ -56,6 +58,8 @@ The following synthetic example shows an unsubmitted connection form with a fict
 Choose **Foundry Hosted agent** to use a hosted agent from your Foundry project. Create and finish setting up the hosted agent before selecting it in the workflow. See [Create and use a Foundry Hosted Agent](/guides/create-foundry-hosted-agents/).
 
 ## Orchestrate agents
+
+For workflow patterns, see [Ways of orchestrating agents](/guides/orchestrate-agents/).
 
 Use the workflow to decide when an agent runs and what happens next:
 

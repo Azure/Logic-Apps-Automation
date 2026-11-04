@@ -90,19 +90,22 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Agents',
+					collapsed: true,
+					items: [
+						{ label: 'The options and how to choose', slug: 'guides/agent-options' },
+						{ label: 'Ways of orchestrating agents', slug: 'guides/orchestrate-agents' },
+						{ label: 'Workflow Agent', slug: 'guides/workflow-agent' },
+						{ label: 'Managed Agent', slug: 'guides/managed-agent' },
+						{ label: 'Foundry Prompt Agent', slug: 'guides/foundry-prompt-agent' },
+						{ label: 'Foundry Hosted Agent', slug: 'features/foundry-hosted-agents' },
+					],
+				},
+				{
 					label: 'Templates',
 					collapsed: true,
 					items: [
 						{ label: 'Create, import and share templates', slug: 'guides/templates' },
-					],
-				},
-				{
-					label: 'Agents',
-					collapsed: true,
-					items: [
-						{ label: 'Choose and orchestrate agents', slug: 'features/agents' },
-						{ label: 'Foundry Hosted agent', slug: 'features/foundry-hosted-agents' },
-						{ label: 'Create a Foundry Hosted agent', slug: 'guides/create-foundry-hosted-agents' },
 					],
 				},
 				{

@@ -22,7 +22,7 @@ Built-in operations are available in the workflow designer. The following table 
 | **Control** | - **Condition** <br>- **Switch** <br>- **For each** <br>- **Until** | Change the flow based on meeting specific criteria. |
 | **Data Operations** | - **Compose** <br>- **Parse JSON** <br>- **Select** <br>- **Filter array** <br>- **Join** | Perform data shaping. |
 | **Variables** | - **Initialize variable** <br>- **Set variable** <br>- **Increment variable** <br>- **Decrement variable** | Create and manage variable values. |
-| **AI Agents** | [Agent options](/features/agents/#choose-an-agent) | Add an agent to a workflow. |
+| **AI Agents** | [Agent options](/guides/agent-options/) | Add an agent to a workflow. |
 
 ## Managed connectors
 
