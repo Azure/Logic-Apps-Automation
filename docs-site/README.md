@@ -28,6 +28,12 @@ npm run dev         # http://localhost:4321 — hot reload
 
 **Before pushing:** `npm run check && npm run build && python3 -m unittest discover -s scripts/tests -p 'test_*.py' && python3 scripts/validate_docs_site.py` (all green).
 
+Area owners with repository write access can update the docs on the shared
+`docs/automation-collaboration` branch. Pull the latest changes, make your edits,
+run the checks above, and push to the same branch. Review the pull request's
+checks and documentation preview after each push; changes to `docs-site/**` or
+the docs deployment workflow trigger the build and preview.
+
 ---
 
 ## Where everything lives
