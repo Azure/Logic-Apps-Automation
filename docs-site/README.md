@@ -2,7 +2,7 @@
 
 Documentation for the workflow automation platform. This README is the entry point for **anyone touching the docs site** — humans and AI agents alike. It covers the environment layout, every common operation (add a page, cut a release note, replace a screenshot, embed a video, deploy), and the conventions that keep the site consistent.
 
-- 🌐 **Live (canary):** https://lemon-mud-0e10bdd1e.7.azurestaticapps.net
+- 🌐 **Live (canary):** https://otto-canary.azure.com/docs/
 - ⚙️ **Built with:** [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) + [Plyr](https://plyr.io) (videos)
 - ☁️ **Hosted on:** Azure Static Web App (canary subscription) — see [`INFRA.md`](./INFRA.md)
 - 🚀 **Deploy workflow:** [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml)
@@ -20,11 +20,13 @@ npm run dev         # http://localhost:4321 — hot reload
 | Command            | What it does                                                |
 | ------------------ | ----------------------------------------------------------- |
 | `npm run dev`      | Hot-reload dev server (port 4321).                          |
-| `npm run check`    | Type-check content + validate internal links.               |
+| `npm run check`    | Check content and TypeScript with Astro.                    |
 | `npm run build`    | Production build to `dist/`.                                |
 | `npm run preview`  | Serve the production build locally (close to canary).       |
+| `python3 -m unittest discover -s scripts/tests -p 'test_*.py'` | Run link/fragment checker unit tests. |
+| `python3 scripts/validate_docs_site.py` | Validate built internal links, fragments, and HTML output shape. |
 
-**Before pushing:** `npm run check && npm run build` (both green).
+**Before pushing:** `npm run check && npm run build && python3 -m unittest discover -s scripts/tests -p 'test_*.py' && python3 scripts/validate_docs_site.py` (all green).
 
 ---
 
@@ -40,7 +42,9 @@ docs-site/
 ├── tsconfig.json
 ├── scripts/
 │   ├── postbuild.mjs              ← copies staticwebapp.config.json into dist/ root after `astro build`
-│   └── remarkBasePrefix.mjs       ← remark plugin: prepends `/docs` to plain markdown links so content stays portable
+│   ├── remarkBasePrefix.mjs       ← remark plugin: prepends `/docs` to plain markdown links so content stays portable
+│   ├── validate_docs_site.py      ← static validator for built internal links/fragments + required HTML output
+│   └── tests/test_validate_docs_site.py ← focused unit tests for validator edge cases
 ├── public/                        ← copied as-is into `dist/docs/` (so URLs match the `/docs/*` AFD route)
 │   ├── favicon.svg                ← product icon (reused from portal)
 │   └── videos/                    ← self-hosted MP4 clips (see ./public/videos/README.md)
@@ -78,13 +82,12 @@ docs-site/
             │   ├── sandboxes.md
             │   ├── visual-designer.md
             │   └── workflows.md
-            ├── guides/            ← stub for how-tos (auto-shown when populated)
+            ├── guides/            ← how-to articles
             │   ├── media/
             |   |   ├── create-knowledge-bases/  ← portal screenshots for related doc (lowercase)
             |   |   └── create-sandboxes/        ← portal screenshots for related doc (lowercase)
             │   ├── create-knowledge-bases.md
             │   └── create-sandboxes.md
-            ├── reference/         ← stub for technical reference
             ├── release-notes/
             │   └── changelog.md
             └── support/
@@ -92,7 +95,11 @@ docs-site/
                 └── feature-request.md
 ```
 
-**Sidebar** is auto-generated from these folders (`autogenerate` in `astro.config.mjs`). Adding a page = drop a file in the right folder. No config edit needed.
+**Sidebar** groups related topics in `astro.config.mjs`, independently of the files' directories. Most entries are explicit; demos, release notes, and support also use `autogenerate`.
+
+The same page can appear in more than one group to support different journeys. Keep one canonical page instead of copying its content. **From templates** under **Workflows** uses `/guides/build-from-templates/` to link to the canonical templates guide. This adds a click, but gives each page a distinct current sidebar entry.
+
+**Quickstart** and **Connectors** are still cross-listed in multiple groups. Starlight highlights only the first matching entry for those shared routes; consider that tradeoff when changing their navigation.
 
 ---
 
@@ -139,7 +146,7 @@ To make sure content uses consistent voice and other quality criteria as Microso
 - **Bullet lists** only for non-sequential items. For easy scanning and readability, put any series exceeding two items in a separate bullet list. Don't use for steps or instructions.
 - **Numbered lists** only for sequential series with steps or tasks. Don't use bullet lists.
 - **Site-absolute paths** with trailing slash for cross-links: `[Quickstart](/getting-started/quickstart/)`
-- **Relative paths** for images, organized in their own respective content file folder within a `media` folder  the parent section: `![Screenshot that shows <alt-text-ux-description>.](media/<related-doc-filename>/<image-filename>.png)`.
+- **Image paths** use a relative `media/<related-doc-filename>/` path for tracked images, or an approved publicly accessible HTTPS URL for externally hosted images. Use descriptive alt text and identify synthetic images and data.
 - **Callouts** only for alerts - use sparingly. See [Alerts - Microsoft Learn](https://learn.microsoft.com/contribute/content/markdown-reference): 
 
   ```markdown
@@ -172,38 +179,40 @@ To make sure content uses consistent voice and other quality criteria as Microso
 
 ### Add a new page
 
-Pick the section, copy an existing page nearby, rename, and edit the frontmatter. The page appears in the sidebar automatically.
+Pick the section, copy an existing page nearby, rename it, and edit the frontmatter. Add an explicit sidebar entry in `astro.config.mjs` unless the target group uses `autogenerate`. Explicit groups use the order in the configuration; `sidebar.order` applies to autogenerated groups.
 
 ```bash
 # Example: add a "triggers" reference page
 cp src/content/docs/features/workflows.md src/content/docs/features/triggers.md
-# Edit title/description/sidebar.order in the frontmatter, write the body
+# Edit the title and description in the frontmatter, then write the body
+# Add the new slug to the relevant explicit sidebar group
 npm run check && npm run build
 ```
 
+Cross-link the new page from related topics, then check its sidebar placement and links in the built site or PR preview. The check and build commands don't by themselves verify every link or fragment.
+
 ### Update an existing page
 
-Edit it. Hot-reload picks it up. Run `npm run check` before pushing.
+Edit it. Keep existing page URLs and heading fragments working when reorganizing content; if a heading changes, preserve its old fragment as an explicit anchor, as in `features/runs-and-monitoring.md`. Check incoming links and run `npm run check` and `npm run build` before pushing.
 
 ### Hide a page from the sidebar (keep it reachable by URL)
 
-Add `sidebar: { hidden: true }` to the page's frontmatter.
+For an explicitly listed page, remove its entry from `astro.config.mjs`. For an autogenerated group, add `sidebar: { hidden: true }` to the page's frontmatter. The page remains reachable by URL.
 
 ### Add a new top-level section
 
-This is the **only** time you touch `astro.config.mjs`:
+Add a group to the `sidebar` array in `astro.config.mjs`. Prefer explicit entries when pages live in different directories:
 
-1. Create the folder under `src/content/docs/` (e.g., `tutorials/`).
-2. Add to the `sidebar` array in `astro.config.mjs`:
+1. Add the group and its page slugs:
 
    ```js
    {
      label: 'Tutorials',
-     items: [{ autogenerate: { directory: 'tutorials' } }],
+     items: [{ label: 'First tutorial', slug: 'tutorials/first-tutorial' }],
    },
    ```
 
-3. Drop your first page in the new folder and ship.
+2. Create the corresponding page under `src/content/docs/` and validate its links.
 
 ### Cut a release note / changelog entry
 
@@ -230,9 +239,9 @@ For larger releases, link out to a longer write-up under `guides/` rather than b
 
 ### Add or replace a portal screenshot
 
-Screenshots must be PNG files and live in the respective parent `<section-name>/media/` folder within the related `<doc-filename>` folder. Screenshot file names use the following naming convention: `<image-short-name>.png` without articles like "a", "the", and so on in the file name.
+For screenshots tracked in the repository, use PNG files in the respective parent `<section-name>/media/` folder within the related `<doc-filename>` folder. Screenshot file names use the following naming convention: `<image-short-name>.png` without articles like "a", "the", and so on in the file name. For an approved external host, use its publicly accessible HTTPS image URL instead. Remove sensitive information and identify synthetic screenshots and data.
 
-Astro automatically optimizes images at build time (PNG → WebP, responsive `srcset`), so don't precompress.
+Astro automatically optimizes local images at build time (PNG → WebP, responsive `srcset`), so don't precompress those files. Externally hosted images aren't optimized by the build.
 
 To capture against your local portal (running at `http://localhost:4200`):
 
@@ -432,7 +441,7 @@ Optional fields:
 title: ...
 description: ...
 sidebar:
-  order: 5                  # position in the section (lower = earlier)
+  order: 5                  # position in an autogenerated group (lower = earlier)
   label: "Short label"      # override page title in the nav
   badge:
     text: "preview"         # short tag rendered beside the nav item
@@ -460,9 +469,9 @@ hero:                       # only with template: splash
 | Local validation | `npm run check` |
 | Local build | `npm run build` |
 | Local preview | `npm run preview` |
-| CI validation | Every push / PR runs `npm run check` and `npm run build` |
+| CI validation | Pushes and PRs changing `docs-site/**` or the docs workflow run `npm run check`, `npm run build`, the checker unit tests, and `python3 scripts/validate_docs_site.py` |
 | Canary deploy | `push` to `main` under `docs-site/**` → SWA |
-| PR preview | Every PR touching `docs-site/**` gets a free preview env; closing the PR tears it down |
+| PR preview | In-repository PRs touching `docs-site/**` get a preview; fork PRs build only |
 
 Workflow file: [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml).
 Resource map + rotation commands: [`INFRA.md`](./INFRA.md).
@@ -495,13 +504,17 @@ This section is a structured map for AI agents working on the docs.
 ### Conventions checklist (every page must satisfy all of)
 
 - [ ] Frontmatter has `title` and `description`.
-- [ ] `sidebar.order` is set if order matters (lower = earlier).
+- [ ] Explicit sidebar entries are ordered in `astro.config.mjs`; autogenerated groups use `sidebar.order` (lower = earlier).
 - [ ] Body starts at H2 (the H1 comes from frontmatter `title`).
+- [ ] Start with an overview, followed by concise how-to steps when the page describes a task.
 - [ ] Internal links are site-absolute with trailing slash.
-- [ ] Image paths use `media/<doc-file-name>/...` from a content file.
+- [ ] Tracked image paths use `media/<doc-file-name>/...`; external images use an approved public HTTPS URL.
+- [ ] Image alt text is descriptive, and synthetic images and data are identified.
 - [ ] Voice is sentence-case, imperative, product-neutral.
-- [ ] `npm run check` passes (no broken links, no frontmatter errors).
+- [ ] `npm run check` passes.
 - [ ] `npm run build` succeeds.
+- [ ] `python3 -m unittest discover -s scripts/tests -p 'test_*.py'` passes.
+- [ ] `python3 scripts/validate_docs_site.py` passes (links, fragments, and required HTML output).
 
 ### Recipes
 
@@ -514,13 +527,11 @@ This section is a structured map for AI agents working on the docs.
    ---
    title: <Title>
    description: <One sentence.>
-   sidebar:
-     order: <highest existing order in features + 1>
    ---
    ```
 
 3. Open with a 1-paragraph summary. Break into H2 sections below.
-4. Cross-link from any related feature page.
+4. Add the page to the relevant sidebar group and cross-link it from related pages.
 5. Run `npm run check && npm run build`.
 
 **Cut a release note.**
@@ -561,8 +572,8 @@ This section is a structured map for AI agents working on the docs.
 
 | Symptom | Try |
 | --- | --- |
-| `astro check` complains about a frontmatter field | Check the schema in `src/content/content.config.ts` and Starlight docs. |
-| Sidebar page doesn't appear after adding it | Confirm the folder is listed in `astro.config.mjs`'s `sidebar`, and that frontmatter parsed (run `npm run check`). |
+| `astro check` complains about a frontmatter field | Check the schema in `src/content.config.ts` and Starlight docs. |
+| Sidebar page doesn't appear after adding it | Check its entry in `astro.config.mjs`, and that frontmatter parsed (run `npm run check`). |
 | Image renders as a broken link | Path must be relative from the `.md` file (typically `../../../assets/...`). Astro is case-sensitive. |
 | Build succeeds but live site is stale | The deploy is async; allow ~1 min after the workflow shows green. SWA caches at the edge; first hit to a new path can take a few seconds. |
 | Canary URL returns 404 | The deploy workflow may have failed — check **Actions** on GitHub. Common causes in `INFRA.md`. |

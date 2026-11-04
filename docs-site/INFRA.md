@@ -99,8 +99,8 @@ fetches the new token on the next run.
 
 In-repo PRs each get a preview environment hosted by the canary SWA.
 Fork PRs build but don't deploy (GitHub does not pass secrets to fork
-workflows, by design). Maintainers can manually deploy a fork PR's branch
-with a `workflow_dispatch` run after review.
+workflows, by design). A canary `workflow_dispatch` run is restricted to
+`main`; it can't deploy a fork PR's branch directly.
 
 Closing or merging the PR automatically tears down the preview (the
 `close_pr_preview` job). Preview deploys intentionally skip the
