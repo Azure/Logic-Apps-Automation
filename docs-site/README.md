@@ -107,6 +107,8 @@ The same page can appear in more than one group to support different journeys. K
 
 **Quickstart** and **Connectors** are still cross-listed in multiple groups. Starlight highlights only the first matching entry for those shared routes; consider that tradeoff when changing their navigation.
 
+The connector catalog lives in `features/connectors.md`; service-specific action and trigger inventories live in `guides/*-connector.md` and `guides/azure-devops-connectors.md`. Keep connection, authentication, and common troubleshooting guidance on the catalog page rather than repeating it in each guide. When updating inventories, check the connector specifications, operation visibility, generated variants, and registration configuration together. Exclude internal discovery and webhook-management helpers from user-facing counts, and don't treat merged source or default registration as proof of deployment. Keep Microsoft Learn's Standard connector references separate from Automation availability claims.
+
 ---
 
 ## Conventions
