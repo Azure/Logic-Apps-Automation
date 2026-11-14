@@ -28,6 +28,10 @@ The built-in Azure Resource Graph connector queries resource inventory and suppo
 
 For example, retrieve a saved shared query, pass its query text to **Run a resource query** with the execution scope you choose, and use the results in a later workflow action.
 
+Resource queries can return a partial result. Inspect `resultTruncated` and `$skipToken`: when a `$skipToken` is returned, pass it in the next request's `options.$skipToken` with the same query and scope. Check for a token even when `resultTruncated` is `"false"`; a truncated result doesn't always include a token.
+
+The shared-query list actions can return a `nextLink` for more results, but they don't expose a continuation input. A single response might not contain every shared query.
+
 ## Triggers
 
 This connector provides actions only. Start the workflow with a separate trigger, such as **Recurrence**, before querying resources.

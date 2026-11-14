@@ -15,6 +15,14 @@ The built-in Azure DevOps connectors provide actions and event triggers for Boar
 1. Provide the organization and any required project, repository, work item, or pipeline information.
 1. Review the selected operation and test with resources and data you're authorized to use.
 
+## Pagination
+
+Some list and query actions return only part of a result. Paging inputs and outputs vary by operation:
+
+- **Get commit diffs** accepts `$top` and `$skip`; increase `$skip` to request subsequent results. **Get pull request iteration changes** also returns `nextTop` and `nextSkip`; pass them as `$top` and `$skip` until both are zero.
+- For **List source provider repositories** in Build, set `pageResults` to `true` and pass the response body's `continuationToken` to the next request until no token remains.
+- Some actions, such as WIQL queries, expose `$top` as a limit without a next-page input. Others, such as **List pipelines**, accept `continuationToken`, but header-only continuation tokens aren't exposed by this connector. These actions can't retrieve all pages using their output alone.
+
 ## Boards
 
 ### Actions
@@ -57,7 +65,9 @@ Start a workflow when **code is pushed**, a pull request is **created** or **upd
 |---|---|
 | Pipelines | Create, list, get, and preview a pipeline. |
 | Runs | Run a pipeline; list and get pipeline runs. |
-| Artifacts and logs | Get a pipeline artifact; list pipeline logs; and get a pipeline log. |
+| Artifacts and logs | Get metadata for a named pipeline artifact; list pipeline logs; and get a pipeline log. |
+
+**Get a pipeline artifact** returns metadata, not artifact file contents. Set `$expand` to `signedContent` to request a time-limited download URL in `signedContent.url`.
 
 ### Triggers
 

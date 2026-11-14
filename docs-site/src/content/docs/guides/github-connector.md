@@ -25,6 +25,8 @@ The built-in GitHub connector provides actions for repositories, issues, pull re
 | Pull requests | List, create, get, update, and merge pull requests; list changed files; request reviewers; create a review comment; create and submit reviews; and update a pull request branch. |
 | Workflow runs and releases | Get a workflow run, list runs for a workflow, and create a release. |
 
+List actions return a page of results. Where the action exposes `page` and `per_page`, increase `page` to retrieve subsequent pages and use `per_page` to set the page size. `page` defaults to 1; `per_page` defaults to 30 or 100 depending on the action. Available parameters vary by action.
+
 ### Issues
 
 | Action | What it does |
@@ -40,24 +42,26 @@ The built-in GitHub connector provides actions for repositories, issues, pull re
 | **Add labels to an issue** | Apply labels to an issue. |
 | **Remove a label from an issue** | Remove a specific label from an issue. |
 
-For example, start with an issue event trigger, use **Get issue** to inspect the issue, then use **Add labels to an issue** or **Create an issue comment** to record the result.
+For example, start with an issue event trigger and check that its `action` is `opened`. Then use **Get issue** to inspect the issue and **Add labels to an issue** or **Create an issue comment** to record the result. Checking the action prevents a label added by the workflow from being processed as another opened issue.
 
 ## Triggers
 
 | Trigger | Events |
 |---|---|
-| **When an issue event occurs** | An issue is opened, edited, or closed. |
-| **When an issue comment event occurs** | A comment is created, edited, or deleted on an issue or pull request. |
-| **When a pull request event occurs** | A pull request is opened, closed, reopened, or synchronized. |
+| **When an issue event occurs** | Issue events, such as an issue being opened, edited, closed, reopened, or labeled. |
+| **When an issue comment event occurs** | Issue comment events, such as a comment being created, edited, or deleted on an issue or pull request. |
+| **When a pull request event occurs** | Pull request events, such as a pull request being opened, closed, reopened, synchronized, or labeled. |
 | **When code is pushed** | Commits are pushed to a branch or tag. |
-| **When a check suite is requested, rerequested, or completed** | A check suite event occurs. |
+| **When a check suite is requested, rerequested, or completed** | Check suite events, such as a suite being requested, rerequested, or completed. |
 | **When a deployment status changes** | A deployment's status changes. |
-| **When a label event occurs** | A repository label is created, edited, or deleted. |
-| **When a milestone event occurs** | A milestone is created, edited, closed, opened, or deleted. |
-| **When a repository star is added or removed** | A repository gains or loses a star. |
+| **When a label event occurs** | Label events, such as a repository label being created, edited, or deleted. |
+| **When a milestone event occurs** | Milestone events, such as a milestone being created, edited, closed, opened, or deleted. |
+| **When a repository star is added or removed** | Star events, such as a repository gaining or losing a star. |
 | **When the repository is forked** | A fork is created. |
 | **When a discussion event occurs** | A discussion is created, edited, answered, or otherwise changed. |
-| **When a commit comment is created** | A comment is created on a commit. |
+| **When a commit comment is created** | Commit comment events, such as a comment being created on a commit. |
+
+These triggers subscribe to the GitHub event type, not a subset of its actions. Where the payload includes `action`, check it in a condition before processing the event. In particular, issue and pull request events include actions beyond the examples above, and a workflow's own changes can trigger another run.
 
 The deployment status trigger responds to status changes rather than a specific status. Use the returned status in a later condition to branch on a particular outcome.
 
