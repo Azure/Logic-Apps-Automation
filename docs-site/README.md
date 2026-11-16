@@ -28,6 +28,12 @@ npm run dev         # http://localhost:4321 — hot reload
 
 **Before pushing:** `npm run check && npm run build && python3 -m unittest discover -s scripts/tests -p 'test_*.py' && python3 scripts/validate_docs_site.py` (all green).
 
+Area owners with repository write access can update the docs on the shared
+`docs/automation-collaboration` branch. Pull the latest changes, make your edits,
+run the checks above, and push to the same branch. Review the pull request's
+checks and documentation preview after each push; changes to `docs-site/**` or
+the docs deployment workflow trigger the build and preview.
+
 ---
 
 ## Where everything lives
@@ -100,6 +106,8 @@ docs-site/
 The same page can appear in more than one group to support different journeys. Keep one canonical page instead of copying its content. **From templates** under **Workflows** uses `/guides/build-from-templates/` to link to the canonical templates guide. This adds a click, but gives each page a distinct current sidebar entry.
 
 **Quickstart** and **Connectors** are still cross-listed in multiple groups. Starlight highlights only the first matching entry for those shared routes; consider that tradeoff when changing their navigation.
+
+The connector catalog lives in `features/connectors.md`; service-specific action and trigger inventories live in `guides/*-connector.md` and `guides/azure-devops-connectors.md`. Keep connection, authentication, and common troubleshooting guidance on the catalog page rather than repeating it in each guide. When updating inventories, check the connector specifications, operation visibility, generated variants, and registration configuration together. Exclude internal discovery and webhook-management helpers from user-facing counts, and don't treat merged source or default registration as proof of deployment. Keep Microsoft Learn's Standard connector references separate from Automation availability claims.
 
 ---
 

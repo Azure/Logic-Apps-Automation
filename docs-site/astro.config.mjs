@@ -136,8 +136,12 @@ export default defineConfig({
 					collapsed: true,
 					items: [
 						{ label: 'Overview', slug: 'features/connectors' },
+						{ label: 'Built-in service providers', slug: 'guides/built-in-connectors' },
 						{ label: 'GitHub', slug: 'guides/github-connector' },
 						{ label: 'Azure DevOps', slug: 'guides/azure-devops-connectors' },
+						{ label: 'Azure Advisor', slug: 'guides/azure-advisor-connector' },
+						{ label: 'Azure Resource Graph', slug: 'guides/azure-resource-graph-connector' },
+						{ label: 'Azure Monitor Logs', slug: 'guides/azure-monitor-logs-connector' },
 					],
 				},
 				{
