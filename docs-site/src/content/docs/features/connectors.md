@@ -97,9 +97,10 @@ connection**, choose **Connectors**, select the connector, and complete the same
 sign-in flow. If OAuth isn't offered, it isn't enabled for that connector in
 your environment.
 
-An OAuth service-provider connection authorizes only that connector's actions
-and triggers. It doesn't authorize model calls or repository access for a
-sandbox. Configure those connections separately.
+Creating an OAuth service-provider connection configures authentication for
+that connector's actions and triggers. It doesn't automatically configure model
+calls or repository access for a sandbox. Complete those setup flows
+separately.
 
 ### Manage an OAuth service-provider connection
 

@@ -34,10 +34,11 @@ For current setup guidance, see [Sandbox setup overview](/guides/create-sandboxe
    - **API Key** uses an OpenAI-compatible chat completions endpoint and API
      key.
 
-GitHub OAuth for model calls doesn't authorize repository cloning or GitHub
-connector operations. Configure those connections separately. For more
-information, see [Sandbox setup overview](/guides/create-sandboxes/) and
-[GitHub connector](/guides/github-connector/#connect-with-github-oauth).
+Completing GitHub OAuth for model calls doesn't automatically configure
+repository cloning or GitHub connector operations. Complete those setup flows
+separately. For more information, see
+[Sandbox setup overview](/guides/create-sandboxes/) and [GitHub
+connector](/guides/github-connector/#connect-with-github-oauth).
 
 ## Build path
 

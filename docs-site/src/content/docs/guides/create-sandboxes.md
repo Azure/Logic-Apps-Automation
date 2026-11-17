@@ -79,9 +79,9 @@ Identify the code and repositories your agent needs, then confirm the supported 
    For Azure DevOps OAuth, select **Connect Azure DevOps**, allow the sign-in
    popup, and complete sign-in and consent.
 
-   Repository OAuth authorizes the sandbox to clone that repository. It doesn't
-   authorize GitHub Copilot model calls or GitHub connector operations. Configure
-   those connections separately.
+   Repository OAuth configures repository access for the sandbox. It doesn't
+   automatically configure GitHub Copilot model calls or GitHub connector
+   operations. Complete those setup flows separately.
 
    A connected indicator doesn't by itself prove access to a particular
    repository.
