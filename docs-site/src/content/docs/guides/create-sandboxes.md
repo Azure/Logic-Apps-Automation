@@ -65,8 +65,11 @@ Identify the code and repositories your agent needs, then confirm the supported 
 
    For PAT authentication, enter a token in the **Personal Access Token** field for each repository. Treat tokens as secrets and follow your organization's token policy.
 
-   For GitHub OAuth, select **Install or configure GitHub App** first. Install or
-   configure the
+   For a public GitHub repository, GitHub OAuth might provide the required read
+   access without GitHub App installation.
+
+   For private repositories or authenticated access, select **OAuth**. Install
+   or configure the
    [Logic Apps Automation GitHub App](https://github.com/apps/logic-apps-automation/installations/new)
    for the account that owns the repository, and grant access to the repository.
    An organization administrator might need to approve the installation. Return
@@ -128,7 +131,7 @@ If your current access allows sandbox management, you can perform the following 
 | A sandbox configuration reports an error | Select the configuration and review the error details. |
 | A configuration doesn't appear on the Managed Agent | Review the configuration status and confirm the required access. |
 | An expected input or output file is missing | Review the agent action details in run history. |
-| A GitHub repository can't be cloned after OAuth sign-in | Configure the GitHub App installation for the account that owns the repository and grant the app access to that repository. |
+| A private GitHub repository can't be cloned after OAuth sign-in | Configure the GitHub App installation for the account that owns the repository and grant the app access to that repository. |
 | A repository skill isn't available | Review the sandbox configuration and confirm the requirements for using repository skills. |
 
 ## Related content

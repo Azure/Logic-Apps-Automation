@@ -77,21 +77,24 @@ An environment-specific GitHub Enterprise variant uses the same actions and trig
 For shared OAuth connection setup and management, see
 [Create an OAuth service-provider connection](/features/connectors/#create-an-oauth-service-provider-connection).
 
-Before you complete OAuth, install or configure the
+Public GitHub repositories might be accessible without installing the GitHub
+App, depending on the operation and required permissions. For private
+repositories or operations that require installation-granted access, install or
+configure the
 [Logic Apps Automation GitHub App](https://github.com/apps/logic-apps-automation/installations/new)
 for the GitHub accounts and repositories that the connection should access.
 Choose only the repositories the workflow needs. An organization administrator
 might need to approve the installation.
 
 The GitHub App installation grants repository access to Logic Apps Automation.
-The OAuth sign-in authorizes your connection. Both are required, and completing
-one doesn't complete the other.
+The OAuth sign-in authorizes your connection. These are separate steps, and
+completing one doesn't complete the other.
 
 For GitHub, complete these steps before continuing with the shared OAuth setup:
 
-1. Select **Install or configure GitHub App**. Choose the GitHub account and
-   repositories that this connection should access, then return to the
-   connection form.
+1. If the operation requires GitHub App installation, select **Install or
+   configure GitHub App**. Choose the GitHub account and repositories that this
+   connection should access, then return to the connection form.
 1. Select **Continue with GitHub OAuth**, then complete GitHub sign-in and
    consent.
 
