@@ -81,12 +81,26 @@ This connection authorizes GitHub connector actions and triggers. It is separate
 from GitHub OAuth for GitHub Copilot model calls and from repository OAuth used
 by a Managed agent sandbox.
 
+Before you complete OAuth, install or configure the
+[Logic Apps Automation GitHub App](https://github.com/apps/logic-apps-automation/installations/new)
+for the GitHub accounts and repositories that the connection should access.
+Choose only the repositories the workflow needs. An organization administrator
+might need to approve the installation.
+
+The GitHub App installation grants repository access to Logic Apps Automation.
+The OAuth sign-in authorizes your connection. Both are required, and completing
+one doesn't complete the other.
+
 ### Create a connection
 
 1. Add a GitHub action or trigger to a workflow.
 1. In **Connection**, select **Create new** and enter a connection name.
 1. If more than one authentication type is available, select the OAuth option.
-1. Select **Sign in**, then complete GitHub sign-in and consent.
+1. Select **Install or configure GitHub App**. Choose the GitHub account and
+   repositories that this connection should access, then return to the
+   connection form.
+1. Select **Continue with GitHub OAuth**, then complete GitHub sign-in and
+   consent.
 1. Select the new connection and save the workflow.
 
 You can also create the connection from the app's **Connections** page. Select
@@ -122,6 +136,9 @@ authorization code, in its workflow connection configuration.
   operation.
 - If a trigger can't subscribe, confirm that the account can create and manage
   repository webhooks.
+- If an expected repository isn't available, configure the GitHub App
+  installation for the account that owns the repository and grant access to
+  that repository.
 - If the connection remains **Not connected**, edit it and sign in again.
 
 For general connection setup and troubleshooting, see

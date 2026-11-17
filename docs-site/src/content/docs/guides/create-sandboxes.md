@@ -65,11 +65,23 @@ Identify the code and repositories your agent needs, then confirm the supported 
 
    For PAT authentication, enter a token in the **Personal Access Token** field for each repository. Treat tokens as secrets and follow your organization's token policy.
 
-   For OAuth, use the offered **Connect GitHub** or **Connect Azure DevOps** option, allow the sign-in popup, and complete sign-in and consent. A connected indicator doesn't by itself prove access to a particular repository.
+   For GitHub OAuth, select **Install or configure GitHub App** first. Install or
+   configure the
+   [Logic Apps Automation GitHub App](https://github.com/apps/logic-apps-automation/installations/new)
+   for the account that owns the repository, and grant access to the repository.
+   An organization administrator might need to approve the installation. Return
+   to the sandbox configuration, select **Connect GitHub**, and complete sign-in
+   and consent.
+
+   For Azure DevOps OAuth, select **Connect Azure DevOps**, allow the sign-in
+   popup, and complete sign-in and consent.
 
    Repository OAuth authorizes the sandbox to clone that repository. It doesn't
    authorize GitHub Copilot model calls or GitHub connector operations. Configure
    those connections separately.
+
+   A connected indicator doesn't by itself prove access to a particular
+   repository.
 
 1. Select **Create**, then review the configuration status. Select a configuration that shows **Ready** when you attach it to the agent.
 
@@ -116,6 +128,7 @@ If your current access allows sandbox management, you can perform the following 
 | A sandbox configuration reports an error | Select the configuration and review the error details. |
 | A configuration doesn't appear on the Managed Agent | Review the configuration status and confirm the required access. |
 | An expected input or output file is missing | Review the agent action details in run history. |
+| A GitHub repository can't be cloned after OAuth sign-in | Configure the GitHub App installation for the account that owns the repository and grant the app access to that repository. |
 | A repository skill isn't available | Review the sandbox configuration and confirm the requirements for using repository skills. |
 
 ## Related content
