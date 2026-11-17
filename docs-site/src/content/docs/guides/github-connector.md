@@ -71,15 +71,10 @@ An environment-specific GitHub Enterprise variant uses the same actions and trig
 
 <span id="authentication-and-permissions"></span>
 
-## Connect with GitHub OAuth
+## GitHub authentication and permissions
 
-When OAuth is available for the GitHub connector, you can authorize a connection
-with your GitHub account without storing an OAuth token in the workflow
-definition.
-
-This connection authorizes GitHub connector actions and triggers. It is separate
-from GitHub OAuth for GitHub Copilot model calls and from repository OAuth used
-by a Managed agent sandbox.
+For shared OAuth connection setup and management, see
+[Create an OAuth service-provider connection](/features/connectors/#create-an-oauth-service-provider-connection).
 
 Before you complete OAuth, install or configure the
 [Logic Apps Automation GitHub App](https://github.com/apps/logic-apps-automation/installations/new)
@@ -91,41 +86,13 @@ The GitHub App installation grants repository access to Logic Apps Automation.
 The OAuth sign-in authorizes your connection. Both are required, and completing
 one doesn't complete the other.
 
-### Create a connection
+For GitHub, complete these steps before continuing with the shared OAuth setup:
 
-1. Add a GitHub action or trigger to a workflow.
-1. In **Connection**, select **Create new** and enter a connection name.
-1. If more than one authentication type is available, select the OAuth option.
 1. Select **Install or configure GitHub App**. Choose the GitHub account and
    repositories that this connection should access, then return to the
    connection form.
 1. Select **Continue with GitHub OAuth**, then complete GitHub sign-in and
    consent.
-1. Select the new connection and save the workflow.
-
-You can also create the connection from the app's **Connections** page. Select
-**Add connection**, choose the GitHub connector, and complete the same sign-in
-flow.
-
-If OAuth isn't offered, it isn't enabled for the GitHub connector in your
-environment.
-
-### Manage the connection
-
-On the app's **Connections** page, find the connection under **Service provider
-connections**.
-
-- **Connected** means the GitHub authorization is ready to use.
-- **Not connected** means the authorization is missing or no longer valid.
-- **Unknown** means the connection state couldn't be determined.
-
-To restore authorization, edit the connection and select **Sign in** again. To
-change the GitHub account, delete the connection and create it again with the
-intended account. Deleting the connection also removes its OAuth authorization,
-so reconnect any workflow actions or triggers that used it.
-
-The app stores a reference to the OAuth connection, not the OAuth token or
-authorization code, in its workflow connection configuration.
 
 <span id="troubleshoot"></span>
 
@@ -139,7 +106,6 @@ authorization code, in its workflow connection configuration.
 - If an expected repository isn't available, configure the GitHub App
   installation for the account that owns the repository and grant access to
   that repository.
-- If the connection remains **Not connected**, edit it and sign in again.
 
 For general connection setup and troubleshooting, see
 [shared connector guidance](/features/connectors/#add-a-connector-operation).
