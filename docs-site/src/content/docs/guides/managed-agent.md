@@ -44,6 +44,7 @@ connector](/guides/github-connector/#connect-with-github-oauth).
 
 Use this sequence:
 
+1. Add an agent action and select **Managed agent**.
 1. Select the model or model connection.
 1. Configure **System message** and **User message** for the exact task.
 1. Review **Harness** settings, including execution environment, sandbox, and repository skills.
