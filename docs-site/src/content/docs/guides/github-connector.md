@@ -70,6 +70,7 @@ The deployment status trigger responds to status changes rather than a specific 
 An environment-specific GitHub Enterprise variant uses the same actions and triggers against its configured host. It requires explicit enablement and isn't registered by default. Its presence doesn't imply support for arbitrary GitHub Enterprise Server URLs; use only the variant and host offered by your environment.
 
 <span id="authentication-and-permissions"></span>
+<span id="connect-with-github-oauth"></span>
 
 ## GitHub authentication and permissions
 
