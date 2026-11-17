@@ -67,6 +67,10 @@ Identify the code and repositories your agent needs, then confirm the supported 
 
    For OAuth, use the offered **Connect GitHub** or **Connect Azure DevOps** option, allow the sign-in popup, and complete sign-in and consent. A connected indicator doesn't by itself prove access to a particular repository.
 
+   Repository OAuth authorizes the sandbox to clone that repository. It doesn't
+   authorize GitHub Copilot model calls or GitHub connector operations. Configure
+   those connections separately.
+
 1. Select **Create**, then review the configuration status. Select a configuration that shows **Ready** when you attach it to the agent.
 
 ### 2. Set up the Managed Agent
@@ -77,7 +81,8 @@ Identify the code and repositories your agent needs, then confirm the supported 
 
 1. In the agent's **Harness** settings, select **GHCP** (GitHub Copilot) as the harness type, if offered.
 
-1. Select the ready sandbox configuration. Verify the agent's model connection and other required settings before running the workflow.
+1. Select the ready sandbox configuration. Verify the agent's model selection or
+   model connection and other required settings before running the workflow.
 
 #### How Azure Logic Apps Automation places skills for GitHub Copilot
 
@@ -117,5 +122,7 @@ If your current access allows sandbox management, you can perform the following 
 
 - [Sandboxes](/features/sandboxes/)
 - [Agents](/features/agents/)
+- [Managed Agent](/guides/managed-agent/)
+- [GitHub connector](/guides/github-connector/)
 - [Connectors](/features/connectors/)
 - [Runs and monitoring](/features/runs-and-monitoring/)

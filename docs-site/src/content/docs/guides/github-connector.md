@@ -70,12 +70,66 @@ The deployment status trigger responds to status changes rather than a specific 
 An environment-specific GitHub Enterprise variant uses the same actions and triggers against its configured host. It requires explicit enablement and isn't registered by default. Its presence doesn't imply support for arbitrary GitHub Enterprise Server URLs; use only the variant and host offered by your environment.
 
 <span id="authentication-and-permissions"></span>
+
+## Connect with GitHub OAuth
+
+When OAuth is available for the GitHub connector, you can authorize a connection
+with your GitHub account without storing an OAuth token in the workflow
+definition.
+
+This connection authorizes GitHub connector actions and triggers. It is separate
+from GitHub OAuth for GitHub Copilot model calls and from repository OAuth used
+by a Managed agent sandbox.
+
+### Create a connection
+
+1. Add a GitHub action or trigger to a workflow.
+1. In **Connection**, select **Create new** and enter a connection name.
+1. If more than one authentication type is available, select the OAuth option.
+1. Select **Sign in**, then complete GitHub sign-in and consent.
+1. Select the new connection and save the workflow.
+
+You can also create the connection from the app's **Connections** page. Select
+**Add connection**, choose the GitHub connector, and complete the same sign-in
+flow.
+
+If OAuth isn't offered, it isn't enabled for the GitHub connector in your
+environment.
+
+### Manage the connection
+
+On the app's **Connections** page, find the connection under **Service provider
+connections**.
+
+- **Connected** means the GitHub authorization is ready to use.
+- **Not connected** means the authorization is missing or no longer valid.
+- **Unknown** means the connection state couldn't be determined.
+
+To restore authorization, edit the connection and select **Sign in** again. To
+change the GitHub account, delete the connection and create it again with the
+intended account. Deleting the connection also removes its OAuth authorization,
+so reconnect any workflow actions or triggers that used it.
+
+The app stores a reference to the OAuth connection, not the OAuth token or
+authorization code, in its workflow connection configuration.
+
 <span id="troubleshoot"></span>
 
-For connection setup, permissions, and common issues, see [shared connector guidance](/features/connectors/#add-a-connector-operation).
+### Troubleshoot OAuth
+
+- If sign-in succeeds but an operation is denied, confirm that the GitHub
+  account can access the repository and has the permissions required by the
+  operation.
+- If a trigger can't subscribe, confirm that the account can create and manage
+  repository webhooks.
+- If the connection remains **Not connected**, edit it and sign in again.
+
+For general connection setup and troubleshooting, see
+[shared connector guidance](/features/connectors/#add-a-connector-operation).
 
 ## Related content
 
 - [Connectors](/features/connectors/)
 - [Azure DevOps connectors](/guides/azure-devops-connectors/)
+- [Managed Agent](/guides/managed-agent/)
 - [Visual designer](/features/visual-designer/)

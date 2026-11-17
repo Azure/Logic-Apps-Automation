@@ -9,6 +9,10 @@ sidebar:
 
 This guide shows how to create a Foundry Hosted Agent in an Azure Logic Apps Automation app and use the agent in a workflow.
 
+Unlike a Managed agent, a Foundry Hosted Agent doesn't use an Azure Logic Apps
+Automation sandbox or a separate model connection. You select the Foundry model
+deployment when you create the hosted agent.
+
 :::note
 Availability can vary by environment. If you can't find this capability in the [portal](https://auto.azure.com), check with your environment administrator.
 :::
@@ -146,4 +150,5 @@ Before deleting an agent, review the effects and required permissions. The delet
 
 - [Foundry Hosted Agents](/features/foundry-hosted-agents/)
 - [Agents](/features/agents/)
+- [The options and how to choose](/guides/agent-options/)
 - [Runs and monitoring](/features/runs-and-monitoring/)
