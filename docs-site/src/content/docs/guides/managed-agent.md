@@ -60,7 +60,7 @@ Managed agent outputs can feed later deterministic workflow actions. Use run set
 | Problem | Try |
 |---|---|
 | GitHub sign-in isn't offered | Confirm that you selected **Managed agent**, then select **Use your own model connection** in the model picker. |
-| GitHub sign-in succeeds but model calls fail | Confirm that the signed-in GitHub account has GitHub Copilot access. Delete and recreate the model connection to use a different account. |
+| GitHub sign-in succeeds but model calls fail | Confirm that the signed-in GitHub account has GitHub Copilot access. To use a different account, first identify all agents using the model connection. Delete and recreate the connection with the intended account, then select the replacement connection in every affected agent and save the workflows. |
 | A sandbox configuration isn't available | Confirm that the configuration has the **Ready** status. |
 | A repository can't be cloned | Check the repository URL and branch, then review the repository authentication configured on the sandbox. |
 
