@@ -68,8 +68,7 @@ Identify the code and repositories your agent needs, then confirm the supported 
    For a public GitHub repository, GitHub OAuth might provide the required read
    access without GitHub App installation.
 
-   For private repositories or authenticated access, select **OAuth**. Install
-   or configure the
+   For a private GitHub repository using **OAuth**, install or configure the
    [Logic Apps Automation GitHub App](https://github.com/apps/logic-apps-automation/installations/new)
    for the account that owns the repository, and grant access to the repository.
    An organization administrator might need to approve the installation. Return
