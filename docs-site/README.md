@@ -211,10 +211,11 @@ network requests. No page or component changes are needed to add an entry.
    author username, and original displayed publication date (not its updated
    date or a UTC timestamp that falls on a different day).
 2. Add one JSON object with `id` (article ID as a string), `title`, `url`,
-   `publishedAt` (`YYYY-MM-DD`), `author`, and `summary`. Use the canonical HTTPS
-   `techcommunity.microsoft.com/blog/.../<article-id>` URL without tracking
-   parameters or fragments. Retain percent-encoded characters in canonical URLs.
-   Decorative symbols in source titles can be omitted from the display title.
+   `publishedAt` (`YYYY-MM-DD`), `author`, and `summary`. Preserve the exact
+   HTTPS Tech Community URL supplied by the canonical post, whether it uses the
+   `/blog/.../<article-id>` or `.../ba-p/<article-id>` route. Do not rewrite its
+   path, percent encoding, or add tracking parameters and fragments. Decorative
+   symbols in source titles can be omitted from the display title.
 3. Write an original one- or two-sentence plain-text summary (up to 400
    characters, no HTML or Markdown). Describe the article rather than promising
    current availability or pricing. Link pricing announcements to current

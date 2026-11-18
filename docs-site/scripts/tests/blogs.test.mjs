@@ -10,6 +10,26 @@ test('the curated catalog satisfies its schema and cross-entry integrity rules',
 	assert.doesNotThrow(() => parseBlogCatalog(catalogText));
 });
 
+test('contains exactly the three approved canonical Tech Community posts', () => {
+	assert.deepEqual(
+		JSON.parse(catalogText).map(({ id, url }) => ({ id, url })),
+		[
+			{
+				id: '4566381',
+				url: 'https://techcommunity.microsoft.com/t5/azure-integration-services-blog/orchestrate-foundry-prompt-and-hosted-agents-with-logic-apps/ba-p/4566381',
+			},
+			{
+				id: '4562264',
+				url: 'https://techcommunity.microsoft.com/t5/azure-integration-services-blog/announcing-free-grant-and-pricing-for-logic-apps-automation/ba-p/4562264',
+			},
+			{
+				id: '4524685',
+				url: 'https://techcommunity.microsoft.com/blog/integrationsonazureblog/whats-new-in-azure-logic-apps-at-microsoft-build-2026/4524685',
+			},
+		],
+	);
+});
+
 test('allows an empty catalog so the index can retain its broader community link', () => {
 	assert.deepEqual(parseBlogCatalog('[]'), []);
 });
