@@ -10,10 +10,14 @@ test('the curated catalog satisfies its schema and cross-entry integrity rules',
 	assert.doesNotThrow(() => parseBlogCatalog(catalogText));
 });
 
-test('contains exactly the three approved canonical Tech Community posts', () => {
+test('contains exactly the four approved canonical Tech Community posts', () => {
 	assert.deepEqual(
 		JSON.parse(catalogText).map(({ id, url }) => ({ id, url })),
 		[
+			{
+				id: '4573879',
+				url: 'https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/from-canvas-to-run-a-better-logic-apps-automation-experience/4573879',
+			},
 			{
 				id: '4566381',
 				url: 'https://techcommunity.microsoft.com/blog/integrationsonazureblog/%f0%9f%86%95orchestrate-foundry-prompt-and-hosted-agents-with-logic-apps-automation/4566381',

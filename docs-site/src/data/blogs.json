@@ -1,5 +1,17 @@
 [
   {
+    "id": "4573879",
+    "title": "From canvas to run: a better Logic Apps Automation experience",
+    "url": "https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/from-canvas-to-run-a-better-logic-apps-automation-experience/4573879",
+    "publishedAt": "2026-11-17",
+    "author": "KrrishM",
+    "summary": "Follow the Logic Apps Automation experience from finding a workflow and editing the canvas through testing a draft and investigating a run.",
+    "relatedDocs": [
+      { "label": "Visual designer", "href": "/docs/features/visual-designer/" },
+      { "label": "Runs and monitoring", "href": "/docs/features/runs-and-monitoring/" }
+    ]
+  },
+  {
     "id": "4566381",
     "title": "Orchestrate Foundry Prompt and Hosted Agents with Logic Apps Automation",
     "url": "https://techcommunity.microsoft.com/blog/integrationsonazureblog/%f0%9f%86%95orchestrate-foundry-prompt-and-hosted-agents-with-logic-apps-automation/4566381",
