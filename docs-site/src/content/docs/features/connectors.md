@@ -81,11 +81,50 @@ Use the authentication methods offered by the selected connector in your environ
 
 A sandbox repository connection is separate from an app's workflow connection. See [Sandbox setup](/guides/create-sandboxes/#1-create-the-configuration).
 
+### Create an OAuth service-provider connection
+
+When OAuth is available for a built-in service-provider connector:
+
+1. Add an action or trigger from the connector to a workflow.
+1. In **Connection**, select **Create new** and enter a connection name.
+1. If more than one authentication type is available, select the OAuth option.
+1. Complete any connector-specific prerequisites, then select **Sign in** and
+   complete sign-in and consent.
+1. Select the new connection and save the workflow.
+
+You can also start from the app's **Connections** page. Select **Add
+connection**, choose **Connectors**, select the connector, and complete the same
+sign-in flow. If OAuth isn't offered, it isn't enabled for that connector in
+your environment.
+
+Creating an OAuth service-provider connection configures authentication for
+that connector's actions and triggers. It doesn't automatically configure model
+calls or repository access for a sandbox. Complete those setup flows
+separately.
+
+### Manage an OAuth service-provider connection
+
+On the app's **Connections** page, find the connection under **Service provider
+connections**.
+
+- **Connected** means the authorization is ready to use.
+- **Not connected** means the authorization is missing or no longer valid.
+- **Unknown** means the connection state couldn't be determined.
+
+To restore authorization, edit the connection and select **Sign in** again. To
+change the account, delete the connection and create it again with the intended
+account. Deleting a connection also removes its OAuth authorization, so
+reconnect any workflow actions or triggers that used it.
+
+The app stores a reference to the OAuth connection, not the OAuth token or
+authorization code, in its workflow connection configuration.
+
 ### If a connector or operation doesn't work
 
 - If the connector or operation isn't listed, confirm its deployment and enablement with your environment administrator. Build and the environment-specific GitHub Enterprise variant require explicit enablement.
 - If a resource isn't listed or an action is denied, check the selected connection, service permissions, and resource scope.
 - If an event trigger doesn't receive events, check its event filters and webhook or Service Hooks subscription, then inspect [run history](/features/runs-and-monitoring/).
+- If an OAuth connection remains **Not connected**, edit it and sign in again.
 
 ## HTTP for everything else
 
