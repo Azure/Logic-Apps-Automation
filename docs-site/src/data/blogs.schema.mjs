@@ -19,10 +19,7 @@ function isArticleUrl(value) {
 			&& url.hostname === 'techcommunity.microsoft.com'
 			&& url.href === value
 			&& !url.username && !url.password && !url.port && !url.search && !url.hash
-			&& (
-				/^\/blog\/[^/]+\/[^/]+\/[1-9]\d*$/u.test(url.pathname)
-				|| /^\/t5\/azure-integration-services-blog\/[^/]+\/ba-p\/[1-9]\d*$/u.test(url.pathname)
-			);
+			&& /^\/blog\/[^/]+\/[^/]+\/[1-9]\d*$/u.test(url.pathname);
 	} catch {
 		return false;
 	}

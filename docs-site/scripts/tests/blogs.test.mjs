@@ -16,11 +16,11 @@ test('contains exactly the three approved canonical Tech Community posts', () =>
 		[
 			{
 				id: '4566381',
-				url: 'https://techcommunity.microsoft.com/t5/azure-integration-services-blog/orchestrate-foundry-prompt-and-hosted-agents-with-logic-apps/ba-p/4566381',
+				url: 'https://techcommunity.microsoft.com/blog/integrationsonazureblog/%f0%9f%86%95orchestrate-foundry-prompt-and-hosted-agents-with-logic-apps-automation/4566381',
 			},
 			{
 				id: '4562264',
-				url: 'https://techcommunity.microsoft.com/t5/azure-integration-services-blog/announcing-free-grant-and-pricing-for-logic-apps-automation/ba-p/4562264',
+				url: 'https://techcommunity.microsoft.com/blog/integrationsonazureblog/%f0%9f%92%b2announcing-free-grant-and-pricing-for-logic-apps-automation/4562264',
 			},
 			{
 				id: '4524685',
