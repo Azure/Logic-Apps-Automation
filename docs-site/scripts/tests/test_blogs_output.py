@@ -65,7 +65,10 @@ class BlogsOutputTests(unittest.TestCase):
         cls.parser.feed(cls.blog_page.read_text())
 
     def test_static_articles_have_complete_attribution_in_newest_first_order(self):
-        expected = sorted(self.catalog, key=lambda entry: entry["publishedAt"], reverse=True)
+        expected = sorted(
+            self.catalog,
+            key=lambda entry: (-int(date.fromisoformat(entry["publishedAt"]).strftime("%Y%m%d")), entry["id"]),
+        )
         self.assertEqual(len(self.parser.articles), len(expected))
         for actual, entry in zip(self.parser.articles, expected):
             with self.subTest(article=entry["id"]):

@@ -1,5 +1,29 @@
 [
   {
+    "id": "4573643",
+    "title": "Announcing Decision APIs as actions in Azure Logic Apps",
+    "url": "https://techcommunity.microsoft.com/blog/integrationsonazureblog/announcing-decision-apis-as-actions-in-azure-logic-apps/4573643",
+    "publishedAt": "2026-11-17",
+    "author": "DivSwa",
+    "summary": "Learn how Yes/No, Choice, and Score actions return typed judgment results that workflows can act on without deploying a model or parsing free-form output.",
+    "relatedDocs": [
+      { "label": "Workflow concepts and expressions", "href": "/docs/features/workflows/" },
+      { "label": "Agent options", "href": "/docs/guides/agent-options/" }
+    ]
+  },
+  {
+    "id": "4573645",
+    "title": "What's new in Logic Apps Automation at Ignite 2026",
+    "url": "https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/what%E2%80%99s-new-in-logic-apps-automation-at-ignite-2026/4573645",
+    "publishedAt": "2026-11-17",
+    "author": "DivSwa",
+    "summary": "See the Automation-specific Ignite update covering Azure connectors, templates, managed models, Decision actions, virtual network support, hosting, and the refreshed designer.",
+    "relatedDocs": [
+      { "label": "Connectors", "href": "/docs/features/connectors/" },
+      { "label": "Workflow templates", "href": "/docs/guides/templates/" }
+    ]
+  },
+  {
     "id": "4573879",
     "title": "From canvas to run: a better Logic Apps Automation experience",
     "url": "https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/from-canvas-to-run-a-better-logic-apps-automation-experience/4573879",
@@ -9,6 +33,18 @@
     "relatedDocs": [
       { "label": "Visual designer", "href": "/docs/features/visual-designer/" },
       { "label": "Runs and monitoring", "href": "/docs/features/runs-and-monitoring/" }
+    ]
+  },
+  {
+    "id": "4574191",
+    "title": "What's new in Azure Logic Apps at Microsoft Ignite 2026",
+    "url": "https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/whats-new-in-azure-logic-apps-at-microsoft-ignite-2026/4574191",
+    "publishedAt": "2026-11-17",
+    "author": "beenamore",
+    "summary": "Read the broader Ignite roundup for Logic Apps, including Automation updates for templates, agents, managed models, Decision actions, connectors, and virtual network support.",
+    "relatedDocs": [
+      { "label": "About Logic Apps Automation", "href": "/docs/getting-started/introduction/" },
+      { "label": "Connectors", "href": "/docs/features/connectors/" }
     ]
   },
   {
@@ -32,6 +68,18 @@
     "summary": "Read the free-grant and pricing announcement for Automation. Check the current pricing documentation for applicable rates, eligibility, and grant terms before estimating costs.",
     "relatedDocs": [
       { "label": "Pricing and free grants", "href": "/docs/getting-started/pricing/" }
+    ]
+  },
+  {
+    "id": "4524555",
+    "title": "Automation just became a team sport. Meet Azure Logic Apps Automation.",
+    "url": "https://techcommunity.microsoft.com/blog/integrationsonazureblog/%F0%9F%8E%89-automation-just-became-a-team-sport-meet-azure-logic-apps-automation-/4524555",
+    "publishedAt": "2026-06-02",
+    "author": "DivSwa",
+    "summary": "Read the Public Preview launch story for Logic Apps Automation, including the managed experience, productivity goals, enterprise foundation, and path from idea to production.",
+    "relatedDocs": [
+      { "label": "About Logic Apps Automation", "href": "/docs/getting-started/introduction/" },
+      { "label": "Build your first workflow", "href": "/docs/getting-started/quickstart/" }
     ]
   },
   {

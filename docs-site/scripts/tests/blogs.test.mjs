@@ -10,13 +10,25 @@ test('the curated catalog satisfies its schema and cross-entry integrity rules',
 	assert.doesNotThrow(() => parseBlogCatalog(catalogText));
 });
 
-test('contains exactly the four approved canonical Tech Community posts', () => {
+test('contains exactly the eight approved canonical Tech Community posts', () => {
 	assert.deepEqual(
 		JSON.parse(catalogText).map(({ id, url }) => ({ id, url })),
 		[
 			{
+				id: '4573643',
+				url: 'https://techcommunity.microsoft.com/blog/integrationsonazureblog/announcing-decision-apis-as-actions-in-azure-logic-apps/4573643',
+			},
+			{
+				id: '4573645',
+				url: 'https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/what%E2%80%99s-new-in-logic-apps-automation-at-ignite-2026/4573645',
+			},
+			{
 				id: '4573879',
 				url: 'https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/from-canvas-to-run-a-better-logic-apps-automation-experience/4573879',
+			},
+			{
+				id: '4574191',
+				url: 'https://techcommunity.microsoft.com/blog/IntegrationsonAzureBlog/whats-new-in-azure-logic-apps-at-microsoft-ignite-2026/4574191',
 			},
 			{
 				id: '4566381',
@@ -25,6 +37,10 @@ test('contains exactly the four approved canonical Tech Community posts', () => 
 			{
 				id: '4562264',
 				url: 'https://techcommunity.microsoft.com/blog/integrationsonazureblog/%f0%9f%92%b2announcing-free-grant-and-pricing-for-logic-apps-automation/4562264',
+			},
+			{
+				id: '4524555',
+				url: 'https://techcommunity.microsoft.com/blog/integrationsonazureblog/%F0%9F%8E%89-automation-just-became-a-team-sport-meet-azure-logic-apps-automation-/4524555',
 			},
 			{
 				id: '4524685',
