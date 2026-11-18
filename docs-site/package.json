@@ -9,7 +9,7 @@
     "start": "astro dev",
     "build": "astro build && node scripts/postbuild.mjs",
     "preview": "astro preview",
-    "check": "astro check",
+    "check": "node --test scripts/tests/blogs.test.mjs && astro check",
     "astro": "astro"
   },
   "dependencies": {

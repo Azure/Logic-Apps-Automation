@@ -157,6 +157,10 @@ export default defineConfig({
 					items: [{ autogenerate: { directory: 'demos' } }],
 				},
 				{
+					label: 'Blogs',
+					slug: 'blogs',
+				},
+				{
 					label: 'Release notes',
 					items: [{ autogenerate: { directory: 'release-notes' } }],
 				},

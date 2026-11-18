@@ -1,0 +1,36 @@
+[
+  {
+    "id": "4566381",
+    "title": "Orchestrate Foundry Prompt and Hosted Agents with Logic Apps Automation",
+    "url": "https://techcommunity.microsoft.com/blog/integrationsonazureblog/%f0%9f%86%95orchestrate-foundry-prompt-and-hosted-agents-with-logic-apps-automation/4566381",
+    "publishedAt": "2026-10-20",
+    "author": "DivSwa",
+    "summary": "Explore the Foundry prompt and hosted agent options for Automation workflows, then use the related documentation to choose and configure an agent.",
+    "relatedDocs": [
+      { "label": "Foundry Prompt Agent", "href": "/docs/guides/foundry-prompt-agent/" },
+      { "label": "Foundry Hosted Agents", "href": "/docs/features/foundry-hosted-agents/" }
+    ]
+  },
+  {
+    "id": "4562264",
+    "title": "Announcing Free Grant and Pricing for Logic Apps Automation",
+    "url": "https://techcommunity.microsoft.com/blog/integrationsonazureblog/%f0%9f%92%b2announcing-free-grant-and-pricing-for-logic-apps-automation/4562264",
+    "publishedAt": "2026-10-07",
+    "author": "DivSwa",
+    "summary": "Read the free-grant and pricing announcement for Automation. Check the current pricing documentation for applicable rates, eligibility, and grant terms before estimating costs.",
+    "relatedDocs": [
+      { "label": "Pricing and free grants", "href": "/docs/getting-started/pricing/" }
+    ]
+  },
+  {
+    "id": "4524685",
+    "title": "What's new in Azure Logic Apps at Microsoft Build 2026",
+    "url": "https://techcommunity.microsoft.com/blog/integrationsonazureblog/whats-new-in-azure-logic-apps-at-microsoft-build-2026/4524685",
+    "publishedAt": "2026-06-02",
+    "author": "beenamore",
+    "summary": "Start with the Build 2026 announcement for context on Logic Apps Automation within the wider Azure Logic Apps updates.",
+    "relatedDocs": [
+      { "label": "About Logic Apps Automation", "href": "/docs/getting-started/introduction/" }
+    ]
+  }
+]

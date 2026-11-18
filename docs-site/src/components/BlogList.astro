@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('blogs')).sort((a, b) =>
+	b.data.publishedAt.localeCompare(a.data.publishedAt) || a.id.localeCompare(b.id),
+);
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+	year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+});
+---
+
+{entries.length === 0 ? (
+	<p>No articles have been selected yet. Browse the community blog below for more posts.</p>
+) : (
+	<ul class="blog-list" role="list">
+		{entries.map(({ id, data }) => (
+			<li>
+				<article aria-labelledby={`blog-${id}`}>
+					<h2 id={`blog-${id}`}><a href={data.url}>{data.title}</a></h2>
+					<p class="attribution">
+						<time datetime={data.publishedAt}>
+							{dateFormat.format(new Date(`${data.publishedAt}T00:00:00Z`))}
+						</time>
+						{' · '}{data.author}{' · Microsoft Tech Community'}
+					</p>
+					<p>{data.summary}</p>
+					{data.relatedDocs.length > 0 && (
+						<p>
+							In the docs:{' '}
+							{data.relatedDocs.map((link, index) => (
+								<>{index > 0 && ' · '}<a href={link.href}>{link.label}</a></>
+							))}
+						</p>
+					)}
+				</article>
+			</li>
+		))}
+	</ul>
+)}
+
+<style>
+	.blog-list {
+		list-style: none;
+		padding-inline-start: 0;
+	}
+	.blog-list > li + li {
+		border-block-start: 1px solid var(--sl-color-hairline-light);
+		margin-block-start: 2rem;
+		padding-block-start: 1rem;
+	}
+	h2 {
+		font-size: var(--sl-text-h3);
+		overflow-wrap: anywhere;
+	}
+	.attribution {
+		font-size: var(--sl-text-sm);
+	}
+</style>
