@@ -20,10 +20,10 @@ npm run dev         # http://localhost:4321 — hot reload
 | Command            | What it does                                                |
 | ------------------ | ----------------------------------------------------------- |
 | `npm run dev`      | Hot-reload dev server (port 4321).                          |
-| `npm run check`    | Check content and TypeScript with Astro.                    |
+| `npm run check`    | Test blog metadata integrity, then check content and TypeScript with Astro. |
 | `npm run build`    | Production build to `dist/`.                                |
 | `npm run preview`  | Serve the production build locally (close to canary).       |
-| `python3 -m unittest discover -s scripts/tests -p 'test_*.py'` | Run link/fragment checker unit tests. |
+| `python3 -m unittest discover -s scripts/tests -p 'test_*.py'` | Test the link/fragment checker and built Blogs output (run after build). |
 | `python3 scripts/validate_docs_site.py` | Validate built internal links, fragments, and HTML output shape. |
 
 **Before pushing:** `npm run check && npm run build && python3 -m unittest discover -s scripts/tests -p 'test_*.py' && python3 scripts/validate_docs_site.py` (all green).
@@ -198,6 +198,45 @@ npm run check && npm run build
 ```
 
 Cross-link the new page from related topics, then check its sidebar placement and links in the built site or PR preview. The check and build commands don't by themselves verify every link or fragment.
+
+### Add a curated blog entry
+
+The static `/docs/blogs/` index reads `src/data/blogs.json` through the local
+`blogs` content collection. Tech Community hosts the originals: do not copy
+article bodies, excerpts, or images, and do not add RSS, runtime, or build-time
+network requests. No page or component changes are needed to add an entry.
+
+1. Verify that the article is relevant to Azure Logic Apps Automation. Open the
+   original on Microsoft Tech Community and check its canonical URL, title,
+   author username, and original displayed publication date (not its updated
+   date or a UTC timestamp that falls on a different day).
+2. Add one JSON object with `id` (article ID as a string), `title`, `url`,
+   `publishedAt` (`YYYY-MM-DD`), `author`, and `summary`. Use the canonical HTTPS
+   `techcommunity.microsoft.com/blog/.../<article-id>` URL without tracking
+   parameters or fragments. Retain percent-encoded characters in canonical URLs.
+   Decorative symbols in source titles can be omitted from the display title.
+3. Write an original one- or two-sentence plain-text summary (up to 400
+   characters, no HTML or Markdown). Describe the article rather than promising
+   current availability or pricing. Link pricing announcements to current
+   pricing guidance instead of repeating rates or grants.
+4. Optionally add up to two `relatedDocs` objects with `label` and `href`.
+   Use `/docs/`-prefixed routes with a trailing slash, such as
+   `/docs/getting-started/pricing/`; an existing `#fragment` can follow the slash.
+5. Run the full **Before pushing** command above, sequentially. `npm run check`
+   tests schema edge cases and catalog integrity; both check and build validate
+   the local catalog before Astro indexes it. The Python validator checks
+   generated internal routes and fragments, including related docs links.
+6. Review the Blogs page and homepage in the documentation preview: check
+   newest-first order, attribution, link destinations, keyboard navigation,
+   mobile layout, and light/dark themes. Request normal PR review for relevance,
+   metadata accuracy, summary originality, and related documentation.
+
+The schema in `src/data/blogs.schema.mjs` rejects missing or empty required
+fields, invalid or future dates, duplicate IDs/URLs, mismatched article IDs,
+unsafe/noncanonical article URLs, formatted summaries, and malformed internal
+routes. The list is rendered as static HTML with ordinary same-tab links and
+requires no client-side script or remote service. The broader community blog
+link remains available even when the curated catalog is empty.
 
 ### Update an existing page
 
