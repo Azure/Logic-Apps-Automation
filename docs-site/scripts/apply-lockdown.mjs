@@ -22,8 +22,8 @@ const TARGETS = {
     customDomain: 'otto-canary.azure.com',
   },
   prod: {
-    // otto-portal-afd
-    frontDoorId: 'c1504f11-9bfe-40e3-b58f-923f88dc0689',
+    // auto-portal-afd (RG: auto-portal-afd-rg)
+    frontDoorId: 'fd12a176-4667-4e79-8d3d-0bd88e863ff7',
     customDomain: 'auto.azure.com',
   },
 };
