@@ -19,7 +19,15 @@
 
 name: ${{ parameters.target }}-$(Date:yyyyMMdd)$(Rev:.r)
 
-trigger: none
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - docs-site/**
+      - .azure-pipelines/docs-site-deploy.yml
+      - .azure-pipelines/ado.npmrc
 pr: none
 schedules: []
 
