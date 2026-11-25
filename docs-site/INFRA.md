@@ -1,11 +1,11 @@
 # Otto Docs Site — Infrastructure
 
 The docs site is an Astro/Starlight build hosted on Azure Static Web Apps.
-There are two SWAs — one for canary (auto-deploys on every push to `main`)
-and one for prod (gated, manual). Both build from the same source with the
-same `base: '/docs'` config and are fronted by Azure Front Door — direct
-hits on the `*.azurestaticapps.net` hostnames return 403 by design (see
-**Lockdown** below).
+There are two SWAs — one for canary (auto-deploys on every push to `main` via
+Azure DevOps) and one for prod (manual, approval-gated on `main`). Both build
+from the same source with the same `base: '/docs'` config and are fronted by
+Azure Front Door — direct hits on the `*.azurestaticapps.net` hostnames return
+403 by design (see **Lockdown** below).
 
 This is independent of the portal — a docs deploy can never block a runtime
 release.
@@ -19,68 +19,57 @@ release.
 | Resource group | `otto-docs-canary-rg` (`westus2`) | `otto-docs-rg` (`westus2`) |
 | Static Web App | `otto-docs-canary-swa` (**Standard** SKU) | `otto-docs-swa` (**Standard** SKU) |
 | Default hostname | `https://lemon-mud-0e10bdd1e.7.azurestaticapps.net` (403 — locked down) | `https://kind-river-0d9e9ac1e.7.azurestaticapps.net` (403 — locked down) |
-| Public URL | `https://otto-canary.azure.com/docs/` via AFD `otto-portal-canary-afd` | `https://auto.azure.com/docs/` via AFD `otto-portal-afd` |
-| AFD `frontDoorId` | `2ca9cd4d-6df1-47b7-b8e2-24ba2bd17727` | `c1504f11-9bfe-40e3-b58f-923f88dc0689` |
+| Public URL | `https://otto-canary.azure.com/docs/` via AFD `otto-portal-canary-afd` | `https://auto.azure.com/docs/` via AFD `auto-portal-afd` |
+| AFD `frontDoorId` | `2ca9cd4d-6df1-47b7-b8e2-24ba2bd17727` | `fd12a176-4667-4e79-8d3d-0bd88e863ff7` |
+| Deploy UAMI | `otto-docs-canary-deploy-mi` (`otto-docs-canary-rg`) | `otto-docs-prod-deploy-mi` (`otto-docs-rg`) |
+| ADO Service Connection | `otto-docs-canary-arm` | `otto-docs-prod-arm` |
 | Tags | `environment=canary` | `environment=prod` |
 
 Both SWAs share `project=otto-docs`, `team=serverless-paas`,
 `owner=krmitta@microsoft.com`.
 
 Standard SKU is required for `forwardingGateway` enforcement; Free SKU
-silently ignores it. The two SKUs cost ~$9/SWA/month. PR preview
-environments use the same Standard SWA but skip the lockdown injection
-(see **Lockdown** below), so each preview is reachable directly on its
-auto-generated `*-<pr>.eastus2.7.azurestaticapps.net` host.
+silently ignores it. The two SKUs cost ~$9/SWA/month.
 
 ## CI/CD
 
 | Item | Value |
 | --- | --- |
-| Workflow | [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml) |
-| Deploy action | [`Azure/static-web-apps-deploy@v1`](https://github.com/Azure/static-web-apps-deploy) |
-| Build | Single Astro build per run; the same artifact deploys to canary and/or prod. Per-target lockdown is layered in just before deploy by [`docs-site/scripts/apply-lockdown.mjs`](./scripts/apply-lockdown.mjs). |
-| Auth | GitHub OIDC — no long-lived deployment tokens stored anywhere. |
+| PR & main build validation | [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml) (GitHub Actions, credential-free) |
+| Canary & Prod deployment | [`.azure-pipelines/docs-site-deploy.yml`](../.azure-pipelines/docs-site-deploy.yml) (Azure DevOps 1ES Official pipeline `Logic-Apps-Automation-Docs`, definition `490778` in `msazure/One`) |
+| Deploy tool | `@azure/static-web-apps-cli@2.1.0` (pre-installed in a separate credential-free step before `AzureCLI@2`, invoked via `swa deploy`) |
+| Build | Credential-free Astro build on 1ES Ubuntu with `CFSClean` network isolation, restoring packages through the `LogicApps` Azure Artifacts npm upstream (`.azure-pipelines/ado.npmrc`). Per-target AFD lockdown is injected before deploy by [`docs-site/scripts/apply-lockdown.mjs`](./scripts/apply-lockdown.mjs). |
+| Auth | Azure DevOps Workload Identity Federation (WIF) backed by isolated single-SWA User-Assigned Managed Identities — no stored secrets or deployment tokens. |
 
 | Trigger | Action |
 | --- | --- |
-| `push` to `main` on `docs-site/**` | Build → deploy canary (with canary lockdown) |
-| `pull_request` from in-repo branch | Build → deploy preview environment on canary SWA (no lockdown) |
-| `pull_request` from fork | Build only (no secret access) |
-| `pull_request` closed | Tear down preview environment |
-| `workflow_dispatch` target=`canary` | Build → deploy canary (only allowed from `refs/heads/main`) |
-| `workflow_dispatch` target=`prod` | Build → deploy prod (gated by `docs-prod` environment reviewers) |
+| `pull_request` on `docs-site/**` | GitHub Actions: credential-free `npm run check`, `npm run build`, Python link checker tests & validation |
+| `push` to `main` on `docs-site/**` or `.azure-pipelines/*` | Azure DevOps (`490778`): build, validate, apply canary lockdown, deploy to `otto-docs-canary-swa`, run AFD `200` + direct origin `403` smoke probes |
+| Manual ADO run (`target=canary`) | Build and deploy canary (`dryRun=true` validates build & lockdown without Azure login or upload) |
+| Manual ADO run (`target=prod`, `main` only) | Gated by ADO Branch Control (`refs/heads/main`, `refs/tags/release`), Manual Approval, and Exclusive Lock on `otto-docs-prod-arm` → build, apply prod lockdown, deploy to `otto-docs-swa`, run AFD `200` + direct origin `403` smoke probes |
 
-### Auth model (no stored credentials)
+### Auth model (isolated WIF, no stored credentials)
 
-All Azure operations flow through the shared **Otto E2E GitHub Actions** SP
-(reused across docs and portal canary workflows). There are no docs-specific
-GitHub secrets beyond the org-wide Azure identity.
+Canary and Production use separate User-Assigned Managed Identities (UAMIs)
+and separate Azure DevOps Workload Identity Federation service connections in
+`msazure/One`. Each UAMI has `Contributor` scoped strictly to its single Static
+Web App resource (not the resource group or subscription), and each ADO service
+connection is authorized strictly for pipeline `490778`.
 
-| Identity | Otto E2E GitHub Actions (`appId e8323013-aff3-46b9-8f7e-96ea41edf48a`) |
-| --- | --- |
-| Tenant | `72f988bf-86f1-41af-91ab-2d7cd011db47` |
-| Required GitHub secrets | `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID` |
-| Federated credentials | `repository_owner_id:6844498:repository_id:1250745995:ref:refs/heads/main` (push), `…:pull_request` (PR previews), `…:environment:docs-prod` (gated prod deploys) |
-| Role on canary RG | `Contributor` scoped only to `otto-docs-canary-rg` |
-| Role on prod RG | `Contributor` scoped only to `otto-docs-rg` |
-
-> **Subject format caveat.** The Azure GitHub organisation overrides OIDC
-> subject claims to be **ID-based**, not name-based — `repository_owner_id`
-> and `repository_id` numeric IDs replace the org/repo names. Federated
-> credentials whose subject uses the legacy `repo:Azure/Logic-Apps-Automation:…`
-> format silently fail to match (AADSTS700213). Always use the numeric form
-> for new credentials. Owner ID `6844498` = `Azure`; repo ID `1250745995` =
-> `Logic-Apps-Automation`.
+| Setting | Canary | Prod |
+| --- | --- | --- |
+| UAMI | `otto-docs-canary-deploy-mi` (`clientId: defd84eb-b8ce-42f3-a48f-f2910c03f637`) | `otto-docs-prod-deploy-mi` (`clientId: bf93dbf3-f90f-40c0-be40-8a4617150e2e`) |
+| RBAC scope | `Contributor` on `/subscriptions/49cff46c-0b82-4a1b-a533-ede69747bb0b/resourceGroups/otto-docs-canary-rg/providers/Microsoft.Web/staticSites/otto-docs-canary-swa` | `Contributor` on `/subscriptions/49cff46c-0b82-4a1b-a533-ede69747bb0b/resourceGroups/otto-docs-rg/providers/Microsoft.Web/staticSites/otto-docs-swa` |
+| ADO Service Connection | `otto-docs-canary-arm` | `otto-docs-prod-arm` |
+| Pipeline permissions | Pipeline `490778` only (`allPipelines: false`) | Pipeline `490778` only (`allPipelines: false`) |
+| ADO Checks | Exclusive Lock (+ Branch Control `refs/heads/main,refs/tags/release`) | Exclusive Lock + Branch Control (`refs/heads/main,refs/tags/release`) + Manual Approval |
 
 End-to-end auth flow per deploy:
 
-1. GitHub Actions mints a short-lived OIDC token for the workflow run.
-2. `azure/login@v2` exchanges that token (via the federated credential trust)
-   for an Azure access token tied to the SP.
-3. The workflow calls `az staticwebapp secrets list` against the target SWA
-   (canary or prod RG depending on the job) to fetch the deployment token
-   just-in-time. The token is masked in logs and never persisted.
-4. `Azure/static-web-apps-deploy@v1` performs an atomic upload.
+1. The 1ES Build stage builds and validates `docs-site/dist` completely credential-free and publishes the `docs-dist` pipeline artifact.
+2. The Deploy stage verifies the target branch guard (rejecting tag refs and restricting prod to `refs/heads/main`), injects `forwardingGateway` via `docs-site/scripts/apply-lockdown.mjs`, and pre-installs pinned `@azure/static-web-apps-cli@2.1.0` in a separate credential-free step before `AzureCLI@2` runs.
+3. The `AzureCLI@2` deploy step authenticates using ADO WIF (`otto-docs-canary-arm` or `otto-docs-prod-arm`), verifies the target SWA is on `Standard` SKU, fetches the deployment token just-in-time via `az staticwebapp secrets list`, masks it (`##vso[task.setsecret]`), and passes it via `SWA_CLI_DEPLOYMENT_TOKEN` to the pre-installed `swa deploy` binary (no `npx` while credentials are in scope) with `--swa-config-location` pinned to the locked-down staging directory.
+4. Post-deploy smoke probes assert HTTP `200` on the public AFD URL and HTTP `403` on the direct `*.azurestaticapps.net` origin.
 
 To rotate (or after a suspected leak):
 
@@ -92,36 +81,21 @@ az staticwebapp secrets reset-api-key --name otto-docs-canary-swa --resource-gro
 az staticwebapp secrets reset-api-key --name otto-docs-swa --resource-group otto-docs-rg
 ```
 
-No workflow or GH-secret change is needed after rotation — the workflow
-fetches the new token on the next run.
-
-### Preview environments for in-repo PRs
-
-In-repo PRs each get a preview environment hosted by the canary SWA.
-Fork PRs build but don't deploy (GitHub does not pass secrets to fork
-workflows, by design). A canary `workflow_dispatch` run is restricted to
-`main`; it can't deploy a fork PR's branch directly.
-
-Closing or merging the PR automatically tears down the preview (the
-`close_pr_preview` job). Preview deploys intentionally skip the
-`apply-lockdown.mjs` step so the auto-generated preview hostname is
-reachable directly — the reviewer can open the link without going through
-AFD.
+No pipeline or secret-store update is needed after rotation — the deploy stage
+fetches the new token just-in-time on the next run.
 
 ## Front Door routing
 
-Both environments are fronted by their own AFD profile in the same
-subscription:
+Both environments are fronted by Azure Front Door:
 
 | AFD piece | Canary | Prod |
 | --- | --- | --- |
-| Profile | `otto-portal-canary-afd` (RG `otto-portal-canary-rg`) | `otto-portal-afd` (RG `otto-portal-rg`) |
-| Endpoint | `otto-portal-canary` | `otto-portal` |
-| Custom domain | `otto-canary` (`otto-canary.azure.com`, AFD-managed cert) | `auto-azure-com` (`auto.azure.com`, AFD-managed cert) |
-| Docs origin group | `otto-docs-canary-origins` (probe `HEAD /`, HTTPS, 100s) | `otto-docs-origins` |
-| Docs origin | `otto-docs-canary-swa` → `lemon-mud-0e10bdd1e.7.azurestaticapps.net` | `otto-docs-swa-origin` → `kind-river-0d9e9ac1e.7.azurestaticapps.net` |
-| Docs route | `docs-route` — `patternsToMatch: ['/docs', '/docs/*']`, HTTPS only, `linkToDefaultDomain: Disabled` | same |
-| Default route | `default-route` — `/*` → portal ACA origins | same |
+| Profile | `otto-portal-canary-afd` (RG `otto-portal-canary-rg`, sub `49cff46c-0b82-4a1b-a533-ede69747bb0b`) | `auto-portal-afd` (RG `auto-portal-afd-rg`, sub `4bb604d0-3eaa-4194-ab38-26cdc69a7f44`) |
+| Custom domain | `otto-canary.azure.com` (AFD-managed cert) | `auto.azure.com` (AFD-managed cert) |
+| AFD `frontDoorId` | `2ca9cd4d-6df1-47b7-b8e2-24ba2bd17727` | `fd12a176-4667-4e79-8d3d-0bd88e863ff7` |
+| Docs origin | `lemon-mud-0e10bdd1e.7.azurestaticapps.net` | `kind-river-0d9e9ac1e.7.azurestaticapps.net` |
+| Docs route | `patternsToMatch: ['/docs', '/docs/*']`, HTTPS only, `linkToDefaultDomain: Disabled` | same |
+| Default route | `/*` → portal ACA origins | same |
 
 The portal's `default-route` (matching `/*` → portal ACA origins) and the
 `docs-route` coexist on the same endpoint; AFD picks the more specific
@@ -139,8 +113,8 @@ all traffic must come through the registered custom domain.
 
 We never want users to discover and bookmark the raw
 `*.azurestaticapps.net` URL — that bypasses our AFD WAF, rule sets, custom
-domain, and CDN. Both production SWAs are configured to reject any request
-that doesn't carry the expected AFD identifier headers.
+domain, and CDN. Both SWAs are configured to reject any request that doesn't
+carry the expected AFD identifier headers.
 
 This works through the `forwardingGateway` block injected into
 `dist/staticwebapp.config.json` by
@@ -164,10 +138,9 @@ but a request via `https://auto.azure.com/docs/` passes through.
 
 | Caveat | Detail |
 | --- | --- |
-| **SKU** | `forwardingGateway` is enforced only on **Standard** SKU. Free SKU silently ignores it. |
-| **Single FDID per env** | Each SWA pins to exactly one AFD profile via `requiredHeaders`; we can't share a single SWA across canary and prod AFDs. Per-env injection is therefore required and lives in the deploy workflow. |
-| **PR previews** | Preview environments inherit a non-fronted hostname; the workflow `if: github.event_name != 'pull_request'` guard skips lockdown so PR reviewers can open the preview link directly. |
-| **`X-Azure-FDID` is per-profile** | Stamped on every AFD response and discoverable in the Azure Portal / via `az afd profile show -o json --query frontDoorId`. Update [`apply-lockdown.mjs`](./scripts/apply-lockdown.mjs) if the AFD profile is ever recreated. |
+| **SKU** | `forwardingGateway` is enforced only on **Standard** SKU. Free SKU silently ignores it. The deploy pipeline fails fast if the target SWA is not on `Standard` SKU. |
+| **Single FDID per env** | Each SWA pins to exactly one AFD profile via `requiredHeaders`; we can't share a single SWA across canary and prod AFDs. Per-env injection is therefore required and lives in the deploy pipeline. |
+| **`X-Azure-FDID` is per-profile** | Stamped on every AFD response and discoverable in the Azure Portal / via `az afd profile show -o json --query frontDoorId`. Update [`apply-lockdown.mjs`](./scripts/apply-lockdown.mjs) if the AFD profile is ever recreated or cut over. |
 
 Verification (post-deploy):
 
@@ -203,88 +176,54 @@ az staticwebapp create --name otto-docs-swa --resource-group otto-docs-rg \
   --location westus2 --sku Standard \
   --tags environment=prod project=otto-docs team=serverless-paas owner=krmitta@microsoft.com
 
-# ---- SP identity (reuses the existing Otto E2E SP) -----------------------
-SP_APP_ID=e8323013-aff3-46b9-8f7e-96ea41edf48a
-SP_APP_OBJ=bb38355a-93e6-40d9-8b6a-47edbe32f017
-SP_OBJ_ID=$(az ad sp show --id "$SP_APP_ID" --query id -o tsv)
+# ---- Isolated UAMIs + single-SWA RBAC (for ADO WIF service connections) --
+az identity create --name otto-docs-canary-deploy-mi --resource-group otto-docs-canary-rg --location westus2
+az identity create --name otto-docs-prod-deploy-mi   --resource-group otto-docs-rg        --location westus2
 
-# Contributor scoped to each docs RG (least privilege)
-for RG in otto-docs-canary-rg otto-docs-rg; do
-  az role assignment create \
-    --assignee-object-id "$SP_OBJ_ID" \
-    --assignee-principal-type ServicePrincipal \
-    --role Contributor \
-    --scope "/subscriptions/$SUB/resourceGroups/$RG"
-done
+CANARY_MI_OID=$(az identity show --name otto-docs-canary-deploy-mi --resource-group otto-docs-canary-rg --query principalId -o tsv)
+PROD_MI_OID=$(az identity show --name otto-docs-prod-deploy-mi --resource-group otto-docs-rg --query principalId -o tsv)
 
-# Federated credentials for this repo (Azure/Logic-Apps-Automation).
-# Subject format MUST be ID-based to match the Azure org's OIDC claim
-# customization — name-based subjects silently fail with AADSTS700213.
-REPO_OWNER_ID=6844498        # Azure
-REPO_ID=1250745995           # Logic-Apps-Automation
-for cred in \
-  "{\"name\":\"laa-main-numeric\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repository_owner_id:$REPO_OWNER_ID:repository_id:$REPO_ID:ref:refs/heads/main\",\"description\":\"docs canary deploys on main push\",\"audiences\":[\"api://AzureADTokenExchange\"]}" \
-  "{\"name\":\"laa-pr-numeric\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repository_owner_id:$REPO_OWNER_ID:repository_id:$REPO_ID:pull_request\",\"description\":\"docs PR preview deploys\",\"audiences\":[\"api://AzureADTokenExchange\"]}" \
-  "{\"name\":\"laa-env-docs-prod-numeric\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repository_owner_id:$REPO_OWNER_ID:repository_id:$REPO_ID:environment:docs-prod\",\"description\":\"docs prod gated deploys\",\"audiences\":[\"api://AzureADTokenExchange\"]}"
-do
-  az ad app federated-credential create --id "$SP_APP_OBJ" --parameters "$cred"
-done
+az role assignment create \
+  --assignee-object-id "$CANARY_MI_OID" --assignee-principal-type ServicePrincipal \
+  --role Contributor \
+  --scope "/subscriptions/$SUB/resourceGroups/otto-docs-canary-rg/providers/Microsoft.Web/staticSites/otto-docs-canary-swa"
 
-# ---- AFD docs routing ----------------------------------------------------
-# Prod (existing portal AFD)
-PROD_PROFILE=otto-portal-afd
-PROD_AFD_RG=otto-portal-rg
-PROD_ENDPOINT=otto-portal
-PROD_CD=auto-azure-com   # custom-domain resource name for auto.azure.com
-PROD_SWA_HOST=kind-river-0d9e9ac1e.7.azurestaticapps.net
+az role assignment create \
+  --assignee-object-id "$PROD_MI_OID" --assignee-principal-type ServicePrincipal \
+  --role Contributor \
+  --scope "/subscriptions/$SUB/resourceGroups/otto-docs-rg/providers/Microsoft.Web/staticSites/otto-docs-swa"
 
-az afd origin-group create --profile-name $PROD_PROFILE --resource-group $PROD_AFD_RG \
-  --origin-group-name otto-docs-origins \
-  --probe-protocol Https --probe-path / --probe-request-type HEAD --probe-interval-in-seconds 100 \
-  --sample-size 4 --successful-samples-required 3 --additional-latency-in-milliseconds 50
-az afd origin create --profile-name $PROD_PROFILE --resource-group $PROD_AFD_RG \
-  --origin-group-name otto-docs-origins --origin-name otto-docs-swa-origin \
-  --host-name $PROD_SWA_HOST --origin-host-header $PROD_SWA_HOST \
-  --https-port 443 --priority 1 --weight 1000 --enabled-state Enabled
-az afd route create --profile-name $PROD_PROFILE --resource-group $PROD_AFD_RG \
-  --endpoint-name $PROD_ENDPOINT --route-name docs-route \
-  --origin-group otto-docs-origins --custom-domains $PROD_CD \
-  --patterns-to-match '/docs' '/docs/*' \
-  --supported-protocols Http Https --forwarding-protocol HttpsOnly \
-  --https-redirect Enabled --link-to-default-domain Disabled
-
-# Canary (mirror)
-CANARY_PROFILE=otto-portal-canary-afd
-CANARY_AFD_RG=otto-portal-canary-rg
-CANARY_ENDPOINT=otto-portal-canary
-CANARY_CD=otto-canary    # custom-domain resource name for otto-canary.azure.com
-CANARY_SWA_HOST=lemon-mud-0e10bdd1e.7.azurestaticapps.net
-
-az afd origin-group create --profile-name $CANARY_PROFILE --resource-group $CANARY_AFD_RG \
-  --origin-group-name otto-docs-canary-origins \
-  --probe-protocol Https --probe-path / --probe-request-type HEAD --probe-interval-in-seconds 100 \
-  --sample-size 4 --successful-samples-required 3 --additional-latency-in-milliseconds 50
-az afd origin create --profile-name $CANARY_PROFILE --resource-group $CANARY_AFD_RG \
-  --origin-group-name otto-docs-canary-origins --origin-name otto-docs-canary-swa \
-  --host-name $CANARY_SWA_HOST --origin-host-header $CANARY_SWA_HOST \
-  --https-port 443 --priority 1 --weight 1000 --enabled-state Enabled
-az afd route create --profile-name $CANARY_PROFILE --resource-group $CANARY_AFD_RG \
-  --endpoint-name $CANARY_ENDPOINT --route-name docs-route \
-  --origin-group otto-docs-canary-origins --custom-domains $CANARY_CD \
-  --patterns-to-match '/docs' '/docs/*' \
-  --supported-protocols Http Https --forwarding-protocol HttpsOnly \
-  --https-redirect Enabled --link-to-default-domain Disabled
+# Bind Federated Identity Credentials from the ADO WIF service connections
+# (`otto-docs-canary-arm` and `otto-docs-prod-arm` in `msazure/One`) onto each UAMI:
+#   az identity federated-credential create --name ado-otto-docs-<env>-arm \
+#     --identity-name otto-docs-<env>-deploy-mi --resource-group <rg> \
+#     --issuer <ado-wif-issuer> --subject <ado-wif-subject> --audiences api://AzureADTokenExchange
 ```
 
-Repo-side one-time setup (GitHub UI — requires repo admin):
+ADO-side setup (`msazure/One`):
 
-1. **Settings → Secrets and variables → Actions → New repository secret**, add
-   - `AZURE_CLIENT_ID = e8323013-aff3-46b9-8f7e-96ea41edf48a`
-   - `AZURE_TENANT_ID = 72f988bf-86f1-41af-91ab-2d7cd011db47`
-   - `AZURE_SUBSCRIPTION_ID = 49cff46c-0b82-4a1b-a533-ede69747bb0b`
-2. **Settings → Environments → New environment** named `docs-prod`,
-   configure **Required reviewers** (recommended: 1+ team maintainer).
-   Optionally restrict to `main`-only deploy branch.
+1. Create pipeline `Logic-Apps-Automation-Docs` (definition `490778`) pointing at `.azure-pipelines/docs-site-deploy.yml` in `Azure/Logic-Apps-Automation`.
+2. Create WIF service connections `otto-docs-canary-arm` and `otto-docs-prod-arm` targeting each UAMI, authorized strictly for pipeline `490778` (`allPipelines: false`).
+3. Attach Exclusive Lock + Branch Control (`refs/heads/main,refs/tags/release`) to both connections, plus Manual Approval to `otto-docs-prod-arm`.
+
+### Zero-downtime Standard SKU bootstrap & rollback (Prod)
+
+Because the deploy pipeline refuses to deploy when `otto-docs-swa` is on `Free`
+SKU (so `forwardingGateway` is never silently ignored), upgrading a `Free` SWA
+whose currently deployed `staticwebapp.config.json` contains a stale
+`X-Azure-FDID` must follow a config-first sequence to avoid 403s on
+`https://auto.azure.com/docs/`:
+
+1. Build `docs-site` with the updated `apply-lockdown.mjs` (`fd12a176-4667-4e79-8d3d-0bd88e863ff7`) and deploy that bundle while `otto-docs-swa` is still `Free` (zero traffic impact while Free ignores `forwardingGateway`).
+2. Switch `otto-docs-swa` to `Standard` (`az staticwebapp update --name otto-docs-swa --resource-group otto-docs-rg --sku Standard`) — `forwardingGateway` immediately enforces the already-deployed `auto-portal-afd` FDID.
+3. Run an approved ADO `490778` (`target=prod`) deploy from `main` and verify `https://auto.azure.com/docs/` returns `200` and `https://kind-river-0d9e9ac1e.7.azurestaticapps.net/docs/` returns `403`.
+4. **Emergency rollback:** if AFD routing ever breaks after an FDID change, `az staticwebapp update --name otto-docs-swa --resource-group otto-docs-rg --sku Free` immediately disables `forwardingGateway` enforcement while the FDID is corrected.
+
+### Additional hardening notes
+
+- **Branch protection & tag hygiene:** Both ADO service connections allow `refs/heads/main` and `refs/tags/release` (required by the 1ES `1ESPipelineTemplates` repository checkout). Protect `main` and restrict creation of a `release` tag in `Azure/Logic-Apps-Automation` so unreviewed commits cannot match `refs/tags/release`.
+- **Internal npm mirror:** Under 1ES `CFSClean` network isolation, `.azure-pipelines/ado.npmrc` authenticates via `npmAuthenticate@0` to `https://msazure.pkgs.visualstudio.com/_packaging/LogicApps/npm/registry/` (which upstreams `registry.npmjs.org`). Ensure the `msazure/One` Project Collection Build Service retains read permission on the `LogicApps` feed.
+- **Defense-in-depth networking:** `forwardingGateway` enforces `X-Azure-FDID` + `X-Forwarded-Host` at the SWA edge. Optionally restricting SWA `networking.allowedIpRanges` to the `AzureFrontDoor.Backend` service tag provides an additional network-layer barrier.
 
 ## Operational notes
 
@@ -294,8 +233,8 @@ Repo-side one-time setup (GitHub UI — requires repo admin):
 - **Cache**: SWA serves cached static content from the edge; deploys roll
   in atomically — no manual purge needed. AFD also caches static responses
   per the route's compression / query-string-caching settings.
-- **Logs**: Deployment history is visible in the Azure Portal under each
-  SWA's *Overview → Browse* tab. AFD access logs go to the profile's
-  Diagnostic Settings (when enabled).
+- **Logs**: Deployment history is visible in Azure DevOps pipeline `490778`
+  and in the Azure Portal under each SWA's *Overview → Browse* tab. AFD access
+  logs go to the profile's Diagnostic Settings (when enabled).
 - **Alerts**: Not configured. We can add an Application Insights availability
   test (or simple AFD-side healthProbe) later if docs become production-critical.

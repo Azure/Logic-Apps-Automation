@@ -5,7 +5,7 @@ Documentation for the workflow automation platform. This README is the entry poi
 - 🌐 **Live (canary):** https://otto-canary.azure.com/docs/
 - ⚙️ **Built with:** [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) + [Plyr](https://plyr.io) (videos)
 - ☁️ **Hosted on:** Azure Static Web App (canary subscription) — see [`INFRA.md`](./INFRA.md)
-- 🚀 **Deploy workflow:** [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml)
+- 🚀 **Build & Deploy:** PR validation in [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml); Canary & Prod deploys in [`.azure-pipelines/docs-site-deploy.yml`](../.azure-pipelines/docs-site-deploy.yml) (ADO pipeline `490778`)
 
 ---
 
@@ -517,10 +517,11 @@ hero:                       # only with template: splash
 | Local build | `npm run build` |
 | Local preview | `npm run preview` |
 | CI validation | Pushes and PRs changing `docs-site/**` or the docs workflow run `npm run check`, `npm run build`, the checker unit tests, and `python3 scripts/validate_docs_site.py` |
-| Canary deploy | `push` to `main` under `docs-site/**` → SWA |
-| PR preview | In-repository PRs touching `docs-site/**` get a preview; fork PRs build only |
+| Canary deploy | `push` to `main` under `docs-site/**` → Azure DevOps pipeline `490778` → Canary SWA |
+| Prod deploy | Manual run of Azure DevOps pipeline `490778` (`target=prod`, `main` only, approval-gated) → Prod SWA |
 
-Workflow file: [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml).
+CI validation workflow: [`.github/workflows/docs-site-deploy.yml`](../.github/workflows/docs-site-deploy.yml).
+Deployment pipeline: [`.azure-pipelines/docs-site-deploy.yml`](../.azure-pipelines/docs-site-deploy.yml).
 Resource map + rotation commands: [`INFRA.md`](./INFRA.md).
 
 ---
@@ -545,7 +546,7 @@ This section is a structured map for AI agents working on the docs.
 | Embed a video on a page | Rename target page to `.mdx`; `import Video from '../../../components/Video.astro';` then `<Video src="..." title="..." />`. Auto-detects MP4 vs YouTube vs Vimeo and wraps Plyr lazily. |
 | Update logo / favicon | `src/assets/logo.svg`, `public/favicon.svg` |
 | Update SWA security headers / caching | `staticwebapp.config.json` |
-| Update deploy workflow | `../.github/workflows/docs-site-deploy.yml` |
+| Update build validation / deploy pipeline | `../.github/workflows/docs-site-deploy.yml` (PR checks) / `../.azure-pipelines/docs-site-deploy.yml` (ADO deploy) |
 | Inspect canary infra / RBAC / fed creds | `INFRA.md` |
 
 ### Conventions checklist (every page must satisfy all of)
