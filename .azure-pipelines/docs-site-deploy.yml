@@ -80,12 +80,12 @@ extends:
   parameters:
     pool:
       name: Azure-Pipelines-1ESPT-ExDShared
-      image: 1ESPT-Ubuntu22.04
+      image: ubuntu-latest
       os: linux
     sdl:
       sourceAnalysisPool:
         name: Azure-Pipelines-1ESPT-ExDShared
-        image: 1ESPT-Win2022
+        image: windows-latest
         os: windows
     stages:
       - stage: Build
@@ -136,7 +136,8 @@ extends:
                     npm ci --no-audit --no-fund
                     npm run check
                     npm run build
-                    npm run validate
+                    python3 -m unittest discover -s scripts/tests -p 'test_*.py'
+                    python3 scripts/validate_docs_site.py
                 env:
                   NPM_MIRROR_REGISTRY: $(npmMirrorRegistry)
 
