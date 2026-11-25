@@ -70,12 +70,53 @@ The deployment status trigger responds to status changes rather than a specific 
 An environment-specific GitHub Enterprise variant uses the same actions and triggers against its configured host. It requires explicit enablement and isn't registered by default. Its presence doesn't imply support for arbitrary GitHub Enterprise Server URLs; use only the variant and host offered by your environment.
 
 <span id="authentication-and-permissions"></span>
+<span id="connect-with-github-oauth"></span>
+
+## GitHub authentication and permissions
+
+For shared OAuth connection setup and management, see
+[Create an OAuth service-provider connection](/features/connectors/#create-an-oauth-service-provider-connection).
+
+Public GitHub repositories might be accessible without installing the GitHub
+App, depending on the operation and required permissions. For private
+repositories or operations that require installation-granted access, install or
+configure the
+[Logic Apps Automation GitHub App](https://github.com/apps/logic-apps-automation/installations/new)
+for the GitHub accounts and repositories that the connection should access.
+Choose only the repositories the workflow needs. An organization administrator
+might need to approve the installation.
+
+The GitHub App installation grants repository access to Logic Apps Automation.
+The OAuth sign-in authorizes your connection. These are separate steps, and
+completing one doesn't complete the other.
+
+For GitHub, complete these steps before continuing with the shared OAuth setup:
+
+1. If the operation requires GitHub App installation, select **Install or
+   configure GitHub App**. Choose the GitHub account and repositories that this
+   connection should access, then return to the connection form.
+1. Select **Continue with GitHub OAuth**, then complete GitHub sign-in and
+   consent.
+
 <span id="troubleshoot"></span>
 
-For connection setup, permissions, and common issues, see [shared connector guidance](/features/connectors/#add-a-connector-operation).
+### Troubleshoot OAuth
+
+- If sign-in succeeds but an operation is denied, confirm that the GitHub
+  account can access the repository and has the permissions required by the
+  operation.
+- If a trigger can't subscribe, confirm that the account can create and manage
+  repository webhooks.
+- If an expected repository isn't available, configure the GitHub App
+  installation for the account that owns the repository and grant access to
+  that repository.
+
+For general connection setup and troubleshooting, see
+[shared connector guidance](/features/connectors/#add-a-connector-operation).
 
 ## Related content
 
 - [Connectors](/features/connectors/)
 - [Azure DevOps connectors](/guides/azure-devops-connectors/)
+- [Managed Agent](/guides/managed-agent/)
 - [Visual designer](/features/visual-designer/)
