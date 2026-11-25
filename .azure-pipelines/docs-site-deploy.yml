@@ -56,6 +56,8 @@ variables:
     value: ${{ eq(parameters.target, 'prod') }}
   - name: npmMirrorRegistry
     value: 'https://msazure.pkgs.visualstudio.com/_packaging/LogicApps/npm/registry/'
+  - name: swaCliVersion
+    value: '2.1.0'
   - ${{ if eq(parameters.target, 'prod') }}:
       - name: targetServiceConnection
         value: 'otto-docs-prod-arm'
@@ -65,6 +67,8 @@ variables:
         value: 'otto-docs-swa'
       - name: targetExpectedFdid
         value: 'fd12a176-4667-4e79-8d3d-0bd88e863ff7'
+      - name: targetPublicHost
+        value: 'auto.azure.com'
       - name: targetPublicUrl
         value: 'https://auto.azure.com/docs/'
       - name: targetDirectUrl
@@ -78,6 +82,8 @@ variables:
         value: 'otto-docs-canary-swa'
       - name: targetExpectedFdid
         value: '2ca9cd4d-6df1-47b7-b8e2-24ba2bd17727'
+      - name: targetPublicHost
+        value: 'otto-canary.azure.com'
       - name: targetPublicUrl
         value: 'https://otto-canary.azure.com/docs/'
       - name: targetDirectUrl
@@ -206,8 +212,8 @@ extends:
                         console.error(`FDID mismatch: expected ${process.env.EXPECTED_FDID}, got ${actualFdid}`);
                         process.exit(1);
                       }
-                      if (!Array.isArray(hosts) || hosts.length === 0) {
-                        console.error("Missing allowedForwardedHosts in forwardingGateway");
+                      if (!Array.isArray(hosts) || hosts.length !== 1 || hosts[0] !== process.env.EXPECTED_HOST) {
+                        console.error(`allowedForwardedHosts mismatch: expected [${process.env.EXPECTED_HOST}], got ${JSON.stringify(hosts)}`);
                         process.exit(1);
                       }
                       console.log("Verified forwardingGateway:", JSON.stringify(cfg.forwardingGateway));
@@ -218,6 +224,7 @@ extends:
                   DEPLOY_TARGET: ${{ parameters.target }}
                   CONFIG_PATH: $(Agent.TempDirectory)/swa-staging/dist/staticwebapp.config.json
                   EXPECTED_FDID: $(targetExpectedFdid)
+                  EXPECTED_HOST: $(targetPublicHost)
 
               - ${{ if eq(parameters.dryRun, true) }}:
                   - task: Bash@3
@@ -241,6 +248,22 @@ extends:
                     inputs:
                       workingFile: '.azure-pipelines/ado.npmrc'
 
+                  # Install pinned SWA CLI before Azure login so no npm package resolution runs
+                  # while WIF credentials or SWA_CLI_DEPLOYMENT_TOKEN are in scope.
+                  - task: Bash@3
+                    displayName: 'Install pinned SWA CLI (credential-free)'
+                    inputs:
+                      targetType: inline
+                      script: |
+                        set -euo pipefail
+                        SWA_DIR="$(Agent.TempDirectory)/swa-cli"
+                        mkdir -p "${SWA_DIR}"
+                        export NPM_CONFIG_USERCONFIG="$(Build.SourcesDirectory)/.azure-pipelines/ado.npmrc"
+                        npm install --prefix "${SWA_DIR}" --no-audit --no-fund --no-save "@azure/static-web-apps-cli@${SWA_CLI_VERSION}"
+                        "${SWA_DIR}/node_modules/.bin/swa" --version
+                    env:
+                      SWA_CLI_VERSION: $(swaCliVersion)
+
                   - task: AzureCLI@2
                     displayName: 'Verify SWA Standard SKU and deploy via SWA CLI (WIF)'
                     inputs:
@@ -249,8 +272,6 @@ extends:
                       scriptLocation: inlineScript
                       inlineScript: |
                         set -euo pipefail
-                        export NPM_CONFIG_USERCONFIG="$(Build.SourcesDirectory)/.azure-pipelines/ado.npmrc"
-
                         SKU="$(az staticwebapp show \
                           --resource-group "${TARGET_RG}" \
                           --name "${TARGET_SWA}" \
@@ -272,7 +293,8 @@ extends:
                         echo "##vso[task.setsecret]${DEPLOY_TOKEN}"
 
                         STAGING_DIST="$(Agent.TempDirectory)/swa-staging/dist"
-                        SWA_CLI_DEPLOYMENT_TOKEN="${DEPLOY_TOKEN}" npx --yes @azure/static-web-apps-cli@2 deploy "${STAGING_DIST}" \
+                        SWA_BIN="$(Agent.TempDirectory)/swa-cli/node_modules/.bin/swa"
+                        SWA_CLI_DEPLOYMENT_TOKEN="${DEPLOY_TOKEN}" "${SWA_BIN}" deploy "${STAGING_DIST}" \
                           --swa-config-location "${STAGING_DIST}" \
                           --env production \
                           --no-use-keychain

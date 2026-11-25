@@ -206,6 +206,25 @@ ADO-side setup (`msazure/One`):
 2. Create WIF service connections `otto-docs-canary-arm` and `otto-docs-prod-arm` targeting each UAMI, authorized strictly for pipeline `490778` (`allPipelines: false`).
 3. Attach Exclusive Lock + Branch Control (`refs/heads/main,refs/tags/release`) to both connections, plus Manual Approval to `otto-docs-prod-arm`.
 
+### Zero-downtime Standard SKU bootstrap & rollback (Prod)
+
+Because the deploy pipeline refuses to deploy when `otto-docs-swa` is on `Free`
+SKU (so `forwardingGateway` is never silently ignored), upgrading a `Free` SWA
+whose currently deployed `staticwebapp.config.json` contains a stale
+`X-Azure-FDID` must follow a config-first sequence to avoid 403s on
+`https://auto.azure.com/docs/`:
+
+1. Build `docs-site` with the updated `apply-lockdown.mjs` (`fd12a176-4667-4e79-8d3d-0bd88e863ff7`) and deploy that bundle while `otto-docs-swa` is still `Free` (zero traffic impact while Free ignores `forwardingGateway`).
+2. Switch `otto-docs-swa` to `Standard` (`az staticwebapp update --name otto-docs-swa --resource-group otto-docs-rg --sku Standard`) — `forwardingGateway` immediately enforces the already-deployed `auto-portal-afd` FDID.
+3. Run an approved ADO `490778` (`target=prod`) deploy from `main` and verify `https://auto.azure.com/docs/` returns `200` and `https://kind-river-0d9e9ac1e.7.azurestaticapps.net/docs/` returns `403`.
+4. **Emergency rollback:** if AFD routing ever breaks after an FDID change, `az staticwebapp update --name otto-docs-swa --resource-group otto-docs-rg --sku Free` immediately disables `forwardingGateway` enforcement while the FDID is corrected.
+
+### Additional hardening notes
+
+- **Branch protection & tag hygiene:** Both ADO service connections allow `refs/heads/main` and `refs/tags/release` (required by the 1ES `1ESPipelineTemplates` repository checkout). Protect `main` and restrict creation of a `release` tag in `Azure/Logic-Apps-Automation` so unreviewed commits cannot match `refs/tags/release`.
+- **Internal npm mirror:** Under 1ES `CFSClean` network isolation, `.azure-pipelines/ado.npmrc` authenticates via `npmAuthenticate@0` to `https://msazure.pkgs.visualstudio.com/_packaging/LogicApps/npm/registry/` (which upstreams `registry.npmjs.org`). Ensure the `msazure/One` Project Collection Build Service retains read permission on the `LogicApps` feed.
+- **Defense-in-depth networking:** `forwardingGateway` enforces `X-Azure-FDID` + `X-Forwarded-Host` at the SWA edge. Optionally restricting SWA `networking.allowedIpRanges` to the `AzureFrontDoor.Backend` service tag provides an additional network-layer barrier.
+
 ## Operational notes
 
 - **Cost**: Both SWAs are Standard SKU (~$9/SWA/month). The lockdown
