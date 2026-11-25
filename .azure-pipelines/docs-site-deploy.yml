@@ -1,0 +1,254 @@
+# Docs Site — Azure Pipelines (1ES Official) Deploy
+#
+# Additive Azure DevOps pipeline for building and deploying the Astro/Starlight
+# docs site (`docs-site/`) to Azure Static Web Apps (Canary and Prod) using
+# isolated ADO Workload Identity Federation (WIF) service connections:
+#   - Canary: `otto-docs-canary-arm` -> `otto-docs-canary-swa` (`otto-docs-canary-rg`)
+#   - Prod:   `otto-docs-prod-arm`   -> `otto-docs-swa`        (`otto-docs-rg`)
+#
+# Security & safety invariants:
+#   - Build runs in a credential-free stage and publishes immutable `docs-dist`
+#     without `forwardingGateway`.
+#   - Deploy runs in a separate stage on a fresh copy of `docs-dist`, injects
+#     target-specific AFD lockdown via `docs-site/scripts/apply-lockdown.mjs`,
+#     verifies Standard SKU before fetching a JIT SWA token, uploads via SWA CLI
+#     (Docker-free), and verifies direct-origin 403 + AFD 200 post-deploy.
+#   - Prod deploys fail closed unless `Build.SourceBranch == refs/heads/main`
+#     (paired with ADO Branch Control, Approval Check, and Exclusive Lock on
+#     `otto-docs-prod-arm`).
+
+trigger: none
+pr: none
+schedules: []
+
+parameters:
+  - name: target
+    displayName: Deploy target
+    type: string
+    default: canary
+    values:
+      - canary
+      - prod
+  - name: dryRun
+    displayName: Dry run (build, validate, inject lockdown, probe uploader without Azure deploy)
+    type: boolean
+    default: true
+
+resources:
+  repositories:
+    - repository: 1esPipelines
+      type: git
+      name: 1ESPipelineTemplates/1ESPipelineTemplates
+      ref: refs/tags/release
+
+extends:
+  template: v1/1ES.Official.PipelineTemplate.yml@1esPipelines
+  parameters:
+    pool:
+      name: Azure-Pipelines-1ESPT-ExDShared
+      image: ubuntu-latest
+      os: linux
+    sdl:
+      componentgovernance:
+        useAgentBuildDirectory: true
+      sourceAnalysisPool:
+        name: Azure-Pipelines-1ESPT-ExDShared
+        image: windows-latest
+        os: windows
+    stages:
+      - stage: Build
+        displayName: Build and validate docs site
+        jobs:
+          - job: BuildDocs
+            displayName: Build Astro docs site (credential-free)
+            timeoutInMinutes: 15
+            workspace:
+              clean: all
+            templateContext:
+              outputs:
+                - output: pipelineArtifact
+                  displayName: Publish built docs site
+                  targetPath: $(Build.SourcesDirectory)/docs-site/dist
+                  artifactName: docs-dist
+            steps:
+              - checkout: self
+                clean: true
+                persistCredentials: false
+
+              - task: UseNode@1
+                displayName: Use Node.js 22
+                inputs:
+                  version: '22.x'
+
+              - bash: |
+                  set -euo pipefail
+                  npm ci --no-audit --no-fund
+                  npm run check
+                  npm run build
+                  python3 -m unittest discover -s scripts/tests -p 'test_*.py'
+                  python3 scripts/validate_docs_site.py
+                displayName: Install, check, build, and validate docs site
+                workingDirectory: $(Build.SourcesDirectory)/docs-site
+                env:
+                  DOCS_SITE_URL: ''
+
+      - stage: Deploy
+        displayName: Deploy docs site (${{ parameters.target }})
+        dependsOn: Build
+        lockBehavior: sequential
+        ${{ if eq(parameters.target, 'prod') }}:
+          condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+        ${{ else }}:
+          condition: succeeded()
+        variables:
+          ${{ if eq(parameters.target, 'prod') }}:
+            swaName: otto-docs-swa
+            swaResourceGroup: otto-docs-rg
+            expectedFdid: c1504f11-9bfe-40e3-b58f-923f88dc0689
+            expectedAfdHost: auto.azure.com
+            directSwaHost: kind-river-0d9e9ac1e.7.azurestaticapps.net
+          ${{ else }}:
+            swaName: otto-docs-canary-swa
+            swaResourceGroup: otto-docs-canary-rg
+            expectedFdid: 2ca9cd4d-6df1-47b7-b8e2-24ba2bd17727
+            expectedAfdHost: otto-canary.azure.com
+            directSwaHost: lemon-mud-0e10bdd1e.7.azurestaticapps.net
+        jobs:
+          - job: DeployDocs
+            displayName: Apply AFD lockdown and deploy (${{ parameters.target }})
+            timeoutInMinutes: 15
+            workspace:
+              clean: all
+            steps:
+              - checkout: self
+                clean: true
+                persistCredentials: false
+
+              - download: current
+                artifact: docs-dist
+                displayName: Download immutable docs-dist artifact
+
+              - task: UseNode@1
+                displayName: Use Node.js 22
+                inputs:
+                  version: '22.x'
+
+              - bash: |
+                  set -euo pipefail
+                  STAGING_ROOT="$(Agent.TempDirectory)/swa-staging"
+                  rm -rf "$STAGING_ROOT"
+                  mkdir -p "$STAGING_ROOT/dist"
+                  cp -a "$(Pipeline.Workspace)/docs-dist/." "$STAGING_ROOT/dist/"
+
+                  cd "$STAGING_ROOT"
+                  node "$(Build.SourcesDirectory)/docs-site/scripts/apply-lockdown.mjs" "$TARGET"
+
+                  node -e '
+                    const fs = require("node:fs");
+                    const cfg = JSON.parse(fs.readFileSync("dist/staticwebapp.config.json", "utf8"));
+                    const fdid = cfg?.forwardingGateway?.requiredHeaders?.["X-Azure-FDID"];
+                    const hosts = cfg?.forwardingGateway?.allowedForwardedHosts;
+                    if (fdid !== process.env.EXPECTED_FDID) {
+                      throw new Error(`X-Azure-FDID mismatch: got ${fdid}, expected ${process.env.EXPECTED_FDID}`);
+                    }
+                    if (!Array.isArray(hosts) || hosts.length !== 1 || hosts[0] !== process.env.EXPECTED_AFD_HOST) {
+                      throw new Error(`allowedForwardedHosts mismatch: got ${JSON.stringify(hosts)}`);
+                    }
+                    console.log("Verified forwardingGateway:", JSON.stringify(cfg.forwardingGateway));
+                  '
+                displayName: Stage docs-dist and verify AFD lockdown config
+                env:
+                  TARGET: ${{ parameters.target }}
+                  EXPECTED_FDID: $(expectedFdid)
+                  EXPECTED_AFD_HOST: $(expectedAfdHost)
+
+              - ${{ if eq(parameters.dryRun, true) }}:
+                - bash: |
+                    set -euo pipefail
+                    echo "=== Dry run mode: skipping Azure upload ==="
+                    echo "Target: ${TARGET} (SWA=${SWA_NAME}, RG=${SWA_RG})"
+                    echo "--- Validated staticwebapp.config.json ---"
+                    cat "$(Agent.TempDirectory)/swa-staging/dist/staticwebapp.config.json"
+                    echo "--- Runtime probe: Docker ---"
+                    if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+                      echo "Docker daemon: available"
+                    else
+                      echo "Docker daemon: unavailable (Docker-free SWA CLI path required)"
+                    fi
+                    echo "--- Runtime probe: @azure/static-web-apps-cli ---"
+                    npx --yes @azure/static-web-apps-cli@2 --version
+                  displayName: Dry-run diagnostics (lockdown + SWA CLI runtime probe)
+                  env:
+                    TARGET: ${{ parameters.target }}
+                    SWA_NAME: $(swaName)
+                    SWA_RG: $(swaResourceGroup)
+
+              - ${{ if eq(parameters.dryRun, false) }}:
+                - task: AzureCLI@2
+                  displayName: Verify Standard SKU, deploy to SWA, and probe endpoints
+                  inputs:
+                    ${{ if eq(parameters.target, 'prod') }}:
+                      azureSubscription: otto-docs-prod-arm
+                    ${{ else }}:
+                      azureSubscription: otto-docs-canary-arm
+                    scriptType: bash
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      set -euo pipefail
+                      STAGING_DIST="$(Agent.TempDirectory)/swa-staging/dist"
+
+                      # Fail closed if SWA is not on Standard SKU (Free silently ignores forwardingGateway)
+                      SKU_TIER="$(az staticwebapp show \
+                        --name "$SWA_NAME" \
+                        --resource-group "$SWA_RG" \
+                        --query sku.tier \
+                        -o tsv)"
+                      if [ "$SKU_TIER" != "Standard" ]; then
+                        echo "##vso[task.logissue type=error]Refusing deploy: SWA $SWA_NAME SKU tier is '$SKU_TIER' (expected 'Standard' so AFD forwardingGateway lockdown is enforced)."
+                        exit 1
+                      fi
+                      echo "Verified SWA $SWA_NAME SKU tier: $SKU_TIER"
+
+                      # Fetch SWA deployment token JIT and mask it in pipeline logs
+                      SWA_TOKEN="$(az staticwebapp secrets list \
+                        --name "$SWA_NAME" \
+                        --resource-group "$SWA_RG" \
+                        --query properties.apiKey \
+                        -o tsv)"
+                      if [ -z "$SWA_TOKEN" ]; then
+                        echo "##vso[task.logissue type=error]Failed to retrieve SWA deployment token for $SWA_NAME"
+                        exit 1
+                      fi
+                      echo "##vso[task.setvariable variable=_swaTokenMask;issecret=true]$SWA_TOKEN"
+
+                      # Upload staged static bundle using Docker-free SWA CLI
+                      npx --yes @azure/static-web-apps-cli@2 deploy "$STAGING_DIST" \
+                        --deployment-token "$SWA_TOKEN" \
+                        --env production \
+                        --no-use-keychain
+
+                      # Post-deploy smoke probes: direct SWA origin must 403; AFD URL must 200
+                      probe_status() {
+                        local url="$1"
+                        local expected="$2"
+                        local attempt code
+                        for attempt in 1 2 3 4 5 6; do
+                          code="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 15 "$url" || echo 000)"
+                          if [ "$code" = "$expected" ]; then
+                            echo "Probe OK ($url -> HTTP $code on attempt $attempt)"
+                            return 0
+                          fi
+                          echo "Probe retry $attempt/6: $url returned HTTP $code (expected $expected)"
+                          sleep 10
+                        done
+                        echo "##vso[task.logissue type=error]Probe failed: $url returned HTTP $code (expected $expected)"
+                        return 1
+                      }
+
+                      probe_status "https://${DIRECT_SWA_HOST}/docs/" "403"
+                      probe_status "https://${EXPECTED_AFD_HOST}/docs/" "200"
+                  env:
+                    SWA_NAME: $(swaName)
+                    SWA_RG: $(swaResourceGroup)
+                    DIRECT_SWA_HOST: $(directSwaHost)
+                    EXPECTED_AFD_HOST: $(expectedAfdHost)
